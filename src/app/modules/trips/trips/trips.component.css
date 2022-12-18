@@ -1,0 +1,90 @@
+.forms {
+    display: flex;
+    justify-content: space-between;
+}
+
+.right ,
+.left {
+    width:50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.form-item {
+    width:70%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+mat-form-field {
+    width: 100% !important;
+}
+
+.buttons {
+    margin: 1rem auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.search button,
+.delete button {
+    display: block !important;
+    width:8rem !important;
+    font-size: var(--small-font-size);
+    font-weight: var(--large-font-weight);
+    background-color: var(--main-bg-color);
+    color: #fff;
+    padding: 0.4rem ;
+    border: none;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    text-align: center !important;
+
+}
+
+.mat-mdc-form-field {
+    font-size: var(--small-font-size);
+    width: 100%;
+}
+
+th {
+    font-weight: 800 !important;
+    font-size: var(--meduim-font-size);
+}
+
+td {
+    font-size: var(--small-font-size);
+}
+
+td,
+th {
+    width: calc(100% / 8);
+    text-align: center !important;
+}
+
+.mat-mdc-row:hover {
+    background-color: var(--second-bg-color) !important;
+}
+
+.activateButton {
+    background-color: var(--main-bg-color) !important;
+    color: #fff !important;
+    border:none;
+    border-radius: 5px;
+    display: flex;
+    padding:0.3rem 0.4rem;
+    margin:0 auto;
+}
+
+.paginator {
+    display: flex;
+    justify-content: center !important;
+}

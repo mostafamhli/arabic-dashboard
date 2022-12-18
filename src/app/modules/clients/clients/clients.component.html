@@ -1,0 +1,53 @@
+<mat-form-field>
+    <mat-label>البحث</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder=" ابحث عن ما تريد" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <ng-container matColumnDef="userName">
+            <th mat-header-cell *matHeaderCellDef> اسم المستخدم </th>
+            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="mobile">
+            <th mat-header-cell *matHeaderCellDef> رقم الموبايل </th>
+            <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef> تاريخ إنشاء الحساب </th>
+            <td mat-cell *matCellDef="let element"> {{element.creationDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="NumOfTrips">
+            <th mat-header-cell *matHeaderCellDef> عدد الرحلات </th>
+            <td mat-cell *matCellDef="let element"> {{element.NumOfTrips}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="eval">
+            <th mat-header-cell *matHeaderCellDef> التقييم </th>
+            <td mat-cell *matCellDef="let element"> {{element.eval}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="activatedCode">
+            <th mat-header-cell *matHeaderCellDef> رمز التفعيل </th>
+            <td mat-cell *matCellDef="let element"> {{element.activatedCode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="accountActivation">
+            <th mat-header-cell *matHeaderCellDef> رمز التفعيل </th>
+            <td mat-cell *matCellDef="let element"> <button class="activateButton" mat-raised-button>التفعيل</button></td>
+
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="tableRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <div class="paginator">
+        <mat-paginator dir="rtl" [pageSizeOptions]='[5, 10, 20]' length=20 pageSize=5>
+        </mat-paginator>
+    </div>
+</div>

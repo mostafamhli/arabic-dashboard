@@ -1,0 +1,102 @@
+<button type="button" class="btn btn-primary" (click)="openPopup()">إضافة كود حسم +
+</button>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4 class="modal-title">إضافة كود تفعيل جديد</h4>
+                <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form">
+                    <div class="form-item">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>اسم الكوبون</mat-label>
+                            <input matInput name="discountName" ngModel required #discountName="ngModel">
+                            <mat-error
+                                *ngIf="discountName.invalid && discountName.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-item">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>كود الحسم</mat-label>
+                            <input matInput name="discountCode" ngModel required #discountCode="ngModel">
+                            <mat-error
+                                *ngIf="discountCode.invalid && discountCode.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-item">
+                        <mat-form-field class="example-full-width" appearance="fill">
+                            <mat-label>تاريخ إنتهاء الصلاحية</mat-label>
+                            <input matInput [matDatepicker]="picker" name="outDate" ngModel required #outDate="ngModel">
+                            <mat-error
+                                *ngIf="outDate.invalid && outDate.touched">{{getErrorRequiredMessage()}}</mat-error>
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="picker">
+                                <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-item">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>قيمة الحسم بالنسبة المئوية</mat-label>
+                            <input matInput name="discountValue" ngModel required #discountValue="ngModel">
+                            <mat-error
+                                *ngIf="discountValue.invalid && discountValue.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn btn-primary" (click)="closePopup()">إضافة
+                        </button>
+                        <button type="button" class="btn btn-primary cancle" (click)="closePopup()">إلغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <ng-container matColumnDef="discountName">
+            <th mat-header-cell *matHeaderCellDef> اسم الكوبون </th>
+            <td mat-cell *matCellDef="let element"> {{element.discountName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="discountCode">
+            <th mat-header-cell *matHeaderCellDef>كود الحسم </th>
+            <td mat-cell *matCellDef="let element"> {{element.discountCode}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="discountValue">
+            <th mat-header-cell *matHeaderCellDef>قيمة الحسم</th>
+            <td mat-cell *matCellDef="let element"> {{element.discountValue}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="outDate">
+            <th mat-header-cell *matHeaderCellDef>تاريخ إنتهاء الصلاحية</th>
+            <td mat-cell *matCellDef="let element"> {{element.outDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="enable">
+            <th mat-header-cell *matHeaderCellDef>تفعسل الكود</th>
+            <td mat-cell *matCellDef="let element"><button class="delete" mat-raised-button>إلغاء التفعيل</button></td>
+        </ng-container>
+
+        <ng-container matColumnDef="delete">
+            <th mat-header-cell *matHeaderCellDef>حذف الكود</th>
+            <td mat-cell *matCellDef="let element"><button mat-mini-fab class="deleteButton" color="primary" (click)="deleteTableItem(element)"
+                    aria-label="Example icon button with a delete icon">
+                    <mat-icon>delete</mat-icon>
+                </button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="tableRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <div class="paginator">
+        <mat-paginator dir="rtl" [pageSizeOptions]='[5, 10, 20]' length=20 pageSize=5>
+        </mat-paginator>
+    </div>
+</div>

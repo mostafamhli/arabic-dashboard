@@ -1,0 +1,37 @@
+mat-card {
+    width: 100%;
+    background-color: #eee;
+    border-bottom-left-radius: 5%;
+    border-bottom-right-radius: 5%;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+}
+
+.title {
+    width: 100% !important;
+    text-align: center;
+    padding-bottom: 10px;
+    font-weight: var(--large-font-weight);
+    font-size: VAR(--large-font-size);
+    color: var(--title-color);
+}
+
+table {
+    margin-top: 10px;
+}
+table th, 
+table td {
+    color: var(--main-color);
+    text-align: center;
+}
+
+table th { 
+    font-size: var(--meduim-font-size);
+    font-weight: var(--large-font-weight);
+}
+
+table td {
+    font-size: var(--small-font-size);
+    font-weight: var(--small-font-weight);
+}

@@ -1,0 +1,130 @@
+<div class="forms">
+    <div class="right">
+        <div class="form-item">
+            <mat-form-field appearance="fill">
+                <mat-label>السائقين</mat-label>
+                <mat-select>
+                    <mat-option value="one">السائق الأول</mat-option>
+                    <mat-option value="two">السائق الثاني</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-item">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>وقت بداية الرحلة</mat-label>
+                <input matInput [matDatepicker]="picker">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="form-item">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>وقت نهاية الرحلة</mat-label>
+                <input matInput [matDatepicker]="picker1">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker1">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="left">
+        <div class="form-item">
+            <mat-form-field appearance="fill">
+                <mat-label>نوع الرحلة</mat-label>
+                <mat-select>
+                    <mat-option value="one">النوع الأول</mat-option>
+                    <mat-option value="two">النوع الثاني</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form-item">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>تاريخ بداية الرحلة</mat-label>
+                <input matInput [matDatepicker]="picker2">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker2">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="form-item">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>تاريخ نهاية الرحلة</mat-label>
+                <input matInput [matDatepicker]="picker3">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker3">
+                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<div class="buttons">
+    <div class="search">
+        <button mat-raised-button>بحث</button>
+    </div>
+    <div class="delete">
+        <button mat-raised-button>مسح بيانات</button>
+    </div>
+</div>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <ng-container matColumnDef="driverName">
+            <th mat-header-cell *matHeaderCellDef> اسم السائق </th>
+            <td mat-cell *matCellDef="let element"> {{element.driverName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="clientName">
+            <th mat-header-cell *matHeaderCellDef> اسم الزبون </th>
+            <td mat-cell *matCellDef="let element"> {{element.clientName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tripState">
+            <th mat-header-cell *matHeaderCellDef> حالة الرحلة</th>
+            <td mat-cell *matCellDef="let element"> {{element.tripState}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tripType">
+            <th mat-header-cell *matHeaderCellDef> نوع الرحلة</th>
+            <td mat-cell *matCellDef="let element"> {{element.tripType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tripDate">
+            <th mat-header-cell *matHeaderCellDef> تاريخ الرحلة </th>
+            <td mat-cell *matCellDef="let element"> {{element.tripDate}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tripTime">
+            <th mat-header-cell *matHeaderCellDef> وقت الرحلة </th>
+            <td mat-cell *matCellDef="let element"> {{element.tripTime}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tripCost">
+            <th mat-header-cell *matHeaderCellDef> كلفة الرحلة </th>
+            <td mat-cell *matCellDef="let element"> {{element.tripCost}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tripShow">
+            <th mat-header-cell *matHeaderCellDef>عرض الرحلة</th>
+            <td mat-cell *matCellDef="let element"><button class="activateButton" routerLink="trip-details"
+                    mat-raised-button><mat-icon>remove_red_eye</mat-icon></button></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr class="tableRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+    <div class="paginator">
+        <mat-paginator dir="rtl" [pageSizeOptions]='[5, 10, 20]' length=20 pageSize=5>
+        </mat-paginator>
+    </div>
+</div>

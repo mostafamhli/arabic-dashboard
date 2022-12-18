@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'dashboard';
+  isOpened = true;
+
+  clicked(){
+    this.isOpened = !this.isOpened;
+  }
 }
