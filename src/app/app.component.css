@@ -36,6 +36,8 @@ mat-list-item {
     width: 100%;
 }
 
+
+
 mat-list-item:hover,
 mat-list-item.active {
     background-color: var(--main-bg-color) !important;
@@ -49,6 +51,7 @@ mat-list-item.active mat-icon {
     color: #fff !important;
 }
 
+
 mat-drawer-content {
     height: 100%;
     padding: 1rem;
@@ -59,7 +62,7 @@ mat-drawer-content {
     align-items: center;
 }
 
-.listItem span {
+.listItem span{
     font-size: var(--meduim-font-size);
     margin-right: 0.5rem;
 }
