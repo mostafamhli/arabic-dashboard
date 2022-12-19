@@ -1,0 +1,12 @@
+@import "./variables.scss";
+
+.t_btn_blue {
+  background-color: $white;
+  color: $blue;
+  border: 1px solid $blue;
+
+  &:hover {
+    background-color: $blue;
+    color: $white;
+  }
+}

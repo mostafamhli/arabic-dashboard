@@ -14,7 +14,9 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import {MatNativeDateModule} from '@angular/material/core';
-
+import { AdminComponent } from './admin.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DriversOrdersComponent } from './drivers/drivers-orders/drivers-orders.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     ClientsComponent,
     DiscountCodesComponent,
     TripsComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    AdminComponent,
+    DriversOrdersComponent
   ],
 
   imports: [
