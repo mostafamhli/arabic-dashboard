@@ -1,0 +1,76 @@
+.head-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.head-container .button-div,
+.head-container .form-div{
+    width: 30%;
+} 
+
+.btn-primary {
+    background-color: var(--main-bg-color);
+    border-radius: 25px !important;
+    padding:0.5rem 1.5rem !important;
+    margin-bottom: 1rem !important;
+    font-size: 1rem !important;
+    font-weight: 500 !important;
+}
+
+
+.header-name {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid var(--main-color);
+    color: var(--main-bg-color);
+    font-size: var(--large-font-size);
+}
+
+.type-content {
+    color: var(--main-color);
+}
+
+
+.modal-title {
+    margin: 0 0 1rem 0;
+    color: var(--main-bg-color);
+    font-weight: var(--large-font-weight);;
+    font-size: var(--large-font-size);;
+    text-align: center;
+}
+
+.modal-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form-item {
+    width:70%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+mat-form-field {
+    width: 100% !important;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons .btn-primary {
+    width:60% !important;
+}
+
+.cancle {
+    background-color: #eee !important;
+    color: #222;
+}

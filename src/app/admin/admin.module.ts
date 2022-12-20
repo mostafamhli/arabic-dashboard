@@ -14,6 +14,11 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import {MatNativeDateModule} from '@angular/material/core';
+import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
+import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
+import { TypesComponent } from './types/types.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -23,7 +28,12 @@ import {MatNativeDateModule} from '@angular/material/core';
     ClientsComponent,
     DiscountCodesComponent,
     TripsComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    DashboardUsersComponent,
+    VehicleClassificationComponent,
+    ClassificationDisplayComponent,
+    TypesComponent,
+    SettingsComponent
   ],
 
   imports: [

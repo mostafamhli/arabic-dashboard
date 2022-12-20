@@ -30,6 +30,7 @@ mat-drawer {
 
 mat-drawer mat-list {
     height: 45vh;
+    overflow-y: auto;
 }
 
 mat-list-item {
@@ -56,6 +57,7 @@ mat-drawer-content {
     height: 100%;
     padding: 1rem;
 }
+
 
 .listItem {
     display: flex;
