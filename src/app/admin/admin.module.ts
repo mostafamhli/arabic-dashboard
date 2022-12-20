@@ -14,7 +14,12 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import {MatNativeDateModule} from '@angular/material/core';
-
+import { AdminComponent } from './admin.component';
+import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
+import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
+import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
+import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
+import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +28,13 @@ import {MatNativeDateModule} from '@angular/material/core';
     ClientsComponent,
     DiscountCodesComponent,
     TripsComponent,
-    TripDetailsComponent
+    TripDetailsComponent,
+    AdminComponent,
+    DriversRequestComponent,
+    ViewDriverRequestDetailsComponent,
+    DriversListComponent,
+    DriverDetailsComponent,
+    DriverProfileComponent
   ],
 
   imports: [

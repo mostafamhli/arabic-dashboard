@@ -1,0 +1,81 @@
+<div class="driver_details x-font-regular">
+  <div class="img_div">
+    <div class="image">
+      <mat-icon>person</mat-icon>
+      <h1 class="x-font-bold">Test</h1>
+    </div>
+  </div>
+  <div class="jay_taxi_table">
+    <div class="table_div d-flex flex-column align-items-center">
+      <table class="table">
+        <thead class="x-font-bold">
+          <th></th>
+          <th>اليوم</th>
+          <th>البارحة</th>
+          <th>آخر 7 أيام</th>
+          <th>الشهر الحالي</th>
+          <th>الشهر السابق</th>
+          <th>آخر شهرين</th>
+          <th>آخر 3 شهور</th>
+          <th>الإجمالي</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="x-font-bold text-right">عدد الرحلات</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="x-font-bold">إجمالي الأرباح</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="x-font-bold">أرباح الشركات الصافية</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td class="x-font-bold">أرباح السائقين الصافية</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="w-100 mt-3 d-flex flex-column align-items-center">
+    <label class="x-font-bold mb-2">إضافة حوافز للسائق</label>
+    <div class="input_with_button d-flex align-items-center">
+      <input class="form-control" [(ngModel)]="quantity" placeholder="الكمية">
+      <button class="btn t_btn_blue">إضافة</button>
+    </div>
+  </div>
+  <div class="w-100 d-flex flex-column align-items-center back_to_list">
+        <button class="btn t_btn_blue w-30" [routerLink]="['/drivers']" routerLinkActive="router-link-active" >عودة إلى القائمة</button>
+  </div>
+</div>

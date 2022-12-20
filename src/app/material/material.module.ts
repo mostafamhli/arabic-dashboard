@@ -14,6 +14,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
 @NgModule({
   declarations: [],
   imports: [
@@ -21,6 +22,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
@@ -38,6 +40,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,

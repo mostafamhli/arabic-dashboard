@@ -1,0 +1,51 @@
+@import './variables';
+
+// Material Icons font family
+@font-face {
+  font-family: $material_icons;
+  src: url('/assets/fonts/material/material.woff2') format('woff2');
+}
+
+// Cairo font family
+
+@font-face {
+  font-family: $cairo_light;
+  src: url('/assets/fonts/cairo/Cairo-Light.ttf') format("truetype");
+}
+
+
+@font-face {
+  font-family: $cairo_regular;
+  src: url('/assets/fonts/cairo/Cairo-Regular.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: $cairo_medium;
+  src: url('/assets/fonts/cairo/Cairo-Medium.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: $cairo_bold;
+  src: url('/assets/fonts/cairo/Cairo-Bold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: $cairo_black;
+  src: url('/assets/fonts/cairo/Cairo-Black.ttf') format("truetype");
+}
+
+.x-font-regular {
+  font-family: $cairo_regular;
+}
+
+.x-font-medium {
+  font-family: $cairo_medium;
+}
+
+.x-font-bold {
+  font-family: $cairo_bold;
+}
+
+.x-font-black {
+  font-family: $cairo_black;
+}

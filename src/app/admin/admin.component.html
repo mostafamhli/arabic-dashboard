@@ -1,0 +1,77 @@
+<mat-drawer-container class="example-container admin_container">
+  <mat-drawer #drawer mode="side" opened>
+    <div class="logo-container">
+      <img src="../assets/img/logo.png" alt="taxi jay logo">
+    </div>
+    <mat-list role="list">
+      <mat-list-item role="listitem" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="">
+        <div class="listItem">
+          <mat-icon>home</mat-icon>
+          <span>لوحة التحكم</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/clients">
+        <div class="listItem">
+          <mat-icon>supervisor_account</mat-icon>
+          <span>الزبائن</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: showDriversTabs}" (click)="showDriversTabs = !showDriversTabs">
+        <div class="listItem">
+                <mat-icon *ngIf="!showDriversTabs">keyboard_arrow_left</mat-icon>
+                <mat-icon *ngIf="showDriversTabs">keyboard_arrow_down</mat-icon>
+          <span>إدارة السائقين</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="showDriversTabs" [ngClass]="{bg_grey_light: showDriversTabs}" role="listitem" routerLinkActive="active" routerLink="/drivers-request">
+        <div class="listItem">
+          <mat-icon>supervisor_account</mat-icon>
+          <span>طلبات السائقين</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="showDriversTabs" [ngClass]="{bg_grey_light: showDriversTabs}" role="listitem" routerLinkActive="active" routerLink="/drivers">
+        <div class="listItem">
+          <mat-icon>supervisor_account</mat-icon>
+          <span>السائقين</span>
+        </div>
+      </mat-list-item> 
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/trips">
+        <div class="listItem">
+          <mat-icon>directions_car</mat-icon>
+          <span>الرحلات</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/discount-codes">
+        <div class="listItem">
+          <mat-icon>arrow_downward</mat-icon>
+          <span>أكواد الحسم</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/cancle">
+        <div class="listItem">
+          <mat-icon>backspace</mat-icon>
+          <span>أسباب إلغاء الرحلة</span>
+        </div>
+      </mat-list-item>
+    </mat-list>
+    <!-- <div class="car-container">
+            <img src="../assets/img/car.png" alt="taxi jay logo">
+        </div> -->
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <mat-card>
+      <mat-card-content>
+        <router-outlet></router-outlet>
+      </mat-card-content>
+    </mat-card>
+    <!-- <button mat-mini-fab mat-icon-button (click)="drawer.toggle(); clicked()" class="example-icon toggle-button mt-3">
+            <div *ngIf="isOpened; else isClosed">
+                <mat-icon>arrow_forward</mat-icon>
+            </div>
+            <ng-template #isClosed>
+                <mat-icon>arrow_back</mat-icon>
+            </ng-template>
+        </button> -->
+  </mat-drawer-content>
+</mat-drawer-container>

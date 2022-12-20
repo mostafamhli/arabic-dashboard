@@ -1,0 +1,26 @@
+.drivers_list {
+  height: 100%;
+    display: flex;
+    flex-direction: column;
+
+  .jay_taxi_table {
+    container-element {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+  .load_more_div {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  mat-icon { 
+    cursor: pointer;
+  }
+}
+
+::ng-deep .drivers_list {
+  .mat-mdc-text-field-wrapper {
+    background-color: white;
+  }
+}

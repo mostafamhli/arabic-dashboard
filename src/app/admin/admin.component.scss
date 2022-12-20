@@ -1,0 +1,111 @@
+@import 'src/app/shared/styles/variables';
+@import 'src/app/shared/styles/variables';
+
+.admin_container {
+  mat-card {
+    min-height: 94vh;
+    mat-card-content {
+        height: 94vh;
+    }
+  }
+
+  mat-drawer-container {
+    height: 100vh;
+  }
+
+  .car-container,
+  .logo-container {
+    width: 100%;
+  }
+
+  .logo-container {
+    height: 35vh;
+  }
+
+  .car-container {
+    height: 20vh;
+  }
+
+  .logo-container img,
+  .car-container img {
+    width: 100%;
+    height: 100%;
+  }
+
+  mat-drawer {
+    background-color: #fffcf4;
+    width: 18%;
+    height: 100%;
+    border-radius: 2%;
+  }
+
+  mat-drawer mat-list {
+    height: 45vh;
+  }
+
+  mat-list-item {
+    width: 100%;
+  }
+
+
+
+  mat-list-item:hover,
+  mat-list-item.active {
+    background-color: var(--main-bg-color) !important;
+  }
+
+
+  mat-list-item:hover span,
+  mat-list-item:hover mat-icon,
+  mat-list-item.active span,
+  mat-list-item.active mat-icon {
+    color: #fff !important;
+  }
+
+
+  mat-drawer-content {
+    height: 100%;
+    padding: 1rem;
+  }
+
+  .listItem {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .listItem span {
+    font-size: var(--meduim-font-size);
+    margin-right: 0.5rem;
+    font-family: $cairo_medium;
+  }
+
+  .listItem mat-icon,
+  .listItem span {
+    color: var(--main-bg-color);
+  }
+
+  .example-icon {
+    margin: 0 0 1rem 0;
+    padding: 0.2rem 0.4rem;
+    background-color: var(--main-bg-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .example-icon div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+::ng-deep .admin_container {
+    .mat-drawer-inner-container {
+        overflow: hidden;
+    }
+}
