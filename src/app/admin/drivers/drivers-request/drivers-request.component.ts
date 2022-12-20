@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
+import { DriverRequest } from 'src/app/core/models/drivers.mode';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
 
 @Component({
-  selector: 'app-drivers-orders',
-  templateUrl: './drivers-orders.component.html',
-  styleUrls: ['./drivers-orders.component.scss']
+  selector: 'app-drivers-request',
+  templateUrl: './drivers-request.component.html',
+  styleUrls: ['./drivers-request.component.scss']
 })
-export class DriversOrdersComponent {
-  drivers: Driver[] = []
+export class DriversRequestComponent {
+  drivers: DriverRequest[] = []
   filter: FilterWithSearch = new FilterWithSearch()
 
   constructor() {
@@ -17,31 +19,37 @@ export class DriversOrdersComponent {
     console.log(this.filter)
     this.drivers = [
       {
+        id:1,
         name: "Wael",
         email: "wael@gmail.com",
         accountCreationDate: "12-9-2022"
       },
       {
+        id:2,
         name: "Wael",
         email: "wael@gmail.com",
         accountCreationDate: "12-9-2022"
       },
       {
+        id:3,
         name: "Wael",
         email: "wael@gmail.com",
         accountCreationDate: "12-9-2022"
       },
       {
+        id:4,
         name: "Wael",
         email: "wael@gmail.com",
         accountCreationDate: "12-9-2022"
       },
       {
+        id:5,
         name: "Wael",
         email: "wael@gmail.com",
         accountCreationDate: "12-9-2022"
       },
       {
+        id:6,
         name: "Wael",
         email: "wael@gmail.com",
         accountCreationDate: "12-9-2022"
@@ -51,39 +59,5 @@ export class DriversOrdersComponent {
   loadMore(){
     this.filter.pageIndex = this.filter.pageIndex + 1;
     this.getDrivers()
-  }
-}
-
-class Driver {
-  name: string
-  accountCreationDate: any
-  email: string
-  constructor(d?: Driver) {
-    if (!d) {
-      this.name = "",
-        this.accountCreationDate = undefined
-      this.email = ""
-    } else {
-      this.name = d.name
-      this.email = d.email
-      this.accountCreationDate = d.accountCreationDate
-    }
-  }
-}
-
-class Filter {
-  pageIndex: number
-  pageQuantity: number
-  constructor() {
-    this.pageIndex = 0
-    this.pageQuantity = 10
-  }
-}
-
-class FilterWithSearch extends Filter {
-  searchWord: string
-  constructor() {
-    super()
-    this.searchWord = ""
   }
 }

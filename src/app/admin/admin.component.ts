@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AdminComponent {
   title = 'dashboard';
   isOpened = true;
-
+  showDriversTabs:boolean = false
   clicked() {
     this.isOpened = !this.isOpened;
   }

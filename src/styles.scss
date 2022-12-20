@@ -1,42 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import "src/app/shared/styles/styles.scss";
 
 :root {
-    --large-font-size: 1.25rem;
-    --meduim-font-size: 1.1rem;
-    --small-font-size: 0.9rem;
+  --large-font-size: 1.25rem;
+  --meduim-font-size: 1.1rem;
+  --small-font-size: 0.9rem;
 
-    --large-font-weight: 600;
-    --small-font-weight: 500;
+  --large-font-weight: 600;
+  --small-font-weight: 500;
 
-    --main-bg-color: #1f2568;
-    --second-bg-color: #eee;
-    --side-bg-color:#fffcf4;
-    
-    --main-color: #222;
-    --title-color: #000000b0;
-    --gold-color: #ffd609;
+  --main-bg-color: #1f2568;
+  --second-bg-color: #eee;
+  --side-bg-color: #fffcf4;
+
+  --main-color: #222;
+  --title-color: #000000b0;
+  --gold-color: #ffd609;
 
 }
 
 html,
 body {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Noto Kufi Arabic', sans-serif;
-    font-family: 'Noto Naskh Arabic', serif;
-    font-family: 'Quicksand', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $cairo_regular;
 }
 
 a {
-    margin: 0;
-    text-decoration: none;
-    color: var(--main-color);
+  margin: 0;
+  text-decoration: none;
+  color: var(--main-color);
+}
+
+mat-form-field {
+    div,input,span,label,p {
+    font-family: $cairo_regular !important;
+    }
+}
+
+.mat-icon {
+  font-family: $material_icons !important;
 }

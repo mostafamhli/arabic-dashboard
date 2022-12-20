@@ -1,0 +1,67 @@
+@import 'src/app/shared/styles/variables';
+@import 'src/app/shared/styles/functions';
+
+.view_request_details {
+  padding: 1rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .img_div {
+    margin-bottom: 2rem;
+
+    .image {
+      display: flex;
+      align-items: center;
+
+      h1 {
+        color: $blue;
+        margin: 0;
+      }
+
+      mat-icon {
+        background-color: $blue;
+        color: $white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 2rem;
+        margin-left: 1rem;
+        font-size: font-size(48);
+      }
+    }
+  }
+
+  .body {
+    color: $blue;
+
+    .first_col {
+      .info {
+        mat-icon {
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+
+  .accept_reject {
+    margin-top: auto;
+    margin-bottom: auto;
+
+    div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      button {
+        width: 98%;
+      }
+    }
+  }
+
+  .view_driver_info_div {
+    margin-top: auto;
+  }
+}
