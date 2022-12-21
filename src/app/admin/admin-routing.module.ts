@@ -16,6 +16,11 @@ import { DriverProfilePersonalInfoComponent } from './drivers/driver-profile-per
 import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehicle-info/driver-profile-vehicle-info.component';
 import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
+import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
+import { TypesComponent } from './types/types.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
+import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
 
 const routes: Routes = [
   {
@@ -40,7 +45,12 @@ const routes: Routes = [
         path: 'view-driver-profile/:id',
         component: ViewProfileComponent
       },
-      { path: 'transfers', component: TransfersComponent }
+      { path: 'transfers', component: TransfersComponent },
+      { path: 'dashboard-users', component: DashboardUsersComponent },
+      { path: 'vehicle-classification', component: VehicleClassificationComponent },
+      { path: 'classification-display', component: ClassificationDisplayComponent },
+      { path: 'types', component: TypesComponent },
+      { path: 'settings', component: SettingsComponent },
     ]
   }
 ];

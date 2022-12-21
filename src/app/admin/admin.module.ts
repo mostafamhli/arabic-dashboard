@@ -14,6 +14,12 @@ import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import {MatNativeDateModule} from '@angular/material/core';
+import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
+import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
+import { TypesComponent } from './types/types.component';
+import { SettingsComponent } from './settings/settings.component';
+
 import { AdminComponent } from './admin.component';
 import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
 import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
@@ -34,6 +40,11 @@ import { ViewProfileComponent } from './drivers/view-profile/view-profile.compon
     DiscountCodesComponent,
     TripsComponent,
     TripDetailsComponent,
+    DashboardUsersComponent,
+    VehicleClassificationComponent,
+    ClassificationDisplayComponent,
+    TypesComponent,
+    SettingsComponent,
     AdminComponent,
     DriversRequestComponent,
     ViewDriverRequestDetailsComponent,
