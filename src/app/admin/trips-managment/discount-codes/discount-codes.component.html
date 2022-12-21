@@ -1,6 +1,6 @@
-<button type="button" class="btn btn-primary" (click)="openPopup()">إضافة كود حسم +
+<button type="button" class="btn t_btn_blue x-font-regular mb-3" (click)="openPopup()">إضافة كود حسم +
 </button>
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+<div class="modal x-font-regular" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -44,9 +44,9 @@
                         </mat-form-field>
                     </div>
                     <div class="buttons">
-                        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn btn-primary" (click)="closePopup()">إضافة
+                        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn t_btn_blue" (click)="closePopup()">إضافة
                         </button>
-                        <button type="button" class="btn btn-primary cancle" (click)="closePopup()">إلغاء
+                        <button type="button" class="btn t_btn_blue cancle" (click)="closePopup()">إلغاء
                         </button>
                     </div>
                 </form>
@@ -55,7 +55,7 @@
     </div>
 </div>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 x-font-regular">
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
         <ng-container matColumnDef="discountName">
@@ -85,7 +85,7 @@
 
         <ng-container matColumnDef="delete">
             <th mat-header-cell *matHeaderCellDef>حذف الكود</th>
-            <td mat-cell *matCellDef="let element"><button mat-mini-fab class="deleteButton" color="primary" (click)="deleteTableItem(element)"
+            <td mat-cell *matCellDef="let element"><button class="deleteButton" color="primary" (click)="deleteTableItem(element)"
                     aria-label="Example icon button with a delete icon">
                     <mat-icon>delete</mat-icon>
                 </button></td>

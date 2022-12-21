@@ -1,9 +1,9 @@
-<mat-form-field>
+<mat-form-field class="x-font-regular">
     <mat-label>البحث</mat-label>
     <input matInput (keyup)="applyFilter($event)" placeholder=" ابحث عن ما تريد" #input>
 </mat-form-field>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 x-font-regular">
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
         <ng-container matColumnDef="userName">

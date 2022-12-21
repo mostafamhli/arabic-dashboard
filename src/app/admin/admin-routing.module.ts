@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CancleReasonsComponent } from './cancle-reasons/cancle-reasons.component';
+import { CancleReasonsComponent } from './trips-managment/cancle-reasons/cancle-reasons.component';
 import { ClientsComponent } from './clients/clients.component';
-import { DiscountCodesComponent } from './discount-codes/discount-codes.component';
+import { DiscountCodesComponent } from './trips-managment/discount-codes/discount-codes.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
-import { TripDetailsComponent } from './trip-details/trip-details.component';
-import { TripsComponent } from './trips/trips.component';
+import { TripDetailsComponent } from './trips-managment/trip-details/trip-details.component';
+import { TripsComponent } from './trips-managment/trips/trips.component';
 import { AdminComponent } from './admin.component';
 import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
 import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
 import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
 import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
-import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
-import { TypesComponent } from './types/types.component';
-import { SettingsComponent } from './settings/settings.component';
-import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
-import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
+import { VehicleClassificationComponent } from './public-settings/vehicle-classification/vehicle-classification.component';
+import { TypesComponent } from './public-settings/types/types.component';
+import { SettingsComponent } from './public-settings/settings/settings.component';
+import { ClassificationDisplayComponent } from './public-settings/classification-display/classification-display.component';
+import { DashboardUsersComponent } from './public-settings/dashboard-users/dashboard-users.component';
 
 const routes: Routes = [
   {

@@ -9,6 +9,8 @@ export class AdminComponent {
   title = 'dashboard';
   isOpened = true;
   showDriversTabs:boolean = false
+  showTripsTabs:boolean = false;
+  showSettingsTabs:boolean = false;
   clicked() {
     this.isOpened = !this.isOpened;
   }

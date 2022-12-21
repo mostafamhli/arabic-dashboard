@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import 'boxicons'
 @Component({
   selector: 'app-main-dashboard',
   templateUrl: './main-dashboard.component.html',

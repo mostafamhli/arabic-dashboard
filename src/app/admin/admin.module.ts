@@ -6,19 +6,19 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { MaterialModule } from '../material/material.module';
 
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
-import { CancleReasonsComponent } from './cancle-reasons/cancle-reasons.component';
+import { CancleReasonsComponent } from './trips-managment/cancle-reasons/cancle-reasons.component';
 import { ClientsComponent } from './clients/clients.component';
-import { DiscountCodesComponent } from './discount-codes/discount-codes.component';
-import { TripsComponent } from './trips/trips.component';
-import { TripDetailsComponent } from './trip-details/trip-details.component';
+import { DiscountCodesComponent } from './trips-managment/discount-codes/discount-codes.component';
+import { TripsComponent } from './trips-managment/trips/trips.component';
+import { TripDetailsComponent } from './trips-managment/trip-details/trip-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import {MatNativeDateModule} from '@angular/material/core';
-import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
-import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
-import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
-import { TypesComponent } from './types/types.component';
-import { SettingsComponent } from './settings/settings.component';
+import { DashboardUsersComponent } from './public-settings/dashboard-users/dashboard-users.component';
+import { VehicleClassificationComponent } from './public-settings/vehicle-classification/vehicle-classification.component';
+import { ClassificationDisplayComponent } from './public-settings/classification-display/classification-display.component';
+import { TypesComponent } from './public-settings/types/types.component';
+import { SettingsComponent } from './public-settings/settings/settings.component';
 
 import { AdminComponent } from './admin.component';
 import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
