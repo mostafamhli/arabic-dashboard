@@ -1,4 +1,5 @@
 
+
 .icon-container {
     width: 20%;
 }
@@ -25,4 +26,8 @@
     padding-right: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid rgba(51, 51, 51, 0.486);
+}
+
+.bx {
+    font-size: 50px;
 }

@@ -3,6 +3,10 @@
 .admin_container {
   mat-card {
     min-height: 94vh;
+    mat-card-content {
+        min-height: 94vh;
+    }
+
   }
 
   mat-drawer-container {

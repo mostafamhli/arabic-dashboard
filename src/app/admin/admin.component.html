@@ -35,49 +35,57 @@
           <span>السائقين</span>
         </div>
       </mat-list-item> 
-      <mat-list-item *ngIf="showDriversTabs" [ngClass]="{bg_grey_light: showDriversTabs}" role="listitem" routerLinkActive="active" routerLink="/transfers">
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: showTripsTabs}" (click)="showTripsTabs = !showTripsTabs">
         <div class="listItem">
-          <mat-icon>attach_money</mat-icon>
-          <span>التحويلات النقدية</span>
+                <mat-icon *ngIf="!showTripsTabs">keyboard_arrow_left</mat-icon>
+                <mat-icon *ngIf="showTripsTabs">keyboard_arrow_down</mat-icon>
+          <span>إدارة الرحلات</span>
         </div>
-      </mat-list-item> 
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/trips">
+      </mat-list-item>
+      <mat-list-item *ngIf="showTripsTabs" [ngClass]="{bg_grey_light: showTripsTabs}" role="listitem" routerLinkActive="active" routerLink="/trips">
         <div class="listItem">
           <mat-icon>directions_car</mat-icon>
           <span>الرحلات</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/discount-codes">
+      <mat-list-item *ngIf="showTripsTabs" [ngClass]="{bg_grey_light: showTripsTabs}" role="listitem" routerLinkActive="active" routerLink="/discount-codes">
         <div class="listItem">
           <mat-icon>arrow_downward</mat-icon>
           <span>أكواد الحسم</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/cancle">
+      <mat-list-item *ngIf="showTripsTabs" [ngClass]="{bg_grey_light: showTripsTabs}" role="listitem" routerLinkActive="active" routerLink="/cancle">
         <div class="listItem">
           <mat-icon>backspace</mat-icon>
           <span>أسباب إلغاء الرحلة</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/dashboard-users">
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: showSettingsTabs}" (click)="showSettingsTabs = !showSettingsTabs">
+        <div class="listItem">
+                <mat-icon *ngIf="!showSettingsTabs">keyboard_arrow_left</mat-icon>
+                <mat-icon *ngIf="showSettingsTabs">keyboard_arrow_down</mat-icon>
+          <span>الإعدادات العامة</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/dashboard-users">
         <div class="listItem">
             <mat-icon>supervised_user_circle</mat-icon>
             <span>مستخدمي لوحة التحكم</span>
         </div>
     </mat-list-item>
-    <mat-list-item role="listitem" routerLinkActive="active" routerLink="/vehicle-classification">
+    <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/vehicle-classification">
         <div class="listItem">
             <mat-icon>apps</mat-icon>
             <span>تصنيف المركبة</span>
         </div>
     </mat-list-item>
-    <mat-list-item role="listitem" routerLinkActive="active" routerLink="/types">
+    <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/types">
         <div class="listItem">
             <mat-icon>person_outline</mat-icon>
             <span>الأدوار</span>
         </div>
     </mat-list-item>
-    <mat-list-item role="listitem" routerLinkActive="active" routerLink="/settings">
+    <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/settings">
         <div class="listItem">
             <mat-icon>settings</mat-icon>
             <span>الإعدادات</span>

@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
 export class AdminComponent {
   title = 'dashboard';
   isOpened = true;
+  showDriversTabs:boolean = false
+  showTripsTabs:boolean = false;
+  showSettingsTabs:boolean = false;
+
   showDriversTabs: boolean = false
 
   constructor(private router: Router) {

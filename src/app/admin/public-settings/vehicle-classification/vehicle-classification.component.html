@@ -1,11 +1,11 @@
 
-<div class="head-container">
+<div class="head-container x-font-regular">
     <div class="button-div">
-        <button type="button" class="btn btn-primary" (click)="openPopup()">إضافة تصنيف جديد +
+        <button type="button" class="btn t_btn_blue" (click)="openPopup()">إضافة تصنيف جديد +
         </button>
     </div>
     
-    <div class="form-div">
+    <div class="form-div x-font-regular ">
         <mat-form-field>
             <mat-label>البحث</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder=" ابحث عن ما تريد" #input>
@@ -13,7 +13,7 @@
     </div>
 </div>
 
-<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+<div class="modal x-font-regular " tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -114,7 +114,7 @@
     </div>
 </div>
 
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8 x-font-regular">
     <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
 
         <ng-container matColumnDef="classificationName">

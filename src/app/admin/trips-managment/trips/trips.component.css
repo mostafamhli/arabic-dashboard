@@ -84,6 +84,10 @@ th {
     margin:0 auto;
 }
 
+.activateButton mat-icon {
+    margin:0;
+}
+
 .paginator {
     display: flex;
     justify-content: center !important;
