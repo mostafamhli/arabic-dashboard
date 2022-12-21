@@ -1,0 +1,65 @@
+<div class="head-container">
+    <div class="button-div">
+        <button type="button" class="btn btn-primary" (click)="openPopup()">إضافة دور جديد +
+        </button>
+    </div>
+
+    <div class="form-div">
+        <mat-form-field>
+            <mat-label>البحث</mat-label>
+            <input matInput placeholder=" ابحث عن ما تريد" #input>
+        </mat-form-field>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4 class="modal-title">إضافة دور جديد</h4>
+                <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form">
+                    <div class="form-item">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>اسم الدور</mat-label>
+                            <input matInput name="typeName" ngModel required #typeName="ngModel">
+                            <mat-error
+                                *ngIf="typeName.invalid && typeName.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-item">
+                        <mat-form-field appearance="fill">
+                            <mat-label>الدور</mat-label>
+                            <mat-select [formControl]="types" multiple>
+                                <mat-select-trigger>
+                                    {{types.value?.[0] || ''}}
+                                    <span *ngIf="(types.value?.length || 0) > 1" class="example-additional-selection">
+                                        (+{{(types.value?.length || 0) - 1}} {{types.value?.length === 2 ? 'other' :
+                                        'others'}})
+                                    </span>
+                                </mat-select-trigger>
+                                <mat-option *ngFor="let topping of typesList" [value]="topping">{{topping}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn btn-primary"
+                            (click)="closePopup()">إضافة
+                        </button>
+                        <button type="button" class="btn btn-primary cancle" (click)="closePopup()">إلغاء
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mat-elevation-z8 d-flex justify-content-center">
+    <div class="w-75 d-flex flex-column justify-content-center mb-5">
+        <h2 class="header-name py-3">اسم الدور</h2>
+        <div class="d-flex justify-content-center">
+            <p class="type-content">Admin</p>
+        </div>
+    </div>
+
+</div>

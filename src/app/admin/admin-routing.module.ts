@@ -11,6 +11,11 @@ import { DriversRequestComponent } from './drivers/drivers-request/drivers-reque
 import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
 import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
 import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
+import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
+import { TypesComponent } from './types/types.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
+import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
 
 const routes: Routes = [
   {
@@ -26,7 +31,12 @@ const routes: Routes = [
       { path: 'drivers-request', component: DriversRequestComponent },
       { path: 'driver-request/:id', component: ViewDriverRequestDetailsComponent },
       { path: 'drivers', component: DriversListComponent },
-      { path: 'driver-details/:id', component: DriverDetailsComponent }
+      { path: 'driver-details/:id', component: DriverDetailsComponent },
+      { path: 'dashboard-users', component: DashboardUsersComponent },
+      { path: 'vehicle-classification', component: VehicleClassificationComponent },
+      { path: 'classification-display', component: ClassificationDisplayComponent },
+      { path: 'types', component: TypesComponent },
+      { path: 'settings', component: SettingsComponent },
     ]
   }
 ];
