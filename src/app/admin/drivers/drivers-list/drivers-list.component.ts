@@ -18,7 +18,6 @@ export class DriversListComponent {
   }
 
   getDrivers() {
-    console.log(this.filter)
     this.drivers = [
       {
         id: 1,

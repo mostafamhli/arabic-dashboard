@@ -1,0 +1,44 @@
+.upload_image {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .panel{
+        .img_label{
+            width: 65%;
+            padding: 0.375rem 0;
+            .img{
+                cursor: pointer;
+                width: 25%;
+                margin-left: auto;
+                img {
+                    max-width: 90%;
+                    max-height: 2.5rem;
+                    width: auto;
+                    height: auto;
+                }
+            }
+            .label{
+                margin: 0 auto;
+                width: 70%;
+            }
+        }
+        .control{
+            width: 33%;
+            margin-right: auto;
+            .t_btn_blue_outline {
+                width: 70%;
+                margin: 0 auto;
+            }
+            .t_btn_red_outline {
+                width: 25%;
+                margin: 0 auto;
+            }
+        }
+    }
+  .img_label {
+    box-shadow: 0px 0px 3px 2px rgb(136 136 136 / 24%);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+  }
+}

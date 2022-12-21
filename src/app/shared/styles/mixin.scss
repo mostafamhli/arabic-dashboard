@@ -1,0 +1,11 @@
+@mixin scroll {
+    &::-webkit-scrollbar {
+      @content;
+    }
+  }
+  
+  @mixin scroll_thumb {
+    &::-webkit-scrollbar-thumb {
+      @content;
+    }
+  }

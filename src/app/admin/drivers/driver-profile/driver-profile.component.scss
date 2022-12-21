@@ -1,0 +1,29 @@
+@import 'src/app/shared/styles/variables';
+@import 'src/app/shared/styles/functions';
+
+.driver_profile {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  .tab {
+    padding: 1rem;
+    cursor: pointer;
+
+    .text {
+      margin-bottom: .5rem;
+    }
+
+    hr {
+      margin: 0;
+      border-top: 4px solid $blue;
+      border-radius: 2px;
+      opacity: 1;
+    }
+  }
+  .content{
+    padding-top: 1rem;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+}

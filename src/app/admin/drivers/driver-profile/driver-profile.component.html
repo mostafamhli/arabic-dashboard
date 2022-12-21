@@ -1,1 +1,16 @@
-<p>driver-profile works!</p>
+<div class="driver_profile">
+  <div class="wizard d-flex align-items-start justify-content-center x-font-bold">
+    <div class="tab" (click)="activeTab = ActiveProfileTabEnum.personal">
+      <div class="text">معلومات السائق</div>
+      <hr *ngIf="activeTab == ActiveProfileTabEnum.personal" />
+    </div>
+    <div class="tab" (click)="activeTab = ActiveProfileTabEnum.vehicle">
+      <div class="text">معلومات السيارة</div>
+      <hr *ngIf="activeTab == ActiveProfileTabEnum.vehicle" />
+    </div>
+  </div>
+  <div class="content">
+      <app-driver-profile-personal-info *ngIf="activeTab == ActiveProfileTabEnum.personal"></app-driver-profile-personal-info>
+      <app-driver-profile-vehicle-info *ngIf="activeTab == ActiveProfileTabEnum.vehicle"></app-driver-profile-vehicle-info>
+  </div>
+</div>

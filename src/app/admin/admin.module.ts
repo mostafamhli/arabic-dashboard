@@ -26,6 +26,11 @@ import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request
 import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
 import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
 import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.component';
+import { DriverProfilePersonalInfoComponent } from './drivers/driver-profile-personal-info/driver-profile-personal-info.component';
+import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehicle-info/driver-profile-vehicle-info.component';
+import { TransfersComponent } from './drivers/transfers/transfers.component';
+import { AddTransferComponent } from './drivers/add-transfer/add-transfer.component';
+import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +50,12 @@ import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.
     ViewDriverRequestDetailsComponent,
     DriversListComponent,
     DriverDetailsComponent,
-    DriverProfileComponent
+    DriverProfileComponent,
+    DriverProfilePersonalInfoComponent,
+    DriverProfileVehicleInfoComponent,
+    TransfersComponent,
+    AddTransferComponent,
+    ViewProfileComponent
   ],
 
   imports: [

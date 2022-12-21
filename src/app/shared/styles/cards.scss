@@ -4,6 +4,7 @@
     th,td {
         border: 1px solid $gold-light;
         text-align: center;
+        text-align: -webkit-center;
         vertical-align: middle;
     }
     thead {
