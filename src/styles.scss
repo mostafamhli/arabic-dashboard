@@ -29,6 +29,16 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: $cairo_regular;
+  @include scroll {
+    -webkit-appearance: none;
+    width: 15px;
+    height: 7px;
+  }
+
+  @include scroll_thumb {
+    background-color: $blue;
+    box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+  }
 }
 
 a {
@@ -45,4 +55,8 @@ mat-form-field {
 
 .mat-icon {
   font-family: $material_icons !important;
+}
+
+.cursor {
+  cursor: pointer;
 }

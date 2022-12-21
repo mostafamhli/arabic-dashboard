@@ -1,12 +1,8 @@
 @import 'src/app/shared/styles/variables';
-@import 'src/app/shared/styles/variables';
 
 .admin_container {
   mat-card {
     min-height: 94vh;
-    mat-card-content {
-        height: 94vh;
-    }
   }
 
   mat-drawer-container {
