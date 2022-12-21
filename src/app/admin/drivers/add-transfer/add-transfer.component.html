@@ -1,0 +1,32 @@
+<div class="add_transfer">
+  <form [formGroup]="transfer">
+    <div class="d-flex flex-column align-items-center">
+      <mat-form-field appearance="fill">
+        <mat-label>السائقين </mat-label>
+        <mat-select>
+          <mat-option>wael</mat-option>
+          <mat-option>Omar</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>المبلغ</mat-label>
+        <input matInput placeholder="المبلغ" #input>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>نوع المناقلة</mat-label>
+        <mat-select>
+          <mat-option>إيداع</mat-option>
+          <mat-option>استرجاع</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="add_cancel w-100 d-flex align-items-center x-font-bold">
+        <button class="btn t_btn_blue w-25">
+          إضافة
+        </button>
+        <button class="btn t_btn_blue_outline w-25">
+          إلغاء
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

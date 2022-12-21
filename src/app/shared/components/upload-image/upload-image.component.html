@@ -1,0 +1,20 @@
+<div class="upload_image x-font-regular">
+  <div class="panel d-flex align-items-center w-100">
+    <div class="img_label">
+      <div class="img d-flex flex-column align-items-center" (click)="viewImage(path)">
+        <img [src]="path">
+      </div>
+      <div class="label">
+        <label class="x-font-bold">{{label}}</label>
+      </div>
+    </div>
+    <div class="control d-flex align-items-center">
+      <button class="btn t_btn_blue_outline">
+        اختيار
+      </button>
+      <button class="btn t_btn_red_outline small_btn_full">
+            <mat-icon>delete</mat-icon>
+          </button>
+    </div>
+  </div>
+</div>

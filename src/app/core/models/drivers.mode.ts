@@ -1,6 +1,6 @@
 
 
-import { AccountStatus } from '../enums/genric.enums';
+import { AccountStatus, TransferType } from '../enums/genric.enums';
 
 export class Driver {
     id: number
@@ -53,3 +53,28 @@ export class DriverRequest {
     }
 }
 
+export class Transfer {
+    id: number
+    driverName: string
+    accountantName: string
+    accountCreationDate: any
+    stock: number
+    tranferType: number
+    constructor(t?: Transfer) {
+        if (t) {
+            this.id = t.id
+            this.driverName = t.driverName
+            this.stock = t.stock
+            this.tranferType = t.tranferType
+            this.accountCreationDate = t.accountCreationDate
+            this.accountantName = t.accountantName
+        } else {
+            this.id = 0
+            this.driverName = ""
+            this.stock = 0
+            this.tranferType = TransferType.remittance
+            this.accountCreationDate = undefined
+            this.accountantName = ""
+        }
+    }
+}

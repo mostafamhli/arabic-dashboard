@@ -11,11 +11,18 @@ import { DriversRequestComponent } from './drivers/drivers-request/drivers-reque
 import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
 import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
 import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
+
 import { VehicleClassificationComponent } from './public-settings/vehicle-classification/vehicle-classification.component';
 import { TypesComponent } from './public-settings/types/types.component';
 import { SettingsComponent } from './public-settings/settings/settings.component';
 import { ClassificationDisplayComponent } from './public-settings/classification-display/classification-display.component';
 import { DashboardUsersComponent } from './public-settings/dashboard-users/dashboard-users.component';
+import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.component';
+import { DriverProfilePersonalInfoComponent } from './drivers/driver-profile-personal-info/driver-profile-personal-info.component';
+import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehicle-info/driver-profile-vehicle-info.component';
+import { TransfersComponent } from './drivers/transfers/transfers.component';
+import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
+
 
 const routes: Routes = [
   {
@@ -32,6 +39,15 @@ const routes: Routes = [
       { path: 'driver-request/:id', component: ViewDriverRequestDetailsComponent },
       { path: 'drivers', component: DriversListComponent },
       { path: 'driver-details/:id', component: DriverDetailsComponent },
+      {
+        path: 'driver-profile/:id',
+        component: DriverProfileComponent
+      },
+      {
+        path: 'view-driver-profile/:id',
+        component: ViewProfileComponent
+      },
+      { path: 'transfers', component: TransfersComponent },
       { path: 'dashboard-users', component: DashboardUsersComponent },
       { path: 'vehicle-classification', component: VehicleClassificationComponent },
       { path: 'classification-display', component: ClassificationDisplayComponent },

@@ -1,0 +1,21 @@
+.add_transfer {
+  padding: 2rem;
+
+  .add_cancel {
+    .t_btn_blue {
+      margin-right: auto;
+      margin-left: 3px;
+    }
+
+    .t_btn_blue_outline {
+      margin-left: auto;
+      margin-right: 3px;
+    }
+  }
+}
+
+::ng-deep .add_transfer {
+  mat-form-field {
+    width: 80%
+  }
+}

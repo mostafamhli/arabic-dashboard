@@ -1,6 +1,12 @@
 @import "./variables.scss";
 @import "./functions.scss";
 
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .t_btn_blue_outline {
   background-color: $white;
   color: $blue;
@@ -26,9 +32,40 @@
   }
 }
 
+.t_btn_red{
+  background-color: $red;
+  color: $white;
+  border: 1px solid $red;
+  border-radius: .8rem;
+
+  &:hover {
+    background-color: $white;
+    color: $red;
+    border: 1px solid $red;
+  }
+}
+.t_btn_red_outline{
+  background-color: $white;
+  color: $red;
+  border: 1px solid $red;
+  border-radius: .8rem;
+
+  &:hover {
+    background-color: $red;
+    color: $white;
+    border: 1px solid $red;
+  }
+}
+
 .small_btn {
   padding-top: 0.2rem;
   padding-bottom: 0.2rem;
+  font-size: font-size(16);
+}
+
+.small_btn_full {
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
   font-size: font-size(16);
 }
 
