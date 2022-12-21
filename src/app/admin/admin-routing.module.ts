@@ -1,29 +1,44 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CancleReasonsComponent } from './cancle-reasons/cancle-reasons.component';
-import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
 import { ClientsComponent } from './clients/clients.component';
-import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
 import { DiscountCodesComponent } from './discount-codes/discount-codes.component';
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
-import { SettingsComponent } from './settings/settings.component';
 import { TripDetailsComponent } from './trip-details/trip-details.component';
 import { TripsComponent } from './trips/trips.component';
-import { TypesComponent } from './types/types.component';
+import { AdminComponent } from './admin.component';
+import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
+import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
+import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
+import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
 import { VehicleClassificationComponent } from './vehicle-classification/vehicle-classification.component';
+import { TypesComponent } from './types/types.component';
+import { SettingsComponent } from './settings/settings.component';
+import { ClassificationDisplayComponent } from './classification-display/classification-display.component';
+import { DashboardUsersComponent } from './dashboard-users/dashboard-users.component';
 
 const routes: Routes = [
-  {path:'', component:MainDashboardComponent},
-  {path:'clients', component:ClientsComponent},
-  {path:'trips', component:TripsComponent},
-  {path:'trip-details', component:TripDetailsComponent},
-  {path:'discount-codes', component:DiscountCodesComponent},
-  {path:'cancle', component:CancleReasonsComponent},
-  {path:'dashboard-users', component:DashboardUsersComponent},
-  {path:'vehicle-classification', component:VehicleClassificationComponent},
-  {path:'classification-display', component:ClassificationDisplayComponent},
-  {path:'types', component:TypesComponent},
-  {path:'settings', component:SettingsComponent},
+  {
+    path: '',
+    component: AdminComponent,
+    children: [
+      { path: '', component: MainDashboardComponent },
+      { path: 'clients', component: ClientsComponent },
+      { path: 'trips', component: TripsComponent },
+      { path: 'trip-details', component: TripDetailsComponent },
+      { path: 'discount-codes', component: DiscountCodesComponent },
+      { path: 'cancle', component: CancleReasonsComponent },
+      { path: 'drivers-request', component: DriversRequestComponent },
+      { path: 'driver-request/:id', component: ViewDriverRequestDetailsComponent },
+      { path: 'drivers', component: DriversListComponent },
+      { path: 'driver-details/:id', component: DriverDetailsComponent },
+      { path: 'dashboard-users', component: DashboardUsersComponent },
+      { path: 'vehicle-classification', component: VehicleClassificationComponent },
+      { path: 'classification-display', component: ClassificationDisplayComponent },
+      { path: 'types', component: TypesComponent },
+      { path: 'settings', component: SettingsComponent },
+    ]
+  }
 ];
 
 @NgModule({

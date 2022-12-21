@@ -20,6 +20,12 @@ import { ClassificationDisplayComponent } from './classification-display/classif
 import { TypesComponent } from './types/types.component';
 import { SettingsComponent } from './settings/settings.component';
 
+import { AdminComponent } from './admin.component';
+import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
+import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
+import { DriversListComponent } from './drivers/drivers-list/drivers-list.component';
+import { DriverDetailsComponent } from './drivers/driver-details/driver-details.component';
+import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,13 @@ import { SettingsComponent } from './settings/settings.component';
     VehicleClassificationComponent,
     ClassificationDisplayComponent,
     TypesComponent,
-    SettingsComponent
+    SettingsComponent,
+    AdminComponent,
+    DriversRequestComponent,
+    ViewDriverRequestDetailsComponent,
+    DriversListComponent,
+    DriverDetailsComponent,
+    DriverProfileComponent
   ],
 
   imports: [

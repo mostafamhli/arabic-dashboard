@@ -1,0 +1,51 @@
+@import "./variables.scss";
+@import "./functions.scss";
+
+.t_btn_blue_outline {
+  background-color: $white;
+  color: $blue;
+  border: 1px solid $blue;
+  border-radius: .8rem;
+
+  &:hover {
+    background-color: $blue;
+    color: $white;
+  }
+}
+
+.t_btn_blue {
+  background-color: $blue;
+  color: $white;
+  border: 1px solid $blue;
+  border-radius: .8rem;
+
+  &:hover {
+    background-color: $white;
+    color: $blue;
+    border: 1px solid $blue;
+  }
+}
+
+.small_btn {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  font-size: font-size(16);
+}
+
+.status {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+  border-radius: 1rem;
+}
+
+.status.active_status {
+  background-color: $gold;
+}
+
+.status.inactive_status {
+  background-color: $gold;
+  opacity: .5;
+}
