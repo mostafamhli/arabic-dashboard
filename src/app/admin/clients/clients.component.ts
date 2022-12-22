@@ -1,41 +1,8 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { MatPaginator, } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component } from '@angular/core';
+import { AccountStatus } from 'src/app/core/enums/genric.enums';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
 
 
-
-export interface PeriodicElement {
-  userName: string;
-  mobile: number;
-  creationDate: string;
-  NumOfTrips: number;
-  eval: number;
-  activatedCode: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { userName: 'Mostafa Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Ali Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Foaad Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Rami Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Rema Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Florance Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Mnal Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Mostafa Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Ali Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Foaad Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Rami Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Rema Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Florance Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Mnal Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Mostafa Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Ali Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Foaad Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Rami Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Rema Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 },
-  { userName: 'Mnal Mhli', mobile: 95365522, creationDate: '2022-10-21', NumOfTrips: 62, eval: 3.8, activatedCode: 123456 }
-];
 
 @Component({
   selector: 'app-clients',
@@ -44,31 +11,104 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ClientsComponent {
 
-  displayedColumns: string[] = ['userName', 'mobile', 'creationDate', 'NumOfTrips', 'eval', 'activatedCode', 'accountActivation'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  clients: any[] = []
+  filter: FilterWithSearch = new FilterWithSearch()
+  accountStatusEnum = AccountStatus
 
-  ngOnInit() {
-    this.paginator._intl.itemsPerPageLabel = 'عدد المعلومات بالصفحة';
-    this.paginator._intl.nextPageLabel = 'الصفحة التالية';
-    this.paginator._intl.previousPageLabel = 'الصفحة السابقة';
-    this.paginator._intl.firstPageLabel = 'الصفحة الأولى';
-    this.paginator._intl.lastPageLabel = 'الصفحة الأخيرة';
+
+  constructor() {
+    this.getClients()
   }
 
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  };
+  getClients() {
+    this.clients = [
+      {
+        id: 1,
+        userName: 'Mostafa Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.active
+      },
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+      {
+        id: 2,
+        userName: 'Mostafa Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.inActive
+      },
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+
+      {
+        id: 3,
+        userName: 'Mostafa Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.active
+      },
+
+
+      {
+        id: 4,
+        userName: 'Mostafa Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.active
+      },
+
+
+      {
+        id: 5,
+        userName: 'Mostafa Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.active
+      },
+
+      {
+        id: 6,
+        userName: 'ali Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.inActive
+      },
+
+
+      {
+        id: 7,
+        userName: 'Mostafa Mhli',
+        mobile: 95365522,
+        creationDate: '12-9-2022',
+        NumOfTrips: 62,
+        eval: 3.8,
+        activatedCode: 123456,
+        accountStatus: AccountStatus.inActive
+      },
+    ]
   }
+
+
+  loadMore() {
+    this.filter.pageIndex = this.filter.pageIndex + 1;
+    this.getClients()
+  }
+
 }

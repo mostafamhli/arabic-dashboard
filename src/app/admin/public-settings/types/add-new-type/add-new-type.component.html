@@ -1,0 +1,38 @@
+<div class="add_transfer">
+    <div class="d-flex flex-column">
+        <h4 class="modal-title">إضافة دور جديد</h4>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>اسم الدور</mat-label>
+                    <input matInput name="typeName" ngModel required #typeName="ngModel">
+                    <mat-error
+                        *ngIf="typeName.invalid && typeName.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-item">
+                <mat-form-field appearance="fill">
+                    <mat-label>الدور</mat-label>
+                    <mat-select [formControl]="types" multiple>
+                        <mat-select-trigger>
+                            {{types.value?.[0] || ''}}
+                            <span *ngIf="(types.value?.length || 0) > 1" class="example-additional-selection">
+                                (+{{(types.value?.length || 0) - 1}} {{types.value?.length === 2 ? 'آخر' :
+                                'آخرون'}})
+                            </span>
+                        </mat-select-trigger>
+                        <mat-option *ngFor="let topping of typesList" [value]="topping">{{topping}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="d-flex justify-content-center w-75 mb-3 buttons">
+                <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn t_btn_blue w-25"
+                    mat-dialog-close>إضافة
+                </button>
+                <button type="button" class="btn t_btn_blue w-25" mat-dialog-close>إلغاء
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

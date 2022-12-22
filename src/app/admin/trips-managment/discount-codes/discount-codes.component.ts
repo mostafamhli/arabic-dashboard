@@ -1,17 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import * as moment from 'moment';
-
-export interface PeriodicElement {
-  discountName: string;
-  discountCode: string;
-  discountValue: number;
-  outDate: string;
-}
-
+import { MatDialog } from '@angular/material/dialog';
+import { DiscountCodeStatus } from 'src/app/core/enums/genric.enums';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { AddDiscountCodeComponent } from './add-discount-code/add-discount-code.component';
 
 @Component({
   selector: 'app-discount-codes',
@@ -19,68 +11,68 @@ export interface PeriodicElement {
   styleUrls: ['./discount-codes.component.css']
 })
 export class DiscountCodesComponent {
-  displayedColumns: string[] = ['discountName', 'discountCode', 'discountValue', 'outDate', 'enable', 'delete'];
 
-  dataSource = new MatTableDataSource<PeriodicElement>([
-    { discountName: 'ABCDEFG', discountCode: 'abcdef', discountValue: 90, outDate: '2022-10-21' },
-    { discountName: 'ABCDEF', discountCode: 'abcdef', discountValue: 90, outDate: '2022-10-21' }
-  ]);
+  discountCodes: any[] = []
+  filter: FilterWithSearch = new FilterWithSearch()
+  discountCodeStatusEnum = DiscountCodeStatus
 
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  @ViewChild('myForm') form!: NgForm;
-  discountName = new FormControl('', [Validators.required]);
-  discountCode = new FormControl('', [Validators.required]);
-  outDate = new FormControl('', [Validators.required]);
-  discountValue = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
-
-  getErrorRequiredMessage() {
-    if (this.discountValue.hasError('pattern')) {
-      return 'يسمح فقط باستخدام الأرقام(0-9)';
-    }
-    return 'يجب أن تدخل قيمة';
+  constructor(private addDiscountCodes:MatDialog) {
+    this.getDiscountCodes()
   }
 
-  ngOnInit() {
-    this.paginator._intl.itemsPerPageLabel = 'عدد المعلومات بالصفحة';
-    this.paginator._intl.nextPageLabel = 'الصفحة التالية';
-    this.paginator._intl.previousPageLabel = 'الصفحة السابقة';
-    this.paginator._intl.firstPageLabel = 'الصفحة الأولى';
-    this.paginator._intl.lastPageLabel = 'الصفحة الأخيرة';
-
+  getDiscountCodes() {
+    this.discountCodes = [
+      {
+        id:1,
+        discountName: 'ABCDEFG',
+        discountCode: 'abcdef',
+        discountValue: 90,
+        outDate: '22-12-2022',
+        discountCodeStatus: DiscountCodeStatus.inActive,
+      },
+      {
+        id:2,
+        discountName: 'ABCDEFG',
+        discountCode: 'abcdef',
+        discountValue: 90,
+        outDate: '22-12-2022',
+        discountCodeStatus: DiscountCodeStatus.active,
+      },
+      {
+        id:3,
+        discountName: 'ABCDEFG',
+        discountCode: 'abcdef',
+        discountValue: 90,
+        outDate: '22-12-2022',
+        discountCodeStatus: DiscountCodeStatus.inActive,
+      },
+    ]
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  };
 
-  displayStyle = "none";
-
-  openPopup() {
-    this.displayStyle = "block";
+  loadMore() {
+    this.filter.pageIndex = this.filter.pageIndex + 1;
+    this.getDiscountCodes()
+  }
+  
+  addDiscountCode(){
+    this.addDiscountCodes.open(AddDiscountCodeComponent,{
+      width:"50%"
+    })
   }
 
-  closePopup() {
-    this.displayStyle = "none";
-  }
 
-  onSubmit() {
-    const data = this.dataSource.data;
-    data.push({
-      discountName: this.form.value.discountName,
-      discountCode: this.form.value.discountCode,
-      discountValue: this.form.value.discountValue,
-      outDate: (moment(this.form.value.outDate)).format('yyyy-M-D')
-    });
-    this.dataSource.data = data;
-  }
-
-  deleteTableItem(element:any){
+  deleteTableItem(elementId: number) {
+    console.log(elementId)
+    const data = this.discountCodes.filter(item => {
+      return item.id !== elementId
+    })
+    this.discountCodes = data
+    /*
     const data = this.dataSource.data.filter(item => {
       return item.discountName !== element.discountName
     })
     this.dataSource.data = data;
+    */
   }
 }

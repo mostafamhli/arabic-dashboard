@@ -82,6 +82,10 @@
   background-color: $gold;
 }
 
+.status.discount_code_active_status {
+  background-color: $red;
+}
+
 .status.inactive_status {
   background-color: $gold;
   opacity: .5;

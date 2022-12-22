@@ -1,0 +1,31 @@
+
+.modal-title {
+    margin: 2rem 0 1rem 0;
+    color: var(--main-bg-color);
+    font-weight: var(--large-font-weight);;
+    font-size: var(--large-font-size);;
+    text-align: center;
+}
+
+.modal-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.form-item {
+    width:70%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+mat-form-field {
+    width: 100% !important;
+}
+
+.buttons {
+    gap: 1rem;
+}

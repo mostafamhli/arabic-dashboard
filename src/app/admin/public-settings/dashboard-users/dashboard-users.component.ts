@@ -1,9 +1,13 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as moment from 'moment';
+import { AccountStatus } from 'src/app/core/enums/genric.enums';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
 
 export interface PeriodicElement {
   userName: string;
@@ -19,75 +23,52 @@ export interface PeriodicElement {
 })
 export class DashboardUsersComponent {
 
-  displayedColumns: string[] = ['userName', 'type', 'accountCreateDate', 'email', 'enable', 'operations'];
+  dashboardUsers: any[] = []
+  filter: FilterWithSearch = new FilterWithSearch()
+  accountStatusEnum = AccountStatus
 
-  dataSource = new MatTableDataSource<PeriodicElement>([
-    { userName: 'Mostafa Mhli', type: 'admin', accountCreateDate: '2022-12-19', email: 'mostafa1234@gmail.com' },
-    { userName: 'Ali Masri', type: 'user', accountCreateDate: '2022-12-19', email: 'ali1234@gmail.com' }
-  ]);
-
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  @ViewChild('myForm') form!: NgForm;
-  firstName = new FormControl('', [Validators.required]);
-  lastName = new FormControl('', [Validators.required]);
-  address = new FormControl('', [Validators.required]);
-  mobile = new FormControl('', [Validators.required]);
-  creationDate = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  type = new FormControl('', [Validators.required]);
-
-  getErrorRequiredMessage() {
-    if (this.email.hasError('email')) {
-      return 'أدخل بريد إلكتروني صالح'
-    }
-    return 'يجب أن تدخل قيمة';
+  constructor(private addNewUserAccount:MatDialog){
+    this.getDashboardUsers()
+  }
+  
+  getDashboardUsers() {
+    this.dashboardUsers = [
+      {
+        id:1,
+        userName: 'Mostafa Mhli',
+        type: 'admin',
+        accountCreateDate: '22-12-2022',
+        email: 'mostafa1234@gmail.com',
+        accountStatus: AccountStatus.active,
+      },
+      {
+        id:2,
+        userName: 'Mostafa Mhli',
+        type: 'admin',
+        accountCreateDate: '22-12-2022',
+        email: 'mostafa1234@gmail.com',
+        accountStatus: AccountStatus.active,
+      },
+      {
+        id:3,
+        userName: 'Mostafa Mhli',
+        type: 'admin',
+        accountCreateDate: '22-12-2022',
+        email: 'mostafa1234@gmail.com',
+        accountStatus: AccountStatus.inActive,
+      },
+    ]
+  }
+  
+  loadMore() {
+    this.filter.pageIndex = this.filter.pageIndex + 1;
+    this.getDashboardUsers()
   }
 
-  ngOnInit() {
-    this.paginator._intl.itemsPerPageLabel = 'عدد المعلومات بالصفحة';
-    this.paginator._intl.nextPageLabel = 'الصفحة التالية';
-    this.paginator._intl.previousPageLabel = 'الصفحة السابقة';
-    this.paginator._intl.firstPageLabel = 'الصفحة الأولى';
-    this.paginator._intl.lastPageLabel = 'الصفحة الأخيرة';
 
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  };
-
-  displayStyle = "none";
-
-  openPopup() {
-    this.displayStyle = "block";
-  }
-
-  closePopup() {
-    this.displayStyle = "none";
-  }
-
-  onSubmit() {
-    
-    const data = this.dataSource.data;
-    data.push({
-      userName: this.form.value.firstName+ ' '+this.form.value.firstName,
-      type: this.form.value.type,
-      email: this.form.value.email,
-      accountCreateDate: (moment(this.form.value.accountCreateDate)).format('yyyy-M-D')
-    });
-    this.dataSource.data = data;
-    
-  }
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  addNewAccount(){
+    this.addNewUserAccount.open(AddNewAccountComponent,{
+      width:"50%"
+    })
   }
 }
