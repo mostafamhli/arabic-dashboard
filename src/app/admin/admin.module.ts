@@ -31,7 +31,9 @@ import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehi
 import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { AddTransferComponent } from './drivers/add-transfer/add-transfer.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
-
+import { ReportsComponent } from './reports/reports.component';
+import { NotificationsComponent } from './notification/notifications/notifications.component';
+import { SendNotificationComponent } from './notification/send-notification/send-notification.component';
 @NgModule({
   declarations: [
     MainDashboardComponent,
@@ -55,7 +57,10 @@ import { ViewProfileComponent } from './drivers/view-profile/view-profile.compon
     DriverProfileVehicleInfoComponent,
     TransfersComponent,
     AddTransferComponent,
-    ViewProfileComponent
+    ViewProfileComponent,
+    ReportsComponent,
+    NotificationsComponent,
+    SendNotificationComponent
   ],
 
   imports: [

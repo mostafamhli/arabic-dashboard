@@ -4,13 +4,13 @@
       <img src="../assets/img/logo.png" alt="taxi jay logo">
     </div>
     <mat-list role="list">
-      <mat-list-item role="listitem" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="">
+      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="">
         <div class="listItem">
           <mat-icon>home</mat-icon>
           <span>لوحة التحكم</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" routerLinkActive="active" routerLink="/clients">
+      <mat-list-item role="listitem" (click)="activeTab = 0" routerLinkActive="active" routerLink="/clients">
         <div class="listItem">
           <mat-icon>supervisor_account</mat-icon>
           <span>الزبائن</span>
@@ -119,6 +119,29 @@
         <div class="listItem">
           <mat-icon>settings</mat-icon>
           <span>الإعدادات</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.notifications}"
+        (click)="activeTab == activeTabsEnum.notifications ? activeTab = 0 : activeTab = activeTabsEnum.notifications">
+        <div class="listItem">
+          <mat-icon *ngIf="activeTab != activeTabsEnum.notifications">keyboard_arrow_left</mat-icon>
+          <mat-icon *ngIf="activeTab == activeTabsEnum.notifications">keyboard_arrow_down</mat-icon>
+          <span>قنوات التواصل</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" *ngIf="activeTab == activeTabsEnum.notifications"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.notifications}" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/notifications">
+        <div class="listItem">
+          <mat-icon>notifications_active</mat-icon>
+          <span>الإشعارات</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"
+        routerLink="/reports">
+        <div class="listItem">
+          <mat-icon>assignment</mat-icon>
+          <span>التقارير</span>
         </div>
       </mat-list-item>
     </mat-list>
