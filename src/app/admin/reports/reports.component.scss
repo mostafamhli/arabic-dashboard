@@ -1,0 +1,13 @@
+@import 'src/app/shared/styles/variables';
+@import 'src/app/shared/styles/functions';
+
+.report_details {
+  height: 84vh;
+  display: flex;
+  flex-direction: column;
+
+  .jay_taxi_table {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+}

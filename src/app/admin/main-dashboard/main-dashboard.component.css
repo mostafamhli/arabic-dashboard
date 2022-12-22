@@ -1,7 +1,6 @@
 .best-group {
     display: flex;
     justify-content: space-between;
-    height: 200px;
 }
 
 .best-group mat-card:first-child {
@@ -23,7 +22,7 @@
     margin-top: 1.5rem;
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
 }
 
 .best-driver,
@@ -56,6 +55,7 @@
     font-weight: var(--small-font-weight);
     font-size: var(--large-font-size);
     text-align: center;
+    margin: 0;
 }
 
 
@@ -66,9 +66,9 @@
 }
 
 .icon mat-icon {
-    width: 60%;
-    height: 60px;
-    font-size: 60px;
+    font-size: 2em;
+    width: auto;
+    height: auto;
 }
 
 .icon .people {

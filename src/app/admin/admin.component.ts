@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 enum ActiveTabs  {
   drivers = 1,
   trips = 2,
-  setting = 3
+  setting = 3,
+  notifications = 4
 }
 
 @Component({

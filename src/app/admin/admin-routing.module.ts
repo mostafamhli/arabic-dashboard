@@ -23,6 +23,9 @@ import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehi
 import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
+import { ReportsComponent } from './reports/reports.component';
+import { NotificationsComponent } from './notification/notifications/notifications.component';
+
 
 
 const routes: Routes = [
@@ -55,6 +58,8 @@ const routes: Routes = [
       { path: 'types', component: TypesComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'cities', component: CitiesComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'notifications', component: NotificationsComponent }
     ]
   }
 ];
