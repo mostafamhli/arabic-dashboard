@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { AddNewTypeComponent } from './add-new-type/add-new-type.component';
 
 @Component({
   selector: 'app-types',
@@ -7,26 +10,22 @@ import { FormControl, NgForm, Validators } from '@angular/forms';
   styleUrls: ['./types.component.css']
 })
 export class TypesComponent {
+  filter: FilterWithSearch = new FilterWithSearch()
+  
+  typesList: string[] = [];
 
-  types = new FormControl('');
-  typesList: string[] = ['إدارة أسباب إلغاء الرحلة', 'إدارة الرسائل', 'إدارة الزبائن', 'إدارة السائقين'];
-
-  @ViewChild('myForm') form!: NgForm;
-  typeName = new FormControl('', [Validators.required]);
-  getErrorRequiredMessage() {
-    return 'يجب أن تدخل قيمة';
-  }
-  displayStyle = "none";
-
-  openPopup() {
-    this.displayStyle = "block";
+  constructor(private addType:MatDialog){
+    this.getTypes()
   }
 
-  closePopup() {
-    this.displayStyle = "none";
+  getTypes(){
+    
   }
 
-  onSubmit() {
-
+  addNewType(){
+    this.addType.open(AddNewTypeComponent,{
+      width:"50%"
+    })
   }
+  
 }

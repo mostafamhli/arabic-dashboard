@@ -1,161 +1,55 @@
-
-<div class="head-container x-font-regular">
-    <div class="button-div">
-        <button type="button" class="btn t_btn_blue" (click)="openPopup()">إضافة حساب جديد +
-        </button>
-    </div>
-    
-    <div class="form-div">
-        <mat-form-field>
-            <mat-label>البحث</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder=" ابحث عن ما تريد" #input>
-        </mat-form-field>
-    </div>
-    
-</div>
-
-<div class="modal x-font-regular " tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form">
-                    <div class="user-img">
-                        <img src="../../../assets/img/user.png" alt="user image">
-                    </div>
-                    <div class="form-group">
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>الاسم</mat-label>
-                                <input matInput name="firstName" ngModel required #firstName="ngModel">
-                                <mat-error
-                                    *ngIf="firstName.invalid && firstName.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>الكنية</mat-label>
-                                <input matInput name="lastName" ngModel required #lastName="ngModel">
-                                <mat-error
-                                    *ngIf="lastName.invalid && lastName.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>البريد الإلكتروني</mat-label>
-                                <input matInput name="email" ngModel required #email="ngModel">
-                                <mat-error
-                                    *ngIf="email.invalid && email.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>العنوان</mat-label>
-                                <input matInput name="address" ngModel required #address="ngModel">
-                                <mat-error
-                                    *ngIf="address.invalid && address.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>رقم الموبايل</mat-label>
-                                <input matInput name="mobile" ngModel required #mobile="ngModel">
-                                <mat-error
-                                    *ngIf="mobile.invalid && mobile.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width" appearance="fill">
-                                <mat-label>تاريخ</mat-label>
-                                <input matInput [matDatepicker]="picker" name="creationDate" ngModel required #creationDate="ngModel">
-                                <mat-error
-                                    *ngIf="creationDate.invalid && creationDate.touched">{{getErrorRequiredMessage()}}</mat-error>
-                                <mat-hint>MM/DD/YYYY</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker">
-                                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                                </mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>كلمة السر</mat-label>
-                                <input matInput name="password" ngModel required #password="ngModel">
-                                <mat-error
-                                    *ngIf="password.invalid && password.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="form-item">
-                            <mat-form-field class="example-full-width">
-                                <mat-label>الدور</mat-label>
-                                <input matInput name="type" ngModel required #type="ngModel">
-                                <mat-error
-                                    *ngIf="type.invalid && type.touched">{{getErrorRequiredMessage()}}</mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="buttons">
-                        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn btn-primary"
-                            (click)="closePopup()">إضافة
-                        </button>
-                        <button type="button" class="btn btn-primary cancle" (click)="closePopup()">إلغاء
-                        </button>
-                    </div>
-                </form>
-            </div>
+<div class="drivers_list x-font-regular">
+    <div class="row">
+        <div class="col-6 d-flex align-items-center">
+            <button class="btn t_btn_blue w-30" (click)="addNewAccount()">
+                إضافة حساب جديد +
+            </button>
+        </div>
+        <div class="col"></div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+            <mat-form-field>
+                <mat-label>بحث</mat-label>
+                <input matInput (keyup)="getDashboardUsers()" [(ngModel)]="filter.searchWord"
+                    placeholder=" ابحث عن ما تريد" #input>
+            </mat-form-field>
         </div>
     </div>
-</div>
-
-<div class="mat-elevation-z8 x-font-regular ">
-    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
-
-        <ng-container matColumnDef="userName">
-            <th mat-header-cell *matHeaderCellDef> اسم المستخدم </th>
-            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="type">
-            <th mat-header-cell *matHeaderCellDef>الدور</th>
-            <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="accountCreateDate">
-            <th mat-header-cell *matHeaderCellDef>تاريخ إنشاء الحساب</th>
-            <td mat-cell *matCellDef="let element"> {{element.accountCreateDate}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef>البريد الإلكتروني</th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="enable">
-            <th mat-header-cell *matHeaderCellDef>تفعيل الحساب</th>
-            <td mat-cell *matCellDef="let element"><button class="delete" mat-raised-button>مفعل</button></td>
-        </ng-container>
-
-        <ng-container matColumnDef="operations">
-            <th mat-header-cell *matHeaderCellDef>العمليات</th>
-            <td mat-cell *matCellDef="let element">
-                    <mat-icon>create</mat-icon>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="tableRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    </table>
-    <div class="paginator">
-        <mat-paginator dir="rtl" [pageSizeOptions]='[5, 10, 20]' length=20 pageSize=5>
-        </mat-paginator>
+    <div class="jay_taxi_table">
+        <div class="table_div d-flex flex-column align-items-center">
+            <table class="table">
+                <thead class="x-font-bold">
+                    <th>اسم المستخدم </th>
+                    <th>الدور</th>
+                    <th>تاريخ إنشاء الحساب</th>
+                    <th>البريد الإلكتروني</th>
+                    <th>تفعيل الحساب</th>
+                    <th>العمليات</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of dashboardUsers">
+                        <td>{{item.userName}}</td>
+                        <td>{{item.type}}</td>
+                        <td>{{item.accountCreateDate}}</td>
+                        <td>{{item.email}}</td>
+                        <td>
+                            <container-element [ngSwitch]="item.accountStatus">
+                                <span class="status active_status py-1"
+                                    *ngSwitchCase="accountStatusEnum.active">مفعل</span>
+                                <span class="status inactive_status py-1" *ngSwitchCase="accountStatusEnum.inActive">غير
+                                    مفعل</span>
+                            </container-element>
+                        </td>
+                        <td>
+                            <mat-icon>edit</mat-icon>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+        <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+            تحميل المزيد
+        </button>
     </div>
 </div>

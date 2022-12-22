@@ -1,53 +1,49 @@
-<mat-form-field class="x-font-regular">
-    <mat-label>البحث</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder=" ابحث عن ما تريد" #input>
-</mat-form-field>
+<div class="drivers_list x-font-regular">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+            <mat-form-field>
+                <mat-label>بحث</mat-label>
+                <input matInput (keyup)="getClients()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد"
+                    #input>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="jay_taxi_table">
+        <div class="table_div d-flex flex-column align-items-center">
+            <table class="table">
+                <thead class="x-font-bold">
+                    <th> اسم المستخدم </th>
+                    <th>رقم الموبايل</th>
+                    <th>تاريخ إنشاء الحساب</th>
+                    <th>عدد الرحلات </th>
+                    <th>التقييم</th>
+                    <th>رمز التفعيل </th>
+                    <th>تفعيل الحساب</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of clients">
+                        <td>{{item.userName}}</td>
+                        <td>{{item.mobile}}</td>
+                        <td>{{item.creationDate}}</td>
+                        <td>{{item.NumOfTrips}}</td>
+                        <td>{{item.eval}}</td>
+                        <td>{{item.activatedCode}}</td>
+                        <td>
+                            <container-element [ngSwitch]="item.accountStatus">
+                                <span class="status active_status py-1" *ngSwitchCase="accountStatusEnum.active">مفعل</span>
+                                <span class="status inactive_status py-1" *ngSwitchCase="accountStatusEnum.inActive">غير
+                                    مفعل</span>
+                            </container-element>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<div class="mat-elevation-z8 x-font-regular">
-    <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
-
-        <ng-container matColumnDef="userName">
-            <th mat-header-cell *matHeaderCellDef> اسم المستخدم </th>
-            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="mobile">
-            <th mat-header-cell *matHeaderCellDef> رقم الموبايل </th>
-            <td mat-cell *matCellDef="let element"> {{element.mobile}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="creationDate">
-            <th mat-header-cell *matHeaderCellDef> تاريخ إنشاء الحساب </th>
-            <td mat-cell *matCellDef="let element"> {{element.creationDate}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="NumOfTrips">
-            <th mat-header-cell *matHeaderCellDef> عدد الرحلات </th>
-            <td mat-cell *matCellDef="let element"> {{element.NumOfTrips}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="eval">
-            <th mat-header-cell *matHeaderCellDef> التقييم </th>
-            <td mat-cell *matCellDef="let element"> {{element.eval}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="activatedCode">
-            <th mat-header-cell *matHeaderCellDef> رمز التفعيل </th>
-            <td mat-cell *matCellDef="let element"> {{element.activatedCode}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="accountActivation">
-            <th mat-header-cell *matHeaderCellDef> رمز التفعيل </th>
-            <td mat-cell *matCellDef="let element"> <button class="activateButton" mat-raised-button>التفعيل</button></td>
-
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr class="tableRow" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-    </table>
-    <div class="paginator">
-        <mat-paginator dir="rtl" [pageSizeOptions]='[5, 10, 20]' length=20 pageSize=5>
-        </mat-paginator>
+    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+        <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+            تحميل المزيد
+        </button>
     </div>
 </div>

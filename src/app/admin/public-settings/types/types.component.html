@@ -1,55 +1,17 @@
-<div class="head-container x-font-regular ">
-    <div class="button-div">
-        <button type="button" class="btn t_btn_blue" (click)="openPopup()">إضافة دور جديد +
-        </button>
-    </div>
-
-    <div class="form-div">
-        <mat-form-field>
-            <mat-label>البحث</mat-label>
-            <input matInput placeholder=" ابحث عن ما تريد" #input>
-        </mat-form-field>
-    </div>
-</div>
-
-<div class="modal x-font-regular " tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <h4 class="modal-title">إضافة دور جديد</h4>
-                <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form">
-                    <div class="form-item">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>اسم الدور</mat-label>
-                            <input matInput name="typeName" ngModel required #typeName="ngModel">
-                            <mat-error
-                                *ngIf="typeName.invalid && typeName.touched">{{getErrorRequiredMessage()}}</mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="form-item">
-                        <mat-form-field appearance="fill">
-                            <mat-label>الدور</mat-label>
-                            <mat-select [formControl]="types" multiple>
-                                <mat-select-trigger>
-                                    {{types.value?.[0] || ''}}
-                                    <span *ngIf="(types.value?.length || 0) > 1" class="example-additional-selection">
-                                        (+{{(types.value?.length || 0) - 1}} {{types.value?.length === 2 ? 'other' :
-                                        'others'}})
-                                    </span>
-                                </mat-select-trigger>
-                                <mat-option *ngFor="let topping of typesList" [value]="topping">{{topping}}</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                    <div class="buttons">
-                        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn btn-primary"
-                            (click)="closePopup()">إضافة
-                        </button>
-                        <button type="button" class="btn btn-primary cancle" (click)="closePopup()">إلغاء
-                        </button>
-                    </div>
-                </form>
-            </div>
+<div class="drivers_list x-font-regular">
+    <div class="row">
+        <div class="col-6 d-flex align-items-center">
+            <button class="btn t_btn_blue w-25" (click)="addNewType()">
+                إضافة دور
+            </button>
+        </div>
+        <div class="col"></div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+            <mat-form-field>
+                <mat-label>بحث</mat-label>
+                <input matInput (keyup)="getTypes()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد"
+                    #input>
+            </mat-form-field>
         </div>
     </div>
 </div>

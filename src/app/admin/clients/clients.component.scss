@@ -1,0 +1,9 @@
+@import "src/app/shared/styles/variables.scss";
+
+::ng-deep {
+    .mat-mdc-table{
+      th,button,td {
+        font-family: $cairo_regular !important;
+      }
+    }
+  }

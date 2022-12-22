@@ -2,42 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
 
-
-export interface PeriodicElement {
-  driverName: string;
-  clientName: string;
-  tripState: string;
-  tripType: string;
-  tripDate: string;
-  tripTime: string;
-  tripCost: number;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-  { driverName: 'Mostafa Mhli', clientName: 'Yazan Abbas', tripState: 'مؤكدة', tripType: 'عادية', tripDate: '2022-10-22', tripTime: '10:58', tripCost: 10000 },
-
-
-];
 
 @Component({
   selector: 'app-trips',
@@ -46,24 +12,95 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class TripsComponent {
 
-  displayedColumns: string[] = ['driverName', 'clientName', 'tripState', 'tripType', 'tripDate', 'tripTime', 'tripCost','tripShow'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  trips: any[] = []
+  filter: FilterWithSearch = new FilterWithSearch()
 
-  ngOnInit() {
-    this.paginator._intl.itemsPerPageLabel = 'عدد المعلومات بالصفحة';
-    this.paginator._intl.nextPageLabel = 'الصفحة التالية';
-    this.paginator._intl.previousPageLabel = 'الصفحة السابقة';
-    this.paginator._intl.firstPageLabel = 'الصفحة الأولى';
-    this.paginator._intl.lastPageLabel = 'الصفحة الأخيرة';
-    this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
+  constructor() {
+    this.getTrips()
   }
 
-  ngAfterViewInit() {
-    this.dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  };
+  getTrips() {
+    this.trips = [
+      {
+        id: 1,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      },
+      {
+        id: 2,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      },
+      {
+        id: 3,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      },
+      {
+        id: 4,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      },
+      {
+        id: 5,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      },
+      {
+        id: 6,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      },
+      {
+        id: 7,
+        driverName: 'Mostafa Mhli',
+        clientName: 'Yazan Abbas',
+        tripState: 'مؤكدة',
+        tripType: 'عادية',
+        tripDate: '22-12-2022',
+        tripTime: '10:58',
+        tripCost: 10000
+      }
+    ]
+  }
+
+  loadMore() {
+    this.filter.pageIndex = this.filter.pageIndex + 1;
+    this.getTrips()
+  }
+
+  onClick(item:any){
+    console.log(item)
+  }
+
 }

@@ -16,81 +16,119 @@
           <span>الزبائن</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: showDriversTabs}" (click)="showDriversTabs = !showDriversTabs">
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}"
+        (click)="activeTab == activeTabsEnum.drivers ? activeTab = 0 : activeTab = activeTabsEnum.drivers">
         <div class="listItem">
-                <mat-icon *ngIf="!showDriversTabs">keyboard_arrow_left</mat-icon>
-                <mat-icon *ngIf="showDriversTabs">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="activeTab != activeTabsEnum.drivers">keyboard_arrow_left</mat-icon>
+          <mat-icon *ngIf="activeTab == activeTabsEnum.drivers">keyboard_arrow_down</mat-icon>
           <span>إدارة السائقين</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="showDriversTabs" [ngClass]="{bg_grey_light: showDriversTabs}" role="listitem" routerLinkActive="active" routerLink="/drivers-request">
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.drivers"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}" role="listitem" routerLinkActive="active"
+        routerLink="/drivers-request">
         <div class="listItem">
           <mat-icon>person_add</mat-icon>
           <span>طلبات السائقين</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="showDriversTabs" [ngClass]="{bg_grey_light: showDriversTabs}" role="listitem" routerLinkActive="active" routerLink="/drivers">
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.drivers"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}" role="listitem" routerLinkActive="active"
+        routerLink="/drivers">
         <div class="listItem">
           <mat-icon>supervisor_account</mat-icon>
           <span>السائقين</span>
         </div>
-      </mat-list-item> 
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: showTripsTabs}" (click)="showTripsTabs = !showTripsTabs">
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.drivers"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}" role="listitem" routerLinkActive="active"
+        routerLink="/transfers">
         <div class="listItem">
-                <mat-icon *ngIf="!showTripsTabs">keyboard_arrow_left</mat-icon>
-                <mat-icon *ngIf="showTripsTabs">keyboard_arrow_down</mat-icon>
+          <mat-icon>attach_money</mat-icon>
+          <span>التحويلات النقدية</span>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}"
+        (click)="activeTab == activeTabsEnum.trips ? activeTab = 0 : activeTab = activeTabsEnum.trips">
+        <div class="listItem">
+          <mat-icon *ngIf="activeTab != activeTabsEnum.trips">keyboard_arrow_left</mat-icon>
+          <mat-icon *ngIf="activeTab == activeTabsEnum.trips">keyboard_arrow_down</mat-icon>
           <span>إدارة الرحلات</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="showTripsTabs" [ngClass]="{bg_grey_light: showTripsTabs}" role="listitem" routerLinkActive="active" routerLink="/trips">
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.trips"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}" role="listitem" routerLinkActive="active"
+        routerLink="/trips">
         <div class="listItem">
           <mat-icon>directions_car</mat-icon>
           <span>الرحلات</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="showTripsTabs" [ngClass]="{bg_grey_light: showTripsTabs}" role="listitem" routerLinkActive="active" routerLink="/discount-codes">
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.trips"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}" role="listitem" routerLinkActive="active"
+        routerLink="/discount-codes">
         <div class="listItem">
           <mat-icon>arrow_downward</mat-icon>
           <span>أكواد الحسم</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="showTripsTabs" [ngClass]="{bg_grey_light: showTripsTabs}" role="listitem" routerLinkActive="active" routerLink="/cancle">
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.trips"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}" role="listitem" routerLinkActive="active"
+        routerLink="/cancle">
         <div class="listItem">
           <mat-icon>backspace</mat-icon>
           <span>أسباب إلغاء الرحلة</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: showSettingsTabs}" (click)="showSettingsTabs = !showSettingsTabs">
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}"
+        (click)="activeTab == activeTabsEnum.setting ? activeTab = 0 : activeTab = activeTabsEnum.setting">
         <div class="listItem">
-                <mat-icon *ngIf="!showSettingsTabs">keyboard_arrow_left</mat-icon>
-                <mat-icon *ngIf="showSettingsTabs">keyboard_arrow_down</mat-icon>
+          <mat-icon *ngIf="activeTab != activeTabsEnum.setting">keyboard_arrow_left</mat-icon>
+          <mat-icon *ngIf="activeTab == activeTabsEnum.setting">keyboard_arrow_down</mat-icon>
           <span>الإعدادات العامة</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/dashboard-users">
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+        routerLink="/dashboard-users">
         <div class="listItem">
-            <mat-icon>supervised_user_circle</mat-icon>
-            <span>مستخدمي لوحة التحكم</span>
+          <mat-icon>supervised_user_circle</mat-icon>
+          <span>مستخدمي لوحة التحكم</span>
         </div>
-    </mat-list-item>
-    <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/vehicle-classification">
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+        routerLink="/vehicle-classification">
         <div class="listItem">
-            <mat-icon>apps</mat-icon>
-            <span>تصنيف المركبة</span>
+          <mat-icon>apps</mat-icon>
+          <span>تصنيف المركبة</span>
         </div>
-    </mat-list-item>
-    <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/types">
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+        routerLink="/types">
         <div class="listItem">
-            <mat-icon>person_outline</mat-icon>
-            <span>الأدوار</span>
+          <mat-icon>person_outline</mat-icon>
+          <span>الأدوار</span>
         </div>
-    </mat-list-item>
-    <mat-list-item *ngIf="showSettingsTabs" [ngClass]="{bg_grey_light: showSettingsTabs}" role="listitem" routerLinkActive="active" routerLink="/settings">
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+        routerLink="/cities">
         <div class="listItem">
-            <mat-icon>settings</mat-icon>
-            <span>الإعدادات</span>
+          <mat-icon>location_city</mat-icon>
+          <span>المحافظات</span>
         </div>
-    </mat-list-item>
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+        routerLink="/settings">
+        <div class="listItem">
+          <mat-icon>settings</mat-icon>
+          <span>الإعدادات</span>
+        </div>
+      </mat-list-item>
     </mat-list>
     <!-- <div class="car-container">
             <img src="../assets/img/car.png" alt="taxi jay logo">

@@ -1,0 +1,94 @@
+<div class="add_transfer">
+    <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="d-flex flex-wrap justify-content-center">
+        <div class=" w-100 d-flex justify-content-center user-img">
+            <img src="../../../assets/img/user.png" alt="user image">
+        </div>
+        <div class="form-group">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>الاسم</mat-label>
+                    <input matInput name="firstName" ngModel required #firstName="ngModel">
+                    <mat-error
+                        *ngIf="firstName.invalid && firstName.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>الكنية</mat-label>
+                    <input matInput name="lastName" ngModel required #lastName="ngModel">
+                    <mat-error
+                        *ngIf="lastName.invalid && lastName.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>البريد الإلكتروني</mat-label>
+                    <input matInput name="email" ngModel required #email="ngModel">
+                    <mat-error
+                        *ngIf="email.invalid && email.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>العنوان</mat-label>
+                    <input matInput name="address" ngModel required #address="ngModel">
+                    <mat-error
+                        *ngIf="address.invalid && address.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>رقم الموبايل</mat-label>
+                    <input matInput name="mobile" ngModel required #mobile="ngModel">
+                    <mat-error
+                        *ngIf="mobile.invalid && mobile.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-item">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>تاريخ</mat-label>
+                    <input matInput [matDatepicker]="picker" name="creationDate" ngModel required #creationDate="ngModel">
+                    <mat-error
+                        *ngIf="creationDate.invalid && creationDate.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker">
+                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+                    </mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>كلمة السر</mat-label>
+                    <input matInput name="password" ngModel required #password="ngModel">
+                    <mat-error
+                        *ngIf="password.invalid && password.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>الدور</mat-label>
+                    <input matInput name="type" ngModel required #type="ngModel">
+                    <mat-error
+                        *ngIf="type.invalid && type.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="buttons w-75 mb-3 d-flex justify-content-center align-items-center">
+            <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn t_btn_blue w-25"
+            mat-dialog-close>إضافة
+            </button>
+            <button type="button" mat-dialog-close class="btn t_btn_blue w-25" (click)="closePopup()">إلغاء
+            </button>
+        </div>
+    </form>
+</div>

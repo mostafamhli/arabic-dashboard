@@ -25,11 +25,11 @@ table td {
     color: var(--main-color);
     text-align: center;
 }
-
+/*
 table th { 
     font-size: var(--meduim-font-size);
     font-weight: var(--large-font-weight);
-}
+}*/
 
 table td {
     font-size: var(--small-font-size);

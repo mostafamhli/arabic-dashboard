@@ -76,7 +76,7 @@
 }
 
 .icon .gift {
-    color: var(--gold-color);
+    color: var(--main-color);
 }
 
 mat-card {

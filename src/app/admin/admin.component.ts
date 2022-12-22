@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+enum ActiveTabs  {
+  drivers = 1,
+  trips = 2,
+  setting = 3
+}
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -9,11 +15,8 @@ import { Router } from '@angular/router';
 export class AdminComponent {
   title = 'dashboard';
   isOpened = true;
-  showDriversTabs:boolean = false
-  showTripsTabs:boolean = false;
-  showSettingsTabs:boolean = false;
-
-  showDriversTabs: boolean = false
+  activeTabsEnum = ActiveTabs
+  activeTab = 0
 
   constructor(private router: Router) {
     let url = router.url
@@ -24,7 +27,7 @@ export class AdminComponent {
       url.includes('driver-profile') ||
       url.includes('drivers') ||
       url.includes('transfers')) {
-      this.showDriversTabs = true
+      this.activeTab = ActiveTabs.drivers
     }
   }
 

@@ -1,0 +1,31 @@
+.user-img img {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+}
+
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding:1rem 2rem 0;
+}
+
+.form-item {
+    width:45%;
+    height: 4.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+mat-form-field {
+    width: 100% !important;
+}
+
+.buttons {
+    gap: 2rem;
+}
