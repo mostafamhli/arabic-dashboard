@@ -60,3 +60,10 @@ mat-form-field {
 .cursor {
   cursor: pointer;
 }
+
+mat-form-field{
+mat-icon {
+  height: auto !important;
+  width: auto !important;
+}
+}

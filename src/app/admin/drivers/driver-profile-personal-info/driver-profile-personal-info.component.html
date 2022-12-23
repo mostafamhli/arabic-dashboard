@@ -1,7 +1,8 @@
 <div class="driver_profile_personal_info x-font-regular">
   <form [formGroup]="personalInfo">
     <div class="first_sec row w-100">
-      <div class="col-lg-2 col-md-2 col-sm-12 col-12 mb-lg-0 mb-md-0 mb-3 d-flex flex-column align-items-center justify-content-center">
+      <div
+        class="col-lg-2 col-md-2 col-sm-12 col-12 mb-lg-0 mb-md-0 mb-3 d-flex flex-column align-items-center justify-content-center">
         <div class="img_div">
           <div class="image">
             <mat-icon>person</mat-icon>
@@ -51,7 +52,8 @@
         <app-upload-image path="/assets/img/temp/id1.png" label="صورة الهوية (الوجه الأمامي)"></app-upload-image>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/driving2.png" label="صورة رخصة القيادة (الوجه الأمامي)"></app-upload-image>
+        <app-upload-image path="/assets/img/temp/driving2.png" label="صورة رخصة القيادة (الوجه الأمامي)">
+        </app-upload-image>
       </div>
     </div>
     <div class="fourth_sec row w-100 mt-3">
@@ -59,13 +61,20 @@
         <app-upload-image path="/assets/img/temp/id2.jpg" label="صورة الهوية (الوجه الخلفي)"></app-upload-image>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/driving.jpg" label="صورة رخصة القيادة (الوجه الخلفي)"></app-upload-image>
+        <app-upload-image path="/assets/img/temp/driving.jpg" label="صورة رخصة القيادة (الوجه الخلفي)">
+        </app-upload-image>
       </div>
     </div>
     <div class="save_btn w-100 d-flex flex-column align-items-center justify-content-center">
-        <button class="btn t_btn_blue x-font-bold w-30">
-               حفظ التعديل
+      <div class="d-flex align-items-center">
+        <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-30">
+          حفظ التعديل
         </button>
+        <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" [routerLink]="['/drivers']"
+          routerLinkActive="router-link-active">
+          إلغاء
+        </button>
+      </div>
     </div>
   </form>
 </div>

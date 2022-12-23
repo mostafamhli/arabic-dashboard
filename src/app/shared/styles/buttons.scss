@@ -30,6 +30,11 @@
     color: $blue;
     border: 1px solid $blue;
   }
+  &:active,&:visited,&:focus {
+    background-color: $blue;
+    color: $white;
+    border: 1px solid $blue;
+  }
 }
 
 .t_btn_red{

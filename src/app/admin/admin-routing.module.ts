@@ -44,6 +44,10 @@ const routes: Routes = [
       { path: 'drivers', component: DriversListComponent },
       { path: 'driver-details/:id', component: DriverDetailsComponent },
       {
+        path: 'driver-profile',
+        component: DriverProfileComponent
+      },
+      {
         path: 'driver-profile/:id',
         component: DriverProfileComponent
       },

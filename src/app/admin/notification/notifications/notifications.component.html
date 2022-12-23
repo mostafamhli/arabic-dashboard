@@ -10,6 +10,7 @@
       <mat-form-field>
         <mat-label>بحث</mat-label>
         <input matInput (keyup)="getNotifications()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
+        <mat-icon matSuffix>search</mat-icon>
       </mat-form-field>
     </div>
   </div>

@@ -1,111 +1,109 @@
 <div class="forms x-font-regular ">
-    <div class="right">
-        <div class="form-item">
-            <mat-form-field appearance="fill">
-                <mat-label>السائقين</mat-label>
-                <mat-select>
-                    <mat-option value="one">السائق الأول</mat-option>
-                    <mat-option value="two">السائق الثاني</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="form-item">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>وقت بداية الرحلة</mat-label>
-                <input matInput [matDatepicker]="picker">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="form-item">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>وقت نهاية الرحلة</mat-label>
-                <input matInput [matDatepicker]="picker1">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker1">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-        </div>
+  <div class="right">
+    <div class="form-item">
+      <mat-form-field appearance="fill">
+        <mat-label>السائقين</mat-label>
+        <mat-select>
+          <mat-option value="one">السائق الأول</mat-option>
+          <mat-option value="two">السائق الثاني</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <div class="left">
-        <div class="form-item">
-            <mat-form-field appearance="fill">
-                <mat-label>نوع الرحلة</mat-label>
-                <mat-select>
-                    <mat-option value="one">النوع الأول</mat-option>
-                    <mat-option value="two">النوع الثاني</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="form-item">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>تاريخ بداية الرحلة</mat-label>
-                <input matInput [matDatepicker]="picker2">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker2">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="form-item">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>تاريخ نهاية الرحلة</mat-label>
-                <input matInput [matDatepicker]="picker3">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="picker3">
-                    <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker3></mat-datepicker>
-            </mat-form-field>
-        </div>
+    <div class="form-item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>وقت بداية الرحلة</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
     </div>
+    <div class="form-item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>وقت نهاية الرحلة</mat-label>
+        <input matInput [matDatepicker]="picker1">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker1">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="left">
+    <div class="form-item">
+      <mat-form-field appearance="fill">
+        <mat-label>نوع الرحلة</mat-label>
+        <mat-select>
+          <mat-option value="one">النوع الأول</mat-option>
+          <mat-option value="two">النوع الثاني</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="form-item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>تاريخ بداية الرحلة</mat-label>
+        <input matInput [matDatepicker]="picker2">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker2">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form-item">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>تاريخ نهاية الرحلة</mat-label>
+        <input matInput [matDatepicker]="picker3">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker3">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
 <div class="w-75 d-flex justify-content-center mx-auto buttons x-font-regular ">
-    <button class="btn t_btn_blue_outline w-25">بحث</button>
-    <button class="btn t_btn_blue_outline w-25">مسح بيانات</button>
+  <button class="btn t_btn_blue_outline w-25">بحث</button>
+  <button class="btn t_btn_blue_outline w-25">مسح بيانات</button>
 </div>
 
 <div class="jay_taxi_table">
-    <div class="table_div d-flex flex-column align-items-center">
-        <table class="table">
-            <thead class="x-font-bold">
-                <th>اسم السائق</th>
-                <th>اسم الزبون </th>
-                <th>حالة الرحلة</th>
-                <th> نوع الرحلة</th>
-                <th>تاريخ الرحلة </th>
-                <th>وقت الرحلة </th>
-                <th>كلفة الرحلة </th>
-                <th>عرض الرحلة</th>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of trips">
-                    <td>{{item.driverName}}</td>
-                    <td>{{item.clientName}}</td>
-                    <td>{{item.tripState}}</td>
-                    <td>{{item.tripType}}</td>
-                    <td>{{item.tripDate}}</td>
-                    <td>{{item.tripTime}}</td>
-                    <td>{{item.tripCost}}</td>
-                    <td>
-                        <button class="btn t_btn_blue small_btn" [routerLink]="['/trip-details']"
-                            (click)="onClick(item)" routerLinkActive="router-link-active">
-                            <mat-icon class="removed-eye">remove_red_eye</mat-icon>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <div class="table_div d-flex flex-column align-items-center">
+    <table class="table">
+      <thead class="x-font-bold">
+        <th>اسم السائق</th>
+        <th>اسم الزبون </th>
+        <th>حالة الرحلة</th>
+        <th> نوع الرحلة</th>
+        <th>تاريخ الرحلة </th>
+        <th>وقت الرحلة </th>
+        <th>كلفة الرحلة </th>
+        <th>عرض الرحلة</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of trips">
+          <td>{{item.driverName}}</td>
+          <td>{{item.clientName}}</td>
+          <td>{{item.tripState}}</td>
+          <td>{{item.tripType}}</td>
+          <td>{{item.tripDate}}</td>
+          <td>{{item.tripTime}}</td>
+          <td>{{item.tripCost}}</td>
+          <td>
+            <mat-icon [routerLink]="['/trip-details']" (click)="onClick(item)" routerLinkActive="router-link-active"
+              class="removed-eye">remove_red_eye</mat-icon>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
-    <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
-        تحميل المزيد
-    </button>
+  <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+    تحميل المزيد
+  </button>
 </div>

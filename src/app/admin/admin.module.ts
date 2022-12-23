@@ -41,6 +41,7 @@ import { CitiesComponent } from './public-settings/cities/cities.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
 import { SendNotificationComponent } from './notification/send-notification/send-notification.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { SendNotificationComponent } from './notification/send-notification/send
     CitiesComponent,
     ReportsComponent,
     NotificationsComponent,
-    SendNotificationComponent
+    SendNotificationComponent,
+    ConfirmComponent
   ],
 
   imports: [
