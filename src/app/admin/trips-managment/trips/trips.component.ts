@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
+import { FormControl, NgForm, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 
 
@@ -15,6 +14,20 @@ export class TripsComponent {
   trips: any[] = []
   filter: FilterWithSearch = new FilterWithSearch()
 
+  
+  @ViewChild('myForm') form!: NgForm;
+  driversList = new FormControl('', [Validators.required]);
+  beginTime = new FormControl('', [Validators.required]);
+  beginDate = new FormControl('', [Validators.required]);
+  endTime = new FormControl('', [Validators.required]);
+  tripType = new FormControl('', [Validators.required]);
+  endDate = new FormControl('', [Validators.required]);
+
+  
+  getErrorRequiredMessage() {
+    return 'يجب أن تدخل قيمة';
+  }
+
   constructor() {
     this.getTrips()
   }
@@ -27,7 +40,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       },
@@ -37,7 +50,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       },
@@ -47,7 +60,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       },
@@ -57,7 +70,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       },
@@ -67,7 +80,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       },
@@ -77,7 +90,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       },
@@ -87,7 +100,7 @@ export class TripsComponent {
         clientName: 'Yazan Abbas',
         tripState: 'مؤكدة',
         tripType: 'عادية',
-        tripDate: '22-12-2022',
+        tripDate: moment().format('DD-MM-YYYY'),
         tripTime: '10:58',
         tripCost: 10000
       }
@@ -103,4 +116,7 @@ export class TripsComponent {
     console.log(item)
   }
 
+  onSubmit(){
+    console.log(this.form.value)
+  }
 }

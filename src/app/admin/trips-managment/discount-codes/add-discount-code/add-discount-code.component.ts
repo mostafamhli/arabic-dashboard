@@ -11,6 +11,7 @@ export class AddDiscountCodeComponent {
   displayStyle = "none";
 
   @ViewChild('myForm') form!: NgForm;
+  
   discountName = new FormControl('', [Validators.required]);
   discountCode = new FormControl('', [Validators.required]);
   outDate = new FormControl('', [Validators.required]);

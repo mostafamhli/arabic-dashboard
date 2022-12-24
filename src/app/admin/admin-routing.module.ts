@@ -23,6 +23,8 @@ import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehi
 import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
+import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
+import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
 
 
 const routes: Routes = [
@@ -55,6 +57,8 @@ const routes: Routes = [
       { path: 'types', component: TypesComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'cities', component: CitiesComponent },
+      { path: 'add-new-user', component: AddNewUserComponent },
+      { path: 'add-new-classification', component: AddNewClassificationComponent },
     ]
   }
 ];

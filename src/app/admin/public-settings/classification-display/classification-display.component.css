@@ -34,17 +34,13 @@
     padding-right: 6rem;
 }
 
-.day-rent-container:first-child {
-    border-left: 1px solid var(--main-color);
-}
-
 .lable {
     font-size: var(--meduim-font-size);
     color: var(--main-bg-color);
 }
 
 .lable-value {
-    width: 50%;
+    width: 80%;
     color: var(--main-color);
     font-size: var(--small-font-size);
     padding-right: 5px;

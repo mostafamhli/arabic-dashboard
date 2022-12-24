@@ -1,1 +1,215 @@
-<p>add-new-classification works!</p>
+<div class="w-100 d-flex justify-content-end">
+    <button class="btn t_btn_blue_outline" routerLink="/vehicle-classification"><mat-icon>arrow_back</mat-icon></button>
+</div>
+
+<div class="class-header x-font-regular ">
+    <h2>عرض التصنيف</h2>
+    <div class="user-img">
+        <img src="../../../assets/img/user.png" alt="user image">
+    </div>
+</div>
+
+<div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular ">
+    <form (ngSubmit)="onSubmit()" #myForm0="ngForm" class="w-100 d-flex flex-wrap justify-content-around">
+        <div class="form-item w-30">
+            <mat-form-field class="example-full-width">
+                <mat-label>اسم التصنيف</mat-label>
+                <input matInput name="className" ngModel required #className="ngModel">
+                <mat-error *ngIf="className.invalid && className.touched">{{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-item w-30">
+            <mat-form-field class="example-full-width">
+                <mat-label>عدد المقاعد</mat-label>
+                <input matInput name="numOfSeat" ngModel required #numOfSeat="ngModel">
+                <mat-error *ngIf="numOfSeat.invalid && numOfSeat.touched">{{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="form-item w-30">
+            <mat-form-field class="example-full-width">
+                <mat-label>نسبة السائق</mat-label>
+                <input matInput name="driverRatio" ngModel required #driverRatio="ngModel">
+                <mat-error *ngIf="driverRatio.invalid && driverRatio.touched">{{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+
+<div class="d-flex flex-wrap justify-content-between mt-5 x-font-regular ">
+    <div class="w-30 d-flex flex-column day-rent-container">
+        <h2 class="rent-header text-center">الأجور خلال الصباح</h2>
+        <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="d-flex flex-wrap flex-column">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>أقل أجرة</mat-label>
+                    <input matInput name="lowestRent" ngModel required #lowestRent="ngModel">
+                    <mat-error
+                        *ngIf="lowestRent.invalid && lowestRent.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>الضريبة</mat-label>
+                    <input matInput name="tax" ngModel required #tax="ngModel">
+                    <mat-error *ngIf="tax.invalid && tax.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>1/Km</mat-label>
+                    <input matInput name="one_Km" ngModel required #one_Km="ngModel">
+                    <mat-error *ngIf="one_Km.invalid && one_Km.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>10/m</mat-label>
+                    <input matInput name="ten_M" ngModel required #ten_M="ngModel">
+                    <mat-error *ngIf="ten_M.invalid && ten_M.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>وقت ابتداء الفترة الصباحية</mat-label>
+                    <input matInput name="morningBegin" ngModel required #morningBegin="ngModel">
+                    <mat-error
+                        *ngIf="morningBegin.invalid && morningBegin.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>وقت انتهاء الفترة الصباحية</mat-label>
+                    <input matInput name="morningEnd" ngModel required #morningEnd="ngModel">
+                    <mat-error
+                        *ngIf="morningEnd.invalid && morningEnd.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-30 d-flex flex-column day-rent-container">
+        <h2 class="rent-header text-center">الأجور خلال النهار</h2>
+        <form (ngSubmit)="onSubmit()" #myForm2="ngForm" class="d-flex flex-wrap flex-column">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>أقل أجرة</mat-label>
+                    <input matInput name="lowestRent" ngModel required #lowestRent="ngModel">
+                    <mat-error
+                        *ngIf="lowestRent.invalid && lowestRent.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>الضريبة</mat-label>
+                    <input matInput name="tax" ngModel required #tax="ngModel">
+                    <mat-error *ngIf="tax.invalid && tax.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>1/Km</mat-label>
+                    <input matInput name="one_Km" ngModel required #one_Km="ngModel">
+                    <mat-error *ngIf="one_Km.invalid && one_Km.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>10/m</mat-label>
+                    <input matInput name="ten_M" ngModel required #ten_M="ngModel">
+                    <mat-error *ngIf="ten_M.invalid && ten_M.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>وقت ابتداء الفترة النهارية</mat-label>
+                    <input matInput name="dayBegin" ngModel required #dayBegin="ngModel">
+                    <mat-error *ngIf="dayBegin.invalid && dayBegin.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>وقت انتهاء الفترة النهارية</mat-label>
+                    <input matInput name="dayEnd" ngModel required #dayEnd="ngModel">
+                    <mat-error *ngIf="dayEnd.invalid && dayEnd.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-30 d-flex flex-column day-rent-container x-font-regular ">
+        <h2 class="rent-header text-center">الأجور خلال الليل</h2>
+        <form (ngSubmit)="onSubmit()" #myForm3="ngForm" class="d-flex flex-wrap flex-column">
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>أقل أجرة</mat-label>
+                    <input matInput name="lowestRent" ngModel required #lowestRent="ngModel">
+                    <mat-error
+                        *ngIf="lowestRent.invalid && lowestRent.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>الضريبة</mat-label>
+                    <input matInput name="tax" ngModel required #tax="ngModel">
+                    <mat-error *ngIf="tax.invalid && tax.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>1/Km</mat-label>
+                    <input matInput name="one_Km" ngModel required #one_Km="ngModel">
+                    <mat-error *ngIf="one_Km.invalid && one_Km.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>10/m</mat-label>
+                    <input matInput name="ten_M" ngModel required #ten_M="ngModel">
+                    <mat-error *ngIf="ten_M.invalid && ten_M.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>وقت ابتداء الفترة المسائية</mat-label>
+                    <input matInput name="nightBegin" ngModel required #nightBegin="ngModel">
+                    <mat-error
+                        *ngIf="nightBegin.invalid && nightBegin.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>وقت انتهاء الفترة المسائية</mat-label>
+                    <input matInput name="nightEnd" ngModel required #nightEnd="ngModel">
+                    <mat-error *ngIf="nightEnd.invalid && nightEnd.touched">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+    </div>
+
+    <div class="w-100 d-flex justify-content-center">
+        <button class="w-25 btn t_btn_blue_outline">أضف</button>
+    </div>
+</div>

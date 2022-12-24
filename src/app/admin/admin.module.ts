@@ -32,10 +32,11 @@ import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { AddTransferComponent } from './drivers/add-transfer/add-transfer.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
 import { AddDiscountCodeComponent } from './trips-managment/discount-codes/add-discount-code/add-discount-code.component';
-import { AddNewAccountComponent } from './public-settings/dashboard-users/add-new-account/add-new-account.component';
+
 import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
 import { AddNewTypeComponent } from './public-settings/types/add-new-type/add-new-type.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
+import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
 
 @NgModule({
   declarations: [
@@ -62,10 +63,10 @@ import { CitiesComponent } from './public-settings/cities/cities.component';
     AddTransferComponent,
     ViewProfileComponent,
     AddDiscountCodeComponent,
-    AddNewAccountComponent,
     AddNewClassificationComponent,
     AddNewTypeComponent,
-    CitiesComponent
+    CitiesComponent,
+    AddNewUserComponent
   ],
 
   imports: [

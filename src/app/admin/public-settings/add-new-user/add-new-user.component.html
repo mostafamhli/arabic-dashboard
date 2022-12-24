@@ -75,11 +75,14 @@
                 </mat-form-field>
             </div>
             <div class="form-item">
-                <mat-form-field class="example-full-width">
+                <mat-form-field appearance="fill">
                     <mat-label>الدور</mat-label>
-                    <input matInput name="type" ngModel required #type="ngModel">
+                    <mat-select name="type" ngModel required #type="ngModel">
+                        <mat-option value="one">الدور الأول</mat-option>
+                        <mat-option value="two">الدور الثاني</mat-option>
+                    </mat-select>
                     <mat-error
-                        *ngIf="type.invalid && type.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    *ngIf="type.invalid && type.touched">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
         </div>
@@ -87,7 +90,7 @@
             <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn t_btn_blue w-25"
             mat-dialog-close>إضافة
             </button>
-            <button type="button" mat-dialog-close class="btn t_btn_blue w-25" (click)="closePopup()">إلغاء
+            <button type="button" mat-dialog-close class="btn t_btn_blue w-25" routerLink="/dashboard-users">إلغاء
             </button>
         </div>
     </form>

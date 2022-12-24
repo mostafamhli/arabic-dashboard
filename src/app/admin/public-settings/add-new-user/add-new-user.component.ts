@@ -1,19 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-add-new-account',
-  templateUrl: './add-new-account.component.html',
-  styleUrls: ['./add-new-account.component.scss']
+  selector: 'app-add-new-user',
+  templateUrl: './add-new-user.component.html',
+  styleUrls: ['./add-new-user.component.scss']
 })
-export class AddNewAccountComponent {
+export class AddNewUserComponent {
 
   @ViewChild('myForm') form!: NgForm;
   firstName = new FormControl('', [Validators.required]);
   lastName = new FormControl('', [Validators.required]);
   address = new FormControl('', [Validators.required]);
   mobile = new FormControl('', [Validators.required]);
-  creationDate = new FormControl('', [Validators.required]);
+  creationDate = new FormControl(moment().format('DD-MM-YYYY'), [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
   type = new FormControl('', [Validators.required]);
@@ -23,17 +24,6 @@ export class AddNewAccountComponent {
       return 'أدخل بريد إلكتروني صالح'
     }
     return 'يجب أن تدخل قيمة';
-  }
-
-
-  displayStyle = "none";
-
-  openPopup() {
-    this.displayStyle = "block";
-  }
-
-  closePopup() {
-    this.displayStyle = "none";
   }
 
   
@@ -49,14 +39,5 @@ export class AddNewAccountComponent {
         this.dataSource.data = data;
     */
       }
-      applyFilter(event: Event) {
-        /*
-        const filterValue = (event.target as HTMLInputElement).value;
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-    
-        if (this.dataSource.paginator) {
-          this.dataSource.paginator.firstPage();
-        }
-        */
-      }
+
 }
