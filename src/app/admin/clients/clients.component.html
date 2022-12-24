@@ -5,6 +5,7 @@
                 <mat-label>بحث</mat-label>
                 <input matInput (keyup)="getClients()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد"
                     #input>
+                <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
         </div>
     </div>
@@ -17,7 +18,7 @@
                     <th>تاريخ إنشاء الحساب</th>
                     <th>عدد الرحلات </th>
                     <th>التقييم</th>
-                    <th>رمز التفعيل </th>
+                    <!-- <th>رمز التفعيل </th> -->
                     <th>تفعيل الحساب</th>
                 </thead>
                 <tbody>
@@ -27,7 +28,7 @@
                         <td>{{item.creationDate}}</td>
                         <td>{{item.NumOfTrips}}</td>
                         <td>{{item.eval}}</td>
-                        <td>{{item.activatedCode}}</td>
+                        <!-- <td>{{item.activatedCode}}</td> -->
                         <td>
                             <container-element [ngSwitch]="item.accountStatus">
                                 <span class="status active_status py-1" *ngSwitchCase="accountStatusEnum.active">مفعل</span>

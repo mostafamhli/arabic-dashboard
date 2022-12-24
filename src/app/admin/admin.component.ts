@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 enum ActiveTabs  {
   drivers = 1,
   trips = 2,
-  setting = 3
+  setting = 3,
+  notifications = 4
 }
 
 @Component({
@@ -28,6 +29,26 @@ export class AdminComponent {
       url.includes('drivers') ||
       url.includes('transfers')) {
       this.activeTab = ActiveTabs.drivers
+    } else if(
+      url.includes('trips') ||
+      url.includes('trip-details') ||
+      url.includes('discount-codes') ||
+      url.includes('cancle')
+    ){
+      this.activeTab = ActiveTabs.trips
+    } else if(
+      url.includes('dashboard-users') ||
+      url.includes('vehicle-classification') ||
+      url.includes('classification-display') ||
+      url.includes('types') ||
+      url.includes('cities') ||
+      url.includes('settings') 
+    ){
+      this.activeTab = ActiveTabs.setting
+    } else if(
+      url.includes('notifications')
+    ){
+      this.activeTab = ActiveTabs.notifications
     }
   }
 

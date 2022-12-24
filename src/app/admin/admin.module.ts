@@ -31,12 +31,18 @@ import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehi
 import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { AddTransferComponent } from './drivers/add-transfer/add-transfer.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
+
 import { AddDiscountCodeComponent } from './trips-managment/discount-codes/add-discount-code/add-discount-code.component';
 
 import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
 import { AddNewTypeComponent } from './public-settings/types/add-new-type/add-new-type.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
 import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
+
+import { ReportsComponent } from './reports/reports.component';
+import { NotificationsComponent } from './notification/notifications/notifications.component';
+import { SendNotificationComponent } from './notification/send-notification/send-notification.component';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 @NgModule({
   declarations: [
@@ -66,7 +72,11 @@ import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user
     AddNewClassificationComponent,
     AddNewTypeComponent,
     CitiesComponent,
-    AddNewUserComponent
+    AddNewUserComponent,
+    ReportsComponent,
+    NotificationsComponent,
+    SendNotificationComponent,
+    ConfirmComponent
   ],
 
   imports: [

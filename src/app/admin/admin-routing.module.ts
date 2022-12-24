@@ -25,6 +25,9 @@ import { ViewProfileComponent } from './drivers/view-profile/view-profile.compon
 import { CitiesComponent } from './public-settings/cities/cities.component';
 import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
 import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
+import { ReportsComponent } from './reports/reports.component';
+import { NotificationsComponent } from './notification/notifications/notifications.component';
+
 
 
 const routes: Routes = [
@@ -43,6 +46,10 @@ const routes: Routes = [
       { path: 'drivers', component: DriversListComponent },
       { path: 'driver-details/:id', component: DriverDetailsComponent },
       {
+        path: 'driver-profile',
+        component: DriverProfileComponent
+      },
+      {
         path: 'driver-profile/:id',
         component: DriverProfileComponent
       },
@@ -59,6 +66,8 @@ const routes: Routes = [
       { path: 'cities', component: CitiesComponent },
       { path: 'add-new-user', component: AddNewUserComponent },
       { path: 'add-new-classification', component: AddNewClassificationComponent },
+      { path: 'reports', component: ReportsComponent },
+      { path: 'notifications', component: NotificationsComponent }
     ]
   }
 ];

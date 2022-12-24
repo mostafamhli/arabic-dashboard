@@ -10,6 +10,7 @@
             <mat-form-field>
               <mat-label>بحث</mat-label>
               <input matInput (keyup)="getDrivers()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
+              <mat-icon matSuffix>search</mat-icon>
             </mat-form-field>
           </div>
         </div>
@@ -18,7 +19,7 @@
             <table class="table">
               <thead class="x-font-bold">
                 <th>اسم السائق</th>
-                <th>تاريخ إنشاء الحساب</th>
+                <th>تاريخ الدفع</th>
                 <th>اسم المحاسب</th>
                 <th>المبلغ</th>
                 <th>نوع المناقلة</th>
