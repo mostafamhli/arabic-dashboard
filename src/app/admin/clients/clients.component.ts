@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { AccountStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmComponent } from '../confirm/confirm.component';
 
 
 
@@ -16,7 +18,7 @@ export class ClientsComponent {
   accountStatusEnum = AccountStatus
 
 
-  constructor() {
+  constructor(private confirmChangeStatus:MatDialog) {
     this.getClients()
   }
 
@@ -111,4 +113,20 @@ export class ClientsComponent {
     this.getClients()
   }
 
+  
+  confirm(item:any){
+    let dialog = this.confirmChangeStatus.open(ConfirmComponent,{
+      width:"40%",
+      data : item
+    })
+    dialog.afterClosed().subscribe((result: any) => {
+      if(result){
+        let clientIndex = this.clients.findIndex(a=>a.id == result.id)
+        if(clientIndex != -1) {
+          this.clients[clientIndex].accountStatus = result.accountStatus
+          console.log(this.clients[clientIndex])
+        }
+      }
+    })
+  }
 }

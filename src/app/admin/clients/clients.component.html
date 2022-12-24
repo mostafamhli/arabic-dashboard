@@ -31,8 +31,8 @@
                         <!-- <td>{{item.activatedCode}}</td> -->
                         <td>
                             <container-element [ngSwitch]="item.accountStatus">
-                                <span class="status active_status py-1" *ngSwitchCase="accountStatusEnum.active">مفعل</span>
-                                <span class="status inactive_status py-1" *ngSwitchCase="accountStatusEnum.inActive">غير
+                                <span (click)="confirm(item)" class="status cursor active_status py-1" *ngSwitchCase="accountStatusEnum.active">مفعل</span>
+                                <span (click)="confirm(item)" class="status cursor inactive_status py-1" *ngSwitchCase="accountStatusEnum.inActive">غير
                                     مفعل</span>
                             </container-element>
                         </td>

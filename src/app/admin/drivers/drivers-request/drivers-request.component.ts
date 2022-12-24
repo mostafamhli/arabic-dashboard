@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DriverRequest } from 'src/app/core/models/drivers.mode';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-drivers-request',
@@ -21,41 +22,42 @@ export class DriversRequestComponent {
       {
         id:1,
         name: "Wael",
-        email: "wael@gmail.com",
+        mobile: "963949394418",
         accountCreationDate: "12-9-2022"
       },
       {
         id:2,
         name: "Wael",
-        email: "wael@gmail.com",
+        mobile: "963949394418",
         accountCreationDate: "12-9-2022"
       },
       {
         id:3,
         name: "Wael",
-        email: "wael@gmail.com",
+        mobile: "963949394418",
         accountCreationDate: "12-9-2022"
       },
       {
         id:4,
         name: "Wael",
-        email: "wael@gmail.com",
+        mobile: "963949394418",
         accountCreationDate: "12-9-2022"
       },
       {
         id:5,
         name: "Wael",
-        email: "wael@gmail.com",
+        mobile: "963949394418",
         accountCreationDate: "12-9-2022"
       },
       {
         id:6,
         name: "Wael",
-        email: "wael@gmail.com",
+        mobile: "963949394418",
         accountCreationDate: "12-9-2022"
       },
     ]
   }
+
   loadMore(){
     this.filter.pageIndex = this.filter.pageIndex + 1;
     this.getDrivers()

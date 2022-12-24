@@ -37,17 +37,17 @@ export class DriverRequest {
     id: number
     name: string
     accountCreationDate: any
-    email: string
+    mobile: string
     constructor(d?: DriverRequest) {
         if (!d) {
             this.name = ""
             this.accountCreationDate = undefined
-            this.email = ""
+            this.mobile = ""
             this.id = 0
         } else {
             this.id = d.id
             this.name = d.name
-            this.email = d.email
+            this.mobile = d.mobile
             this.accountCreationDate = d.accountCreationDate
         }
     }
