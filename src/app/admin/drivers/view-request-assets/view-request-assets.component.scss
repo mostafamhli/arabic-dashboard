@@ -1,0 +1,21 @@
+@import 'src/app/shared/styles/variables';
+
+.view_assets {
+    .assets {
+        .asset {
+          background: $grey_transparent;
+          margin-bottom: 2vh;
+    
+          .img_div {
+            width: 15vw;
+    
+            img {
+              max-width: 15vw;
+              max-height: 15vh;
+              width: auto;
+              height: auto;
+            }
+          }
+        }
+      }
+}

@@ -1,0 +1,23 @@
+<div class="accept_driver_request p-3">
+  <h4 class="mb-5 x-font-bold w-100 text-center">
+    اختر المركبة
+  </h4>
+  <div class="vehicles d-flex align-items-center">
+    <div class="vehicle" *ngFor="let item of vehicles" [ngClass]="{active: activeVehicle == item.id}" (click)="activeVehicle = item.id">
+      <div class="img_div">
+        <img [src]="item.path">
+      </div>
+      <label>{{item.name}}</label>
+    </div>
+  </div>
+  <div class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-3">
+    <div class="d-flex align-items-center">
+      <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-30" (click)="accept()">
+        حفظ 
+      </button>
+      <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" (click)="cancel()">
+        إلغاء
+      </button>
+    </div>
+  </div>
+</div>
