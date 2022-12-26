@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "src/app/shared/styles/styles.scss";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
 
 :root {
   --large-font-size: 1.25rem;
@@ -29,6 +30,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: $cairo_regular;
+
   @include scroll {
     -webkit-appearance: none;
     width: 15px;
@@ -48,9 +50,14 @@ a {
 }
 
 mat-form-field {
-    div,input,span,label,p {
+
+  div,
+  input,
+  span,
+  label,
+  p {
     font-family: $cairo_regular !important;
-    }
+  }
 }
 
 .mat-icon {
@@ -61,9 +68,10 @@ mat-form-field {
   cursor: pointer;
 }
 
-mat-form-field{
-mat-icon {
-  height: auto !important;
-  width: auto !important;
-}
+
+mat-form-field {
+  mat-icon {
+    height: auto !important;
+    width: auto !important;
+  }
 }

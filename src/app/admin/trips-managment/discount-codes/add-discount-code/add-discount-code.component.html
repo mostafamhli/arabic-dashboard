@@ -19,17 +19,17 @@
                 </mat-form-field>
             </div>
             <div class="form-item">
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field appearance="fill">
                     <mat-label>تاريخ إنتهاء الصلاحية</mat-label>
-                    <input matInput [matDatepicker]="picker" name="outDate" ngModel required #outDate="ngModel">
+                    <input matInput [matDatepicker]="picker" readonly name="outDate" ngModel required
+                        #outDate="ngModel">
                     <mat-error *ngIf="outDate.invalid && outDate.touched">{{getErrorRequiredMessage()}}</mat-error>
                     <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker">
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker disabled="false"></mat-datepicker>
                 </mat-form-field>
             </div>
+
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>قيمة الحسم بالنسبة المئوية</mat-label>

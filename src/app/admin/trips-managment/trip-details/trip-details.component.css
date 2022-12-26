@@ -17,8 +17,7 @@
 
 .trip-info-item span:first-child,
 .trip-info-item span:last-child {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.4rem;
 }
 
 .trip-image {

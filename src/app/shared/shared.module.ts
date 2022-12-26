@@ -7,7 +7,6 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
 import { ViewImageComponent } from './components/view-image/view-image.component';
 
 
-
 @NgModule({
   declarations: [
     MatCartComponent,

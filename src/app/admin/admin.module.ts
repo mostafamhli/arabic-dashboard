@@ -33,11 +33,13 @@ import { AddTransferComponent } from './drivers/add-transfer/add-transfer.compon
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
 
 import { AddDiscountCodeComponent } from './trips-managment/discount-codes/add-discount-code/add-discount-code.component';
-import { AddNewAccountComponent } from './public-settings/dashboard-users/add-new-account/add-new-account.component';
+
 import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
 import { AddNewTypeComponent } from './public-settings/types/add-new-type/add-new-type.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
-
+import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
 import { SendNotificationComponent } from './notification/send-notification/send-notification.component';
@@ -70,10 +72,11 @@ import { ViewRequestAssetsComponent } from './drivers/view-request-assets/view-r
     AddTransferComponent,
     ViewProfileComponent,
     AddDiscountCodeComponent,
-    AddNewAccountComponent,
     AddNewClassificationComponent,
     AddNewTypeComponent,
     CitiesComponent,
+    AddNewUserComponent,
+    AddNewCityComponent,
     ReportsComponent,
     NotificationsComponent,
     SendNotificationComponent,
@@ -89,7 +92,9 @@ import { ViewRequestAssetsComponent } from './drivers/view-request-assets/view-r
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
-  ]
+    MatNativeDateModule,
+    NgxMatTimepickerModule.setLocale('ar-AE')
+  ],
+ 
 })
 export class AdminModule { }

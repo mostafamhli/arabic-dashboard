@@ -1,20 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import * as moment from 'moment';
+import { Component } from '@angular/core';
 import { AccountStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
-import { AddNewAccountComponent } from './add-new-account/add-new-account.component';
 
-export interface PeriodicElement {
-  userName: string;
-  type: string;
-  accountCreateDate: string;
-  email: string;
-}
+
 
 @Component({
   selector: 'app-dashboard-users',
@@ -27,7 +15,7 @@ export class DashboardUsersComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   accountStatusEnum = AccountStatus
 
-  constructor(private addNewUserAccount:MatDialog){
+  constructor(){
     this.getDashboardUsers()
   }
   
@@ -63,12 +51,5 @@ export class DashboardUsersComponent {
   loadMore() {
     this.filter.pageIndex = this.filter.pageIndex + 1;
     this.getDashboardUsers()
-  }
-
-
-  addNewAccount(){
-    this.addNewUserAccount.open(AddNewAccountComponent,{
-      width:"50%"
-    })
   }
 }
