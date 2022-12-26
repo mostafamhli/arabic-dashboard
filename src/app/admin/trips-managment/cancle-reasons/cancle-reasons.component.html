@@ -1,21 +1,29 @@
-
-<div class="main-container cancel x-font-regular ">
+<div class="d-flex justify-content-center align-items-center x-font-regular" style="height:80vh;">
     <mat-card>
         <mat-card-content>
             <h4 class="title">أسباب إلغاء الرحلات</h4>
-            <mat-form-field appearance="fill" class="example-form-field">
-                <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl">
-                    <mat-chip-row *ngFor="let keyword of keywords" (removed)="removeKeyword(keyword)">
-                        <span>{{keyword}}</span>
-                        <button matChipRemove aria-label="'إزالة ' + keyword">
-                            <mat-icon>cancel</mat-icon>
-                        </button>
-                    </mat-chip-row>
-                </mat-chip-grid>
-                <div class="input-container">
-                    <input placeholder="إضافة سبب جديد" [matChipInputFor]="chipGrid" (matChipInputTokenEnd)="add($event)" />
-                </div>    
-            </mat-form-field>
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <div class="d-flex justify-content-center w-100">
+                    <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl" class="w-100 d-flex justify-content-center">
+                        <mat-chip-row *ngFor="let keyword of keywords" (removed)="removeKeyword(keyword)" class=" d-flex justify-content-between mb-3">
+                            <span>{{keyword}}</span>
+                            <button matChipRemove aria-label="'إزالة ' + keyword">
+                                <mat-icon>cancel</mat-icon>
+                            </button>
+                        </mat-chip-row>
+                    </mat-chip-grid>
+                </div>
+
+                <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="d-flex flex-wrap justify-content-center">
+                    <div class="form-item mt-5">
+                        <mat-form-field class="example-full-width">
+                            <mat-label>إضافة محافظة جديدة</mat-label>
+                            <input matInput name="cancleName" ngModel #cancleName="ngModel" >
+                        </mat-form-field>
+                    </div>
+                    <button class="btn t_btn_blue w-25" type="submit">أضف</button>
+                </form>
+            </div>
         </mat-card-content>
-      </mat-card>
+    </mat-card>
 </div>
