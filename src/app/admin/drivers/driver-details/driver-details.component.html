@@ -5,64 +5,82 @@
       <h1 class="x-font-bold">Test</h1>
     </div>
   </div>
+  <div class="filter_div d-flex align-items-center">
+    <h6 class="x-font-bold ms-3">يمكنك الفلترة حسب مجال معين</h6>
+    <mat-form-field appearance="fill">
+      <mat-label>أدخل المجال</mat-label>
+      <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+        <input matStartDate formControlName="start" placeholder="Start date">
+        <input matEndDate formControlName="end" placeholder="End date">
+      </mat-date-range-input>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+      <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
+    </mat-form-field>
+  </div>
   <div class="jay_taxi_table">
     <div class="table_div d-flex flex-column align-items-center">
       <table class="table">
         <thead class="x-font-bold">
           <th></th>
-          <th>اليوم</th>
+          <!-- <th>اليوم</th>
           <th>البارحة</th>
           <th>آخر 7 أيام</th>
           <th>الشهر الحالي</th>
           <th>الشهر السابق</th>
           <th>آخر شهرين</th>
-          <th>آخر 3 شهور</th>
-          <th>الإجمالي</th>
+          <th>آخر 3 شهور</th> -->
+          <th *ngIf="range && range.value && range.value.start && range.value.end">
+            {{range.value.start | date:'MMM d, y'}} -> {{range.value.end | date:'MMM d, y'}}
+          </th>
+          <th>منذ إنشاء الحساب</th>
         </thead>
         <tbody>
           <tr>
             <td class="x-font-bold text-right">عدد الرحلات</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
+            <td></td>
+            <!-- <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td></td> -->
           </tr>
           <tr>
             <td class="x-font-bold">إجمالي الأرباح</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
+            <td></td>
+            <!-- <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td></td> -->
           </tr>
           <tr>
             <td class="x-font-bold">أرباح الشركات الصافية</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
+            <td></td>
+            <!-- <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td></td> -->
           </tr>
           <tr>
             <td class="x-font-bold">أرباح السائقين الصافية</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
+            <td></td>
+            <!-- <td></td>
             <td></td>
             <td></td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td></td> -->
           </tr>
         </tbody>
       </table>
@@ -76,6 +94,7 @@
     </div>
   </div>
   <div class="w-100 d-flex flex-column align-items-center back_to_list">
-        <button class="btn t_btn_blue w-30" [routerLink]="['/drivers']" routerLinkActive="router-link-active" >عودة إلى القائمة</button>
+    <button class="btn t_btn_blue w-30" [routerLink]="['/drivers']" routerLinkActive="router-link-active">عودة إلى
+      القائمة</button>
   </div>
 </div>
