@@ -1,0 +1,42 @@
+@import 'src/app/shared/styles/variables';
+
+.accept_driver_request {
+  .vehicle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: $grey_transparent;
+
+    &.active {
+      background-color: $grey_active;
+    }
+
+    width: 110px;
+    height: 110px;
+    border-radius: 15px;
+    margin: auto;
+    padding: 10px;
+    cursor: pointer;
+
+    .img_div {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      img {
+        max-width: 80px;
+        max-height: 80px;
+        width: auto;
+        height: auto;
+      }
+    }
+
+    label {
+      margin-top: 10px;
+    }
+  }
+}
