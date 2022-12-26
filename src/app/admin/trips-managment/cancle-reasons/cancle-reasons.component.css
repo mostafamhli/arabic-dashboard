@@ -1,14 +1,7 @@
-.main-container {
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
 
 mat-card {
-    width: 60%;
-    display: flex;
-    justify-content: center;
+    width: 70%;
 }
 
 .title {
@@ -19,17 +12,10 @@ mat-card {
     text-align: center;
 }
 
-mat-form-field {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
 
 mat-chip-row {
     background-color: var(--main-bg-color) !important;
-    width: calc(100% / 4);
-    display: flex;
-    justify-content: space-between;
+    width: calc((100% / 4) - 10px);
 }
 
 mat-chip-row span {
@@ -43,26 +29,10 @@ mat-chip-row button mat-icon {
     color:var(--gold-color) !important;
 }
 
+
 .input-container {
-    width: 50%;
+    width: 40%;
     display: flex;
     justify-content: center;
     margin: 2rem auto 0;
-}
-
-input {
-    width: 60%;
-    background-color: var(--gold-color);
-    color: var(--main-bg-color);
-    display: flex;
-    justify-content: center;
-    padding: 0.4rem 0;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-input::placeholder {
-    font-size: var(--meduim-font-size);
-    color: var(--main-bg-color);
-    text-align: center;
 }
