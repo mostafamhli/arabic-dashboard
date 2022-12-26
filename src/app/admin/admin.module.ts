@@ -38,6 +38,9 @@ import { AddNewTypeComponent } from './public-settings/types/add-new-type/add-ne
 import { CitiesComponent } from './public-settings/cities/cities.component';
 import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
 
+import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
+
 @NgModule({
   declarations: [
     MainDashboardComponent,
@@ -66,7 +69,8 @@ import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user
     AddNewClassificationComponent,
     AddNewTypeComponent,
     CitiesComponent,
-    AddNewUserComponent
+    AddNewUserComponent,
+    AddNewCityComponent
   ],
 
   imports: [
@@ -76,7 +80,9 @@ import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    MatNativeDateModule
-  ]
+    MatNativeDateModule,
+    NgxMatTimepickerModule.setLocale('ar-AE')
+  ],
+ 
 })
 export class AdminModule { }

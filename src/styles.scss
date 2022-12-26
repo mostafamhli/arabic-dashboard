@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "src/app/shared/styles/styles.scss";
+@import "@angular/material/prebuilt-themes/indigo-pink.css";  
 
 :root {
   --large-font-size: 1.25rem;
@@ -60,3 +61,5 @@ mat-form-field {
 .cursor {
   cursor: pointer;
 }
+
+

@@ -9,6 +9,8 @@ import * as moment from 'moment';
 })
 export class AddNewUserComponent {
 
+  hide = true;
+  
   @ViewChild('myForm') form!: NgForm;
   firstName = new FormControl('', [Validators.required]);
   lastName = new FormControl('', [Validators.required]);

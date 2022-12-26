@@ -1,68 +1,15 @@
-.main-container {
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@import 'src/app/shared/styles/variables';
+
+.city-name {
+    background-color: $grey_light;
 }
 
-mat-card {
-    width: 60%;
-    display: flex;
-    justify-content: center;
-}
-
-.title {
-    margin: 0 0 1rem 0;
-    color: var(--main-bg-color);
-    font-weight: var(--large-font-weight);
-    font-size: var(--large-font-size);
-    text-align: center;
-}
-
-mat-form-field {
-    display: flex;
-    justify-content: center;
+.img-info img {
     width: 100%;
 }
 
-mat-chip-row {
-    background-color: var(--main-bg-color) !important;
-    width: calc(100% / 4);
-    display: flex;
-    justify-content: space-between;
-}
-
-mat-chip-row span {
-    color: #fff !important;
-    font-size: var(--meduim-font-size);
-}
-
-mat-chip-row button,
-mat-chip-row button mat-icon {
-    background-color: none !important;
-    color:var(--gold-color) !important;
-}
-
-.input-container {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    margin: 2rem auto 0;
-}
-
-input {
-    width: 60%;
-    background-color: var(--gold-color);
-    color: var(--main-bg-color);
-    display: flex;
-    justify-content: center;
-    padding: 0.4rem 0;
-    border-radius: 25px;
-    cursor: pointer;
-}
-
-input::placeholder {
-    font-size: var(--meduim-font-size);
-    color: var(--main-bg-color);
-    text-align: center;
+.city-name p {
+    color: $blue;
+    font-weight: 600;
+    font-size: 1.2rem;
 }

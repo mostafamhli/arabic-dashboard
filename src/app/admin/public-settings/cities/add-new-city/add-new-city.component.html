@@ -1,0 +1,20 @@
+<form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form pt-5 d-flex flex-wrap justify-content-around">
+    <div class="form-item ">
+        <mat-form-field class="example-full-width">
+            <mat-label>اسم المحافظة</mat-label>
+            <input matInput name="cityName" ngModel required #cityName="ngModel">
+            <mat-error *ngIf="cityName.invalid && cityName.touched">{{getErrorRequiredMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div class="file-input">
+        <input type="file" id="file" class="file" name="cityPhoto" ngModel required #cityPhoto="ngModel" (change)="onSelectedFile($event)">
+        <label for="file">
+            اختر صورة المحافظة
+            <p class="file-name"></p>
+        </label>
+    </div>
+    
+    <div class="w-100 d-flex justify-content-center pb-1">
+        <button class="w-25 btn t_btn_blue_outline">أضف</button>
+    </div>
+</form>

@@ -9,36 +9,35 @@
                         <mat-option value="two">السائق الثاني</mat-option>
                     </mat-select>
                     <mat-error
-                    *ngIf="driversList.invalid && driversList.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="driversList.invalid && driversList.touched">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
+
             <div class="form-item">
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field>
                     <mat-label>وقت بداية الرحلة</mat-label>
-                    <input matInput [matDatepicker]="picker" name="beginTime" ngModel required #beginTime="ngModel">
-                    <mat-error
-                    *ngIf="beginTime.invalid && beginTime.touched">{{getErrorRequiredMessage()}}</mat-error>
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker">
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <input matInput name="selected_time_A" [(ngModel)]="beginTime" [ngxMatTimepicker]="pickerA"
+                        placeholder="4:00 PM" readonly />
+                    <mat-icon matSuffix (click)="pickerA.open()">
+                        watch_later
+                    </mat-icon>
                 </mat-form-field>
+                <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
             </div>
+
             <div class="form-item">
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field>
                     <mat-label>وقت نهاية الرحلة</mat-label>
-                    <input matInput [matDatepicker]="picker1" name="endTime" ngModel required #endTime="ngModel">
-                    <mat-error
-                    *ngIf="endTime.invalid && endTime.touched">{{getErrorRequiredMessage()}}</mat-error>
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker1" >
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker1></mat-datepicker>
+                    <input matInput name="selected_time_B" [(ngModel)]="endTime" [ngxMatTimepicker]="pickerB"
+                        placeholder="4:00 PM" readonly />
+                    <mat-icon matSuffix (click)="pickerB.open()">
+                        watch_later
+                    </mat-icon>
                 </mat-form-field>
+                <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
             </div>
         </div>
+
         <div class="left">
             <div class="form-item">
                 <mat-form-field appearance="fill">
@@ -47,42 +46,41 @@
                         <mat-option value="one">النوع الأول</mat-option>
                         <mat-option value="two">النوع الثاني</mat-option>
                     </mat-select>
-                    <mat-error
-                    *ngIf="tripType.invalid && tripType.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <mat-error *ngIf="tripType.invalid && tripType.touched">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
+
             <div class="form-item">
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field appearance="fill">
                     <mat-label>تاريخ بداية الرحلة</mat-label>
-                    <input matInput [matDatepicker]="picker2" name="beginDate" ngModel required #beginDate="ngModel">
-                    <mat-error
-                    *ngIf="beginDate.invalid && beginDate.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput [matDatepicker]="picker3" readonly name="beginDate" ngModel required
+                        #beginDate="ngModel">
+                    <mat-error *ngIf="beginDate.invalid && beginDate.touched">{{getErrorRequiredMessage()}}</mat-error>
                     <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker2">
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                    <mat-datepicker #picker3 disabled="false"></mat-datepicker>
                 </mat-form-field>
             </div>
+
             <div class="form-item">
-                <mat-form-field class="example-full-width" appearance="fill">
+                <mat-form-field appearance="fill">
                     <mat-label>تاريخ نهاية الرحلة</mat-label>
-                    <input matInput [matDatepicker]="picker3" name="endDate" ngModel required #endDate="ngModel">
-                    <mat-error
-                    *ngIf="endDate.invalid && endDate.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput [matDatepicker]="picker4" readonly name="endDate" ngModel required
+                        #endDate="ngModel">
+                    <mat-error *ngIf="endDate.invalid && endDate.touched">{{getErrorRequiredMessage()}}</mat-error>
                     <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matIconSuffix [for]="picker3">
-                        <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
-                    </mat-datepicker-toggle>
-                    <mat-datepicker #picker3></mat-datepicker>
+                    <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                    <mat-datepicker #picker4 disabled="false"></mat-datepicker>
                 </mat-form-field>
             </div>
         </div>
         <div class="w-75 d-flex justify-content-center mx-auto buttons x-font-regular ">
-            <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn t_btn_blue_outline w-25">بحث</button>
+            <button type="submit" [disabled]="!myForm.valid || myForm.untouched"
+                class="btn t_btn_blue_outline w-25">بحث</button>
             <button class="btn t_btn_blue_outline w-25">مسح بيانات</button>
         </div>
     </form>
+
 </div>
 
 

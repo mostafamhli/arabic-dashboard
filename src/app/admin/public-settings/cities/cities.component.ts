@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormControl, NgForm, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { MatDialog } from '@angular/material/dialog';
+import { AddNewCityComponent } from './add-new-city/add-new-city.component';
 
 @Component({
   selector: 'app-cities',
@@ -11,6 +13,9 @@ export class CitiesComponent {
 
   keywords = ['بغداد', 'الأنبار', 'الموصل'];
   formControl = new FormControl(['بغداد']);
+  
+  constructor(private addNewCity:MatDialog) {
+  }
 
   removeKeyword(keyword: string) {
     const index = this.keywords.indexOf(keyword);
@@ -30,4 +35,12 @@ export class CitiesComponent {
     // Clear the input value
     event.chipInput!.clear();
   }
+
+  addCity(){
+    this.addNewCity.open(AddNewCityComponent,{
+      width:"50%"
+    })
+  }
+
+  
 }
