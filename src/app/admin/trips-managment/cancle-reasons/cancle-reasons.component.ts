@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { Component, ViewChild} from '@angular/core';
+import { FormControl, NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-cancle-reasons',
@@ -12,6 +12,10 @@ export class CancleReasonsComponent {
   keywords = ['تأخر السائق', 'الخدمة سيئة'];
   formControl = new FormControl(['تأخر السائق']);
 
+  @ViewChild('myForm') form!: NgForm;
+  cancleName = new FormControl('');
+
+  
   removeKeyword(keyword: string) {
     const index = this.keywords.indexOf(keyword);
     if (index >= 0) {
@@ -19,15 +23,15 @@ export class CancleReasonsComponent {
     }
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+ 
+  onSubmit(){
+    console.log(this.form.controls)
+    const value = this.form.value.cancleName
 
-    // Add our keyword
     if (value) {
       this.keywords.push(value);
     }
 
-    // Clear the input value
-    event.chipInput!.clear();
+    this.form.reset()
   }
 }
