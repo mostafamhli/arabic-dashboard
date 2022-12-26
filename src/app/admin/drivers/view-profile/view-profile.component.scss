@@ -2,41 +2,57 @@
 @import 'src/app/shared/styles/functions';
 
 .view_profile {
+  .info {
+    .img_div {
+      margin-bottom: 2rem;
 
-  .img_div {
-    margin-bottom: 2rem;
-
-    .image {
-      display: flex;
-      align-items: center;
-
-      h1 {
-        color: $blue;
-        margin: 0;
-      }
-
-      mat-icon {
-        background-color: $blue;
-        color: $white;
+      .image {
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 4rem;
-        height: 4rem;
-        border-radius: 2rem;
-        margin-left: 1rem;
-        font-size: font-size(48);
+
+        h1 {
+          color: $blue;
+          margin: 0;
+        }
+
+        mat-icon {
+          background-color: $blue;
+          color: $white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 4rem;
+          height: 4rem;
+          border-radius: 2rem;
+          margin-left: 1rem;
+          font-size: font-size(48);
+        }
       }
     }
   }
-  .assets{
-      .asset{
-          img{
-              max-width: 4rem;
-              max-height: 4rem;
-              width: auto;
-              height: auto;
-          }
+
+  .assets {
+    .asset {
+      background: $grey_transparent;
+      margin-bottom: 2vh;
+
+      .img_div {
+        width: 25vw;
+
+        img {
+          max-width: 25vw;
+          max-height: 25vh;
+          width: auto;
+          height: auto;
+        }
       }
+    }
+  }
+  .stars{
+    mat-icon{
+      font-size: 2em;
+      width: auto;
+      height: auto;
+    }
   }
 }

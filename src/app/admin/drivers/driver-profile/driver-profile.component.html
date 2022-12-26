@@ -10,7 +10,9 @@
     </div>
   </div>
   <div class="content">
-      <app-driver-profile-personal-info *ngIf="activeTab == ActiveProfileTabEnum.personal"></app-driver-profile-personal-info>
-      <app-driver-profile-vehicle-info *ngIf="activeTab == ActiveProfileTabEnum.vehicle"></app-driver-profile-vehicle-info>
+    <app-driver-profile-personal-info *ngIf="activeTab == ActiveProfileTabEnum.personal">
+    </app-driver-profile-personal-info>
+    <app-driver-profile-vehicle-info *ngIf="activeTab == ActiveProfileTabEnum.vehicle">
+    </app-driver-profile-vehicle-info>
   </div>
 </div>

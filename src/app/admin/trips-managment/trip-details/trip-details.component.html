@@ -1,7 +1,3 @@
-<div class="d-flex justify-content-end w-100  x-font-regular ">
-    <button class="btn t_btn_blue small_btn " routerLink="/trips"><mat-icon>arrow_back</mat-icon></button>
-</div>
-
 <div class="d-flex flex-wrap justify-content-between align-items-center x-font-regular">
     <div class="d-flex flex-column trip-info">
         <div class="d-flex trip-info-item">
@@ -61,4 +57,10 @@
     <div class="trip-image">
         <img src="../../../../assets/img/taxi.jpg" alt="taxi Jai">
     </div>
+</div>
+<div class="d-flex justify-content-center w-100  x-font-regular ">
+    <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" [routerLink]="['/trips']"
+            routerLinkActive="router-link-active">
+            عودة إلى القائمة
+          </button>
 </div>
