@@ -3,17 +3,48 @@
     اختر المركبة
   </h4>
   <div class="vehicles d-flex align-items-center">
-    <div class="vehicle" *ngFor="let item of vehicles" [ngClass]="{active: activeVehicle == item.id}" (click)="activeVehicle = item.id">
-      <div class="img_div">
-        <img [src]="item.path">
+
+    <ng-container *ngIf="activeTypes == 0">
+      <div class="vehicle" *ngFor="let item of types" [ngClass]="{active: activeTypes == item.id}"
+        (click)="activeTypes = item.id">
+        <div class="img_div">
+          <img [src]="item.path">
+        </div>
+        <label>{{item.name}}</label>
       </div>
-      <label>{{item.name}}</label>
-    </div>
+    </ng-container>
+    <ng-container *ngIf="activeTypes == 2">
+      <div class="vehicle" *ngFor="let item of vehicles" [ngClass]="{active: activeVehicle == item.id}"
+        (click)="activeVehicle = item.id">
+        <div class="img_div">
+          <img [src]="item.path">
+        </div>
+        <label>{{item.name}}</label>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTypes == 1">
+      <div class="vehicle" *ngFor="let item of toktoks" [ngClass]="{active: activeVehicle == item.id}"
+        (click)="activeVehicle = item.id">
+        <div class="img_div">
+          <img [src]="item.path">
+        </div>
+        <label>{{item.name}}</label>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="activeTypes == 3">
+      <div class="vehicle" *ngFor="let item of cars" [ngClass]="{active: activeVehicle == item.id}"
+        (click)="activeVehicle = item.id">
+        <div class="img_div">
+          <img [src]="item.path">
+        </div>
+        <label>{{item.name}}</label>
+      </div>
+    </ng-container>
   </div>
   <div class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-3">
     <div class="d-flex align-items-center">
       <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-30" (click)="accept()">
-        حفظ 
+        حفظ
       </button>
       <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" (click)="cancel()">
         إلغاء

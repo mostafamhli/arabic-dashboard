@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, NgForm, Validators, FormGroup } from '@angular/forms';
 import * as moment from 'moment';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 
@@ -23,6 +23,10 @@ export class TripsComponent {
   tripType = new FormControl('', [Validators.required]);
   endDate = new FormControl('', [Validators.required]);
 
+  range = new FormGroup({
+    start: new FormControl<Date | null>(null),
+    end: new FormControl<Date | null>(null),
+  });
   
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
