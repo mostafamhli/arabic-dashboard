@@ -1,5 +1,6 @@
 @import 'src/app/shared/styles/variables';
 @import 'src/app/shared/styles/mixin';
+@import 'src/app/shared/styles/functions';
 
 .admin_container {
   mat-card {
@@ -55,7 +56,7 @@
   mat-list-item:hover mat-icon,
   mat-list-item.active span,
   mat-list-item.active mat-icon {
-    color: #fff !important;
+    color: $white !important;
   }
 
 
@@ -71,20 +72,20 @@
   }
 
   .listItem span {
-    font-size: var(--meduim-font-size);
+    font-size: font-size(14);
     margin-right: 0.5rem;
     font-family: $cairo_medium;
   }
 
   .listItem mat-icon,
   .listItem span {
-    color: var(--main-bg-color);
+    color: $blue;
   }
 
   .example-icon {
     margin: 0 0 1rem 0;
     padding: 0.2rem 0.4rem;
-    background-color: var(--main-bg-color);
+    background-color: $blue;
     color: #fff;
     border: none;
     border-radius: 5px;

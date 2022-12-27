@@ -1,1 +1,47 @@
-<p>send-notification works!</p>
+<div class="add_notification">
+  <form>
+    <div class="d-flex flex-column align-items-center">
+      <mat-form-field>
+        <mat-label>عنوان الرسالة</mat-label>
+        <input matInput placeholder="عنوان الرسالة" #input>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>محتوى الرسالة</mat-label>
+        <textarea matInput placeholder="محتوى الرسالة "></textarea>
+      </mat-form-field>
+      <!-- <mat-form-field appearance="fill">
+          <mat-label>نوع المناقلة</mat-label>
+          <mat-select>
+            <mat-option>إيداع</mat-option>
+            <mat-option>استرجاع</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      <div class="d-flex align-items-center w-100 mt-3 mb-3">
+        <div class="choice">
+          <input type="checkbox" id="vehicle1" name="vehicle" [(ngModel)]="filter.users" value="users">
+          <label for="vehicle1">كل المستخدمين</label>
+        </div>
+        <div class="choice">
+          <input type="checkbox" id="vehicle2" name="vehicle" [(ngModel)]="filter.drivers" value="drivers">
+          <label for="vehicle2">كل السائقين</label>
+        </div>
+        <div class="choice">
+          <input type="checkbox" id="vehicle3" name="vehicle" [(ngModel)]="filter.customers" value="customers">
+          <label for="vehicle3">كل الزبائن</label>
+        </div>
+        <div class="choice">
+          <input type="checkbox" id="vehicle4" name="vehicle" [(ngModel)]="filter.specificUser" value="specificUser">
+          <label for="vehicle4">مستخدمين معينين</label>
+        </div>
+      </div>
+      <div class="add_cancel w-100 d-flex align-items-center x-font-bold">
+        <button class="btn t_btn_blue w-25" (click)="send()">
+          إرسال
+        </button>
+        <button class="btn t_btn_blue_outline w-25">
+          إلغاء
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -15,6 +15,7 @@ export class AddDiscountCodeComponent {
   discountName = new FormControl('', [Validators.required]);
   discountCode = new FormControl('', [Validators.required]);
   outDate = new FormControl('', [Validators.required]);
+  usingTimes = new FormControl(1, [Validators.required]);
   discountValue = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
 
   getErrorRequiredMessage() {

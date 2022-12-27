@@ -1,0 +1,32 @@
+.add_notification {
+    padding: 2rem;
+  
+    .add_cancel {
+      .t_btn_blue {
+        margin-right: auto;
+        margin-left: 3px;
+      }
+  
+      .t_btn_blue_outline {
+        margin-left: auto;
+        margin-right: 3px;
+      }
+    }
+    .choice{
+        display: flex;
+        align-items: center;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        input{
+            margin-left: 5px;
+        }
+    }
+  }
+  
+  ::ng-deep .add_notification {
+    mat-form-field {
+      width: 80%
+    }
+  }
+

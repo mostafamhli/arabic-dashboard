@@ -8,7 +8,7 @@ import { AddDiscountCodeComponent } from './add-discount-code/add-discount-code.
 @Component({
   selector: 'app-discount-codes',
   templateUrl: './discount-codes.component.html',
-  styleUrls: ['./discount-codes.component.css']
+  styleUrls: ['./discount-codes.component.scss']
 })
 export class DiscountCodesComponent {
 
@@ -26,6 +26,7 @@ export class DiscountCodesComponent {
         id:1,
         discountName: 'ABCDEFG',
         discountCode: 'abcdef',
+        usingTimes:5,
         discountValue: 90,
         outDate: '22-12-2022',
         discountCodeStatus: DiscountCodeStatus.inActive,
@@ -34,6 +35,7 @@ export class DiscountCodesComponent {
         id:2,
         discountName: 'ABCDEFG',
         discountCode: 'abcdef',
+        usingTimes:8,
         discountValue: 90,
         outDate: '22-12-2022',
         discountCodeStatus: DiscountCodeStatus.active,
@@ -42,6 +44,7 @@ export class DiscountCodesComponent {
         id:3,
         discountName: 'ABCDEFG',
         discountCode: 'abcdef',
+        usingTimes:5,
         discountValue: 90,
         outDate: '22-12-2022',
         discountCodeStatus: DiscountCodeStatus.inActive,
