@@ -1,0 +1,19 @@
+@import 'src/app/shared/styles/variables';
+
+.tab {
+    padding: 1rem;
+    width: 212px;
+    cursor: pointer;
+
+    .text {
+        margin-bottom: .5rem;
+    }
+
+    hr {
+        width: 212px !important;
+        margin: 0;
+        border-top: 4px solid $blue;
+        border-radius: 2px;
+        opacity: 1;
+    }
+}

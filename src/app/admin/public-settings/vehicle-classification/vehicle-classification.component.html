@@ -1,58 +1,76 @@
-
-
-<div class="drivers_list x-font-regular">
-    <div class="row">
-      <div class="col-6 d-flex align-items-center">
-        <button class="btn t_btn_blue w-25" routerLink='/add-new-classification'>
-          إضافة تصنيف
-        </button>
-      </div>
-      <div class="col"></div>
-      <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
-        <mat-form-field>
-          <mat-label>بحث</mat-label>
-          <input matInput (keyup)="getClassifications()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
-          <mat-icon matSuffix>search</mat-icon>
+<div class="wizard d-flex align-items-start justify-content-center x-font-bold">
+  <div *ngFor="let city of cities" class="tab" (click)="clickOnCityTab(city)">
+    <div class="text text-center">{{city}}</div>
+    <div *ngIf="activeCityTab == city">
+      <hr />
+      <form>
+        <mat-form-field appearance="fill">
+          <mat-label>اختر نوع الآلية</mat-label>
+          <mat-select matNativeControl (valueChange)="selectedValueChanged($event)">
+            <mat-option *ngFor="let vehicleType of vehicleType" [value]="vehicleType">
+              {{vehicleType}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
-      </div>
-    </div>
-    <div class="jay_taxi_table">
-      <div class="table_div d-flex flex-column align-items-center">
-        <table class="table">
-          <thead class="x-font-bold">
-            <th>اسم التصنيف </th>
-            <th>عدد المقاعد</th>
-            <th>الأجرة خلال النهار</th>
-            <th>الأجرة خلال الليل</th>
-            <th>نسبة السائق</th>
-            <th>العمليات</th>
-            <th>عرض التصنيف</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of classifications">
-              <td>{{item.classificationName}}</td>
-              <td>{{item.numOfSeat}}</td>
-              <td>{{item.rentDuringDay}}</td>
-              <td>{{item.rentDuringNight}}</td>
-              <td>{{item.driverRatio}}</td>
-              <td>
-                <mat-icon>edit</mat-icon>
-                <mat-icon>delete</mat-icon>
-              </td>
-              <td >
-                <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display']"
-                  routerLinkActive="router-link-active">
-                  عرض
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
-      <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
-        تحميل المزيد
-      </button>
+      </form>
     </div>
   </div>
+</div>
+
+<div class="drivers_list x-font-regular">
+  <div class="row">
+    <div class="col-6 d-flex align-items-center">
+      <button class="btn t_btn_blue w-25" routerLink='/add-new-classification'>
+        إضافة تصنيف
+      </button>
+    </div>
+    <div class="col"></div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+      <mat-form-field>
+        <mat-label>بحث</mat-label>
+        <input matInput (keyup)="getClassifications()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد"
+          #input>
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="jay_taxi_table">
+    <div class="table_div d-flex flex-column align-items-center">
+      <table class="table">
+        <thead class="x-font-bold">
+          <th>اسم التصنيف </th>
+          <th>عدد المقاعد</th>
+          <th>الأجرة خلال النهار</th>
+          <th>الأجرة خلال الليل</th>
+          <th>نسبة السائق</th>
+          <th>العمليات</th>
+          <th>عرض التصنيف</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of classifications">
+            <td>{{item.classificationName}}</td>
+            <td>{{item.numOfSeat}}</td>
+            <td>{{item.rentDuringDay}}</td>
+            <td>{{item.rentDuringNight}}</td>
+            <td>{{item.driverRatio}}</td>
+            <td>
+              <mat-icon>edit</mat-icon>
+              <mat-icon>delete</mat-icon>
+            </td>
+            <td>
+              <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display']"
+                routerLinkActive="router-link-active">
+                عرض
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+    <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+      تحميل المزيد
+    </button>
+  </div>
+</div>
