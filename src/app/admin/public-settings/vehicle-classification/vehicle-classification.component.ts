@@ -1,36 +1,45 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import * as moment from 'moment';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
-import { AddNewClassificationComponent } from './add-new-classification/add-new-classification.component';
 
-export interface PeriodicElement {
-  classificationName: string;
-  numOfSeat: number;
-  rentDuringDay: number;
-  rentDuringNight: number;
-  driverRatio: number
-}
+
 @Component({
   selector: 'app-vehicle-classification',
   templateUrl: './vehicle-classification.component.html',
-  styleUrls: ['./vehicle-classification.component.css']
+  styleUrls: ['./vehicle-classification.component.scss']
 })
+
 export class VehicleClassificationComponent {
 
-  classifications: any[] = []
+  classifications: any[] = [];
+  cities: any[] = [];
+  activeCityTab = 'بغداد';
+  vehicleType: string[] = ['جاي تكسي', 'آليات', 'توك توك']
+  selectedValue: string = 'جاي تكسي';
   filter: FilterWithSearch = new FilterWithSearch();
 
-  constructor( private addClassification:MatDialog ) {
-    this.getClassifications()
+  constructor(private addClassification: MatDialog) {
+    this.getClassifications();
+    this.getCities();
   }
 
-  getClassifications() {
+  getCities() {
+    this.cities = ['بغداد', 'موصل', 'الأنبار'];
+  }
+
+  clickOnCityTab(city: string) {
+    this.activeCityTab = city;
+  }
+
+  selectedValueChanged(event: Event) {
+    this.selectedValue = event.toString();
+    this.getClassifications(this.activeCityTab, this.selectedValue)
+  }
+
+  getClassifications(cityName?: string, vehicleType?: string) {
+    console.log(cityName)
+    console.log(vehicleType)
     this.classifications = [
       {
         id: 1,
@@ -59,15 +68,15 @@ export class VehicleClassificationComponent {
     ]
   }
 
-  
+
   loadMore() {
     this.filter.pageIndex = this.filter.pageIndex + 1;
     this.getClassifications()
   }
 
-  addNewClassification(){
-    this.addClassification.open(ClassificationDisplayComponent,{
-      width:"50%"
+  addNewClassification() {
+    this.addClassification.open(ClassificationDisplayComponent, {
+      width: "50%"
     })
   }
 
