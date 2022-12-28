@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-new-classification',
@@ -8,33 +8,41 @@ import { FormControl, NgForm, Validators } from '@angular/forms';
 })
 export class AddNewClassificationComponent {
 
-  
-  @ViewChild('myForm') form!: NgForm;
-  firstName = new FormControl('', [Validators.required]);
-  lastName = new FormControl('', [Validators.required]);
-  address = new FormControl('', [Validators.required]);
-  mobile = new FormControl('', [Validators.required]);
-  creationDate = new FormControl('', [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  type = new FormControl('', [Validators.required]);
+  addNewMorningClassificationForm = new FormGroup({
+    lowestRent: new FormControl('', [Validators.required]),
+    firstExtraCost: new FormControl('', [Validators.required]),
+    secondExtraCost: new FormControl('', [Validators.required]),
+    one_Km: new FormControl('', [Validators.required]),
+    ten_M: new FormControl('', [Validators.required]),
+    morningBegin: new FormControl('', [Validators.required]),
+    morningEnd: new FormControl('', [Validators.required]),
+  })
+
+  addNewDayClassificationForm = new FormGroup({
+    lowestRent: new FormControl('', [Validators.required]),
+    firstExtraCost: new FormControl('', [Validators.required]),
+    secondExtraCost: new FormControl('', [Validators.required]),
+    one_Km: new FormControl('', [Validators.required]),
+    ten_M: new FormControl('', [Validators.required]),
+    dayBegin: new FormControl('', [Validators.required]),
+    dayEnd: new FormControl('', [Validators.required]),
+  })
+
+  addNewNightClassificationForm = new FormGroup({
+    lowestRent: new FormControl('', [Validators.required]),
+    firstExtraCost: new FormControl('', [Validators.required]),
+    secondExtraCost: new FormControl('', [Validators.required]),
+    one_Km: new FormControl('', [Validators.required]),
+    ten_M: new FormControl('', [Validators.required]),
+    nightBegin: new FormControl('', [Validators.required]),
+    nightEnd: new FormControl('', [Validators.required]),
+  })
+
 
   getErrorRequiredMessage() {
-    if (this.email.hasError('email')) {
-      return 'أدخل بريد إلكتروني صالح'
-    }
     return 'يجب أن تدخل قيمة';
   }
 
-  displayStyle = "none";
-
-  openPopup() {
-    this.displayStyle = "block";
-  }
-
-  closePopup() {
-    this.displayStyle = "none";
-  }
 
   onSubmit() {
     /*
@@ -49,13 +57,5 @@ export class AddNewClassificationComponent {
     */
   }
 
-  applyFilter(event: Event) {
-    /*const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
 
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }*/
-  }
-  
 }

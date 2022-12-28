@@ -14,6 +14,40 @@
   font-size: 1.2rem;
 }
 
+.city-pic img{
+  max-width: 100%;
+  min-width: 100%;
+  height: 200px;
+}
+
+.distance-price-header {
+  color: $blue;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.second-label {
+  color: $blue;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.rangeValue {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.city-container:nth-child(2n+1) {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.city-container:not(:first-child) {
+  margin-top: 3rem;
+}
+
 .city {
   background-image: url('/assets/img/baghdad.jpg');
 

@@ -38,37 +38,46 @@
 <div class="d-flex flex-wrap justify-content-between mt-5 x-font-regular ">
     <div class="w-30 d-flex flex-column day-rent-container">
         <h2 class="rent-header text-center">الأجور خلال الصباح</h2>
-        <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="d-flex flex-wrap flex-column">
+        <form (ngSubmit)="onSubmit()" [formGroup]="addNewMorningClassificationForm" class="d-flex flex-wrap flex-column">
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>أقل أجرة</mat-label>
-                    <input matInput name="lowestRent" ngModel required #lowestRent="ngModel">
+                    <input matInput name="lowestRent" formControlName="lowestRent">
                     <mat-error
-                        *ngIf="lowestRent.invalid && lowestRent.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="addNewMorningClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
-                    <mat-label>الضريبة</mat-label>
-                    <input matInput name="tax" ngModel required #tax="ngModel">
-                    <mat-error *ngIf="tax.invalid && tax.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <mat-label>التكلفة الإضافية المأجورة<span>5</span> - <span>9</span></mat-label>
+                    <input matInput name="firstExtraCost" formControlName="firstExtraCost">
+                    <mat-error *ngIf="addNewMorningClassificationForm.controls.firstExtraCost.invalid">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>التكلفة الإضافية المأجورة<span>5</span> - <span>9</span></mat-label>
+                    <input matInput name="secondExtraCost" formControlName="secondExtraCost">
+                    <mat-error *ngIf="addNewMorningClassificationForm.controls.secondExtraCost.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>1/Km</mat-label>
-                    <input matInput name="one_Km" ngModel required #one_Km="ngModel">
-                    <mat-error *ngIf="one_Km.invalid && one_Km.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="one_Km" formControlName="one_Km">
+                    <mat-error *ngIf="addNewMorningClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>10/m</mat-label>
-                    <input matInput name="ten_M" ngModel required #ten_M="ngModel">
-                    <mat-error *ngIf="ten_M.invalid && ten_M.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="ten_M" formControlName="ten_M" >
+                    <mat-error *ngIf="addNewMorningClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -76,9 +85,9 @@
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>وقت ابتداء الفترة الصباحية</mat-label>
-                    <input matInput name="morningBegin" ngModel required #morningBegin="ngModel">
+                    <input matInput name="morningBegin" formControlName="morningBegin">
                     <mat-error
-                        *ngIf="morningBegin.invalid && morningBegin.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="addNewMorningClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -86,9 +95,9 @@
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>وقت انتهاء الفترة الصباحية</mat-label>
-                    <input matInput name="morningEnd" ngModel required #morningEnd="ngModel">
+                    <input matInput name="morningEnd" formControlName="morningEnd">
                     <mat-error
-                        *ngIf="morningEnd.invalid && morningEnd.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="addNewMorningClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
         </form>
@@ -96,37 +105,46 @@
 
     <div class="w-30 d-flex flex-column day-rent-container">
         <h2 class="rent-header text-center">الأجور خلال النهار</h2>
-        <form (ngSubmit)="onSubmit()" #myForm2="ngForm" class="d-flex flex-wrap flex-column">
+        <form (ngSubmit)="onSubmit()" [formGroup]="addNewDayClassificationForm" class="d-flex flex-wrap flex-column">
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>أقل أجرة</mat-label>
-                    <input matInput name="lowestRent" ngModel required #lowestRent="ngModel">
+                    <input matInput name="lowestRent" formControlName="lowestRent">
                     <mat-error
-                        *ngIf="lowestRent.invalid && lowestRent.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="addNewDayClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
-                    <mat-label>الضريبة</mat-label>
-                    <input matInput name="tax" ngModel required #tax="ngModel">
-                    <mat-error *ngIf="tax.invalid && tax.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <mat-label>التكلفة الإضافية المأجورة<span>5</span> - <span>9</span></mat-label>
+                    <input matInput name="firstExtraCost" formControlName="firstExtraCost">
+                    <mat-error *ngIf="addNewDayClassificationForm.controls.firstExtraCost.invalid">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>التكلفة الإضافية المأجورة<span>5</span> - <span>9</span></mat-label>
+                    <input matInput name="secondExtraCost" formControlName="secondExtraCost">
+                    <mat-error *ngIf="addNewDayClassificationForm.controls.secondExtraCost.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>1/Km</mat-label>
-                    <input matInput name="one_Km" ngModel required #one_Km="ngModel">
-                    <mat-error *ngIf="one_Km.invalid && one_Km.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="one_Km" formControlName="one_Km">
+                    <mat-error *ngIf="addNewDayClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>10/m</mat-label>
-                    <input matInput name="ten_M" ngModel required #ten_M="ngModel">
-                    <mat-error *ngIf="ten_M.invalid && ten_M.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="ten_M" formControlName="ten_M" >
+                    <mat-error *ngIf="addNewDayClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -134,8 +152,9 @@
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>وقت ابتداء الفترة النهارية</mat-label>
-                    <input matInput name="dayBegin" ngModel required #dayBegin="ngModel">
-                    <mat-error *ngIf="dayBegin.invalid && dayBegin.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="dayBegin" formControlName="dayBegin">
+                    <mat-error
+                        *ngIf="addNewDayClassificationForm.controls.dayBegin.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -143,46 +162,57 @@
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>وقت انتهاء الفترة النهارية</mat-label>
-                    <input matInput name="dayEnd" ngModel required #dayEnd="ngModel">
-                    <mat-error *ngIf="dayEnd.invalid && dayEnd.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="dayEnd" formControlName="dayEnd">
+                    <mat-error
+                        *ngIf="addNewDayClassificationForm.controls.dayEnd.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
         </form>
     </div>
 
-    <div class="w-30 d-flex flex-column day-rent-container x-font-regular ">
+
+    <div class="w-30 d-flex flex-column day-rent-container">
         <h2 class="rent-header text-center">الأجور خلال الليل</h2>
-        <form (ngSubmit)="onSubmit()" #myForm3="ngForm" class="d-flex flex-wrap flex-column">
+        <form (ngSubmit)="onSubmit()" [formGroup]="addNewNightClassificationForm" class="d-flex flex-wrap flex-column">
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>أقل أجرة</mat-label>
-                    <input matInput name="lowestRent" ngModel required #lowestRent="ngModel">
+                    <input matInput name="lowestRent" formControlName="lowestRent">
                     <mat-error
-                        *ngIf="lowestRent.invalid && lowestRent.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="addNewNightClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
-                    <mat-label>الضريبة</mat-label>
-                    <input matInput name="tax" ngModel required #tax="ngModel">
-                    <mat-error *ngIf="tax.invalid && tax.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <mat-label>التكلفة الإضافية المأجورة<span>5</span> - <span>9</span></mat-label>
+                    <input matInput name="firstExtraCost" formControlName="firstExtraCost">
+                    <mat-error *ngIf="addNewNightClassificationForm.controls.firstExtraCost.invalid">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+
+
+            <div class="form-item">
+                <mat-form-field class="example-full-width">
+                    <mat-label>التكلفة الإضافية المأجورة<span>5</span> - <span>9</span></mat-label>
+                    <input matInput name="secondExtraCost" formControlName="secondExtraCost">
+                    <mat-error *ngIf="addNewNightClassificationForm.controls.secondExtraCost.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>1/Km</mat-label>
-                    <input matInput name="one_Km" ngModel required #one_Km="ngModel">
-                    <mat-error *ngIf="one_Km.invalid && one_Km.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="one_Km" formControlName="one_Km">
+                    <mat-error *ngIf="addNewNightClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>10/m</mat-label>
-                    <input matInput name="ten_M" ngModel required #ten_M="ngModel">
-                    <mat-error *ngIf="ten_M.invalid && ten_M.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="ten_M" formControlName="ten_M" >
+                    <mat-error *ngIf="addNewNightClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -190,9 +220,9 @@
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>وقت ابتداء الفترة المسائية</mat-label>
-                    <input matInput name="nightBegin" ngModel required #nightBegin="ngModel">
+                    <input matInput name="nightBegin" formControlName="nightBegin">
                     <mat-error
-                        *ngIf="nightBegin.invalid && nightBegin.touched">{{getErrorRequiredMessage()}}</mat-error>
+                        *ngIf="addNewNightClassificationForm.controls.nightBegin.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
 
@@ -200,8 +230,9 @@
             <div class="form-item">
                 <mat-form-field class="example-full-width">
                     <mat-label>وقت انتهاء الفترة المسائية</mat-label>
-                    <input matInput name="nightEnd" ngModel required #nightEnd="ngModel">
-                    <mat-error *ngIf="nightEnd.invalid && nightEnd.touched">{{getErrorRequiredMessage()}}</mat-error>
+                    <input matInput name="nightEnd" formControlName="nightEnd">
+                    <mat-error
+                        *ngIf="addNewNightClassificationForm.controls.nightEnd.invalid">{{getErrorRequiredMessage()}}</mat-error>
                 </mat-form-field>
             </div>
         </form>

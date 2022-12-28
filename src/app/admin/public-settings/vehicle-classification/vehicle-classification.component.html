@@ -1,19 +1,21 @@
-<div class="wizard d-flex align-items-start justify-content-center x-font-bold">
+<div class="wizard d-flex flex-wrap align-items-start justify-content-center x-font-bold">
   <div *ngFor="let city of cities" class="tab" (click)="clickOnCityTab(city)">
     <div class="text text-center">{{city}}</div>
     <div *ngIf="activeCityTab == city">
       <hr />
-      <form>
-        <mat-form-field appearance="fill">
-          <mat-label>اختر نوع الآلية</mat-label>
-          <mat-select matNativeControl (valueChange)="selectedValueChanged($event)">
-            <mat-option *ngFor="let vehicleType of vehicleType" [value]="vehicleType">
-              {{vehicleType}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </form>
     </div>
+  </div>
+  <div class="d-flex w-100">
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>اختر نوع الآلية</mat-label>
+        <mat-select matNativeControl (valueChange)="selectedValueChanged($event)">
+          <mat-option *ngFor="let vehicleType of vehicleType" [value]="vehicleType">
+            {{vehicleType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
   </div>
 </div>
 
@@ -40,6 +42,7 @@
         <thead class="x-font-bold">
           <th>اسم التصنيف </th>
           <th>عدد المقاعد</th>
+          <th>الأجرة خلال الصباح</th>
           <th>الأجرة خلال النهار</th>
           <th>الأجرة خلال الليل</th>
           <th>نسبة السائق</th>
@@ -50,6 +53,7 @@
           <tr *ngFor="let item of classifications">
             <td>{{item.classificationName}}</td>
             <td>{{item.numOfSeat}}</td>
+            <td>{{item.rentDuringMorning}}</td>
             <td>{{item.rentDuringDay}}</td>
             <td>{{item.rentDuringNight}}</td>
             <td>{{item.driverRatio}}</td>

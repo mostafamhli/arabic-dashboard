@@ -11,36 +11,39 @@ import { AddNewCityComponent } from './add-new-city/add-new-city.component';
 })
 export class CitiesComponent {
 
-  keywords = ['بغداد', 'الأنبار', 'الموصل'];
-  formControl = new FormControl(['بغداد']);
-  
-  constructor(private addNewCity:MatDialog) {
-  }
-
-  removeKeyword(keyword: string) {
-    const index = this.keywords.indexOf(keyword);
-    if (index >= 0) {
-      this.keywords.splice(index, 1);
+  cities = [
+    {
+      name: 'بغداد',
+      pic: '../../../../assets/img/baghdad.jpg',
+      firstValueAtFirstRange: 5,
+      secondValueAtFirstRange: 9,
+      secondValueAtSecondRange: 15,
+    },
+    {
+      name: 'الموصل',
+      pic: '../../../../assets/img/basra.jpg',
+      firstValueAtFirstRange: 3,
+      secondValueAtFirstRange: 8,
+      secondValueAtSecondRange: 16,
+    },
+    {
+      name: 'الأنبار',
+      pic: '../../../../assets/img/baghdad.jpg',
+      firstValueAtFirstRange: 2,
+      secondValueAtFirstRange: 8,
+      secondValueAtSecondRange: 20,
     }
+
+  ]
+
+  constructor(private addNewCity: MatDialog) {
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our keyword
-    if (value) {
-      this.keywords.push(value);
-    }
-
-    // Clear the input value
-    event.chipInput!.clear();
-  }
-
-  addCity(){
-    this.addNewCity.open(AddNewCityComponent,{
-      width:"50%"
+  addCity() {
+    this.addNewCity.open(AddNewCityComponent, {
+      width: "50%"
     })
   }
 
-  
+
 }
