@@ -20,9 +20,9 @@ export class AddDiscountCodeComponent {
 
 
   getErrorRequiredMessage() {
-    if (this.addDiscountForm.controls.discountValue.hasError('pattern')) {
+   /* if (this.addDiscountForm.controls.discountValue.hasError('pattern')) {
       return 'يسمح فقط باستخدام الأرقام(0-9)';
-    }
+    }*/
     return 'يجب أن تدخل قيمة';
   }
 
@@ -37,7 +37,7 @@ export class AddDiscountCodeComponent {
 
 
   onSubmit() {
-    console.log(this.addDiscountForm.controls)
+    //console.log(this.addDiscountForm.controls)
     /*
     const data = this.discountCode.data;
     data.push({

@@ -8,7 +8,7 @@
   <div class="d-flex w-100">
     <form>
       <mat-form-field appearance="fill">
-        <mat-label>اختر نوع الآلية</mat-label>
+        <mat-label>اختر نوع </mat-label>
         <mat-select matNativeControl (valueChange)="selectedValueChanged($event)">
           <mat-option *ngFor="let vehicleType of vehicleType" [value]="vehicleType">
             {{vehicleType}}
