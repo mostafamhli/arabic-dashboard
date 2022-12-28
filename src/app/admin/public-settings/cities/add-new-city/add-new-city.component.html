@@ -1,20 +1,62 @@
-<form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form pt-5 d-flex flex-wrap justify-content-around">
-    <div class="form-item ">
-        <mat-form-field class="example-full-width">
-            <mat-label>اسم المحافظة</mat-label>
-            <input matInput name="cityName" ngModel required #cityName="ngModel">
-            <mat-error *ngIf="cityName.invalid && cityName.touched">{{getErrorRequiredMessage()}}</mat-error>
-        </mat-form-field>
+<form (ngSubmit)="onSubmit()" [formGroup]="addNewCityForm"
+    class="modal-form py-5 px-3 d-flex flex-wrap justify-content-center">
+    <div class="content-form d-flex flex-coulmn align-items-center flex-wrap">
+        <div class="form-item">
+            <mat-form-field class="example-full-width">
+                <mat-label>اسم المحافظة</mat-label>
+                <input matInput name="cityName" formControlName="cityName">
+                <mat-error
+                    *ngIf="addNewCityForm.controls.cityName.errors?.['required']">{{getErrorRequiredMessage()}}</mat-error>
+
+            </mat-form-field>
+        </div>
+
+        <div class="d-flex flex-wrap">
+            <label class="w-100 main-label">كلفة وصول السائق للزبون من أجل المسافات :</label>
+            <mat-label class="w-100 second-label">المجال الأول:</mat-label>
+            <div class="d-flex justify-content-between align-items-center">
+                <mat-form-field class="rangeValue">
+                    <input matInput name="firstValueInRangeOne" formControlName="firstValueInRangeOne"
+                        placeholder="القيمة الأولى">
+                    <mat-error
+                        *ngIf="addNewCityForm.controls.firstValueInRangeOne.errors?.['required']">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+                -
+                <mat-form-field class="rangeValue">
+                    <input matInput name="secondValueInRangeOne" formControlName="secondValueInRangeOne"
+                        placeholder="القيمة الثانية">
+                    <mat-error
+                        *ngIf="addNewCityForm.controls.secondValueInRangeOne.errors?.['required']">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="d-flex flex-wrap">
+            <mat-label class="w-100 second-label">المجال الثاني:</mat-label>
+            <div class="d-flex justify-content-between align-items-center">
+                <mat-form-field class="rangeValue">
+                    <input matInput name="firstValueInRangeTwo" formControlName="firstValueInRangeTwo"
+                        placeholder="{{this.addNewCityForm.controls.secondValueInRangeOne.value? this.addNewCityForm.controls.secondValueInRangeOne.value : '-'}}">
+                </mat-form-field>
+                -
+                <mat-form-field class="rangeValue">
+                    <input matInput name="secondValueInRangeTwo" formControlName="secondValueInRangeTwo"
+                        placeholder="القيمة الثانية">
+                    <mat-error
+                        *ngIf="addNewCityForm.controls.secondValueInRangeTwo.errors?.['required']">{{getErrorRequiredMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
     </div>
-    <div class="file-input">
-        <input type="file" id="file" class="file" name="cityPhoto" ngModel required #cityPhoto="ngModel" (change)="onSelectedFile($event)">
+
+    <div class="file-input d-flex flex-column align-items-center justify-content-start">
+        <input type="file" id="file" class="file" name="cityPhoto" ngModel required #cityPhoto="ngModel"
+            (change)="onSelectedFile($event)">
         <label for="file">
             اختر صورة المحافظة
             <p class="file-name"></p>
         </label>
     </div>
-    
-    <div class="w-100 d-flex justify-content-center pb-1">
-        <button class="w-25 btn t_btn_blue_outline">أضف</button>
-    </div>
+
+
 </form>

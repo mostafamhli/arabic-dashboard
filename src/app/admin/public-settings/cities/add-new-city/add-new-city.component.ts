@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-add-new-city',
@@ -8,29 +8,36 @@ import { FormControl, NgForm, Validators } from '@angular/forms';
 })
 export class AddNewCityComponent {
 
-  @ViewChild('myForm') form!: NgForm;
-  
-  cityName = new FormControl('', [Validators.required]);
+  addNewCityForm = new FormGroup({
+    cityName: new FormControl('', [Validators.required]),
+    firstValueInRangeOne: new FormControl('', [Validators.required]),
+    secondValueInRangeOne: new FormControl('', [Validators.required]),
+    firstValueInRangeTwo: new FormControl(''),
+    secondValueInRangeTwo: new FormControl('', [Validators.required]),
+  })
+
   cityPhoto = new FormControl(File, [Validators.required]);
 
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
   }
 
-  
-  
-  onSelectedFile(e:any){
-    if(e.target.files){
+  ngOnInit() {
+
+  }
+
+  onSelectedFile(e: any) {
+    if (e.target.files) {
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event:any) =>{
+      reader.onload = (event: any) => {
         this.cityPhoto = event.target.result
         console.log(this.cityPhoto)
       }
     }
   }
 
-  onSubmit(){
-    console.log(this.form.value)
+  onSubmit() {
+    console.log(this.addNewCityForm.value)
   }
 }

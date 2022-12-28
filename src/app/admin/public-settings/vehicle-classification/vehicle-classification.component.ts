@@ -45,6 +45,7 @@ export class VehicleClassificationComponent {
         id: 1,
         classificationName: 'comfort',
         numOfSeat: 5,
+        rentDuringMorning:12,
         rentDuringDay: 10,
         rentDuringNight: 20,
         driverRatio: 10
@@ -53,6 +54,7 @@ export class VehicleClassificationComponent {
         id: 1,
         classificationName: 'classic',
         numOfSeat: 5,
+        rentDuringMorning:12,
         rentDuringDay: 10,
         rentDuringNight: 20,
         driverRatio: 10
@@ -61,6 +63,7 @@ export class VehicleClassificationComponent {
         id: 1,
         classificationName: 'comfort',
         numOfSeat: 5,
+        rentDuringMorning:12,
         rentDuringDay: 10,
         rentDuringNight: 20,
         driverRatio: 10
