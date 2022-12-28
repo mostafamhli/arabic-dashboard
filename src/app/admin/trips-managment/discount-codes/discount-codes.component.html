@@ -13,6 +13,7 @@
                     <th>اسم الكوبون </th>
                     <th>كود الحسم </th>
                     <th>قيمة الحسم</th>
+                    <th>عدد مرات الاستخدام</th>
                     <th>تاريخ إنتهاء الصلاحية</th>
                     <th>تفعيل الكود</th>
                     <th>حذف الكود</th>
@@ -22,6 +23,7 @@
                         <td>{{item.discountName}}</td>
                         <td>{{item.discountCode}}</td>
                         <td>{{item.discountValue}}</td>
+                        <td>{{item.usingTimes}}</td>
                         <td>{{item.outDate}}</td>
                         <td>
                             <container-element [ngSwitch]="item.discountCodeStatus">

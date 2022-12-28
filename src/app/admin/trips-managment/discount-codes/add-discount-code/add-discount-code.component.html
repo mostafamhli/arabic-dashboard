@@ -1,50 +1,53 @@
 <div class="add_transfer">
-    <div class="d-flex flex-column">
-        <h4 class="modal-title">إضافة كود تفعيل جديد</h4>
-        <form (ngSubmit)="onSubmit()" [formGroup]="addDiscountForm" class="modal-form">
-            <div class="form-item">
-                <mat-form-field class="example-full-width">
-                    <mat-label>اسم الكوبون</mat-label>
-                    <input matInput formControlName="discountName">
-                    <mat-error
-                        *ngIf="addDiscountForm.controls.discountName.errors?.['required']  && addDiscountForm.controls.discountName.value === ''">{{getErrorRequiredMessage()}}</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-item">
-                <mat-form-field class="example-full-width">
-                    <mat-label>كود الحسم</mat-label>
-                    <input matInput formControlName="discountCode">
-                    <mat-error
-                        *ngIf="addDiscountForm.controls.discountCode.errors?.['required'] && addDiscountForm.controls.discountCode.value === ''  ">{{getErrorRequiredMessage()}}</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-item">
-                <mat-form-field appearance="fill">
-                    <mat-label>تاريخ إنتهاء الصلاحية</mat-label>
-                    <input matInput [matDatepicker]="picker" readonly formControlName="outDate">
-                    <mat-error
-                        *ngIf="addDiscountForm.controls.outDate.errors?.['required'] && addDiscountForm.controls.outDate.value === ''">{{getErrorRequiredMessage()}}</mat-error>
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-
-                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker disabled="false"></mat-datepicker>
-                </mat-form-field>
-            </div>
-
-            <div class="form-item">
-                <mat-form-field class="example-full-width">
-                    <mat-label>قيمة الحسم بالنسبة المئوية</mat-label>
-                    <input matInput formControlName="discountValue">
-                    <mat-error
-                        *ngIf="addDiscountForm.controls.discountValue.errors?.['required'] || addDiscountForm.controls.discountValue.errors?.['pattern']">{{getErrorRequiredMessage()}}</mat-error>
-                </mat-form-field>
-            </div>
-            <div class="d-flex justify-content-center w-75 mb-3 buttons">
-                <button type="submit" class="btn t_btn_blue w-25" mat-dialog-close>إضافة
-                </button>
-                <button type="button" class="btn t_btn_blue w-25" mat-dialog-close>إلغاء
-                </button>
-            </div>
-        </form>
-    </div>
+  <div class="d-flex flex-column">
+    <h4 class="modal-title">إضافة كود تفعيل جديد</h4>
+    <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="modal-form">
+      <div class="row w-100 p-3">
+        <div class="col-6 form-item">
+          <mat-form-field class="example-full-width">
+            <mat-label>اسم الكوبون</mat-label>
+            <input matInput name="discountName" ngModel required #discountName="ngModel">
+            <mat-error *ngIf="discountName.invalid && discountName.touched">{{getErrorRequiredMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6 form-item">
+          <mat-form-field class="example-full-width">
+            <mat-label>كود الحسم</mat-label>
+            <input matInput name="discountCode" ngModel required #discountCode="ngModel">
+            <mat-error *ngIf="discountCode.invalid && discountCode.touched">{{getErrorRequiredMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6 form-item">
+          <mat-form-field class="example-full-width">
+            <mat-label>عدد مرات استخدام الكوبون</mat-label>
+            <input matInput name="usingTimes" ngModel required #usingTimes="ngModel">
+            <mat-error *ngIf="usingTimes.invalid && usingTimes.touched">{{getErrorRequiredMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-6 form-item">
+          <mat-form-field appearance="fill">
+            <mat-label>تاريخ إنتهاء الصلاحية</mat-label>
+            <input matInput [matDatepicker]="picker" readonly name="outDate" ngModel required #outDate="ngModel">
+            <mat-error *ngIf="outDate.invalid && outDate.touched">{{getErrorRequiredMessage()}}</mat-error>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker disabled="false"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-6 form-item">
+          <mat-form-field class="example-full-width">
+            <mat-label>قيمة الحسم</mat-label>
+            <input matInput name="discountValue" ngModel required #discountValue="ngModel">
+            <mat-error *ngIf="discountValue.invalid && discountValue.touched">{{getErrorRequiredMessage()}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center w-75 mb-3 buttons">
+        <button type="submit" [disabled]="!myForm.valid || myForm.untouched" class="btn t_btn_blue w-25"
+          mat-dialog-close>إضافة
+        </button>
+        <button type="button" class="btn t_btn_blue w-25" mat-dialog-close>إلغاء
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
