@@ -11,15 +11,12 @@ export class AddDiscountCodeComponent {
   displayStyle = "none";
 
   @ViewChild('myForm') form!: NgForm;
-
-  addDiscountForm = new FormGroup({
-    discountName: new FormControl('', [Validators.required]),
-    discountCode: new FormControl('', [Validators.required]),
-    outDate: new FormControl('', [Validators.required]),
-    discountValue: new FormControl('', [
-      Validators.required,
-      Validators.pattern("^[0-9]*$")])
-  })
+  
+  discountName = new FormControl('', [Validators.required]);
+  discountCode = new FormControl('', [Validators.required]);
+  outDate = new FormControl('', [Validators.required]);
+  usingTimes = new FormControl(1, [Validators.required]);
+  discountValue = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
 
 
   getErrorRequiredMessage() {
