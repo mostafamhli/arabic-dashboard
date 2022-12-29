@@ -8,7 +8,7 @@
   <div class="d-flex w-100">
     <form>
       <mat-form-field appearance="fill">
-        <mat-label>اختر نوع الآلية</mat-label>
+        <mat-label>اختر نوع </mat-label>
         <mat-select matNativeControl (valueChange)="selectedValueChanged($event)">
           <mat-option *ngFor="let vehicleType of vehicleType" [value]="vehicleType">
             {{vehicleType}}
@@ -58,11 +58,12 @@
             <td>{{item.rentDuringNight}}</td>
             <td>{{item.driverRatio}}</td>
             <td>
-              <mat-icon>edit</mat-icon>
+              <mat-icon  [routerLink]="['/classification-edit',item.id]"
+              routerLinkActive="router-link-active" class="cursor">edit</mat-icon>
               <mat-icon>delete</mat-icon>
             </td>
             <td>
-              <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display']"
+              <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display',item.id]"
                 routerLinkActive="router-link-active">
                 عرض
               </button>

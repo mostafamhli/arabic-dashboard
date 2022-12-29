@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ViewRequestAssetsComponent } from '../view-request-assets/view-request-assets.component';
 import { AcceptDriverRequestComponent } from '../accept-driver-request/accept-driver-request.component';
+import { ConfirmComponent } from '../../confirm/confirm.component';
 
 @Component({
   selector: 'app-view-driver-request-details',
@@ -26,5 +27,20 @@ export class ViewDriverRequestDetailsComponent {
       width:"50%",
       height:"50vh"
     })
+  }
+  refuse(){
+    let dialog = this.acceptDialog.open(ConfirmComponent,{
+      data:{
+        message : "هل أنت متأكد من رفض الطلب ؟"
+      }
+    })
+    dialog.afterClosed().subscribe((res:boolean) =>{
+      if(res){
+        //action after refuse request
+      } else {
+
+      }
+    });
+    
   }
 }

@@ -11,16 +11,22 @@ export class AddDiscountCodeComponent {
   displayStyle = "none";
 
   @ViewChild('myForm') form!: NgForm;
-  
-  discountName = new FormControl('', [Validators.required]);
-  discountCode = new FormControl('', [Validators.required]);
-  outDate = new FormControl('', [Validators.required]);
-  usingTimes = new FormControl(1, [Validators.required]);
-  discountValue = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]);
 
+  addDiscountForm: FormGroup
+
+
+  constructor() {
+    this.addDiscountForm = new FormGroup({
+      discountName: new FormControl('', [Validators.required]),
+      discountCode: new FormControl('', [Validators.required]),
+      outDate: new FormControl('', [Validators.required]),
+      usingTimes: new FormControl(1, [Validators.required]),
+      discountValue: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
+    })
+  }
 
   getErrorRequiredMessage() {
-    if (this.discountValue.hasError('pattern')) {
+    if (this.addDiscountForm.controls['discountValue'].hasError('pattern')) {
       return 'يسمح فقط باستخدام الأرقام(0-9)';
     }
     return 'يجب أن تدخل قيمة';
@@ -37,7 +43,7 @@ export class AddDiscountCodeComponent {
 
 
   onSubmit() {
-    console.log()
+    //console.log(this.addDiscountForm.controls)
     /*
     const data = this.discountCode.data;
     data.push({

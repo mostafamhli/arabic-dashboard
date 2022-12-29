@@ -12,7 +12,7 @@ export class AddNewCityComponent {
     cityName: new FormControl('', [Validators.required]),
     firstValueInRangeOne: new FormControl('', [Validators.required]),
     secondValueInRangeOne: new FormControl('', [Validators.required]),
-    firstValueInRangeTwo: new FormControl(''),
+    firstValueInRangeTwo: new FormControl({value:'',disabled:true}),
     secondValueInRangeTwo: new FormControl('', [Validators.required]),
   })
 

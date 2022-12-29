@@ -1,11 +1,26 @@
 <div class="view_profile x-font-regular">
   <div class="info">
-    <div class="img_div">
-      <div class="image">
+    <div class="img_div row d-flex">
+      <div class="image col-6">
         <mat-icon>person</mat-icon>
         <h1>Test</h1>
       </div>
+      <div class="rating col-6">
+        <div class="h-100 d-flex flex-column align-items-end justify-content-center">
+          <div class="stars text-centerv d-flex align-items-center">
+            <span>(3/5)</span>
+            <mat-icon class="gold">star</mat-icon>
+            <mat-icon class="gold">star</mat-icon>
+            <mat-icon class="gold">star</mat-icon>
+            <mat-icon>star</mat-icon>
+            <mat-icon>star</mat-icon>
+          </div>
+          <div>45 شخص قامو بالتقييم</div>
+        </div>
+      </div>
     </div>
+    <hr>
+    <h6 class="mb-3 x-font-bold w-100 ">المعلومات الشخصية</h6>
     <div class="row">
       <div class="first_col col-lg-6 col-md-6 col-12">
         <div class="info d-flex align-items-center">
@@ -28,10 +43,34 @@
         </div>
       </div>
     </div>
+    <hr>
+    <h6 class="mb-3 x-font-bold w-100 ">معلومات السيارة</h6>
+    <div class="row">
+      <div class="col-6">
+        <div class="row">
+          <div class="col-6 key x-font-bold">نوع السيارة</div>
+          <div class="col-6 val">مركبة صغيرة</div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-6 key x-font-bold">موديل السيارة</div>
+          <div class="col-6 val">مازدا</div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="row mt-1">
+          <div class="col-6 key x-font-bold">لون السيارة</div>
+          <div class="col-6 val">أحمر</div>
+        </div>
+        <div class="row mt-1">
+          <div class="col-6 key x-font-bold">رقم السيارة</div>
+          <div class="col-6 val">123456</div>
+        </div>
+      </div>
+    </div>
   </div>
   <hr>
   <div class="assets x-font-bold">
-    <h4 class="mb-3 x-font-bold w-100 text-center">مستندات المستخدم</h4>
+    <h6 class="mb-3 x-font-bold w-100 ">مستندات المستخدم</h6>
     <div class="row">
       <div class="col-6">
         <div class="d-flex align-items-center asset">
@@ -81,26 +120,13 @@
       </div>
     </div>
   </div>
-  <hr>
-  <div class="rating">
-    <div class="d-flex flex-column align-items-center">
-      <h4 class="mb-3 x-font-bold w-100 text-center">التقييم</h4>
-      <div class="w-100 stars text-center">
-        <mat-icon class="gold">star</mat-icon>
-        <mat-icon class="gold">star</mat-icon>
-        <mat-icon class="gold">star</mat-icon>
-        <mat-icon>star</mat-icon>
-        <mat-icon>star</mat-icon>
-      </div>
-    </div>
-  </div>
-  <hr>
+  <!-- <hr>
   <div class="reviews">
     <div class="d-flex flex-column align-items-center">
-      <h4 class="mb-3 x-font-bold w-100 text-center">تقييمات الزبائن </h4>
+      <h6 class="mb-3 x-font-bold w-100 text-center">تقييمات الزبائن </h6>
       <div class="w-100 stars text-center">
         لا يوجد تقييمات
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

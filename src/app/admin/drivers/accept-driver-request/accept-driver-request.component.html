@@ -1,5 +1,8 @@
 <div class="accept_driver_request p-3">
-  <h4 class="mb-5 x-font-bold w-100 text-center">
+  <h4 *ngIf="activeTypes == 0" class="mb-5 x-font-bold w-100 text-center">
+    اختر النوع
+  </h4>
+  <h4 *ngIf="activeTypes > 0" class="mb-5 x-font-bold w-100 text-center">
     اختر المركبة
   </h4>
   <div class="vehicles d-flex align-items-center">

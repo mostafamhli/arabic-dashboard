@@ -1,36 +1,42 @@
 <div class="row mb-5">
-    <div class="col-6 d-flex align-items-center">
-        <button class="btn t_btn_blue w-30" (click)="addCity()">
-            إضافة محافظة
-        </button>
-    </div>
+  <div class="col-6 d-flex align-items-center">
+    <button class="btn t_btn_blue w-30" (click)="addCity()">
+      إضافة محافظة
+    </button>
+  </div>
 </div>
 <div class="x-font-regular ">
-    <div class="row city-container" *ngFor="let city of cities">
-        <div class="col-8 city-pic">
-            <img [src]="city.pic" alt="">
+  <div class="row city-container" *ngFor="let city of cities">
+    <div class="col-4 ">
+      <div class="x-font-black text-center">{{city.name}}</div>
+      <div class="distance-price d-flex flex-column mt-3">
+        <div class="distance-price-header text-right mb-1">
+          تُحسب كلفة وصول السائق إلى الزبون من مسافة بعيدة بناءً على المجالات
         </div>
-        <div class="col-4 ">
-            <div class="x-font-black text-center">{{city.name}}</div>
-            <div class="distance-price d-flex flex-column mt-3">
-                <div class="distance-price-header text-center mb-1">كلفة وصول السائق للزبون من أجل المسافات :</div>
-                <mat-label class="w-100 second-label">المجال الأول:</mat-label>
-                <div class="d-flex justify-content-around">
-                    <div>من <span class="rangeValue">{{city.firstValueAtFirstRange}}</span></div>
-                    <div>إلى <span class="rangeValue">{{city.secondValueAtFirstRange}}</span></div>
-                </div>
-
-                <mat-label class="w-100 second-label mt-3">المجال الثاني:</mat-label>
-                <div class="d-flex justify-content-around">
-                    <div>من <span class="rangeValue">{{city.secondValueAtFirstRange}}</span></div>
-                    <div>إلى <span class="rangeValue">{{city.secondValueAtSecondRange}}</span></div>
-                </div>
-            </div>
+        <div class="d-flex align-items-center">
+          <label class="second-label ms-2">المجال الأول:</label>
+          <div class="d-flex justify-content-around">
+            <div>من {{city.firstValueAtFirstRange}}</div>
+            <div>إلى {{city.secondValueAtFirstRange}}</div>
+          </div>
         </div>
+        <div class="d-flex align-items-center mt-3">
+          <label class="second-label ms-2">المجال الثاني:</label>
+          <div class="d-flex justify-content-around">
+            <div>من {{city.secondValueAtFirstRange}}</div>
+            <div>إلى {{city.secondValueAtSecondRange}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 city-pic">
+      <img [src]="city.pic" alt="">
     </div>
 
+  </div>
 
-    <!-- <mat-card>
+
+  <!-- <mat-card>
         <mat-card-content>
             <div class="row">
                 <div class="col-lg-4 col-md-6 col sm-12 mb-5">
