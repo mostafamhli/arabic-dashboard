@@ -23,23 +23,25 @@ export class AddNewClassificationComponent {
     morningBegin: new FormControl('06:00', [Validators.required]),
     morningEnd: new FormControl('09:00', [Validators.required]),
   })
+
   addNewDayClassificationForm = new FormGroup({
     lowestRent: new FormControl(0, [Validators.required]),
     firstExtraCost: new FormControl(0, [Validators.required]),
     secondExtraCost: new FormControl(0, [Validators.required]),
     one_Km: new FormControl(0, [Validators.required]),
     ten_M: new FormControl(0, [Validators.required]),
-    morningBegin: new FormControl('06:00', [Validators.required]),
-    morningEnd: new FormControl('09:00', [Validators.required]),
+    dayBegin: new FormControl('10:00', [Validators.required]),
+    dayEnd: new FormControl('06:00', [Validators.required]),
   })
+
   addNewNightClassificationForm = new FormGroup({
     lowestRent: new FormControl(0, [Validators.required]),
     firstExtraCost: new FormControl(0, [Validators.required]),
     secondExtraCost: new FormControl(0, [Validators.required]),
     one_Km: new FormControl(0, [Validators.required]),
     ten_M: new FormControl(0, [Validators.required]),
-    morningBegin: new FormControl('06:00', [Validators.required]),
-    morningEnd: new FormControl('09:00', [Validators.required]),
+    nightBegin: new FormControl('06:00', [Validators.required]),
+    nightEnd: new FormControl('12:00', [Validators.required]),
   })
 
   generalFields = new FormGroup({
@@ -97,8 +99,8 @@ export class AddNewClassificationComponent {
       secondExtraCost: new FormControl({ value: 1, disabled: pageType.view == this.activePageType }, [Validators.required]),
       one_Km: new FormControl({ value: 6, disabled: pageType.view == this.activePageType }, [Validators.required]),
       ten_M: new FormControl({ value: 0.1, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningBegin: new FormControl({ value: '09:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningEnd: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      dayBegin: new FormControl({ value: '09:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      dayEnd: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
     })
     this.addNewNightClassificationForm = new FormGroup({
       lowestRent: new FormControl({ value: 4, disabled: pageType.view == this.activePageType }, [Validators.required]),
@@ -106,8 +108,8 @@ export class AddNewClassificationComponent {
       secondExtraCost: new FormControl({ value: 1, disabled: pageType.view == this.activePageType }, [Validators.required]),
       one_Km: new FormControl({ value: 6, disabled: pageType.view == this.activePageType }, [Validators.required]),
       ten_M: new FormControl({ value: 0.1, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningBegin: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningEnd: new FormControl({ value: '06:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      nightBegin: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      nightEnd: new FormControl({ value: '06:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
     })
 
 

@@ -54,24 +54,26 @@
         </mat-form-field>
       </div>
       <div class="form-item col-3">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>وقت ابتداء الفترة </mat-label>
-          <input matInput name="morningBegin" formControlName="morningBegin">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
-          </mat-error>
+          <input matInput name="selected_time_A" formControlName="morningBegin" [ngxMatTimepicker]="pickerA" readonly />
+          <mat-icon matSuffix (click)="pickerA.open()">
+            watch_later
+          </mat-icon>
         </mat-form-field>
+        <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
       </div>
-
 
       <div class="form-item col-3">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>وقت انتهاء الفترة </mat-label>
-          <input matInput name="morningEnd" formControlName="morningEnd">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
-          </mat-error>
+          <input matInput name="selected_time_A" formControlName="morningEnd" [ngxMatTimepicker]="pickerB" readonly />
+          <mat-icon matSuffix (click)="pickerB.open()">
+            watch_later
+          </mat-icon>
         </mat-form-field>
+        <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
       </div>
-
 
       <h6 class="x-font-regular col-12">
         التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون يُضاف للفاتورة تكلفة حسب المجال
@@ -133,25 +135,25 @@
         </mat-form-field>
       </div>
       <div class="form-item col-3">
-        <mat-form-field class="example-full-width">
-          <mat-label>وقت ابتداء الفترة</mat-label>
-          <input matInput name="morningBegin" formControlName="morningBegin">
-          <mat-error *ngIf="addNewDayClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
-          </mat-error>
+        <mat-form-field>
+          <mat-label>وقت ابتداء الفترة </mat-label>
+          <input matInput name="selected_time_A" formControlName="dayBegin" [ngxMatTimepicker]="pickerC" readonly />
+          <mat-icon matSuffix (click)="pickerC.open()">
+            watch_later
+          </mat-icon>
         </mat-form-field>
+        <ngx-mat-timepicker #pickerC></ngx-mat-timepicker>
       </div>
-
-
       <div class="form-item col-3">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>وقت انتهاء الفترة </mat-label>
-          <input matInput name="morningEnd" formControlName="morningEnd">
-          <mat-error *ngIf="addNewDayClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
-          </mat-error>
+          <input matInput name="selected_time_A" formControlName="dayEnd" [ngxMatTimepicker]="pickerD" readonly />
+          <mat-icon matSuffix (click)="pickerD.open()">
+            watch_later
+          </mat-icon>
         </mat-form-field>
+        <ngx-mat-timepicker #pickerD></ngx-mat-timepicker>
       </div>
-
-
       <h6 class="x-font-regular col-12">
         التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون يُضاف للفاتورة تكلفة حسب المجال
       </h6>
@@ -211,22 +213,24 @@
         </mat-form-field>
       </div>
       <div class="form-item col-3">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>وقت ابتداء الفترة </mat-label>
-          <input matInput name="morningBegin" formControlName="morningBegin">
-          <mat-error *ngIf="addNewNightClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
-          </mat-error>
+          <input matInput name="selected_time_A" formControlName="nightBegin" [ngxMatTimepicker]="pickerE" readonly />
+          <mat-icon matSuffix (click)="pickerE.open()">
+            watch_later
+          </mat-icon>
         </mat-form-field>
+        <ngx-mat-timepicker #pickerE></ngx-mat-timepicker>
       </div>
-
-
       <div class="form-item col-3">
-        <mat-form-field class="example-full-width">
+        <mat-form-field>
           <mat-label>وقت انتهاء الفترة </mat-label>
-          <input matInput name="morningEnd" formControlName="morningEnd">
-          <mat-error *ngIf="addNewNightClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
-          </mat-error>
+          <input matInput name="selected_time_A" formControlName="nightEnd" [ngxMatTimepicker]="pickerF" readonly />
+          <mat-icon matSuffix (click)="pickerF.open()">
+            watch_later
+          </mat-icon>
         </mat-form-field>
+        <ngx-mat-timepicker #pickerF></ngx-mat-timepicker>
       </div>
 
 
