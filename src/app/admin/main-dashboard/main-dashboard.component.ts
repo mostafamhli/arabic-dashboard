@@ -10,4 +10,12 @@ export class MainDashboardComponent {
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
+
+  constructor(){
+    let now = new Date();
+    let before7Days = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+
+    this.range.controls.start.setValue(before7Days);
+    this.range.controls.end.setValue(now);
+  }
 }

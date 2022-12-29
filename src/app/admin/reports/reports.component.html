@@ -3,25 +3,18 @@
     <div class="table_div d-flex flex-column align-items-center">
       <table class="table">
         <thead class="x-font-bold">
-          <th></th>
-          <th>اليوم</th>
-          <th>البارحة</th>
-          <th>آخر 7 أيام</th>
-          <th>الشهر الحالي</th>
-          <th>الشهر السابق</th>
-          <th>آخر شهرين</th>
-          <th>آخر 3 شهور</th>
-          <th>الإجمالي</th>
+          <th width="35%"></th>
+          <th width="35%" *ngIf="range && range.value && range.value.start && range.value.end">
+            <div class="d-flex flex-column align-items-center">
+              من {{range.value.start | date:'MMM d, y'}}
+              إلى {{range.value.end | date:'MMM d, y'}}
+            </div>
+          </th>
+          <th width="35%">منذ إنشاء الحساب</th>
         </thead>
         <tbody>
           <tr>
             <td class="x-font-bold text-right">عدد الرحلات</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
           </tr>
@@ -29,32 +22,14 @@
             <td class="x-font-bold">إجمالي الأرباح</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr>
             <td class="x-font-bold">أرباح الشركات الصافية</td>
             <td></td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
           </tr>
           <tr>
             <td class="x-font-bold">أرباح السائقين الصافية</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
             <td></td>
             <td></td>
           </tr>
