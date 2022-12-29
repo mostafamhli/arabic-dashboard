@@ -1,33 +1,32 @@
 <div class="class-header x-font-regular ">
-  <h2>إضافة تصنيف</h2>
+  <h2 *ngIf="pageTypeEnum.add == activePageType">إضافة تصنيف</h2>
+  <h2 *ngIf="pageTypeEnum.edit == activePageType">تعديل تصنيف</h2>
+  <h2 *ngIf="pageTypeEnum.view == activePageType">عرض تصنيف</h2>
   <div class="user-img">
     <img src="../../../assets/img/user.png" alt="user image">
   </div>
 </div>
 
 <div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular ">
-  <form (ngSubmit)="onSubmit()" #myForm0="ngForm" class="w-100 d-flex flex-wrap justify-content-around">
+  <form (ngSubmit)="onSubmit()" [formGroup]="generalFields" #myForm0="ngForm" class="w-100 d-flex flex-wrap justify-content-around">
     <div class="form-item col-3 w-30">
       <mat-form-field class="example-full-width">
         <mat-label>اسم التصنيف</mat-label>
-        <input matInput name="className" ngModel required #className="ngModel">
-        <mat-error *ngIf="className.invalid && className.touched">{{getErrorRequiredMessage()}}</mat-error>
+        <input matInput formControlName="name">
       </mat-form-field>
     </div>
 
     <div class="form-item col-3 w-30">
       <mat-form-field class="example-full-width">
         <mat-label>عدد المقاعد</mat-label>
-        <input matInput name="numOfSeat" ngModel required #numOfSeat="ngModel">
-        <mat-error *ngIf="numOfSeat.invalid && numOfSeat.touched">{{getErrorRequiredMessage()}}</mat-error>
+        <input matInput formControlName="numOfSites">
       </mat-form-field>
     </div>
 
     <div class="form-item col-3 w-30">
       <mat-form-field class="example-full-width">
         <mat-label>نسبة السائق</mat-label>
-        <input matInput name="driverRatio" ngModel required #driverRatio="ngModel">
-        <mat-error *ngIf="driverRatio.invalid && driverRatio.touched">{{getErrorRequiredMessage()}}</mat-error>
+        <input matInput formControlName="driverRatio">
       </mat-form-field>
     </div>
   </form>
@@ -115,12 +114,12 @@
 
   <div class="w-100 d-flex flex-column align-items-start day-rent-container">
     <h4 class="rent-header text-center x-font-bold mb-3">الأجور خلال النهار</h4>
-    <form (ngSubmit)="onSubmit()" [formGroup]="addNewMorningClassificationForm" class="row">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addNewDayClassificationForm" class="row">
       <div class="form-item col-3">
         <mat-form-field class="example-full-width">
           <mat-label>أقل أجرة</mat-label>
           <input matInput name="lowestRent" formControlName="lowestRent">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewDayClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -128,7 +127,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>تكلفة الرحلة من أجل كل 1 كم</mat-label>
           <input matInput name="one_Km" formControlName="one_Km">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewDayClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -136,7 +135,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>وقت ابتداء الفترة</mat-label>
           <input matInput name="morningBegin" formControlName="morningBegin">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewDayClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -146,7 +145,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>وقت انتهاء الفترة </mat-label>
           <input matInput name="morningEnd" formControlName="morningEnd">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewDayClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -162,7 +161,7 @@
             <span>5 كم</span> - <span>9 كم</span>
           </mat-label>
           <input matInput name="firstExtraCost" formControlName="firstExtraCost">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.firstExtraCost.invalid">
+          <mat-error *ngIf="addNewDayClassificationForm.controls.firstExtraCost.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
@@ -174,7 +173,7 @@
             المجال الثاني
             <span>9 كم</span> - <span>15 كم</span>
           </mat-label> <input matInput name="secondExtraCost" formControlName="secondExtraCost">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.secondExtraCost.invalid">
+          <mat-error *ngIf="addNewDayClassificationForm.controls.secondExtraCost.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
@@ -185,7 +184,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>الكلفة</mat-label>
           <input matInput name="ten_M" formControlName="ten_M">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewDayClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -193,12 +192,12 @@
   </div>
   <div class="w-100 d-flex flex-column align-items-start day-rent-container">
     <h4 class="rent-header text-center x-font-bold mb-3">الأجور خلال الليل</h4>
-    <form (ngSubmit)="onSubmit()" [formGroup]="addNewMorningClassificationForm" class="row">
+    <form (ngSubmit)="onSubmit()" [formGroup]="addNewNightClassificationForm" class="row">
       <div class="form-item col-3">
         <mat-form-field class="example-full-width">
           <mat-label>أقل أجرة</mat-label>
           <input matInput name="lowestRent" formControlName="lowestRent">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewNightClassificationForm.controls.lowestRent.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -206,7 +205,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>تكلفة الرحلة من أجل كل 1 كم</mat-label>
           <input matInput name="one_Km" formControlName="one_Km">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewNightClassificationForm.controls.one_Km.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -214,7 +213,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>وقت ابتداء الفترة </mat-label>
           <input matInput name="morningBegin" formControlName="morningBegin">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewNightClassificationForm.controls.morningBegin.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -224,7 +223,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>وقت انتهاء الفترة </mat-label>
           <input matInput name="morningEnd" formControlName="morningEnd">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewNightClassificationForm.controls.morningEnd.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -240,7 +239,7 @@
             <span>5 كم</span> - <span>9 كم</span>
           </mat-label>
           <input matInput name="firstExtraCost" formControlName="firstExtraCost">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.firstExtraCost.invalid">
+          <mat-error *ngIf="addNewNightClassificationForm.controls.firstExtraCost.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
@@ -252,7 +251,7 @@
             المجال الثاني
             <span>9 كم</span> - <span>15 كم</span>
           </mat-label> <input matInput name="secondExtraCost" formControlName="secondExtraCost">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.secondExtraCost.invalid">
+          <mat-error *ngIf="addNewNightClassificationForm.controls.secondExtraCost.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
@@ -263,7 +262,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>الكلفة</mat-label>
           <input matInput name="ten_M" formControlName="ten_M">
-          <mat-error *ngIf="addNewMorningClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewNightClassificationForm.controls.ten_M.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
@@ -271,8 +270,9 @@
   </div>
 
   <div class="x-font-bold row w-100 d-flex justify-content-center">
-    <div class="col-6 d-flex justify-content-center">
-      <button class="btn t_btn_blue_outline w-50">أضف</button>
+    <div class="col-6 d-flex justify-content-center" *ngIf="pageTypeEnum.view != activePageType">
+      <button  *ngIf="pageTypeEnum.add == activePageType" class="btn t_btn_blue_outline w-50">أضف</button>
+      <button  *ngIf="pageTypeEnum.edit == activePageType" class="btn t_btn_blue_outline w-50">حفظ</button>
     </div>
     <div class="col-6 d-flex justify-content-center">
       <button class="btn t_btn_blue w-50" routerLink="/vehicle-classification" routerLinkActive="router-link-active">
