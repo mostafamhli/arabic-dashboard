@@ -67,17 +67,10 @@ export class DiscountCodesComponent {
 
 
   deleteTableItem(elementId: number) {
-    console.log(elementId)
     const data = this.discountCodes.filter(item => {
       return item.id !== elementId
     })
     this.discountCodes = data
-    /*
-    const data = this.dataSource.data.filter(item => {
-      return item.discountName !== element.discountName
-    })
-    this.dataSource.data = data;
-    */
   }
 
   confirmDelete(id:number){

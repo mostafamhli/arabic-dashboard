@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
+import { ConfirmComponent } from '../../confirm/confirm.component';
 
 
 @Component({
@@ -28,6 +29,51 @@ export class VehicleClassificationComponent {
       id: 3,
       name: 'الأنبار',
       pic: '/assets/img/baghdad.png',
+    },
+    {
+      id: 4,
+      name: 'البصرة',
+      pic: '/assets/img/baghdad.png',
+    },
+    {
+      id: 5,
+      name: 'النجف',
+      pic: '/assets/img/basra.png',
+    },
+    {
+      id: 6,
+      name: 'بابل',
+      pic: '/assets/img/baghdad.png',
+    },
+    {
+      id: 7,
+      name: 'بغداد',
+      pic: '/assets/img/baghdad.png',
+    },
+    {
+      id: 8,
+      name: 'الموصل',
+      pic: '/assets/img/basra.png',
+    },
+    {
+      id: 9,
+      name: 'الأنبار',
+      pic: '/assets/img/baghdad.png',
+    },
+    {
+      id: 10,
+      name: 'البصرة',
+      pic: '/assets/img/baghdad.png',
+    },
+    {
+      id: 11,
+      name: 'النجف',
+      pic: '/assets/img/basra.png',
+    },
+    {
+      id: 12,
+      name: 'بابل',
+      pic: '/assets/img/baghdad.png',
     }
   ]
   activeCityTab = 1;
@@ -47,7 +93,7 @@ export class VehicleClassificationComponent {
   selectedValue: string = 'جاي تكسي';
   filter: FilterWithSearch = new FilterWithSearch();
 
-  constructor(private addClassification: MatDialog) {
+  constructor(private addClassification: MatDialog,private confirmDialog:MatDialog) {
     this.getClassifications();
   }
 
@@ -58,8 +104,6 @@ export class VehicleClassificationComponent {
     }*/
 
   getClassifications(cityName?: string, vehicleType?: string) {
-    console.log(cityName)
-    console.log(vehicleType)
     this.classifications = [
       {
         id: 1,
@@ -103,4 +147,25 @@ export class VehicleClassificationComponent {
     })
   }
 
+  deleteTableItem(id:number){
+    const data = this.classifications.filter(item => {
+      return item.id !== id
+    })
+    this.classifications = data
+  }
+
+  confirmDelete(id:number){
+    let dialog = this.confirmDialog.open(ConfirmComponent,{
+      data:{
+        message : "هل أنت متأكد من حذف التصنيف ؟"
+      }
+    })
+    dialog.afterClosed().subscribe((res:boolean) =>{
+      if(res){
+        this.deleteTableItem(id)
+      } else {
+
+      }
+    });
+  }
 }

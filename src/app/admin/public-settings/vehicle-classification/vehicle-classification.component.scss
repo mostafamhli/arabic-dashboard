@@ -1,4 +1,19 @@
 @import 'src/app/shared/styles/variables';
+@import 'src/app/shared/styles/mixin';
+
+.wizard {
+    overflow: auto;
+    @include scroll {
+        -webkit-appearance: none;
+        width: 3px;
+        height: 7px;
+      }
+    
+      @include scroll_thumb {
+        background-color: $blue;
+        box-shadow: 0 0 1px rgba(255, 255, 255, 0.5);
+      }
+}
 
 .tab {
     padding: 0.5rem;

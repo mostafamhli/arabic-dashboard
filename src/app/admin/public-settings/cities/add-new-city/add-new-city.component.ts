@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-new-city',
@@ -17,6 +18,10 @@ export class AddNewCityComponent {
   })
 
   cityPhoto = new FormControl(File, [Validators.required]);
+
+  constructor(private dialogRef: MatDialogRef<AddNewCityComponent>) {
+
+  }
 
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
@@ -39,5 +44,9 @@ export class AddNewCityComponent {
 
   onSubmit() {
     console.log(this.addNewCityForm.value)
+  }
+
+  cancel(){
+    this.dialogRef.close()
   }
 }

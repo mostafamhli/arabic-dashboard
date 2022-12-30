@@ -6,7 +6,7 @@
   </div>
 </div>
 <div class="x-font-regular ">
-  <div class="row city-container" *ngFor="let city of cities">
+  <div class="row city-container d-flex align-items-center" *ngFor="let city of cities">
     <div class="col-4 ">
       <div class="x-font-black text-center">{{city.name}}</div>
       <div class="distance-price d-flex flex-column mt-3">
@@ -29,71 +29,8 @@
         </div>
       </div>
     </div>
-    <div class="col-8 city-pic">
+    <div class="col-8 city-pic d-flex flex-column align-items-center">
       <img [src]="city.pic" alt="">
     </div>
-
   </div>
-
-
-  <!-- <mat-card>
-        <mat-card-content>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col sm-12 mb-5">
-                    <div class="city-card d-flex flex-column">
-                        <div class="img-info">
-                            <img src="../../../../assets/img/baghdad.png" alt="">
-                        </div>
-                        <div class="city-name d-flex justify-content-center w-100">
-                            <p class="py-3">Baghdad</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 col sm-12">
-                    <div class="city-card d-flex flex-column">
-                        <div class="img-info">
-                            <img src="../../../../assets/img/baghdad.png" alt="">
-                        </div>
-                        <div class="city-name d-flex justify-content-center w-100">
-                            <p class="py-3">Baghdad</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 col sm-12">
-                    <div class="city-card d-flex flex-column">
-                        <div class="img-info">
-                            <img src="../../../../assets/img/baghdad.png" alt="">
-                        </div>
-                        <div class="city-name d-flex justify-content-center w-100">
-                            <p class="py-3">Baghdad</p>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="col-lg-4 col-md-6 col sm-12">
-                    <div class="city-card d-flex flex-column">
-                        <div class="img-info">
-                            <img src="../../../../assets/img/baghdad.png" alt="">
-                        </div>
-                        <div class="city-name d-flex justify-content-center w-100">
-                            <p class="py-3">Baghdad</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 col sm-12">
-                    <div class="city-card d-flex flex-column">
-                        <div class="img-info">
-                            <img src="../../../../assets/img/baghdad.png" alt="">
-                        </div>
-                        <div class="city-name d-flex justify-content-center w-100">
-                            <p class="py-3">Baghdad</p>
-                        </div>
-                    </div>
-                </div> 
-            </div>
-        </mat-card-content>
-    </mat-card> -->
 </div>
