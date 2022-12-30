@@ -14,26 +14,25 @@ export class CitiesComponent {
   cities = [
     {
       name: 'بغداد',
-      pic: '../../../../assets/img/baghdad.jpg',
+      pic: '../../../../assets/img/baghdad.png',
       firstValueAtFirstRange: 5,
       secondValueAtFirstRange: 9,
       secondValueAtSecondRange: 15,
     },
     {
       name: 'الموصل',
-      pic: '../../../../assets/img/basra.jpg',
+      pic: '../../../../assets/img/basra.png',
       firstValueAtFirstRange: 3,
       secondValueAtFirstRange: 8,
       secondValueAtSecondRange: 16,
     },
     {
       name: 'الأنبار',
-      pic: '../../../../assets/img/baghdad.jpg',
+      pic: '../../../../assets/img/baghdad.png',
       firstValueAtFirstRange: 2,
       secondValueAtFirstRange: 8,
       secondValueAtSecondRange: 20,
     }
-
   ]
 
   constructor(private addNewCity: MatDialog) {

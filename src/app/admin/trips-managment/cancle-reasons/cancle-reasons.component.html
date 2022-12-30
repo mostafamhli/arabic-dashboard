@@ -1,29 +1,34 @@
-<div class="d-flex justify-content-center align-items-center x-font-regular" style="height:80vh;">
-    <mat-card>
-        <mat-card-content>
-            <h4 class="title">أسباب إلغاء الرحلات</h4>
-            <div class="d-flex flex-column align-items-center justify-content-center">
-                <div class="d-flex justify-content-center w-100">
-                    <mat-chip-grid #chipGrid aria-label="Enter keywords" [formControl]="formControl" class="w-100 d-flex justify-content-center">
-                        <mat-chip-row *ngFor="let keyword of keywords" (removed)="removeKeyword(keyword)" class=" d-flex justify-content-between mb-3">
-                            <span>{{keyword}}</span>
-                            <button matChipRemove aria-label="'إزالة ' + keyword">
-                                <mat-icon>cancel</mat-icon>
-                            </button>
-                        </mat-chip-row>
-                    </mat-chip-grid>
+<div class="cancels_container x-font-regular p-3">
+  <h4 class="title mb-5">أسباب إلغاء الرحلات</h4>
+  <div class="d-flex flex-column align-items-center justify-content-center">
+    <div class="jay_taxi_table w-100">
+      <div class="table_div d-flex flex-column align-items-center">
+        <table class="table">
+          <thead class="x-font-bold">
+            <th>السبب</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of reasons">
+              <td>{{item.name}}</td>
+              <td>
+                <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
+                  <mat-icon>delete</mat-icon>
+                  <div>حذف</div>
                 </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-                <form (ngSubmit)="onSubmit()" #myForm="ngForm" class="d-flex flex-wrap justify-content-center">
-                    <div class="form-item mt-5">
-                        <mat-form-field class="example-full-width">
-                            <mat-label>إضافة سبب جديد</mat-label>
-                            <input matInput name="cancleName" ngModel #cancleName="ngModel" >
-                        </mat-form-field>
-                    </div>
-                    <button class="btn t_btn_blue w-25" type="submit">أضف</button>
-                </form>
-            </div>
-        </mat-card-content>
-    </mat-card>
+    <div class="w-100 mt-5 d-flex flex-column align-items-center">
+      <label class="x-font-bold mb-2">إضافة سبب جديد</label>
+      <div class="input_with_button d-flex align-items-center">
+        <input class="form-control" [(ngModel)]="cancleName" placeholder="السبب">
+        <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!cancleName || cancleName==''">إضافة</button>
+      </div>
+    </div>
+  </div>
 </div>

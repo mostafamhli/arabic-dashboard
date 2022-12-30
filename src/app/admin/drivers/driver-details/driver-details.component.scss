@@ -32,32 +32,6 @@
       }
     }
   }
-
-  .input_with_button {
-    border: 1px solid $grey;
-    border-radius: .8rem;
-    width: 40%;
-
-    input {
-      border: none;
-      outline: none;
-      background: none;
-      box-shadow: none;
-
-      &.active {
-        border: none;
-        outline: none;
-        box-shadow: none;
-      }
-
-      &.focus {
-        border: none;
-        outline: none;
-        box-shadow: none;
-      }
-    }
-
-  }
   .back_to_list {
       margin-top: auto;
       margin-bottom: auto;

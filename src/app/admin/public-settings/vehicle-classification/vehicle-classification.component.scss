@@ -1,19 +1,37 @@
 @import 'src/app/shared/styles/variables';
 
 .tab {
-    padding: 1rem;
-    width: 212px;
+    padding: 0.5rem;
     cursor: pointer;
+}
 
-    .text {
-        margin-bottom: .5rem;
-    }
-
-    hr {
-        width: 212px !important;
+.input-label {
+    margin-left: 2rem;
+    &:last-of-type {
         margin: 0;
-        border-top: 4px solid $blue;
-        border-radius: 2px;
-        opacity: 1;
+    }
+}
+.city{
+    background-color: $grey_transparent;
+    &.active {
+      background-color: $grey_active;
+    }
+    width: fit-content;
+    padding: 0.5rem;
+    .img-div{
+        width: 4rem;
+        height: 4rem;
+        padding: 2px;
+        border-radius: 5px;
+        img{
+            max-height: 4rem;
+            max-width: 4rem;
+            width: auto;
+            height: auto;
+        }
+    }
+    
+    .text {
+        margin-top: .5rem;
     }
 }

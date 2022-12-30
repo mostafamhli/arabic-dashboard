@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DiscountCodeStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { AddDiscountCodeComponent } from './add-discount-code/add-discount-code.component';
+import { ConfirmComponent } from '../../confirm/confirm.component';
 
 @Component({
   selector: 'app-discount-codes',
@@ -16,7 +17,7 @@ export class DiscountCodesComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   discountCodeStatusEnum = DiscountCodeStatus
 
-  constructor(private addDiscountCodes:MatDialog) {
+  constructor(private addDiscountCodes:MatDialog,private confirmDialog:MatDialog) {
     this.getDiscountCodes()
   }
 
@@ -77,5 +78,20 @@ export class DiscountCodesComponent {
     })
     this.dataSource.data = data;
     */
+  }
+
+  confirmDelete(id:number){
+    let dialog = this.confirmDialog.open(ConfirmComponent,{
+      data:{
+        message : "هل أنت متأكد من حذف الكوبون ؟"
+      }
+    })
+    dialog.afterClosed().subscribe((res:boolean) =>{
+      if(res){
+        this.deleteTableItem(id)
+      } else {
+
+      }
+    });
   }
 }

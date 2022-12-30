@@ -1,52 +1,51 @@
 <div class="drivers_list x-font-regular">
-    <div class="row mb-5">
-        <div class="col-6 d-flex align-items-center">
-            <button class="btn t_btn_blue w-30" (click)="addDiscountCode()">
-                إضافة كود حسم + 
-              </button>
-        </div>
+  <div class="row mb-5">
+    <div class="col-6 d-flex align-items-center">
+      <button class="btn t_btn_blue w-30" (click)="addDiscountCode()">
+        إضافة كود حسم +
+      </button>
     </div>
-    <div class="jay_taxi_table">
-        <div class="table_div d-flex flex-column align-items-center">
-            <table class="table">
-                <thead class="x-font-bold">
-                    <th>اسم الكوبون </th>
-                    <th>كود الحسم </th>
-                    <th>قيمة الحسم</th>
-                    <th>عدد مرات الاستخدام</th>
-                    <th>تاريخ إنتهاء الصلاحية</th>
-                    <th>تفعيل الكود</th>
-                    <th>حذف الكود</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of discountCodes">
-                        <td>{{item.discountName}}</td>
-                        <td>{{item.discountCode}}</td>
-                        <td>{{item.discountValue}}</td>
-                        <td>{{item.usingTimes}}</td>
-                        <td>{{item.outDate}}</td>
-                        <td>
-                            <container-element [ngSwitch]="item.discountCodeStatus">
-                                <span class="status discount_code_active_status py-1"
-                                    *ngSwitchCase="discountCodeStatusEnum.active">إلغاء التفعيل</span>
-                                <span class="status inactive_status py-1"
-                                    *ngSwitchCase="discountCodeStatusEnum.inActive">تفعيل</span>
-                            </container-element>
-                        </td>
-                        <td>
-                            <button class="btn t_btn_red small_btn" (click)="deleteTableItem(item.id)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+  </div>
+  <div class="jay_taxi_table">
+    <div class="table_div d-flex flex-column align-items-center">
+      <table class="table">
+        <thead class="x-font-bold">
+          <th>اسم الكوبون </th>
+          <th>كود الحسم </th>
+          <th>قيمة الحسم</th>
+          <th>عدد مرات الاستخدام</th>
+          <th>تاريخ إنتهاء الصلاحية</th>
+          <th>تفعيل الكود</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of discountCodes">
+            <td>{{item.discountName}}</td>
+            <td>{{item.discountCode}}</td>
+            <td>{{item.discountValue}}</td>
+            <td>{{item.usingTimes}}</td>
+            <td>{{item.outDate}}</td>
+            <td>
+              <container-element [ngSwitch]="item.discountCodeStatus">
+                <span class="status discount_code_active_status py-1"
+                  *ngSwitchCase="discountCodeStatusEnum.active">إلغاء التفعيل</span>
+                <span class="status inactive_status py-1" *ngSwitchCase="discountCodeStatusEnum.inActive">تفعيل</span>
+              </container-element>
+            </td>
+            <td>
+              <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
+                <mat-icon>delete</mat-icon>
+                <div>حذف</div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
-        <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
-            تحميل المزيد
-        </button>
-    </div>
+  </div>
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+    <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+      تحميل المزيد
+    </button>
+  </div>
 </div>
-
