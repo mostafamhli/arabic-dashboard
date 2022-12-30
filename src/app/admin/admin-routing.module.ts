@@ -27,6 +27,7 @@ import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user
 import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
+import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
 
 
 
@@ -68,7 +69,8 @@ const routes: Routes = [
       { path: 'add-new-user', component: AddNewUserComponent },
       { path: 'add-new-classification', component: AddNewClassificationComponent },
       { path: 'reports', component: ReportsComponent },
-      { path: 'notifications', component: NotificationsComponent }
+      { path: 'notifications', component: NotificationsComponent },
+      { path: 'send-message', component: SendMessageComponent }
     ]
   }
 ];

@@ -4,7 +4,8 @@
       <img src="../assets/img/logo.png" alt="taxi jay logo">
     </div>
     <mat-list role="list">
-      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active" routerLink="">
+      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="">
         <div class="listItem">
           <mat-icon>home</mat-icon>
           <span>لوحة التحكم</span>
@@ -145,14 +146,23 @@
           <span>الإشعارات</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active"
-        routerLink="/reports">
+      <mat-list-item role="listitem" *ngIf="activeTab == activeTabsEnum.notifications"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.notifications}" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/send-message">
+        <div class="listItem">
+          <mat-icon>send</mat-icon>
+          <span>ارسال رسالة</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/reports">
         <div class="listItem">
           <mat-icon>assignment</mat-icon>
           <span>التقارير</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active">
         <div class="listItem">
           <mat-icon>account_balance_wallet</mat-icon>
           <span>المحفظة</span>

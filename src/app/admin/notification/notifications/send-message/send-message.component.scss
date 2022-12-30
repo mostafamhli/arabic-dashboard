@@ -1,0 +1,65 @@
+@import 'src/app/shared/styles/variables';
+
+.main-header h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: $blue;
+}
+
+
+.mat-mdc-slider {
+    
+    width: 100%;
+}
+
+
+.example-label-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10px 0;
+    max-width: 284px;
+}
+
+.example-result-card .example-value-label {
+    font-weight: 600;
+}
+
+.example-name-label {
+    color: $blue;
+}
+
+.add_notification {
+    padding: 2rem;
+  
+    .add_cancel {
+      .t_btn_blue {
+        margin-right: auto;
+        margin-left: 3px;
+      }
+  
+      .t_btn_blue_outline {
+        margin-left: auto;
+        margin-right: 3px;
+      }
+    }
+    .choice{
+        display: flex;
+        align-items: center;
+        width: auto;
+        margin-left: auto;
+        margin-right: auto;
+        input{
+            margin-left: 5px;
+        }
+    }
+    textarea {
+        min-height: 125px;
+    }
+  }
+  
+  ::ng-deep .add_notification {
+    mat-form-field {
+      width: 75%
+    }
+  }
+
