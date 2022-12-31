@@ -47,6 +47,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
 import { AcceptDriverRequestComponent } from './drivers/accept-driver-request/accept-driver-request.component';
 import { ViewRequestAssetsComponent } from './drivers/view-request-assets/view-request-assets.component';
 import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
+import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 
 
 @NgModule({
@@ -85,7 +86,8 @@ import { SendMessageComponent } from './notification/notifications/send-message/
     ConfirmComponent,
     AcceptDriverRequestComponent,
     ViewRequestAssetsComponent,
-    SendMessageComponent
+    SendMessageComponent,
+    ViewClientDetailsComponent
   ],
 
   imports: [

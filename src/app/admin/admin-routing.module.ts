@@ -28,6 +28,7 @@ import { AddNewClassificationComponent } from './public-settings/vehicle-classif
 import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
 import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
+import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 
 
 
@@ -70,7 +71,8 @@ const routes: Routes = [
       { path: 'add-new-classification', component: AddNewClassificationComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'notifications', component: NotificationsComponent },
-      { path: 'send-message', component: SendMessageComponent }
+      { path: 'send-message', component: SendMessageComponent },
+      { path: 'client/:id', component: ViewClientDetailsComponent }
     ]
   }
 ];
