@@ -31,7 +31,6 @@ import { SendMessageComponent } from './notification/notifications/send-message/
 import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 
 
-
 const routes: Routes = [
   {
     path: '',

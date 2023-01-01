@@ -1,0 +1,25 @@
+<div class="d-flex align-items-center justify-content-center main-container">
+    <div class="sign-container d-flex w-75">
+        <div class="content w-50">
+            <form class="w-100 d-flex flex-column align-items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <h2 class="my-5">تسجيل الدخول</h2>
+                <mat-form-field class="w-75 mb-3">
+                    <input matInput placeholder="اسم المستخدم" formControlName="username">
+                    <mat-error *ngIf="!form.get('username')?.valid && form.get('username')?.touched">
+                        اسم المستخدم غير صالح
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="w-75 mb-3">
+                    <input matInput type="password" placeholder="كلمة السر" formControlName="password">
+                    <mat-error  *ngIf="!form.get('password')?.valid && form.get('password')?.touched">
+                        كلمة السر غير صحيحة
+                    </mat-error>
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary">تسجيل الدخول</button>
+            </form>
+        </div>
+        <div class="img-container w-50">
+            <img src="../../../../assets/img/sign-in.svg" alt="">
+        </div>
+    </div>
+</div>
