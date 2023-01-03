@@ -33,19 +33,19 @@
         <tbody>
           <tr>
             <td>الربح الإجمالي</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="values.betweenTwoDates">{{values.betweenTwoDates.totalProfit}}</td>
+            <td>{{values.total.totalProfit}}</td>
           </tr>
           <tr>
             <td>الربح الصافي للشركة</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="values.betweenTwoDates">{{values.betweenTwoDates.netProfitCompany}}</td>
+            <td>{{values.total.netProfitCompany}}</td>
           </tr>
 
           <tr>
             <td>الربح الصافي للسائقين</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="values.betweenTwoDates">{{values.betweenTwoDates.netProfitDriver}}</td>
+            <td>{{values.total.netProfitDriver}}</td>
           </tr>
         </tbody>
       </table>
