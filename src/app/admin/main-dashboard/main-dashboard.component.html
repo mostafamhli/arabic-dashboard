@@ -6,7 +6,7 @@
       <mat-label>أدخل المجال</mat-label>
       <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
         <input matStartDate formControlName="start" placeholder="Start date">
-        <input matEndDate formControlName="end" placeholder="End date">
+        <input matEndDate formControlName="end" placeholder="End date" (dateChange)="dateRangeChange()">
       </mat-date-range-input>
       <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-date-range-picker #picker></mat-date-range-picker>
@@ -33,19 +33,19 @@
         <tbody>
           <tr>
             <td>الربح الإجمالي</td>
-            <td *ngIf="values.betweenTwoDates">{{values.betweenTwoDates.totalProfit}}</td>
-            <td>{{values.total.totalProfit}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.totalProfit}}</td>
+            <td>{{total.totalProfit}}</td>
           </tr>
           <tr>
             <td>الربح الصافي للشركة</td>
-            <td *ngIf="values.betweenTwoDates">{{values.betweenTwoDates.netProfitCompany}}</td>
-            <td>{{values.total.netProfitCompany}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.netProfitCompany}}</td>
+            <td *ngIf="total">{{total.netProfitCompany}}</td>
           </tr>
 
           <tr>
             <td>الربح الصافي للسائقين</td>
-            <td *ngIf="values.betweenTwoDates">{{values.betweenTwoDates.netProfitDriver}}</td>
-            <td>{{values.total.netProfitDriver}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.netProfitDriver}}</td>
+            <td *ngIf="total">{{total.netProfitDriver}}</td>
           </tr>
         </tbody>
       </table>

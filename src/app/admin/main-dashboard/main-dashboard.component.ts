@@ -12,18 +12,31 @@ export class MainDashboardComponent {
     end: new FormControl<Date | null>(null),
   });
 
-  values:any
+  values: any
+  total: any
+
   constructor(private dashboardServices: DashboardServicesService) {
     let now = new Date();
     let before7Days = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
     this.range.controls.start.setValue(before7Days);
     this.range.controls.end.setValue(now);
-
-    this.values = this.dashboardServices.filter(this.range.value.start , this.range.value.end )
+    this.filter()
+    this.filter(this.range.value.start, this.range.value.end)
   }
 
   ngOnInit() {
     console.log(this.values)
   }
 
+  filter(start?: any, end?: any) {
+    if (start && end)
+      this.values = this.dashboardServices.filter(this.range.value.start, this.range.value.end)
+
+    this.total = this.dashboardServices.filter()
+  }
+
+  dateRangeChange() {
+    if (this.range.value.start && this.range.value.end)
+      this.dashboardServices.filter(this.range.value.start, this.range.value.end)
+  }
 }
