@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 
 @Component({
   selector: 'app-add-new-user',
@@ -10,36 +11,31 @@ import * as moment from 'moment';
 export class AddNewUserComponent {
 
   hide = true;
-  
-  @ViewChild('myForm') form!: NgForm;
-  firstName = new FormControl('', [Validators.required]);
-  lastName = new FormControl('', [Validators.required]);
-  address = new FormControl('', [Validators.required]);
-  mobile = new FormControl('', [Validators.required]);
-  creationDate = new FormControl(moment().format('DD-MM-YYYY'), [Validators.required]);
-  email = new FormControl('', [Validators.required, Validators.email]);
-  password = new FormControl('', [Validators.required]);
-  type = new FormControl('', [Validators.required]);
+
+  addNewUserGroupForm = new FormGroup({
+    firstName: new FormControl('', [Validators.required]),
+    lastName: new FormControl('', [Validators.required]),
+    address: new FormControl('', [Validators.required]),
+    mobile: new FormControl('', [Validators.required]),
+    creationDate: new FormControl(moment().format('DD-MM-YYYY'), [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required])
+  })
+
+  constructor(private settingsServices: SettingsServicesService) { }
 
   getErrorRequiredMessage() {
-    if (this.email.hasError('email')) {
+    if (this.addNewUserGroupForm.controls.email.hasError('email')) {
       return 'أدخل بريد إلكتروني صالح'
     }
     return 'يجب أن تدخل قيمة';
   }
 
-  
+
   onSubmit() {
-    /*
-        const data = this.dataSource.data;
-        data.push({
-          userName: this.form.value.firstName + ' ' + this.form.value.firstName,
-          type: this.form.value.type,
-          email: this.form.value.email,
-          accountCreateDate: (moment(this.form.value.accountCreateDate)).format('yyyy-M-D')
-        });
-        this.dataSource.data = data;
-    */
-      }
+    this.settingsServices.addNewUser(this.addNewUserGroupForm.value)
+    console.log(this.settingsServices.addNewUser(this.addNewUserGroupForm.value))
+  }
 
 }

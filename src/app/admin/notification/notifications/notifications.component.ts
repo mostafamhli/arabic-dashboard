@@ -3,6 +3,7 @@ import { SendNotificationComponent } from '../send-notification/send-notificatio
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { Notification } from 'src/app/core/models/notification.nodel';
+import { CommunicationChannelServicesService } from 'src/app/core/services/communication-channel-services.service';
 
 @Component({
   selector: 'app-notifications',
@@ -13,56 +14,26 @@ export class NotificationsComponent {
   notifications: Notification[] = []
   filter: FilterWithSearch = new FilterWithSearch()
 
-  constructor(private sendNotification:MatDialog) {
+  constructor(private sendNotification: MatDialog, private communicationService: CommunicationChannelServicesService) {
     this.getNotifications()
   }
 
   getNotifications() {
-    this.notifications = [
-      {
-        id:1,
-        dateOfSend:new Date(),
-        messageContent : "Temp Content",
-        messageTitle : "Temp Title",
-        userName : "wael"
-      },
-      {
-        id:2,
-        dateOfSend:new Date(),
-        messageContent : "Temp Content",
-        messageTitle : "Temp Title",
-        userName : "wael"
-      },
-      {
-        id:3,
-        dateOfSend:new Date(),
-        messageContent : "Temp Content",
-        messageTitle : "Temp Title",
-        userName : "wael"
-      },
-      {
-        id:4,
-        dateOfSend:new Date(),
-        messageContent : "Temp Content",
-        messageTitle : "Temp Title",
-        userName : "wael"
-      },
-      {
-        id:5,
-        dateOfSend:new Date(),
-        messageContent : "Temp Content",
-        messageTitle : "Temp Title",
-        userName : "wael"
-      }
-    ]
+    this.notifications = this.communicationService.getAllNotifications();
   }
+
   loadMore() {
     this.filter.pageIndex = this.filter.pageIndex + 1;
     this.getNotifications()
   }
-  sendNotifications(){
-    this.sendNotification.open(SendNotificationComponent,{
-      width:"50%"
+
+  sendNotifications() {
+    this.sendNotification.open(SendNotificationComponent, {
+      width: "50%"
     })
+  }
+
+  search(inputText:string){
+    this.notifications= this.communicationService.findNotification(inputText);
   }
 }

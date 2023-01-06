@@ -14,6 +14,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>اسم التصنيف</mat-label>
           <input matInput formControlName="name">
+          <mat-error *ngIf="generalFields.controls.name.invalid && generalFields.controls.name.touched">{{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -21,6 +22,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>عدد المقاعد</mat-label>
           <input matInput formControlName="numOfSites">
+          <mat-error *ngIf="generalFields.controls.numOfSites.invalid && generalFields.controls.numOfSites.touched">{{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -28,6 +30,7 @@
         <mat-form-field class="example-full-width">
           <mat-label>نسبة السائق بالمئة</mat-label>
           <input matInput formControlName="driverRatio">
+          <mat-error *ngIf="generalFields.controls.driverRatio.invalid && generalFields.controls.driverRatio.touched">{{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
     </div>

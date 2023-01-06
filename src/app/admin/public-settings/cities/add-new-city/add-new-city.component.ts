@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 
 @Component({
   selector: 'app-add-new-city',
@@ -11,42 +12,43 @@ export class AddNewCityComponent {
 
   addNewCityForm = new FormGroup({
     cityName: new FormControl('', [Validators.required]),
-    firstValueInRangeOne: new FormControl('', [Validators.required]),
-    secondValueInRangeOne: new FormControl('', [Validators.required]),
-    firstValueInRangeTwo: new FormControl({value:'',disabled:true}),
-    secondValueInRangeTwo: new FormControl('', [Validators.required]),
-  })
+    cityPhoto: new FormControl('', [Validators.required]),
+    firstValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    secondValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    firstValueInRangeTwo: new FormControl({ value: '', disabled: true }),
+    secondValueInRangeTwo: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+  });
 
-  cityPhoto = new FormControl(File, [Validators.required]);
-
-  constructor(private dialogRef: MatDialogRef<AddNewCityComponent>) {
-
-  }
+  constructor(private dialogRef: MatDialogRef<AddNewCityComponent>, private settingsService: SettingsServicesService) { }
 
   getErrorRequiredMessage() {
+    if (
+      this.addNewCityForm.controls['firstValueInRangeOne'].hasError('pattern') ||
+      this.addNewCityForm.controls['secondValueInRangeOne'].hasError('pattern') ||
+      this.addNewCityForm.controls['firstValueInRangeTwo'].hasError('pattern') ||
+      this.addNewCityForm.controls['secondValueInRangeTwo'].hasError('pattern')
+    ) {
+      return 'يسمح فقط باستخدام الأرقام(0-9)';
+    }
     return 'يجب أن تدخل قيمة';
-  }
-
-  ngOnInit() {
-
   }
 
   onSelectedFile(e: any) {
     if (e.target.files) {
+      
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
-        this.cityPhoto = event.target.result
-        console.log(this.cityPhoto)
+        this.addNewCityForm.controls.cityPhoto.setValue(event.target.result);
       }
     }
   }
 
   onSubmit() {
-    console.log(this.addNewCityForm.value)
+    console.log(this.settingsService.addNewCity(this.addNewCityForm.value));
   }
 
-  cancel(){
-    this.dialogRef.close()
+  cancel() {
+    this.dialogRef.close();
   }
 }
