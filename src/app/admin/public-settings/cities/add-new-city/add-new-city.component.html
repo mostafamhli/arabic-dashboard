@@ -6,13 +6,13 @@
         <mat-form-field class="example-full-width">
           <mat-label>اسم المحافظة</mat-label>
           <input matInput name="cityName" formControlName="cityName">
-          <mat-error *ngIf="addNewCityForm.controls.cityName.errors?.['required']">{{getErrorRequiredMessage()}}
+          <mat-error *ngIf="addNewCityForm.controls.cityName.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
 
       <div class="file-input col-6 d-flex flex-column align-items-center justify-content-start">
-        <input type="file" id="file" class="file" name="cityPhoto" ngModel required #cityPhoto="ngModel"
+        <input type="file" id="file" class="file" name="cityPhoto"
           (change)="onSelectedFile($event)">
         <label for="file">
           اختر صورة المحافظة
@@ -27,14 +27,14 @@
         <mat-form-field class="rangeValue">
           <input matInput name="firstValueInRangeOne" formControlName="firstValueInRangeOne"
             placeholder="القيمة الأولى">
-          <mat-error *ngIf="addNewCityForm.controls.firstValueInRangeOne.errors?.['required']">
+          <mat-error *ngIf="addNewCityForm.controls.firstValueInRangeOne.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
         -
         <mat-form-field class="rangeValue">
           <input matInput name="secondValueInRangeOne" formControlName="secondValueInRangeOne"
             placeholder="القيمة الثانية">
-          <mat-error *ngIf="addNewCityForm.controls.secondValueInRangeOne.errors?.['required']">
+          <mat-error *ngIf="addNewCityForm.controls.secondValueInRangeOne.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
@@ -51,7 +51,7 @@
         <mat-form-field class="rangeValue">
           <input matInput name="secondValueInRangeTwo" formControlName="secondValueInRangeTwo"
             placeholder="القيمة الثانية">
-          <mat-error *ngIf="addNewCityForm.controls.secondValueInRangeTwo.errors?.['required']">
+          <mat-error *ngIf="addNewCityForm.controls.secondValueInRangeTwo.invalid">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>

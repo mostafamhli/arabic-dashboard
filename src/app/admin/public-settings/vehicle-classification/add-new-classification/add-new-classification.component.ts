@@ -1,49 +1,53 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 
 export enum pageType {
   add = 1,
   edit = 2,
   view = 3
 }
+
 @Component({
   selector: 'app-add-new-classification',
   templateUrl: './add-new-classification.component.html',
   styleUrls: ['./add-new-classification.component.scss']
 })
+
 export class AddNewClassificationComponent {
+
+  pageTypeEnum = pageType;
+  activePageType = pageType.add;
 
   generalFields = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    numOfSites: new FormControl(0, [Validators.required]),
-    driverRatio: new FormControl(0, [Validators.required]),
-    morningLowestRent: new FormControl(0, [Validators.required]),
-    morningFirstExtraCost: new FormControl(0, [Validators.required]),
-    morningSecondExtraCost: new FormControl(0, [Validators.required]),
-    morningOne_Km: new FormControl(0, [Validators.required]),
-    morningTen_M: new FormControl(0, [Validators.required]),
+    numOfSites: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    driverRatio: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    morningLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    morningFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    morningSecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    morningOne_Km: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    morningTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningBegin: new FormControl('06:00', [Validators.required]),
     morningEnd: new FormControl('09:00', [Validators.required]),
-    dayLowestRent: new FormControl(0, [Validators.required]),
-    dayFirstExtraCost: new FormControl(0, [Validators.required]),
-    daySecondExtraCost: new FormControl(0, [Validators.required]),
-    dayOne_Km: new FormControl(0, [Validators.required]),
-    dayTen_M: new FormControl(0, [Validators.required]),
+    dayLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    dayFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    daySecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    dayOne_Km: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    dayTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     dayBegin: new FormControl('10:00', [Validators.required]),
     dayEnd: new FormControl('06:00', [Validators.required]),
-    nightLowestRent: new FormControl(0, [Validators.required]),
-    nightFirstExtraCost: new FormControl(0, [Validators.required]),
-    nightSecondExtraCost: new FormControl(0, [Validators.required]),
-    nightOne_Km: new FormControl(0, [Validators.required]),
-    nightTen_M: new FormControl(0, [Validators.required]),
+    nightLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    nightFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    nightSecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    nightOne_Km: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    nightTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     nightBegin: new FormControl('06:00', [Validators.required]),
     nightEnd: new FormControl('12:00', [Validators.required])
-  })
-  pageTypeEnum = pageType
-  activePageType = pageType.add
+  });
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
     let id = this.activatedRoute.snapshot.params['id']
     if (id) {
       if (router.url.includes("classification-edit"))
@@ -57,22 +61,33 @@ export class AddNewClassificationComponent {
   }
 
   getErrorRequiredMessage() {
+    if (
+      this.generalFields.controls['numOfSites'].hasError('pattern') ||
+      this.generalFields.controls['driverRatio'].hasError('pattern') ||
+      this.generalFields.controls['morningLowestRent'].hasError('pattern') ||
+      this.generalFields.controls['morningFirstExtraCost'].hasError('pattern') ||
+      this.generalFields.controls['morningSecondExtraCost'].hasError('pattern') ||
+      this.generalFields.controls['morningOne_Km'].hasError('pattern') ||
+      this.generalFields.controls['morningTen_M'].hasError('pattern') ||
+      this.generalFields.controls['dayLowestRent'].hasError('pattern') ||
+      this.generalFields.controls['dayFirstExtraCost'].hasError('pattern') ||
+      this.generalFields.controls['daySecondExtraCost'].hasError('pattern') ||
+      this.generalFields.controls['dayOne_Km'].hasError('pattern') ||
+      this.generalFields.controls['dayTen_M'].hasError('pattern') ||
+      this.generalFields.controls['nightLowestRent'].hasError('pattern') ||
+      this.generalFields.controls['nightFirstExtraCost'].hasError('pattern') ||
+      this.generalFields.controls['nightSecondExtraCost'].hasError('pattern') ||
+      this.generalFields.controls['nightOne_Km'].hasError('pattern') ||
+      this.generalFields.controls['nightTen_M'].hasError('pattern')
+    ) {
+      return 'يسمح فقط باستخدام الأرقام(0-9)';
+    }
     return 'يجب أن تدخل قيمة';
   }
 
 
   onSubmit() {
-    console.log(this.generalFields.value)
-    /*
-    const data = this.dataSource.data;
-    data.push({
-      userName: this.form.value.firstName + ' ' + this.form.value.firstName,
-      type: this.form.value.type,
-      email: this.form.value.email,
-      accountCreateDate: (moment(this.form.value.accountCreateDate)).format('yyyy-M-D')
-    });
-    this.dataSource.data = data;
-    */
+    console.log(this.settingsService.addNewClassification(this.generalFields.value));
   }
 
   setInfoForForm() {

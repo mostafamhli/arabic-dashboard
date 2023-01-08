@@ -5,6 +5,7 @@ import { DiscountCodeStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { AddDiscountCodeComponent } from './add-discount-code/add-discount-code.component';
 import { ConfirmComponent } from '../../confirm/confirm.component';
+import { TripsServicesService } from 'src/app/core/services/trips-services.service';
 
 @Component({
   selector: 'app-discount-codes',
@@ -17,40 +18,12 @@ export class DiscountCodesComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   discountCodeStatusEnum = DiscountCodeStatus
 
-  constructor(private addDiscountCodes:MatDialog,private confirmDialog:MatDialog) {
+  constructor(private addDiscountCodes: MatDialog, private confirmDialog: MatDialog, private tripsServices: TripsServicesService) {
     this.getDiscountCodes()
   }
 
   getDiscountCodes() {
-    this.discountCodes = [
-      {
-        id:1,
-        discountName: 'ABCDEFG',
-        discountCode: 'abcdef',
-        usingTimes:5,
-        discountValue: 90,
-        outDate: '22-12-2022',
-        discountCodeStatus: DiscountCodeStatus.inActive,
-      },
-      {
-        id:2,
-        discountName: 'ABCDEFG',
-        discountCode: 'abcdef',
-        usingTimes:8,
-        discountValue: 90,
-        outDate: '22-12-2022',
-        discountCodeStatus: DiscountCodeStatus.active,
-      },
-      {
-        id:3,
-        discountName: 'ABCDEFG',
-        discountCode: 'abcdef',
-        usingTimes:5,
-        discountValue: 90,
-        outDate: '22-12-2022',
-        discountCodeStatus: DiscountCodeStatus.inActive,
-      },
-    ]
+    this.discountCodes = this.tripsServices.getAllDiscountCodes();
   }
 
 
@@ -58,29 +31,26 @@ export class DiscountCodesComponent {
     this.filter.pageIndex = this.filter.pageIndex + 1;
     this.getDiscountCodes()
   }
-  
-  addDiscountCode(){
-    this.addDiscountCodes.open(AddDiscountCodeComponent,{
-      width:"50%"
+
+  addDiscountCode() {
+    this.addDiscountCodes.open(AddDiscountCodeComponent, {
+      width: "50%"
     })
   }
 
 
   deleteTableItem(elementId: number) {
-    const data = this.discountCodes.filter(item => {
-      return item.id !== elementId
-    })
-    this.discountCodes = data
+    this.discountCodes = this.tripsServices.deleteDiscountCode(elementId);
   }
 
-  confirmDelete(id:number){
-    let dialog = this.confirmDialog.open(ConfirmComponent,{
-      data:{
-        message : "هل أنت متأكد من حذف الكوبون ؟"
+  confirmDelete(id: number) {
+    let dialog = this.confirmDialog.open(ConfirmComponent, {
+      data: {
+        message: "هل أنت متأكد من حذف الكوبون ؟"
       }
     })
-    dialog.afterClosed().subscribe((res:boolean) =>{
-      if(res){
+    dialog.afterClosed().subscribe((res: boolean) => {
+      if (res) {
         this.deleteTableItem(id)
       } else {
 

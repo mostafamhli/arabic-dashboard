@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators, FormGroup } from '@angular/forms';
-import * as moment from 'moment';
+
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { TripsServicesService } from '../../../core/services/trips-services.service';
 
 
 @Component({
@@ -14,101 +15,30 @@ export class TripsComponent {
   trips: any[] = []
   filter: FilterWithSearch = new FilterWithSearch()
 
-  
-  @ViewChild('myForm') form!: NgForm;
-  driversList = new FormControl('', [Validators.required]);
-  beginTime = new FormControl('', [Validators.required]);
-  beginDate = new FormControl('', [Validators.required]);
-  endTime = new FormControl('', [Validators.required]);
-  tripType = new FormControl('', [Validators.required]);
-  endDate = new FormControl('', [Validators.required]);
 
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
-  });
-  
+  generalFields = new FormGroup({
+    driversList: new FormControl(''),
+    tripType: new FormControl(''),
+    tripStatus: new FormControl(''),
+    range: new FormGroup({
+      start: new FormControl<Date | null>(null),
+      end: new FormControl<Date | null>(null),
+    }),
+    clientName:new FormControl('')
+  })
+
+
+
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
   }
 
-  constructor() {
+  constructor(private tripsService: TripsServicesService) {
     this.getTrips()
   }
 
   getTrips() {
-    this.trips = [
-      {
-        id: 1,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 2,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 3,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 4,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 5,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 6,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 7,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      }
-    ]
+    this.trips = this.tripsService.getAllTrips();
   }
 
   loadMore() {
@@ -116,11 +46,11 @@ export class TripsComponent {
     this.getTrips()
   }
 
-  onClick(item:any){
-    console.log(item)
+  search() {
+    console.log(this.tripsService.findTrip(this.generalFields.value))
   }
 
-  onSubmit(){
-    console.log(this.form.value)
+  resetForm(){
+    this.generalFields.reset();
   }
 }

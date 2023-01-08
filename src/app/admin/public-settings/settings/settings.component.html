@@ -8,8 +8,8 @@
             <div class="form-group row d-flex flex-column">
                 <label for="staticEmail" class="col-form-label lable">فيسبوك</label>
                 <div>
-                    <input type="text" name="facebook" [(ngModel)]="facebook" class="form-control-plaintext lable-value"
-                        id="staticEmail">
+                    <input type="text" name="facebook" [value]="socialMedia.facebook"
+                        class="form-control-plaintext lable-value" id="staticEmail">
                 </div>
             </div>
         </div>
@@ -23,8 +23,8 @@
             <div class="form-group row d-flex flex-column">
                 <label for="staticEmail" class="col-form-label lable">تويتر</label>
                 <div>
-                    <input type="text" name="twitter" [(ngModel)]="twitter" class="form-control-plaintext lable-value"
-                        id="staticEmail">
+                    <input type="text" name="twitter" [value]="socialMedia.twitter"
+                        class="form-control-plaintext lable-value" id="staticEmail">
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="form-group row d-flex flex-column">
                 <label for="staticEmail" class="col-form-label lable">انستغرام</label>
                 <div>
-                    <input type="text" name="instagram" [(ngModel)]="instagram"
+                    <input type="text" name="instagram" [value]="socialMedia.instagram"
                         class="form-control-plaintext lable-value" id="staticEmail">
                 </div>
             </div>
@@ -53,8 +53,8 @@
             <div class="form-group row d-flex flex-column">
                 <label for="staticEmail" class="col-form-label lable">واتساب</label>
                 <div>
-                    <input type="text" name="whatsapp" [(ngModel)]="whatsapp" class="form-control-plaintext lable-value"
-                        id="staticEmail">
+                    <input type="text" name="whatsapp" [value]="socialMedia.whatsapp"
+                        class="form-control-plaintext lable-value" id="staticEmail">
                 </div>
             </div>
         </div>
@@ -68,8 +68,8 @@
             <div class="form-group row d-flex flex-column">
                 <label for="staticEmail" class="col-form-label lable">رقم الهاتف</label>
                 <div>
-                    <input type="text" name="phone" [(ngModel)]="phone" class="form-control-plaintext lable-value"
-                        id="staticEmail">
+                    <input type="text" name="phone" [value]="socialMedia.phone"
+                        class="form-control-plaintext lable-value" id="staticEmail">
                 </div>
             </div>
         </div>
@@ -84,10 +84,10 @@
             <div class="form-group row d-flex flex-column">
                 <label for="staticEmail" class="col-form-label lable">البريد الإلكتروني</label>
                 <div>
-                    <input type="text" name="email" [(ngModel)]="email" class="form-control-plaintext lable-value"
-                        id="staticEmail">
+                    <input type="text" name="email" [value]="socialMedia.email"
+                        class="form-control-plaintext lable-value" id="staticEmail">
                 </div>
             </div>
         </div>
-    </div>   
+    </div>
 </div>

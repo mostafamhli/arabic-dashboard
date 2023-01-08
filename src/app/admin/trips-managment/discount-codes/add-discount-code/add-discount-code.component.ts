@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { TripsServicesService } from 'src/app/core/services/trips-services.service';
 
 @Component({
   selector: 'app-add-discount-code',
@@ -8,22 +9,15 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 })
 export class AddDiscountCodeComponent {
 
-  displayStyle = "none";
+  addDiscountForm = new FormGroup({
+    discountName: new FormControl('', [Validators.required]),
+    discountCode: new FormControl('', [Validators.required]),
+    outDate: new FormControl('', [Validators.required]),
+    usingTimes: new FormControl(1, [Validators.required]),
+    discountValue: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
+  })
 
-  @ViewChild('myForm') form!: NgForm;
-
-  addDiscountForm: FormGroup
-
-
-  constructor() {
-    this.addDiscountForm = new FormGroup({
-      discountName: new FormControl('', [Validators.required]),
-      discountCode: new FormControl('', [Validators.required]),
-      outDate: new FormControl('', [Validators.required]),
-      usingTimes: new FormControl(1, [Validators.required]),
-      discountValue: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
-    })
-  }
+  constructor(private tripsServices: TripsServicesService) { }
 
   getErrorRequiredMessage() {
     if (this.addDiscountForm.controls['discountValue'].hasError('pattern')) {
@@ -32,27 +26,7 @@ export class AddDiscountCodeComponent {
     return 'يجب أن تدخل قيمة';
   }
 
-
-  openPopup() {
-    this.displayStyle = "block";
-  }
-
-  closePopup() {
-    this.displayStyle = "none";
-  }
-
-
   onSubmit() {
-    //console.log(this.addDiscountForm.controls)
-    /*
-    const data = this.discountCode.data;
-    data.push({
-      discountName: this.form.value.discountName,
-      discountCode: this.form.value.discountCode,
-      discountValue: this.form.value.discountValue,
-      outDate: (moment(this.form.value.outDate)).format('yyyy-M-D')
-    });
-    this.dataSource.data = data;
-    */
+    console.log(this.tripsServices.addDiscountCode(this.addDiscountForm.value))
   }
 }

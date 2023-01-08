@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators } from '@angular/forms';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,9 +15,16 @@ export class SettingsComponent {
   whatsapp = '0935526455';
   phone = '0935526455';
   email = 'mostafa@gmail.com';
-  setting1 = 50;
-  setting2 = 50;
-  setting3 = 50;
+
+  socialMedia:any
+  constructor(private settingsService:SettingsServicesService){
+    this.socialMediaInfo();
+  }
+
+  socialMediaInfo(){
+    this.socialMedia= this.settingsService.getSocialMediaInfo();
+  }
+
   onSubmit() {
 
   }

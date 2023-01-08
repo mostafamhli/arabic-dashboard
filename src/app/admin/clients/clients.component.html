@@ -3,8 +3,8 @@
     <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
       <mat-form-field>
         <mat-label>بحث</mat-label>
-        <input matInput (keyup)="getClients()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
-        <mat-icon matSuffix>search</mat-icon>
+        <input matInput (keyup)="getClients()" #searchInput [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
+        <mat-icon matSuffix (click)="searchClients(searchInput)">search</mat-icon>
       </mat-form-field>
     </div>
   </div>

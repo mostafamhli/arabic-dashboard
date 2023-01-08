@@ -6,6 +6,7 @@ import { AddNewTypeComponent } from './add-new-type/add-new-type.component';
 import { Role } from 'src/app/core/models/roles.model';
 import { AccountStatus } from 'src/app/core/enums/genric.enums';
 import { ConfirmComponent } from '../../confirm/confirm.component';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 
 @Component({
   selector: 'app-types',
@@ -16,49 +17,16 @@ export class TypesComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   accountStatusEnum = AccountStatus
   typesList: string[] = [];
-  roles: Role[] = [
-    {
-      id: 1,
-      name: "Admin",
-      accountStatus: AccountStatus.active,
-      permissions:
-        [
-          {
-            id: 1,
-            name: "إدارة السائقين",
-            accountStatus: AccountStatus.active
-          },
-          {
-            id: 2,
-            name: "إدارة الزبائن",
-            accountStatus: AccountStatus.active
-          },
-          {
-            id: 3,
-            name: "إدارة الرحلات",
-            accountStatus: AccountStatus.active
-          },
-        ]
-    },
-    {
-      id: 2,
-      name: "Sub Admin",
-      accountStatus: AccountStatus.inActive,
-      permissions: [{
-        id: 1,
-        name: "إدارة الزبائن",
-        accountStatus: AccountStatus.inActive
-      }]
-    }
-  ];
+  roles: Role[] = []
 
-  constructor(private addType: MatDialog, private confirmChangeStatus: MatDialog) {
-    this.getTypes()
+  constructor(private addType: MatDialog, private confirmChangeStatus: MatDialog, private settingsServcie: SettingsServicesService) {
+    this.getTypes();
   }
 
   getTypes() {
-
+    this.roles = this.settingsServcie.getAllRoles();
   }
+
 
   addNewType() {
     this.addType.open(AddNewTypeComponent, {
@@ -67,16 +35,16 @@ export class TypesComponent {
   }
 
   confirm(item: Role) {
+    console.log(item)
     let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
       width: "40%",
       data: item
     })
     dialog.afterClosed().subscribe((result: any) => {
       if (result) {
-        let index = this.roles.findIndex(a => a.id == result.id)
+        let index = this.roles.findIndex(a => a.id == result.id);
         if (index != -1) {
-          this.roles[index].accountStatus = result.accountStatus
-          console.log(this.roles[index])
+          this.roles[index].accountStatus = result.accountStatus;
         }
       }
     })
