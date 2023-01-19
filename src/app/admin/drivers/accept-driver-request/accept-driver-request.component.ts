@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 
 @Component({
   selector: 'app-accept-driver-request',
@@ -8,85 +9,41 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AcceptDriverRequestComponent {
 
-  activeVehicle: number = 1
-  activeTypes: number = 0
-  vehicles: any = [
-    {
-      id: 1,
-      name: "سيارة",
-      path: "/assets/img/vehicles/car.png",
-    },
-    {
-      id: 2,
-      name: "ونش",
-      path: "/assets/img/vehicles/wnch.png",
-    },
-    {
-      id: 3,
-      name: "سيارة VIP",
-      path: "/assets/img/vehicles/vip.png",
-    },
-    {
-      id: 4,
-      name: "توك توك",
-      path: "/assets/img/vehicles/toktok.png",
-    }
-  ]
+  activeVehicle: number = 1;
+  activeTypes: number = 0;
+  vehicles: any[] = [];
+  types: any = [];
+  toktoks: any[] = [];
+  cars: any[] = [];
 
-  types: any = [
-    {
-      id: 1,
-      name: "توك توك",
-      path: "/assets/img/vehicles/toktok.png",
-    },
-    {
-      id: 2,
-      name: "جاي تكسي",
-      path: "/assets/img/logo.png",
-    },
-    {
-      id: 3,
-      name: "آليات",
-      path: "/assets/img/vehicles/fleet.png",
-    }
-  ]
-
-  toktoks: any = [
-    {
-      id: 1,
-      name: "توك توك",
-      path: "/assets/img/vehicles/toktok.png",
-    },
-    {
-      id: 2,
-      name: "توك توك",
-      path: "/assets/img/vehicles/toktok.png",
-    }
-  ]
-
-  cars: any = [
-    {
-      id: 1,
-      name: "سيارة",
-      path: "/assets/img/vehicles/car.png",
-    },
-    {
-      id: 2,
-      name: "ونش",
-      path: "/assets/img/vehicles/wnch.png",
-    },
-    {
-      id: 3,
-      name: "سيارة VIP",
-      path: "/assets/img/vehicles/vip.png",
-    }
-  ]
-  constructor(private dialogRef: MatDialogRef<AcceptDriverRequestComponent>) {
-
+  constructor(private dialogRef: MatDialogRef<AcceptDriverRequestComponent>, private driverServices: DriverServicesService) {
+    this.getVehicles();
+    this.getTypes();
+    this.getToktoks();
+    this.getCars();
   }
+
+  getVehicles() {
+    this.vehicles = this.driverServices.getAllVehicles();
+  }
+
+  getTypes() {
+    this.types = this.driverServices.getVehiclesTypes();
+  }
+
+  getToktoks() {
+    this.toktoks = this.driverServices.getToktoksType();
+  }
+
+  getCars() {
+    this.cars = this.driverServices.getCars();
+  }
+
+
   accept() {
 
   }
+
   cancel() {
     this.dialogRef.close()
   }

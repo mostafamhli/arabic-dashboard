@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { DriverRequest } from 'src/app/core/models/drivers.mode';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
-import { MatDialog } from '@angular/material/dialog';
+import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 
 @Component({
   selector: 'app-drivers-request',
@@ -9,53 +9,19 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./drivers-request.component.scss']
 })
 export class DriversRequestComponent {
-  drivers: DriverRequest[] = []
-  filter: FilterWithSearch = new FilterWithSearch()
+  drivers: DriverRequest[] = [];
+  filter: FilterWithSearch = new FilterWithSearch();
 
-  constructor() {
-    this.getDrivers()
+  constructor(private driverService:DriverServicesService) {
+    this.getDrivers();
   }
 
   getDrivers() {
-    console.log(this.filter)
-    this.drivers = [
-      {
-        id:1,
-        name: "Wael",
-        mobile: "963949394418",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id:2,
-        name: "Wael",
-        mobile: "963949394418",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id:3,
-        name: "Wael",
-        mobile: "963949394418",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id:4,
-        name: "Wael",
-        mobile: "963949394418",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id:5,
-        name: "Wael",
-        mobile: "963949394418",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id:6,
-        name: "Wael",
-        mobile: "963949394418",
-        accountCreationDate: "12-9-2022"
-      },
-    ]
+    this.drivers = this.driverService.getDriversRequest(); 
+  }
+
+  searchInDriverRequestTable(searchWord:string){
+    this.drivers = this.driverService.searchInDriverRequestTable(searchWord);
   }
 
   loadMore(){

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 
 @Component({
   selector: 'app-view-request-assets',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class ViewRequestAssetsComponent {
 
+  requestAssets: any[] = [];
+  constructor(private driversService: DriverServicesService) {
+    this.getRequestAssets();
+  }
+
+  getRequestAssets() {
+    this.requestAssets = this.driversService.getDriverRequestAssets(1)
+  }
 }

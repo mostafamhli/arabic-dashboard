@@ -1,7 +1,7 @@
 <div class="drivers_list x-font-regular">
   <div class="row">
     <div class="col-6 d-flex align-items-center">
-      <button class="btn t_btn_blue w-25" [routerLink]="['/driver-profile']" routerLinkActive="router-link-active" >
+      <button class="btn t_btn_blue w-25" [routerLink]="['/driver-profile']" routerLinkActive="router-link-active">
         إضافة سائق
       </button>
     </div>
@@ -10,7 +10,7 @@
       <mat-form-field>
         <mat-label>بحث</mat-label>
         <input matInput (keyup)="getDrivers()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
-        <mat-icon matSuffix>search</mat-icon>
+        <mat-icon matSuffix (click)="searchInDriverList(input.value)">search</mat-icon>
       </mat-form-field>
     </div>
   </div>
@@ -36,19 +36,22 @@
             <!-- <td>{{item.code}}</td> -->
             <td>
               <container-element [ngSwitch]="item.accountStatus">
-                <span (click)="confirm(item)" class="status active_status cursor" *ngSwitchCase="accountStatusEnum.active">مفعل</span>
-                <span (click)="confirm(item)" class="status inactive_status cursor" *ngSwitchCase="accountStatusEnum.inActive">غير مفعل</span>
+                <span (click)="confirm(item)" class="status active_status cursor"
+                  *ngSwitchCase="accountStatusEnum.active">مفعل</span>
+                <span (click)="confirm(item)" class="status inactive_status cursor"
+                  *ngSwitchCase="accountStatusEnum.inActive">غير مفعل</span>
               </container-element>
             </td>
-            <td >
+            <td>
               <button class="btn t_btn_blue small_btn" [routerLink]="['/driver-details',item.id]"
                 routerLinkActive="router-link-active">
                 عرض
               </button>
             </td>
             <td>
-              <mat-icon [routerLink]="['/driver-profile',item.id]" routerLinkActive="router-link-active" >edit</mat-icon>
-              <mat-icon [routerLink]="['/view-driver-profile',item.id]" routerLinkActive="router-link-active" >visibility</mat-icon>
+              <mat-icon [routerLink]="['/driver-profile',item.id]" routerLinkActive="router-link-active">edit</mat-icon>
+              <mat-icon [routerLink]="['/view-driver-profile',item.id]"
+                routerLinkActive="router-link-active">visibility</mat-icon>
             </td>
           </tr>
         </tbody>
