@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ViewRequestAssetsComponent } from '../view-request-assets/view-request-assets.component';
 import { AcceptDriverRequestComponent } from '../accept-driver-request/accept-driver-request.component';
 import { ConfirmComponent } from '../../confirm/confirm.component';
+import { ActivatedRoute } from '@angular/router';
+import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 
 @Component({
   selector: 'app-view-driver-request-details',
@@ -11,31 +13,39 @@ import { ConfirmComponent } from '../../confirm/confirm.component';
 })
 export class ViewDriverRequestDetailsComponent {
 
-  constructor(private viewAssetsDialog:MatDialog,private acceptDialog:MatDialog){
-    
+  id!: number;
+  driverRequestDetails: any;
+  constructor(private viewAssetsDialog: MatDialog, private acceptDialog: MatDialog, private activatedRoute: ActivatedRoute, private driverService: DriverServicesService) {
+    this.id = activatedRoute.snapshot.params['id'];
+    this.getDriverRequestInfo();
   }
 
-  viewAssets(){
-    this.viewAssetsDialog.open(ViewRequestAssetsComponent,{
-      width:"70%",
-      height:"60vh"
+  getDriverRequestInfo() {
+    this.driverRequestDetails = this.driverService.getDriverRequestDetails(this.id);
+  }
+
+  viewAssets() {
+    this.viewAssetsDialog.open(ViewRequestAssetsComponent, {
+      width: "70%",
+      height: "60vh"
     })
   }
 
-  accept(){
-    this.acceptDialog.open(AcceptDriverRequestComponent,{
-      width:"50%",
-      height:"50vh"
+  accept() {
+    this.acceptDialog.open(AcceptDriverRequestComponent, {
+      width: "50%",
+      height: "50vh"
     })
   }
-  refuse(){
-    let dialog = this.acceptDialog.open(ConfirmComponent,{
-      data:{
-        message : "هل أنت متأكد من رفض الطلب ؟"
+
+  refuse() {
+    let dialog = this.acceptDialog.open(ConfirmComponent, {
+      data: {
+        message: "هل أنت متأكد من رفض الطلب ؟"
       }
     })
-    dialog.afterClosed().subscribe((res:boolean) =>{
-      if(res){
+    dialog.afterClosed().subscribe((res: boolean) => {
+      if (res) {
         //action after refuse request
       } else {
 

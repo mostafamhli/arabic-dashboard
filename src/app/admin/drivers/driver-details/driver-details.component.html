@@ -36,23 +36,23 @@
         <tbody>
           <tr>
             <td class="x-font-bold text-right">عدد الرحلات</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.numOfTrips}}</td>
+            <td>{{total.numOfTrips}}</td>
           </tr>
           <tr>
             <td class="x-font-bold">إجمالي الأرباح</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.totalProfit}}</td>
+            <td>{{total.totalProfit}}</td>
           </tr>
           <tr>
             <td class="x-font-bold">أرباح الشركات الصافية</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.netProfitCompany}}</td>
+            <td>{{total.netProfitCompany}}</td>
           </tr>
           <tr>
             <td class="x-font-bold">أرباح السائقين الصافية</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end"></td>
-            <td></td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.netProfitDriver}}</td>
+            <td>{{total.netProfitDriver}}</td>
           </tr>
         </tbody>
       </table>
@@ -62,7 +62,7 @@
     <label class="x-font-bold mb-2">إضافة حوافز للسائق</label>
     <div class="input_with_button d-flex align-items-center">
       <input class="form-control" [(ngModel)]="quantity" placeholder="الكمية">
-      <button class="btn t_btn_blue">إضافة</button>
+      <button class="btn t_btn_blue" (click)="addIncentivesToDriver()">إضافة</button>
     </div>
   </div>
   <div class="w-100 d-flex flex-column align-items-center back_to_list">

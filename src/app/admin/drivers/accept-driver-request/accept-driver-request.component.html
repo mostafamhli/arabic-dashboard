@@ -6,7 +6,6 @@
     اختر المركبة
   </h4>
   <div class="vehicles d-flex align-items-center">
-
     <ng-container *ngIf="activeTypes == 0">
       <div class="vehicle" *ngFor="let item of types" [ngClass]="{active: activeTypes == item.id}"
         (click)="activeTypes = item.id">

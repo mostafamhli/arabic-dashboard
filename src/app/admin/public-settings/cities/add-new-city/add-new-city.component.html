@@ -1,17 +1,26 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="addNewCityForm"
   class="modal-form py-5 px-3 d-flex flex-wrap justify-content-center">
   <div class="content-form d-flex flex-coulmn align-items-center flex-wrap">
-    <div class=" row w-100 d-flex align-items-center">
-      <div class="col-6 form-item">
+    <div class=" row w-100 d-flex align-items-center justify-content-between">
+      <div class="col-3 form-item">
         <mat-form-field class="example-full-width">
-          <mat-label>اسم المحافظة</mat-label>
-          <input matInput name="cityName" formControlName="cityName">
-          <mat-error *ngIf="addNewCityForm.controls.cityName.invalid">{{getErrorRequiredMessage()}}
+          <mat-label>اسم المحافظة بالعربي</mat-label>
+          <input matInput name="cityNameInArabic" formControlName="cityNameInArabic">
+          <mat-error *ngIf="addNewCityForm.controls.cityNameInArabic.invalid">{{getErrorRequiredMessage()}}
           </mat-error>
         </mat-form-field>
       </div>
 
-      <div class="file-input col-6 d-flex flex-column align-items-center justify-content-start">
+      <div class="col-3 form-item">
+        <mat-form-field class="example-full-width">
+          <mat-label>اسم المحافظة بالانجليزي</mat-label>
+          <input matInput name="cityNameInEnglish" formControlName="cityNameInEnglish">
+          <mat-error *ngIf="addNewCityForm.controls.cityNameInEnglish.invalid">{{getErrorRequiredMessage()}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="file-input col-3 d-flex flex-column align-items-center justify-content-start mb-1">
         <input type="file" id="file" class="file" name="cityPhoto"
           (change)="onSelectedFile($event)">
         <label for="file">
@@ -61,7 +70,7 @@
   <div class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-3">
     <div class="d-flex align-items-center">
       <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-30">
-        إضافة
+        {{data? 'حفظ التعديل': 'إضافة'}}
       </button>
       <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" (click)="cancel()">
         إلغاء

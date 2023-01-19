@@ -31,8 +31,16 @@ mat-chip-row button mat-icon {
 
 
 .input-container {
-    width: 40%;
+    width: 80%;
     display: flex;
     justify-content: center;
     margin: 2rem auto 0;
+}
+
+.input_with_button {
+    width: 80%;
+}
+
+.english-input {
+    direction: ltr !important;
 }

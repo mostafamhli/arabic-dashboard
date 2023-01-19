@@ -29,6 +29,7 @@ import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
 import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
 import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
+import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
 
 
 const routes: Routes = [
@@ -66,6 +67,7 @@ const routes: Routes = [
       { path: 'types', component: TypesComponent },
       { path: 'settings', component: SettingsComponent },
       { path: 'cities', component: CitiesComponent },
+      { path: 'city-edit/:id', component: AddNewCityComponent },
       { path: 'add-new-user', component: AddNewUserComponent },
       { path: 'add-new-classification', component: AddNewClassificationComponent },
       { path: 'reports', component: ReportsComponent },
