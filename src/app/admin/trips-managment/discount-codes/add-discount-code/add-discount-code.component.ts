@@ -10,7 +10,8 @@ import { TripsServicesService } from 'src/app/core/services/trips-services.servi
 export class AddDiscountCodeComponent {
 
   addDiscountForm = new FormGroup({
-    discountName: new FormControl('', [Validators.required]),
+    discountNameInArabic: new FormControl('', [Validators.required]),
+    discountNameInEnglish: new FormControl('', [Validators.required]),
     discountCode: new FormControl('', [Validators.required]),
     outDate: new FormControl('', [Validators.required]),
     usingTimes: new FormControl(1, [Validators.required]),

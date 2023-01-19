@@ -20,6 +20,7 @@ export class CitiesComponent {
 
   getCities(){
     this.cities = this.settingsService.getCities();
+    console.log(this.cities[1])
   }
   addCity() {
     this.addNewCity.open(AddNewCityComponent, {
@@ -27,5 +28,11 @@ export class CitiesComponent {
     })
   }
 
+  editCity(id:number){
+    this.addNewCity.open(AddNewCityComponent, {
+      width: "50%",
+      data:this.cities[id]
+    })
+  }
 
 }

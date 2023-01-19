@@ -225,21 +225,27 @@ export class SettingsServicesService {
   getCities() {
     return [
       {
-        name: 'بغداد',
+        id:1,
+        arabicName: 'بغداد',
+        englishName:'Baghdad',
         pic: '../../../../assets/img/baghdad.png',
         firstValueAtFirstRange: 5,
         secondValueAtFirstRange: 9,
         secondValueAtSecondRange: 15,
       },
       {
-        name: 'الموصل',
+        id:2,
+        arabicName: 'الموصل',
+        englishName:'AL-Mosoul',
         pic: '../../../../assets/img/basra.png',
         firstValueAtFirstRange: 3,
         secondValueAtFirstRange: 8,
         secondValueAtSecondRange: 16,
       },
       {
-        name: 'الأنبار',
+        id:3,
+        arabicName: 'الأنبار',
+        englishName: 'Al-Anbar',
         pic: '../../../../assets/img/baghdad.png',
         firstValueAtFirstRange: 2,
         secondValueAtFirstRange: 8,

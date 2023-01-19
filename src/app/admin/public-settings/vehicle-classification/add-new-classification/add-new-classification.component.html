@@ -2,37 +2,59 @@
   <h2 *ngIf="pageTypeEnum.add == activePageType">إضافة تصنيف</h2>
   <h2 *ngIf="pageTypeEnum.edit == activePageType">تعديل تصنيف</h2>
   <h2 *ngIf="pageTypeEnum.view == activePageType">عرض تصنيف</h2>
-  <div class="user-img">
-    <img src="../../../assets/img/user.png" alt="user image">
-  </div>
 </div>
 
 <div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular ">
   <form (ngSubmit)="onSubmit()" [formGroup]="generalFields">
+    <div class="image-container">
+      <div class="user-img">
+        <img src="../../../assets/img/user.png" alt="user image">
+        <div class="file-upload">
+          <label for="file-upload" class="file-upload__label">+</label>
+          <input id="file-upload" type="file" class="file-upload__input" formControlName="image"
+            (change)="onFileChange($event)" />
+        </div>
+      </div>
+    </div>
+
+
     <div class="w-100 d-flex flex-wrap justify-content-around">
-      <div class="form-item col-3 w-30">
+      <div class="form-item head-item col-3">
         <mat-form-field class="example-full-width">
-          <mat-label>اسم التصنيف</mat-label>
-          <input matInput formControlName="name">
-          <mat-error *ngIf="generalFields.controls.name.invalid && generalFields.controls.name.touched">{{getErrorRequiredMessage()}}</mat-error>
+          <mat-label>اسم التصنيف بالعربي</mat-label>
+          <input matInput formControlName="arabicName">
+          <mat-error
+            *ngIf="generalFields.controls.arabicName.invalid && generalFields.controls.arabicName.touched">{{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="form-item col-3 w-30">
+      <div class="form-item head-item col-3">
+        <mat-form-field class="example-full-width">
+          <mat-label>اسم التصنيف بالانجليزي</mat-label>
+          <input matInput formControlName="englishName">
+          <mat-error
+            *ngIf="generalFields.controls.englishName.invalid && generalFields.controls.englishName.touched">{{getErrorRequiredMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-item head-item col-3">
         <mat-form-field class="example-full-width">
           <mat-label>عدد المقاعد</mat-label>
           <input matInput formControlName="numOfSites">
-          <mat-error *ngIf="generalFields.controls.numOfSites.invalid && generalFields.controls.numOfSites.touched">{{getErrorRequiredMessage()}}</mat-error>
+          <mat-error
+            *ngIf="generalFields.controls.numOfSites.invalid && generalFields.controls.numOfSites.touched">{{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
 
-      <div class="form-item col-3 w-30">
+      <div class="form-item head-item col-3">
         <mat-form-field class="example-full-width">
           <mat-label>نسبة السائق بالمئة</mat-label>
           <input matInput formControlName="driverRatio">
-          <mat-error *ngIf="generalFields.controls.driverRatio.invalid && generalFields.controls.driverRatio.touched">{{getErrorRequiredMessage()}}</mat-error>
+          <mat-error
+            *ngIf="generalFields.controls.driverRatio.invalid && generalFields.controls.driverRatio.touched">{{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
+
     </div>
     <div class="d-flex flex-wrap justify-content-between mt-5 x-font-regular ">
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">

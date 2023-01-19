@@ -11,7 +11,8 @@ import { ConfirmComponent } from '../../confirm/confirm.component';
   styleUrls: ['./cancle-reasons.component.css']
 })
 export class CancleReasonsComponent {
-  cancleName: any;
+  arabicCancleName: any;
+  englishCancleName: any;
   reasons: any[] = [];
 
   constructor(private confirmDialog: MatDialog, private tripsService: TripsServicesService) {
@@ -19,7 +20,7 @@ export class CancleReasonsComponent {
   }
 
   getCancleReasons() {
-    this.reasons = this.tripsService.getAllCancleReason()
+    this.reasons = this.tripsService.getAllCancleReason();
   }
 
   delete(id: number) {
@@ -27,10 +28,13 @@ export class CancleReasonsComponent {
   }
 
   onSubmit() {
-    console.log(this.tripsService.addCancleReason(this.cancleName))
-    let reason = { id: this.reasons[this.reasons.length - 1].id + 1, name: this.tripsService.addCancleReason(this.cancleName) }
-    this.reasons.push(reason)
-    this.cancleName = undefined;
+    console.log(this.tripsService.addCancleReason(this.arabicCancleName))
+    let arabicReason = { id: this.reasons[this.reasons.length - 1].id + 1, name: this.tripsService.addCancleReason(this.arabicCancleName) }
+    this.reasons.push(arabicReason);
+    let englishReason = { id: this.reasons[this.reasons.length - 1].id + 1, name: this.tripsService.addCancleReason(this.englishCancleName) }
+    this.reasons.push(englishReason);
+    this.arabicCancleName = undefined;
+    this.englishCancleName = undefined;
   }
 
   confirmDelete(id: number) {

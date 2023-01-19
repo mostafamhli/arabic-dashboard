@@ -21,7 +21,9 @@ export class AddNewClassificationComponent {
   activePageType = pageType.add;
 
   generalFields = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    arabicName: new FormControl('', [Validators.required]),
+    englishName: new FormControl('', [Validators.required]),
+    image: new FormControl(File, [Validators.required]),
     numOfSites: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     driverRatio: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
@@ -47,6 +49,7 @@ export class AddNewClassificationComponent {
     nightEnd: new FormControl('12:00', [Validators.required])
   });
 
+ 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
     let id = this.activatedRoute.snapshot.params['id']
     if (id) {
@@ -92,7 +95,9 @@ export class AddNewClassificationComponent {
 
   setInfoForForm() {
     this.generalFields = new FormGroup({
-      name: new FormControl({ value: 'Wael', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      arabicName: new FormControl({ value: 'Wael', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      englishName: new FormControl({ value: 'Wael', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      image: new FormControl({value: File, disabled: pageType.view == this.activePageType }, [Validators.required]),
       numOfSites: new FormControl({ value: 4, disabled: pageType.view == this.activePageType }, [Validators.required]),
       driverRatio: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningLowestRent: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
@@ -117,5 +122,20 @@ export class AddNewClassificationComponent {
       nightBegin: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
       nightEnd: new FormControl({ value: '06:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
     })
+  }
+
+  image:any;
+
+  onFileChange(e: any) {
+    if (e.target.files) {
+      
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (event: any) => {
+        this.generalFields.controls.image.setValue(event.target.result);
+        console.log(this.generalFields.controls.image.value)
+        this.image = this.generalFields.controls.image.value;
+      }
+    }
   }
 }
