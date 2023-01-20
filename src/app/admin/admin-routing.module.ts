@@ -20,7 +20,6 @@ import { DashboardUsersComponent } from './public-settings/dashboard-users/dashb
 import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.component';
 import { DriverProfilePersonalInfoComponent } from './drivers/driver-profile-personal-info/driver-profile-personal-info.component';
 import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehicle-info/driver-profile-vehicle-info.component';
-import { TransfersComponent } from './drivers/transfers/transfers.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
 import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
@@ -31,6 +30,9 @@ import { SendMessageComponent } from './notification/notifications/send-message/
 import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
 import { AddServiceComponent } from './public-settings/add-service/add-service.component';
+import { UserTransfersComponent } from './wallet/user-transfers/user-transfers.component';
+import { JaytaxiTransfersComponent } from './wallet/jaytaxi-transfers/jaytaxi-transfers.component';
+import { TransfersComponent } from './wallet/transfers/transfers.component';
 
 
 const routes: Routes = [
@@ -60,7 +62,6 @@ const routes: Routes = [
         path: 'view-driver-profile/:id',
         component: ViewProfileComponent
       },
-      { path: 'transfers', component: TransfersComponent },
       { path: 'dashboard-users', component: DashboardUsersComponent },
       { path: 'vehicle-classification', component: VehicleClassificationComponent },
       { path: 'classification-display/:id', component: AddNewClassificationComponent },
@@ -75,7 +76,10 @@ const routes: Routes = [
       { path: 'reports', component: ReportsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'send-message', component: SendMessageComponent },
-      { path: 'client/:id', component: ViewClientDetailsComponent }
+      { path: 'client/:id', component: ViewClientDetailsComponent },
+      { path: 'transfers', component: TransfersComponent },
+      { path: 'user-transfers', component: UserTransfersComponent },
+      { path: 'jaytaxi-transfers', component: JaytaxiTransfersComponent }
     ]
   }
 ];

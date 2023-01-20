@@ -169,13 +169,39 @@
           <span>التقارير</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
-        routerLinkActive="active">
+      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.wallet}"
+        (click)="activeTab == activeTabsEnum.wallet ? activeTab = 0 : activeTab = activeTabsEnum.wallet">
         <div class="listItem">
-          <mat-icon>account_balance_wallet</mat-icon>
+          <mat-icon *ngIf="activeTab != activeTabsEnum.wallet">keyboard_arrow_left</mat-icon>
+          <mat-icon *ngIf="activeTab == activeTabsEnum.wallet">keyboard_arrow_down</mat-icon>
           <span>المحفظة</span>
         </div>
       </mat-list-item>
+      <mat-list-item role="listitem" *ngIf="activeTab == activeTabsEnum.wallet"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.wallet}" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/jaytaxi-transfers">
+        <div class="listItem">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span>جاي تكسي</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" *ngIf="activeTab == activeTabsEnum.wallet"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.wallet}" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/transfers">
+        <div class="listItem">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span>السائق</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" *ngIf="activeTab == activeTabsEnum.wallet"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.wallet}" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/user-transfers">
+        <div class="listItem">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span>المستخدم</span>
+        </div>
+      </mat-list-item>
+
     </mat-list>
     <!-- <div class="car-container">
             <img src="../assets/img/car.png" alt="taxi jay logo">

@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { AdminRoutingModule } from './admin-routing.module';
-
 import { MaterialModule } from '../material/material.module';
-
 import { MainDashboardComponent } from './main-dashboard/main-dashboard.component';
 import { CancleReasonsComponent } from './trips-managment/cancle-reasons/cancle-reasons.component';
 import { ClientsComponent } from './clients/clients.component';
@@ -13,13 +10,12 @@ import { TripsComponent } from './trips-managment/trips/trips.component';
 import { TripDetailsComponent } from './trips-managment/trip-details/trip-details.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardUsersComponent } from './public-settings/dashboard-users/dashboard-users.component';
 import { VehicleClassificationComponent } from './public-settings/vehicle-classification/vehicle-classification.component';
 import { ClassificationDisplayComponent } from './public-settings/classification-display/classification-display.component';
 import { TypesComponent } from './public-settings/types/types.component';
 import { SettingsComponent } from './public-settings/settings/settings.component';
-
 import { AdminComponent } from './admin.component';
 import { DriversRequestComponent } from './drivers/drivers-request/drivers-request.component';
 import { ViewDriverRequestDetailsComponent } from './drivers/view-driver-request-details/view-driver-request-details.component';
@@ -28,17 +24,14 @@ import { DriverDetailsComponent } from './drivers/driver-details/driver-details.
 import { DriverProfileComponent } from './drivers/driver-profile/driver-profile.component';
 import { DriverProfilePersonalInfoComponent } from './drivers/driver-profile-personal-info/driver-profile-personal-info.component';
 import { DriverProfileVehicleInfoComponent } from './drivers/driver-profile-vehicle-info/driver-profile-vehicle-info.component';
-import { TransfersComponent } from './drivers/transfers/transfers.component';
-import { AddTransferComponent } from './drivers/add-transfer/add-transfer.component';
+import { AddTransferComponent } from './wallet/add-transfer/add-transfer.component';
 import { ViewProfileComponent } from './drivers/view-profile/view-profile.component';
-
 import { AddDiscountCodeComponent } from './trips-managment/discount-codes/add-discount-code/add-discount-code.component';
-
 import { AddNewClassificationComponent } from './public-settings/vehicle-classification/add-new-classification/add-new-classification.component';
 import { AddNewTypeComponent } from './public-settings/types/add-new-type/add-new-type.component';
 import { CitiesComponent } from './public-settings/cities/cities.component';
 import { AddNewUserComponent } from './public-settings/add-new-user/add-new-user.component';
-import {NgxMatTimepickerModule} from 'ngx-mat-timepicker';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
 import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
 import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
@@ -50,7 +43,9 @@ import { SendMessageComponent } from './notification/notifications/send-message/
 import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 import { AddServiceComponent } from './public-settings/add-service/add-service.component';
 import { AddNewServiceComponent } from './public-settings/add-new-service/add-new-service.component';
-
+import { UserTransfersComponent } from './wallet/user-transfers/user-transfers.component';
+import { JaytaxiTransfersComponent } from './wallet/jaytaxi-transfers/jaytaxi-transfers.component';
+import { TransfersComponent } from './wallet/transfers/transfers.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +86,9 @@ import { AddNewServiceComponent } from './public-settings/add-new-service/add-ne
     SendMessageComponent,
     ViewClientDetailsComponent,
     AddServiceComponent,
-    AddNewServiceComponent
+    AddNewServiceComponent,
+    UserTransfersComponent,
+    JaytaxiTransfersComponent
   ],
 
   imports: [
@@ -104,6 +101,5 @@ import { AddNewServiceComponent } from './public-settings/add-new-service/add-ne
     MatNativeDateModule,
     NgxMatTimepickerModule.setLocale('ar-AE')
   ],
- 
 })
 export class AdminModule { }

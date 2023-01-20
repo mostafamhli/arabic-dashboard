@@ -5,7 +5,8 @@ enum ActiveTabs  {
   drivers = 1,
   trips = 2,
   setting = 3,
-  notifications = 4
+  notifications = 4,
+  wallet = 5
 }
 
 @Component({
@@ -26,8 +27,7 @@ export class AdminComponent {
       url.includes('driver-request') ||
       url.includes('driver-details') ||
       url.includes('driver-profile') ||
-      url.includes('drivers') ||
-      url.includes('transfers')) {
+      url.includes('drivers')) {
       this.activeTab = ActiveTabs.drivers
     } else if(
       url.includes('trips') ||
@@ -49,6 +49,8 @@ export class AdminComponent {
       url.includes('notifications')
     ){
       this.activeTab = ActiveTabs.notifications
+    } else if (url.includes('transfers')){
+      this.activeTab = ActiveTabs.wallet 
     }
   }
 
