@@ -119,15 +119,18 @@ export class SettingsServicesService {
     return [
       {
         id: 1,
-        name: 'جاي تكسي'
+        name: 'جاي تكسي',
+        image:'../../../../assets/img/vehicles/car.png'
       },
       {
         id: 2,
-        name: 'آليات'
+        name: 'آليات',
+        image:'../../../../assets/img/vehicles/wnch.png'
       },
       {
         id: 3,
-        name: 'توك توك'
+        name: 'توك توك',
+        image:'../../../../assets/img/vehicles/toktok.png'
       }]
   }
 

@@ -48,6 +48,8 @@ import { AcceptDriverRequestComponent } from './drivers/accept-driver-request/ac
 import { ViewRequestAssetsComponent } from './drivers/view-request-assets/view-request-assets.component';
 import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
 import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
+import { AddServiceComponent } from './public-settings/add-service/add-service.component';
+import { AddNewServiceComponent } from './public-settings/add-new-service/add-new-service.component';
 
 
 @NgModule({
@@ -87,7 +89,9 @@ import { ViewClientDetailsComponent } from './clients/view-client-details/view-c
     AcceptDriverRequestComponent,
     ViewRequestAssetsComponent,
     SendMessageComponent,
-    ViewClientDetailsComponent
+    ViewClientDetailsComponent,
+    AddServiceComponent,
+    AddNewServiceComponent
   ],
 
   imports: [

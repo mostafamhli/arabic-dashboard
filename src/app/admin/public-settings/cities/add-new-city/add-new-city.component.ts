@@ -13,7 +13,7 @@ export class AddNewCityComponent {
   addNewCityForm = new FormGroup({
     cityNameInArabic: new FormControl('', [Validators.required]),
     cityNameInEnglish: new FormControl('', [Validators.required]),
-    cityPhoto: new FormControl('', [Validators.required]),
+    cityPhoto: new FormControl(File, [Validators.required]),
     firstValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     secondValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     firstValueInRangeTwo: new FormControl({ value: '', disabled: true }),
