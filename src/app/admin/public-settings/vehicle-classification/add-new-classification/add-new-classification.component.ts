@@ -26,6 +26,8 @@ export class AddNewClassificationComponent {
     image: new FormControl(File, [Validators.required]),
     numOfSites: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     driverRatio: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+    openTripTime: new FormControl({ value: 0, disabled: pageType.view == this.activePageType }, [Validators.required]),
+    tripCost: new FormControl({ value: 0, disabled: pageType.view == this.activePageType }, [Validators.required]),
     morningLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningSecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
@@ -49,7 +51,9 @@ export class AddNewClassificationComponent {
     nightEnd: new FormControl('12:00', [Validators.required])
   });
 
- 
+  openTripCost: any = {}
+  tripCost: number = 0
+  openTripTime: number = 0
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
     let id = this.activatedRoute.snapshot.params['id']
     if (id) {
@@ -61,6 +65,10 @@ export class AddNewClassificationComponent {
     } else {
       this.activePageType = pageType.add
     }
+
+    this.openTripCost['morning'] = [{ openTripTime: 1, tripCost: 3 }, { openTripTime: 2, tripCost: 5 }]
+    this.openTripCost['day'] = [{ openTripTime: 1, tripCost: 4 }, { openTripTime: 2, tripCost: 5 }]
+    this.openTripCost['night'] = [{ openTripTime: 1, tripCost: 5 }, { openTripTime: 2, tripCost: 7 }]
   }
 
   getErrorRequiredMessage() {
@@ -88,6 +96,16 @@ export class AddNewClassificationComponent {
     return 'يجب أن تدخل قيمة';
   }
 
+  addToOpenTrip(key: string) {
+    if (this.openTripTime > 0 && this.tripCost > 0) {
+      if (this.openTripCost && this.openTripCost[key])
+        this.openTripCost[key].push({ openTripTime: this.openTripTime, tripCost: this.tripCost });
+      else
+        this.openTripCost[key] = { openTripTime: this.openTripTime, tripCost: this.tripCost }
+      this.tripCost = 0
+      this.openTripTime = 0
+    }
+  }
 
   onSubmit() {
     console.log(this.settingsService.addNewClassification(this.generalFields.value));
@@ -97,9 +115,11 @@ export class AddNewClassificationComponent {
     this.generalFields = new FormGroup({
       arabicName: new FormControl({ value: 'Wael', disabled: pageType.view == this.activePageType }, [Validators.required]),
       englishName: new FormControl({ value: 'Wael', disabled: pageType.view == this.activePageType }, [Validators.required]),
-      image: new FormControl({value: File, disabled: pageType.view == this.activePageType }, [Validators.required]),
+      image: new FormControl({ value: File, disabled: pageType.view == this.activePageType }, [Validators.required]),
       numOfSites: new FormControl({ value: 4, disabled: pageType.view == this.activePageType }, [Validators.required]),
       driverRatio: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
+      openTripTime: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
+      tripCost: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningLowestRent: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningFirstExtraCost: new FormControl({ value: 2, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningSecondExtraCost: new FormControl({ value: 1, disabled: pageType.view == this.activePageType }, [Validators.required]),
@@ -124,11 +144,11 @@ export class AddNewClassificationComponent {
     })
   }
 
-  image:any;
+  image: any;
 
   onFileChange(e: any) {
     if (e.target.files) {
-      
+
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
