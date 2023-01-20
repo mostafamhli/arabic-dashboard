@@ -30,6 +30,7 @@ import { NotificationsComponent } from './notification/notifications/notificatio
 import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
 import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
+import { AddServiceComponent } from './public-settings/add-service/add-service.component';
 
 
 const routes: Routes = [
@@ -68,6 +69,7 @@ const routes: Routes = [
       { path: 'settings', component: SettingsComponent },
       { path: 'cities', component: CitiesComponent },
       { path: 'city-edit/:id', component: AddNewCityComponent },
+      { path: 'add-service', component: AddServiceComponent },
       { path: 'add-new-user', component: AddNewUserComponent },
       { path: 'add-new-classification', component: AddNewClassificationComponent },
       { path: 'reports', component: ReportsComponent },

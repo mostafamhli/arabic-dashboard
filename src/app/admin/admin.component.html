@@ -108,6 +108,14 @@
       </mat-list-item>
       <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
         [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+        routerLink="/add-service">
+        <div class="listItem">
+          <mat-icon>apps</mat-icon>
+          <span>إضافة خدمة</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
         routerLink="/types">
         <div class="listItem">
           <mat-icon>person_outline</mat-icon>
