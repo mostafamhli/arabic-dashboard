@@ -28,11 +28,8 @@ export class CancleReasonsComponent {
   }
 
   onSubmit() {
-    console.log(this.tripsService.addCancleReason(this.arabicCancleName))
-    let arabicReason = { id: this.reasons[this.reasons.length - 1].id + 1, name: this.tripsService.addCancleReason(this.arabicCancleName) }
-    this.reasons.push(arabicReason);
-    let englishReason = { id: this.reasons[this.reasons.length - 1].id + 1, name: this.tripsService.addCancleReason(this.englishCancleName) }
-    this.reasons.push(englishReason);
+    let reason = { id: this.reasons[this.reasons.length - 1].id + 1, nameAr: this.tripsService.addCancleReason(this.arabicCancleName), nameEn: this.tripsService.addCancleReason(this.englishCancleName)  }
+    this.reasons.push(reason);
     this.arabicCancleName = undefined;
     this.englishCancleName = undefined;
   }

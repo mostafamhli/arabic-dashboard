@@ -6,11 +6,13 @@
         <table class="table">
           <thead class="x-font-bold">
             <th>السبب</th>
+            <th>Reason</th>
             <th></th>
           </thead>
           <tbody>
             <tr *ngFor="let item of reasons">
-              <td>{{item.name}}</td>
+              <td>{{item.nameAr}}</td>
+              <td>{{item.nameEn}}</td>
               <td>
                 <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
                   <mat-icon>delete</mat-icon>
@@ -24,7 +26,7 @@
     </div>
 
     <div class="w-100 mt-5 d-flex flex-column align-items-center">
-      <div class="d-flex flex-row align-items-center gap-5">
+      <div class="w-100 d-flex flex-row align-items-center gap-5">
         <div class="w-50 mt-5 d-flex flex-column align-items-center">
           <label class="x-font-bold mb-2">إضافة سبب باللغة العربية</label>
           <div class="input_with_button d-flex align-items-center">

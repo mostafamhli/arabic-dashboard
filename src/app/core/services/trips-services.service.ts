@@ -134,11 +134,13 @@ export class TripsServicesService {
     return [
       {
         id: 1,
-        name: "تأخر السائق"
+        nameAr: "تأخر السائق",
+        nameEn: "The driver is late"
       },
       {
         id: 2,
-        name: "الخدمة سيئة"
+        nameAr: "الخدمة سيئة",
+        nameEn: "Bad service"
       }
     ]
   }
