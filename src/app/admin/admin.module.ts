@@ -46,6 +46,9 @@ import { AddNewServiceComponent } from './public-settings/add-new-service/add-ne
 import { UserTransfersComponent } from './wallet/user-transfers/user-transfers.component';
 import { JaytaxiTransfersComponent } from './wallet/jaytaxi-transfers/jaytaxi-transfers.component';
 import { TransfersComponent } from './wallet/transfers/transfers.component';
+import { MapDashboardComponent } from './map-dashboard/map-dashboard.component';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmOverlays } from "agm-overlays"
 
 @NgModule({
   declarations: [
@@ -88,7 +91,8 @@ import { TransfersComponent } from './wallet/transfers/transfers.component';
     AddServiceComponent,
     AddNewServiceComponent,
     UserTransfersComponent,
-    JaytaxiTransfersComponent
+    JaytaxiTransfersComponent,
+    MapDashboardComponent
   ],
 
   imports: [
@@ -99,6 +103,12 @@ import { TransfersComponent } from './wallet/transfers/transfers.component';
     FormsModule,
     ReactiveFormsModule,
     MatNativeDateModule,
+    AgmOverlays,
+    AgmCoreModule.forRoot({
+      apiKey: "",
+      libraries: ['places'],
+      language: 'en'
+    }),
     NgxMatTimepickerModule.setLocale('ar-AE')
   ],
 })

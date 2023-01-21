@@ -58,7 +58,7 @@
     </div>
     <div class="d-flex flex-wrap justify-content-between mt-5 x-font-regular ">
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
-        <h4 class="rent-header text-center x-font-bold mb-3">الأجور خلال الصباح</h4>
+        <h4 class="rent-header text-center x-font-bold mb-3 mt-5">الأجور خلال الصباح</h4>
         <div class="row">
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
@@ -134,6 +134,7 @@
               </mat-error>
             </mat-form-field>
           </div>
+
           <h6 class="x-font-regular col-12">
             الرحلة المفتوحة
           </h6>
@@ -170,11 +171,12 @@
               </table>
             </div>
           </div>
+
         </div>
       </div>
 
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
-        <h4 class="rent-header text-center x-font-bold mb-3">الأجور خلال النهار</h4>
+        <h4 class="rent-header text-center x-font-bold mb-3 mt-5">الأجور خلال النهار</h4>
         <div class="row">
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
@@ -247,12 +249,50 @@
               </mat-error>
             </mat-form-field>
           </div>
+          
+          <h6 class="x-font-regular col-12">
+            الرحلة المفتوحة
+          </h6>
+          <div class="row d-flex align-items-center">
+            <div class="form-item col-5">
+              <mat-form-field class="example-full-width">
+                <mat-label>مدة الرحلة بالساعات</mat-label>
+                <input matInput name="openTripTime" formControlName="openTripTime" [(ngModel)]="openTripTime">
+              </mat-form-field>
+            </div>
+            <div class="form-item col-5">
+              <mat-form-field class="example-full-width">
+                <mat-label>كلفة الرحلة</mat-label>
+                <input matInput name="tripCost" formControlName="tripCost" [(ngModel)]="tripCost">
+              </mat-form-field>
+            </div>
+            <button type="button" class="btn t_btn_blue col-2" (click)="addToOpenTrip('day')">
+              إضافة
+            </button>
+          </div>
+          <div class="jay_taxi_table">
+            <div class="table_div d-flex flex-column align-items-center">
+              <table class="table">
+                <thead class="x-font-bold">
+                  <th>المدة بالساعات</th>
+                  <th>التكلفة</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of openTripCost.day">
+                    <td>{{item.openTripTime}}</td>
+                    <td>{{item.tripCost}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
         </div>
       </div>
 
 
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
-        <h4 class="rent-header text-center x-font-bold mb-3">الأجور خلال الليل</h4>
+        <h4 class="rent-header text-center x-font-bold mb-3 mt-5">الأجور خلال الليل</h4>
         <div class="row">
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
@@ -326,10 +366,48 @@
               </mat-error>
             </mat-form-field>
           </div>
+          
+          <h6 class="x-font-regular col-12">
+            الرحلة المفتوحة
+          </h6>
+          <div class="row d-flex align-items-center">
+            <div class="form-item col-5">
+              <mat-form-field class="example-full-width">
+                <mat-label>مدة الرحلة بالساعات</mat-label>
+                <input matInput name="openTripTime" formControlName="openTripTime" [(ngModel)]="openTripTime">
+              </mat-form-field>
+            </div>
+            <div class="form-item col-5">
+              <mat-form-field class="example-full-width">
+                <mat-label>كلفة الرحلة</mat-label>
+                <input matInput name="tripCost" formControlName="tripCost" [(ngModel)]="tripCost">
+              </mat-form-field>
+            </div>
+            <button type="button" class="btn t_btn_blue col-2" (click)="addToOpenTrip('night')">
+              إضافة
+            </button>
+          </div>
+          <div class="jay_taxi_table">
+            <div class="table_div d-flex flex-column align-items-center">
+              <table class="table">
+                <thead class="x-font-bold">
+                  <th>المدة بالساعات</th>
+                  <th>التكلفة</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of openTripCost.night">
+                    <td>{{item.openTripTime}}</td>
+                    <td>{{item.tripCost}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
         </div>
       </div>
 
-      <div class="x-font-bold row w-100 d-flex justify-content-center">
+      <div class="x-font-bold row w-100 d-flex justify-content-center mt-5">
         <div class="col-6 d-flex justify-content-center" *ngIf="pageTypeEnum.view != activePageType">
           <button type="submit" *ngIf="pageTypeEnum.add == activePageType"
             class="btn t_btn_blue_outline w-50">أضف</button>
