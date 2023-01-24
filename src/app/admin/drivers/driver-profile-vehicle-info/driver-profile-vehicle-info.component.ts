@@ -8,9 +8,18 @@ import { FormGroup } from '@angular/forms';
 })
 export class DriverProfileVehicleInfoComponent {
   vehicleInfo:FormGroup;
+  imageFile:any;
   constructor() {
     this.vehicleInfo = new FormGroup({
       
     })
+  }
+  onFileInput(files: any): void {
+    var reader = new FileReader();
+    this.imageFile = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imageFile = reader.result;
+    };
   }
 }

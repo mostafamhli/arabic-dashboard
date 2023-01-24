@@ -1,7 +1,7 @@
-<div style="width: 20rem;height: 20rem;">
+<div class="map-dashboard-container">
   <agm-map class="map-top" [latitude]="location.lat" [zoom]="location.zoom" [longitude]="location.lng"
     [mapTypeControl]="true" [fitBounds]="true" [fullscreenControl]="true">
-     <agm-overlay [latitude]="location.lat" [longitude]="location.lng">
+    <agm-overlay [latitude]="location.lat" [longitude]="location.lng">
       <div class="stop-marker">
         <svg width="40" height="50" viewBox="0 0 50 58" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -27,6 +27,28 @@
       <agm-info-window #infowindow>
 
       </agm-info-window>
-    </agm-overlay> 
+    </agm-overlay>
   </agm-map>
+  <div class="w-100 mt-3 x-font-bold d-flex align-items-center">
+    <div class="city-div  ms-auto me-auto d-flex align-items-center">
+      <input name="city" type="radio" id="baghdad">
+      <label class="me-3" for="baghdad">بغداد</label>
+    </div>
+    <div class="city-div  ms-auto me-auto d-flex align-items-center">
+      <input name="city" type="radio" id="anbar">
+      <label class="me-3" for="anbar">الأنبار</label>
+    </div>
+    <div class="city-div  ms-auto me-auto d-flex align-items-center">
+      <input name="city" type="radio" id="salah-aldeen">
+      <label class="me-3" for="salah-aldeen">صلاح الدين</label>
+    </div>
+    <div class="city-div  ms-auto me-auto d-flex align-items-center">
+      <input name="city" type="radio" id="nenawa">
+      <label class="me-3" for="nenawa">نينوى</label>
+    </div>
+    <div class="city-div  ms-auto me-auto d-flex align-items-center">
+      <input name="city" type="radio" id="babel">
+      <label class="me-3" for="babel">بابل</label>
+    </div>
+  </div>
 </div>

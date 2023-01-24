@@ -4,22 +4,69 @@
 @import "./fonts.scss";
 @import "./mixin.scss";
 
-.bg_grey_light{
-    background-color: $grey_light;
+.bg_grey_light {
+  background-color: $grey_light;
 }
 
 .grey_light {
-    color: $grey_light;
+  color: $grey_light;
 }
 
-.gold{
-    color: $gold;
+.gold {
+  color: $gold;
 }
 
 .bg_grey_active {
-    background-color: $grey_active;
+  background-color: $grey_active;
 }
 
 .red {
-    color: $red;
+  color: $red;
+}
+
+.img_div_for_edit {
+  .image {
+    display: flex;
+    align-items: center;
+
+    h1 {
+      color: $blue;
+      margin: 0;
+    }
+
+    mat-icon,
+    img {
+      background-color: $blue;
+      color: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 4rem;
+      font-size: font-size(48);
+    }
+
+    .edit-div {
+      background-color: $blue;
+      color: $white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 12.5px;
+      position: relative;
+      margin-inline-start: -1.5rem;
+      margin-top: 5rem;
+
+      .edit-icon {
+        font-size: 1em;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+      }
+    }
+
+  }
 }

@@ -105,7 +105,7 @@ import { AgmOverlays } from "agm-overlays"
     MatNativeDateModule,
     AgmOverlays,
     AgmCoreModule.forRoot({
-      apiKey: "",
+      apiKey: "AIzaSyDbK718aZLiKlwzGd0IPy_qyWTWF1fY9lI",
       libraries: ['places'],
       language: 'en'
     }),

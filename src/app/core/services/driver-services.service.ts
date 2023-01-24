@@ -16,36 +16,42 @@ export class DriverServicesService {
         id: 1,
         name: "Wael",
         mobile: "963949394418",
+        status : "init",
         accountCreationDate: "12-9-2022"
       },
       {
         id: 2,
         name: "Wael",
         mobile: "963949394418",
+        status : "init",
         accountCreationDate: "12-9-2022"
       },
       {
         id: 3,
         name: "Wael",
         mobile: "963949394418",
+        status : "init",
         accountCreationDate: "12-9-2022"
       },
       {
         id: 4,
         name: "Wael",
         mobile: "963949394418",
+        status : "init",
         accountCreationDate: "12-9-2022"
       },
       {
         id: 5,
         name: "Wael",
         mobile: "963949394418",
+        status : "init",
         accountCreationDate: "12-9-2022"
       },
       {
         id: 6,
         name: "Mostafa",
         mobile: "963949394418",
+        status : "init",
         accountCreationDate: "12-9-2022"
       },
     ]

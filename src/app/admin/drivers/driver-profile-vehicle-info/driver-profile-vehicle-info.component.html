@@ -1,11 +1,16 @@
 <div class="driver_profile_vehicle_info x-font-regular">
   <form [formGroup]="vehicleInfo">
     <div class="first_sec row w-100">
-      <div
+        <div
         class="col-lg-2 col-md-2 col-sm-12 col-12 mb-lg-0 mb-md-0 mb-3 d-flex flex-column align-items-center justify-content-center">
-        <div class="img_div">
+        <div class="img_div_for_edit">
           <div class="image">
-            <mat-icon>local_taxi</mat-icon>
+            <img *ngIf="imageFile" [src]="imageFile">
+            <mat-icon *ngIf="!imageFile">local_taxi</mat-icon>
+            <div class="edit-div" (click)="fileInput.click()">
+                <mat-icon class="edit-icon">edit</mat-icon>
+            </div>
+            <input #fileInput type="file" (change)="onFileInput(fileInput.files)" accept="image/*" style="display:none;" />
           </div>
         </div>
       </div>

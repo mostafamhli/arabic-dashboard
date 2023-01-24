@@ -38,17 +38,20 @@ export class DriverRequest {
     name: string
     accountCreationDate: any
     mobile: string
+    status:string
     constructor(d?: DriverRequest) {
         if (!d) {
             this.name = ""
             this.accountCreationDate = undefined
             this.mobile = ""
             this.id = 0
+            this.status = "init"
         } else {
             this.id = d.id
             this.name = d.name
             this.mobile = d.mobile
             this.accountCreationDate = d.accountCreationDate
+            this.status = d.status
         }
     }
 }

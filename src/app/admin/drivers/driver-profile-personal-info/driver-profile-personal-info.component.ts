@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -7,10 +7,21 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./driver-profile-personal-info.component.scss']
 })
 export class DriverProfilePersonalInfoComponent {
-  personalInfo:FormGroup;
+  personalInfo: FormGroup;
+  imageFile: any
+  @ViewChild('fileInput') fileInput: any
+
   constructor() {
     this.personalInfo = new FormGroup({
-      
+
     })
+  }
+  onFileInput(files: any): void {
+    var reader = new FileReader();
+    this.imageFile = files;
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imageFile = reader.result;
+    };
   }
 }

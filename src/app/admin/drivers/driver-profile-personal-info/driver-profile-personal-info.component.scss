@@ -8,29 +8,6 @@
         align-items: center;
         flex-direction: column;
     }
-  .img_div {
-    .image {
-      display: flex;
-      align-items: center;
-
-      h1 {
-        color: $blue;
-        margin: 0;
-      }
-
-      mat-icon {
-        background-color: $blue;
-        color: $white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 4rem;
-        height: 4rem;
-        border-radius: 2rem;
-        font-size: font-size(48);
-      }
-    }
-  }
   .save_btn{
       margin-top: 2rem;
   }
