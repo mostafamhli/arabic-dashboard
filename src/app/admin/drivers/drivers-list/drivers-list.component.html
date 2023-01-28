@@ -29,7 +29,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of drivers">
-            <td>{{item.name}}</td>
+            <td>
+              <div class="user-name d-flex align-items-center">
+                <img src="assets/img/user.png">
+                <div class="me-2">{{item.name}}</div>
+              </div>
+            </td>
             <td>{{item.mobile}}</td>
             <td>{{item.accountCreationDate}}</td>
             <td>{{item.stock}}</td>

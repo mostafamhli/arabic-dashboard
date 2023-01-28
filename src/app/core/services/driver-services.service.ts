@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AccountStatus, TransferType } from '../enums/genric.enums';
 import { Driver } from '../models/drivers.mode';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +10,17 @@ import { Driver } from '../models/drivers.mode';
 export class DriverServicesService {
   TransferTypeEnum = TransferType;
   accountStatusEnum = AccountStatus;
-  constructor() { }
+  captainRequestsUrl:string
+  baseUrl:string
+  constructor(private httpClient:HttpClient) {
+    this.baseUrl = environment.baseURL
+    this.captainRequestsUrl = this.baseUrl + '/api/app/manage-captains/captain-requests'
+  }
 
   getDriversRequest() {
-    return [
+    const response = this.httpClient.get(this.captainRequestsUrl).pipe();
+    return response;
+/*    return [
       {
         id: 1,
         name: "Wael",
@@ -55,12 +64,13 @@ export class DriverServicesService {
         accountCreationDate: "12-9-2022"
       },
     ]
+    */
   }
 
   searchInDriverRequestTable(searchWord: string) {
-    return this.getDriversRequest().filter(item => {
+    /*return this.getDriversRequest().filter(item => {
       return item.name.includes(searchWord);
-    })
+    })*/
   }
 
   getDriverRequestDetails(id: number) {

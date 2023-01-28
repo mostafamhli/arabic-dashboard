@@ -5,16 +5,9 @@
       <div class="row w-100 p-3">
         <div class="col-6 form-item">
           <mat-form-field class="example-full-width">
-            <mat-label>اسم الكوبون باللغة العربية</mat-label>
-            <input matInput name="discountNameInArabic" formControlName="discountNameInArabic">
-            <mat-error *ngIf="addDiscountForm.controls.discountNameInArabic.invalid && addDiscountForm.controls.discountNameInArabic.touched">{{getErrorRequiredMessage()}}</mat-error>
-          </mat-form-field>
-        </div>
-        <div class="col-6 form-item">
-          <mat-form-field class="example-full-width">
-            <mat-label>اسم الكوبون باللغة الإنجليزية</mat-label>
-            <input matInput name="discountNameInEnglish" formControlName="discountNameInEnglish">
-            <mat-error *ngIf="addDiscountForm.controls.discountNameInEnglish.invalid && addDiscountForm.controls.discountNameInEnglish.touched">{{getErrorRequiredMessage()}}</mat-error>
+            <mat-label>اسم الكوبون</mat-label>
+            <input matInput name="discountName" formControlName="discountName">
+            <mat-error *ngIf="addDiscountForm.controls.discountName.invalid && addDiscountForm.controls.discountName.touched">{{getErrorRequiredMessage()}}</mat-error>
           </mat-form-field>
         </div>
         <div class="col-6 form-item">

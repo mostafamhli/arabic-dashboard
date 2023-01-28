@@ -13,7 +13,8 @@
           <th>اسم الكوبون </th>
           <th>كود الحسم </th>
           <th>قيمة الحسم</th>
-          <th>عدد مرات الاستخدام</th>
+          <th width="15%">عدد مرات استخدام الكوبون</th>
+          <th width="15%">العدد الأعظمي لإستخدام الكوبون</th>
           <th>تاريخ إنتهاء الصلاحية</th>
           <th>تفعيل الكود</th>
           <th></th>
@@ -24,6 +25,7 @@
             <td>{{item.discountCode}}</td>
             <td>{{item.discountValue}}</td>
             <td>{{item.usingTimes}}</td>
+            <td>{{item.maxUsing}}</td>
             <td>{{item.outDate}}</td>
             <td>
               <container-element [ngSwitch]="item.discountCodeStatus">
@@ -33,9 +35,9 @@
               </container-element>
             </td>
             <td>
-              <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
-                <mat-icon>delete</mat-icon>
-                <div>حذف</div>
+              <div class="d-flex align-items-center w-fit-content">
+                <mat-icon class="red cursor" (click)="confirmDelete(item.id)">delete</mat-icon>
+                <mat-icon class="cursor" (click)="edit(item)">edit</mat-icon>
               </div>
             </td>
           </tr>

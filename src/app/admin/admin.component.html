@@ -41,6 +41,14 @@
           <span>السائقين</span>
         </div>
       </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.drivers"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}" role="listitem" routerLinkActive="active"
+        routerLink="/move-drivers">
+        <div class="listItem">
+          <mat-icon>supervisor_account</mat-icon>
+          <span>نقل سائق</span>
+        </div>
+      </mat-list-item>
 
       <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}"
         (click)="activeTab == activeTabsEnum.trips ? activeTab = 0 : activeTab = activeTabsEnum.trips">

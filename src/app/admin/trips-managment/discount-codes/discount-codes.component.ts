@@ -38,6 +38,12 @@ export class DiscountCodesComponent {
     })
   }
 
+  edit(item: any) {
+    this.addDiscountCodes.open(AddDiscountCodeComponent, {
+      width: "50%",
+      data: item
+    })
+  }
 
   deleteTableItem(elementId: number) {
     this.discountCodes = this.tripsServices.deleteDiscountCode(elementId);

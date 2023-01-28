@@ -23,31 +23,34 @@
       <table class="table">
         <thead class="x-font-bold">
           <th width="35%"></th>
+          <th width="35%">
+            اليوم
+          </th>
           <th width="35%" *ngIf="range && range.value && range.value.start && range.value.end">
             <div class="d-flex flex-column align-items-center">
-                من {{range.value.start | date:'MMM d, y'}}
-                إلى   {{range.value.end | date:'MMM d, y'}} 
-          </div>
-          </th>
-          <th width="35%">
-           الإجمالي
+              من {{range.value.start | date:'MMM d, y'}}
+              إلى {{range.value.end | date:'MMM d, y'}}
+            </div>
           </th>
         </thead>
         <tbody>
           <tr>
-            <td>الربح الإجمالي</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.totalProfit}}</td>
+            <td>إجمالي الرحلات</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.totalProfit}}
+            </td>
             <td>{{total.totalProfit}}</td>
           </tr>
           <tr>
             <td>الربح الصافي للشركة</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.netProfitCompany}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">
+              {{values.netProfitCompany}}</td>
             <td *ngIf="total">{{total.netProfitCompany}}</td>
           </tr>
 
           <tr>
             <td>الربح الصافي للسائقين</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.netProfitDriver}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">
+              {{values.netProfitDriver}}</td>
             <td *ngIf="total">{{total.netProfitDriver}}</td>
           </tr>
         </tbody>

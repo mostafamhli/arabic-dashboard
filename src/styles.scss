@@ -49,7 +49,9 @@ a {
   color: var(--main-color);
 }
 
-mat-form-field,mat-option,mat-toolbar {
+mat-form-field,
+mat-option,
+mat-toolbar {
 
   div,
   input,
@@ -57,6 +59,17 @@ mat-form-field,mat-option,mat-toolbar {
   label,
   p {
     font-family: $cairo_regular !important;
+  }
+}
+
+mat-optgroup {
+  .mdc-list-item__primary-text {
+    font-family: $cairo_bold !important;
+  }
+  mat-option {
+    .mdc-list-item__primary-text {
+      font-family: $cairo_regular !important;
+    }
   }
 }
 
@@ -76,6 +89,6 @@ mat-form-field {
   }
 }
 
-.w-fit-content{
+.w-fit-content {
   width: fit-content;
 }

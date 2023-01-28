@@ -1,0 +1,41 @@
+<div class="move-driver-to-city-container">
+  <form [formGroup]="moveDriver" (onsubmit)="submit()">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>السائق</mat-label>
+          <mat-select name="driverName" formControlName="driverName">
+            <mat-option value="one">السائق الأول</mat-option>
+            <mat-option value="two">السائق الثاني</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>المحافظة الجديدة</mat-label>
+          <mat-select name="cityName" formControlName="cityName">
+            <mat-option value="one">بغداد</mat-option>
+            <mat-option value="two">البصرة </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill" class="w-100">
+          <mat-label>تصنيف المركبة الجديد</mat-label>
+          <mat-select name="newVehicleClassification" formControlName="newVehicleClassification">
+            <mat-optgroup *ngFor="let item of calssifications" [label]="item.label">
+              <mat-option *ngFor="let item2 of item.vehicles" [value]="{item,item2}">{{item2.name}}</mat-option>
+            </mat-optgroup>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row d-flex align-items-center justify-content-center">
+      <div class="col-4">
+        <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-100" (click)="submit()">
+          حفظ
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -17,11 +17,11 @@ export class DriversRequestComponent {
   }
 
   getDrivers() {
-    this.drivers = this.driverService.getDriversRequest(); 
+    this.driverService.getDriversRequest().subscribe((res:any)=>{this.drivers = res},(err:any)=>{}); 
   }
 
   searchInDriverRequestTable(searchWord:string){
-    this.drivers = this.driverService.searchInDriverRequestTable(searchWord);
+    //this.drivers = this.driverService.searchInDriverRequestTable(searchWord);
   }
 
   loadMore(){

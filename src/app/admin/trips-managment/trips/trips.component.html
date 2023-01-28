@@ -56,7 +56,7 @@
     </div>
     <div class="w-75 d-flex justify-content-center mx-auto buttons x-font-regular ">
       <button type="submit" class="btn t_btn_blue_outline w-25" (click)="search()">بحث</button>
-      <button class="btn t_btn_blue_outline w-25" (click)="resetForm()">مسح بيانات</button>
+      <button class="btn t_btn_blue_outline w-25" (click)="resetForm()">مسح الفلاتر</button>
     </div>
   </form>
 </div>
@@ -70,6 +70,7 @@
         <th>اسم الزبون </th>
         <th>حالة الرحلة</th>
         <th> نوع الرحلة</th>
+        <th> نوع السيارة</th>
         <th>تاريخ الرحلة </th>
         <th>وقت الرحلة </th>
         <th>كلفة الرحلة </th>
@@ -81,6 +82,7 @@
           <td>{{item.clientName}}</td>
           <td>{{item.tripState}}</td>
           <td>{{item.tripType}}</td>
+          <td>{{item.carType}}</td>
           <td>{{item.tripDate}}</td>
           <td>{{item.tripTime}}</td>
           <td>{{item.tripCost}}</td>

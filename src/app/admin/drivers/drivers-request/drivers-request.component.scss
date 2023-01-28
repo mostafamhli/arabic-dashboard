@@ -8,6 +8,14 @@
     .load_more_div {
         margin-top: auto;
     }
+    .user-name{
+        img{
+          max-width: 40px;
+          max-height: 40px;
+          width: auto;
+          height: auto;
+        }
+      }
 }
 /*
 ::ng-deep .drivers_request {

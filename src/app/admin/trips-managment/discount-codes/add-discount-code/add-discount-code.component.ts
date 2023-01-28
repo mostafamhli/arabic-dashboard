@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject, Optional } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TripsServicesService } from 'src/app/core/services/trips-services.service';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-discount-code',
@@ -10,15 +11,28 @@ import { TripsServicesService } from 'src/app/core/services/trips-services.servi
 export class AddDiscountCodeComponent {
 
   addDiscountForm = new FormGroup({
-    discountNameInArabic: new FormControl('', [Validators.required]),
-    discountNameInEnglish: new FormControl('', [Validators.required]),
+    discountName: new FormControl('', [Validators.required]),
     discountCode: new FormControl('', [Validators.required]),
     outDate: new FormControl('', [Validators.required]),
     usingTimes: new FormControl(1, [Validators.required]),
     discountValue: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
   })
 
-  constructor(private tripsServices: TripsServicesService) { }
+  constructor(
+    private tripsServices: TripsServicesService,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    ) {
+      if(data){
+        console.log(data)
+        this.addDiscountForm = new FormGroup({
+          discountName: new FormControl(data.discountName, [Validators.required]),
+          discountCode: new FormControl(data.discountCode, [Validators.required]),
+          outDate: new FormControl(data.outDate, [Validators.required]),
+          usingTimes: new FormControl(data.usingTimes, [Validators.required]),
+          discountValue: new FormControl(data.discountValue, [Validators.required, Validators.pattern("^[0-9]*$")])
+        })
+      }
+    }
 
   getErrorRequiredMessage() {
     if (this.addDiscountForm.controls['discountValue'].hasError('pattern')) {

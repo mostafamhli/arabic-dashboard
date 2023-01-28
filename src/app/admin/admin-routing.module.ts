@@ -33,6 +33,7 @@ import { AddServiceComponent } from './public-settings/add-service/add-service.c
 import { UserTransfersComponent } from './wallet/user-transfers/user-transfers.component';
 import { JaytaxiTransfersComponent } from './wallet/jaytaxi-transfers/jaytaxi-transfers.component';
 import { TransfersComponent } from './wallet/transfers/transfers.component';
+import { MoveDriverToCityComponent } from './drivers/move-driver-to-city/move-driver-to-city.component';
 
 
 const routes: Routes = [
@@ -79,7 +80,8 @@ const routes: Routes = [
       { path: 'client/:id', component: ViewClientDetailsComponent },
       { path: 'transfers', component: TransfersComponent },
       { path: 'user-transfers', component: UserTransfersComponent },
-      { path: 'jaytaxi-transfers', component: JaytaxiTransfersComponent }
+      { path: 'jaytaxi-transfers', component: JaytaxiTransfersComponent },
+      { path: 'move-drivers', component: MoveDriverToCityComponent }
     ]
   }
 ];
