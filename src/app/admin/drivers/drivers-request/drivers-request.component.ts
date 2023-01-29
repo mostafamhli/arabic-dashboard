@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DriverRequest } from 'src/app/core/models/drivers.mode';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { DriverRequestStatus } from 'src/app/core/enums/genric.enums';
 
 @Component({
   selector: 'app-drivers-request',
@@ -11,21 +12,30 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
 export class DriversRequestComponent {
   drivers: DriverRequest[] = [];
   filter: FilterWithSearch = new FilterWithSearch();
+  driverRequestStatusEnum = DriverRequestStatus
+  endOfResult:boolean = false
 
-  constructor(private driverService:DriverServicesService) {
+  constructor(private driverService: DriverServicesService) {
     this.getDrivers();
   }
 
   getDrivers() {
-    this.driverService.getDriversRequest().subscribe((res:any)=>{this.drivers = res},(err:any)=>{}); 
+    this.driverService.getDriversRequest(this.filter).subscribe(
+      res => {
+        if (this.filter.skipCount == 0) {
+          this.drivers = res.items
+        }
+        else
+          this.drivers = this.drivers.concat(res.items)
+          if(res.items.length < this.filter.maxResultCount) {
+            this.endOfResult = true;
+          } else this.endOfResult = false;
+      }
+    )
   }
 
-  searchInDriverRequestTable(searchWord:string){
-    //this.drivers = this.driverService.searchInDriverRequestTable(searchWord);
-  }
-
-  loadMore(){
-    this.filter.pageIndex = this.filter.pageIndex + 1;
+  loadMore() {
+    this.filter.skipCount = this.filter.skipCount + 1;
     this.getDrivers()
   }
 }

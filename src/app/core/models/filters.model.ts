@@ -1,17 +1,23 @@
+import { DriverRequestStatus, SortType } from '../enums/genric.enums';
 
 export class Filter {
-    pageIndex: number
-    pageQuantity: number
+    maxResultCount:number
+    skipCount:number
     constructor() {
-        this.pageIndex = 0
-        this.pageQuantity = 10
+        this.skipCount = 0
+        this.maxResultCount = 2
     }
 }
 
 export class FilterWithSearch extends Filter {
-    searchWord: string
+    status:number
+    filter:string
+    sorting:number
+
     constructor() {
         super()
-        this.searchWord = ""
+        this.status = DriverRequestStatus.Initial
+        this.filter = ''
+        this.sorting = SortType.Ascending
     }
 }

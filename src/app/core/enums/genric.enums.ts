@@ -20,3 +20,14 @@ export enum MessageType {
     Customers = 3,
     specificUser = 4
 }
+
+export enum DriverRequestStatus {
+    Initial = 0,
+    Approved = 1,
+    Rejected = 2
+}
+
+export enum SortType {
+    Ascending = 1,
+    Descending = 2
+}

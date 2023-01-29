@@ -9,7 +9,7 @@
           <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
             <mat-form-field>
               <mat-label>بحث</mat-label>
-              <input matInput (keyup)="getDrivers()" [(ngModel)]="filter.searchWord" placeholder=" ابحث عن ما تريد" #input>
+              <input matInput (keyup)="getDrivers()" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
               <mat-icon matSuffix (click)="searchInTransferTable(input.value)">search</mat-icon>
             </mat-form-field>
           </div>

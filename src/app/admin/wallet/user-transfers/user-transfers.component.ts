@@ -29,7 +29,7 @@ export class UserTransfersComponent {
   }
 
   loadMore() {
-    this.filter.pageIndex = this.filter.pageIndex + 1;
+    this.filter.skipCount = this.filter.skipCount + 1;
     this.getDrivers()
   }
 

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { UserService } from 'src/app/core/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,17 +10,20 @@ import { FormBuilder, NgForm, Validators } from '@angular/forms';
 })
 export class SignInComponent {
 
-  password:string=''
-  username:string=''
+  password: string = ''
+  username: string = ''
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private userService: UserService,
+    private router: Router) { }
 
   public ngOnInit(): void {
 
   }
 
   form = this.fb.group({
-    username: [
+    userName: [
       null,
       [
         Validators.required,
@@ -29,11 +34,7 @@ export class SignInComponent {
     password: [
       null,
       [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/
-        ),
-        Validators.minLength(8),
+        Validators.required
       ],
     ],
   })
@@ -41,7 +42,11 @@ export class SignInComponent {
 
   public onSubmit(): void {
     if (this.form.valid) {
-      console.log('Form Submitted');
+      this.userService.login(this.form.value).subscribe(res => {
+        this.router.navigateByUrl('/')
+      }, err => {
+          console.error(err)
+        })
     } else {
       console.error('Form values are invalid.');
     }

@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, QueryList } from '@angular/core';
 import { AccountStatus, TransferType } from '../enums/genric.enums';
 import { Driver } from '../models/drivers.mode';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FilterWithSearch } from '../models/filters.model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,63 +16,18 @@ export class DriverServicesService {
   baseUrl:string
   constructor(private httpClient:HttpClient) {
     this.baseUrl = environment.baseURL
+  }
+
+  getDriversRequest(filter:FilterWithSearch):Observable<any> {
     this.captainRequestsUrl = this.baseUrl + '/api/app/manage-captains/captain-requests'
-  }
-
-  getDriversRequest() {
-    const response = this.httpClient.get(this.captainRequestsUrl).pipe();
+    let param_ = new HttpParams();
+    if(filter.filter) param_ = param_.append('filter',filter.filter);
+    param_ = param_.append('MaxResultCount',filter.maxResultCount);
+    param_ = param_.append('SkipCount',filter.skipCount);
+    //param_ = param_.append('Sorting',filter.sorting);
+    param_ = param_.append('Status',filter.status);
+    const response = this.httpClient.get(this.captainRequestsUrl,{params:param_}).pipe();
     return response;
-/*    return [
-      {
-        id: 1,
-        name: "Wael",
-        mobile: "963949394418",
-        status : "init",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id: 2,
-        name: "Wael",
-        mobile: "963949394418",
-        status : "init",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id: 3,
-        name: "Wael",
-        mobile: "963949394418",
-        status : "init",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id: 4,
-        name: "Wael",
-        mobile: "963949394418",
-        status : "init",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id: 5,
-        name: "Wael",
-        mobile: "963949394418",
-        status : "init",
-        accountCreationDate: "12-9-2022"
-      },
-      {
-        id: 6,
-        name: "Mostafa",
-        mobile: "963949394418",
-        status : "init",
-        accountCreationDate: "12-9-2022"
-      },
-    ]
-    */
-  }
-
-  searchInDriverRequestTable(searchWord: string) {
-    /*return this.getDriversRequest().filter(item => {
-      return item.name.includes(searchWord);
-    })*/
   }
 
   getDriverRequestDetails(id: number) {

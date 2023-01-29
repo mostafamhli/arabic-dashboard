@@ -2,7 +2,7 @@
 
 .drivers_request {
     padding: 1rem;
-    height: 85vh;
+    min-height: 85vh;
     display: flex;
     flex-direction: column;
     .load_more_div {

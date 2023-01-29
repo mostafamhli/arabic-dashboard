@@ -4,8 +4,8 @@
             <form class="w-100 d-flex flex-column align-items-center" [formGroup]="form" (ngSubmit)="onSubmit()">
                 <h2 class="my-5">تسجيل الدخول</h2>
                 <mat-form-field class="w-75 mb-3">
-                    <input matInput placeholder="اسم المستخدم" formControlName="username">
-                    <mat-error *ngIf="!form.get('username')?.valid && form.get('username')?.touched">
+                    <input matInput placeholder="اسم المستخدم" formControlName="userName">
+                    <mat-error *ngIf="!form.get('userName')?.valid && form.get('userName')?.touched">
                         اسم المستخدم غير صالح
                     </mat-error>
                 </mat-form-field>
