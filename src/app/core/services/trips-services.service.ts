@@ -1,13 +1,25 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { DiscountCodeStatus } from '../enums/genric.enums';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
 export class TripsServicesService {
 
+
   discountCodeStatusEnum = DiscountCodeStatus
-  constructor() { }
+    baseUrl:string
+  addCancelReasonUrl:string
+  getCancelReasonesUrl:string
+
+  constructor(private httpClient:HttpClient) {
+    this.baseUrl = environment.baseURL
+    this.addCancelReasonUrl = this.baseUrl + '/api/app/cancellation-reason'
+    this.getCancelReasonesUrl = this.baseUrl + '/api/app/cancellation-reason/for-dashboard'
+  }
 
   getAllTrips() {
     return [
@@ -133,28 +145,44 @@ export class TripsServicesService {
     })
   }
 
-  getAllCancleReason() {
-    return [
-      {
-        id: 1,
-        nameAr: "تأخر السائق",
-        nameEn: "The driver is late"
-      },
-      {
-        id: 2,
-        nameAr: "الخدمة سيئة",
-        nameEn: "Bad service"
-      }
-    ]
-  }
-
-  deleteCancleReason(id: number) {
-    return this.getAllCancleReason().filter(item => {
+  deleteOpentripType(id: number) {
+    return this.getAllOpenTripTypes().filter(item => {
       return item.id !== id
     })
   }
 
-  addCancleReason(name: string) {
+  addOpenTripType(name: any) {
     return name
+  }
+
+  getAllOpenTripTypes() {
+    return [
+      {
+        id: 1,
+        nameAr: "الباقة 1",
+        nameEn: "Package 1"
+      },
+      {
+        id: 2,
+        nameAr: "الباقة 2",
+        nameEn: "Package 2"
+      }
+    ]
+  }
+
+  getAllCancleReason():Observable<any> {
+    const response = this.httpClient.get(this.getCancelReasonesUrl).pipe();
+    return response;
+  }
+
+  deleteCancleReason(id: number) {
+    //return this.getAllCancleReason().filter(item => {
+    //  return item.id !== id
+    //})
+  }
+
+  addCancleReason(reason: any) {
+    const response = this.httpClient.post(this.addCancelReasonUrl,reason).pipe();
+    return response;
   }
 }

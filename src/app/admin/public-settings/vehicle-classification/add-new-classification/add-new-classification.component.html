@@ -6,18 +6,16 @@
 
 <div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular vehicle-classification-settings">
   <form (ngSubmit)="onSubmit()" [formGroup]="generalFields">
-    <div class="image-container">
-      <div class="user-img">
-        <img src="../../../assets/img/user.png" alt="user image">
-        <div class="file-upload">
-          <label for="file-upload" class="file-upload__label">+</label>
-          <input id="file-upload" type="file" class="file-upload__input" formControlName="image"
-            (change)="onFileChange($event)" />
-        </div>
+    <div class="row mb-5">
+      <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+        <app-add-image [dimension]="100"></app-add-image>
+        <span>صورة</span>
+      </div>
+      <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+        <app-add-image [dimension]="100"></app-add-image>
+        <span>أيقونة</span>
       </div>
     </div>
-
-
     <div class="w-100 d-flex flex-wrap justify-content-around">
       <div class="form-item head-item col-3">
         <mat-form-field class="example-full-width">
@@ -59,7 +57,7 @@
     <div class="d-flex flex-wrap justify-content-between mt-5 x-font-regular ">
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
         <h4 class="rent-header text-center x-font-bold mb-3 mt-5">الأجور خلال الصباح</h4>
-        <div class="row">
+        <div class="row w-100">
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>أقل أجرة</mat-label>
@@ -76,33 +74,22 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="form-item col-3">
-            <mat-form-field>
-              <mat-label>وقت ابتداء الفترة </mat-label>
-              <input matInput name="selected_time_A" formControlName="morningBegin" [ngxMatTimepicker]="pickerA"
-                readonly />
-              <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerA.open()">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
-          </div>
-          <div class="form-item col-3">
-            <mat-form-field>
-              <mat-label>وقت انتهاء الفترة </mat-label>
-              <input matInput name="selected_time_A" formControlName="morningEnd" [ngxMatTimepicker]="pickerB"
-                readonly />
-              <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerB.open()">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
-          </div>
-
-          <h6 class="x-font-regular col-12">
-            التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون يُضاف للفاتورة تكلفة حسب المجال
+          <div class="col-6"></div>
+          <h6 class="x-font-regular col-6">
+            من أجل كل 10 دقائق يتم إيقاف الرحلة فيها من قبل الزبون يُضاف للفاتورة
+          </h6>
+          <h6 class="x-font-regular col-6">
+            التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون
           </h6>
           <div class="form-item col-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>الكلفة</mat-label>
+              <input matInput name="morningTen_M" formControlName="morningTen_M">
+              <mat-error *ngIf="generalFields.controls.morningTen_M.invalid">{{getErrorRequiredMessage()}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
                 التكلفة للمجال الأول
@@ -113,7 +100,7 @@
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <div class="form-item col-6">
+          <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
                 التكلفة للمجال الثاني
@@ -123,61 +110,32 @@
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <h6 class="x-font-regular col-12">
-            من أجل كل 10 دقائق يتم إيقاف الرحلة فيها من قبل الزبون يُضاف للفاتورة
-          </h6>
-          <div class="form-item col-6">
-            <mat-form-field class="example-full-width">
-              <mat-label>الكلفة</mat-label>
-              <input matInput name="morningTen_M" formControlName="morningTen_M">
-              <mat-error *ngIf="generalFields.controls.morningTen_M.invalid">{{getErrorRequiredMessage()}}
-              </mat-error>
-            </mat-form-field>
-          </div>
 
-          <h6 class="x-font-regular col-12">
-            الرحلة المفتوحة
-          </h6>
-          <div class="row d-flex align-items-center">
-            <div class="form-item col-5">
-              <mat-form-field class="example-full-width">
-                <mat-label>مدة الرحلة بالساعات</mat-label>
-                <input matInput name="openTripTime" formControlName="openTripTime" [(ngModel)]="openTripTime">
-              </mat-form-field>
-            </div>
-            <div class="form-item col-5">
-              <mat-form-field class="example-full-width">
-                <mat-label>كلفة الرحلة</mat-label>
-                <input matInput name="tripCost" formControlName="tripCost" [(ngModel)]="tripCost">
-              </mat-form-field>
-            </div>
-            <button type="button" class="btn t_btn_blue col-2" (click)="addToOpenTrip('morning')">
-              إضافة
-            </button>
-          </div>
+          <h6 class="x-font-regular col-12">الرحلة المفتوحة</h6>
           <div class="jay_taxi_table">
             <div class="table_div d-flex flex-column align-items-center">
               <table class="table">
                 <thead class="x-font-bold">
-                  <th>المدة بالساعات</th>
+                  <th width="50%"> الرحلة</th>
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of openTripCost.morning">
                     <td>{{item.openTripTime}}</td>
-                    <td>{{item.tripCost}}</td>
+                    <td>
+                      <input type="text" class="form-control text-center">
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-
         </div>
       </div>
 
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
         <h4 class="rent-header text-center x-font-bold mb-3 mt-5">الأجور خلال النهار</h4>
-        <div class="row">
+        <div class="row w-100">
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>أقل أجرة</mat-label>
@@ -194,30 +152,24 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="form-item col-3">
-            <mat-form-field>
-              <mat-label>وقت ابتداء الفترة </mat-label>
-              <input matInput name="selected_time_A" formControlName="dayBegin" [ngxMatTimepicker]="pickerC" readonly />
-              <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerC.open()">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerC></ngx-mat-timepicker>
-          </div>
-          <div class="form-item col-3">
-            <mat-form-field>
-              <mat-label>وقت انتهاء الفترة </mat-label>
-              <input matInput name="selected_time_A" formControlName="dayEnd" [ngxMatTimepicker]="pickerD" readonly />
-              <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerD.open()">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerD></ngx-mat-timepicker>
-          </div>
-          <h6 class="x-font-regular col-12">
-            التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون يُضاف للفاتورة تكلفة حسب المجال
+          <div class="col-6"></div>
+
+          <h6 class="x-font-regular col-6">
+            من أجل كل 10 دقائق يتم إيقاف الرحلة فيها من قبل الزبون يُضاف للفاتورة
           </h6>
+          <h6 class="x-font-regular col-6">
+            التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون
+          </h6>
+
           <div class="form-item col-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>الكلفة</mat-label>
+              <input matInput name="dayTen_M" formControlName="dayTen_M">
+              <mat-error *ngIf="generalFields.controls.dayTen_M.invalid">{{getErrorRequiredMessage()}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
                 التكلفة للمجال الأول
@@ -228,7 +180,7 @@
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <div class="form-item col-6">
+          <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
                 التكلفة للمجال الثاني
@@ -238,62 +190,33 @@
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <h6 class="x-font-regular col-12">
-            من أجل كل 10 دقائق يتم إيقاف الرحلة فيها من قبل الزبون يُضاف للفاتورة
-          </h6>
-          <div class="form-item col-6">
-            <mat-form-field class="example-full-width">
-              <mat-label>الكلفة</mat-label>
-              <input matInput name="dayTen_M" formControlName="dayTen_M">
-              <mat-error *ngIf="generalFields.controls.dayTen_M.invalid">{{getErrorRequiredMessage()}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-          
-          <h6 class="x-font-regular col-12">
-            الرحلة المفتوحة
-          </h6>
-          <div class="row d-flex align-items-center">
-            <div class="form-item col-5">
-              <mat-form-field class="example-full-width">
-                <mat-label>مدة الرحلة بالساعات</mat-label>
-                <input matInput name="openTripTime" formControlName="openTripTime" [(ngModel)]="openTripTime">
-              </mat-form-field>
-            </div>
-            <div class="form-item col-5">
-              <mat-form-field class="example-full-width">
-                <mat-label>كلفة الرحلة</mat-label>
-                <input matInput name="tripCost" formControlName="tripCost" [(ngModel)]="tripCost">
-              </mat-form-field>
-            </div>
-            <button type="button" class="btn t_btn_blue col-2" (click)="addToOpenTrip('day')">
-              إضافة
-            </button>
-          </div>
+
+          <h6 class="x-font-regular col-12">الرحلة المفتوحة</h6>
           <div class="jay_taxi_table">
             <div class="table_div d-flex flex-column align-items-center">
               <table class="table">
                 <thead class="x-font-bold">
-                  <th>المدة بالساعات</th>
+                  <th width="50%"> الرحلة</th>
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of openTripCost.day">
                     <td>{{item.openTripTime}}</td>
-                    <td>{{item.tripCost}}</td>
+                    <td>
+                      <input type="text" class="form-control text-center">
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          
         </div>
       </div>
 
 
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
         <h4 class="rent-header text-center x-font-bold mb-3 mt-5">الأجور خلال الليل</h4>
-        <div class="row">
+        <div class="row w-100">
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>أقل أجرة</mat-label>
@@ -310,31 +233,23 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="form-item col-3">
-            <mat-form-field>
-              <mat-label>وقت ابتداء الفترة </mat-label>
-              <input matInput name="selected_time_A" formControlName="nightBegin" [ngxMatTimepicker]="pickerE"
-                readonly />
-              <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerE.open()">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerE></ngx-mat-timepicker>
-          </div>
-          <div class="form-item col-3">
-            <mat-form-field>
-              <mat-label>وقت انتهاء الفترة </mat-label>
-              <input matInput name="selected_time_A" formControlName="nightEnd" [ngxMatTimepicker]="pickerF" readonly />
-              <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerF.open()">
-                watch_later
-              </mat-icon>
-            </mat-form-field>
-            <ngx-mat-timepicker #pickerF></ngx-mat-timepicker>
-          </div>
-          <h6 class="x-font-regular col-12">
-            التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون يُضاف للفاتورة تكلفة حسب المجال
+          <div class="col-6"></div>
+
+          <h6 class="x-font-regular col-6">
+            من أجل كل 10 دقائق يتم إيقاف الرحلة فيها من قبل الزبون يُضاف للفاتورة
+          </h6>
+          <h6 class="x-font-regular col-6">
+            التكلفة الإضافية للمسافات التي يقطعها السائق ليصل للزبون
           </h6>
           <div class="form-item col-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>الكلفة</mat-label>
+              <input matInput name="nightTen_M" formControlName="nightTen_M">
+              <mat-error *ngIf="generalFields.controls.nightTen_M.invalid">{{getErrorRequiredMessage()}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
                 التكلفة للمجال الأول
@@ -345,7 +260,7 @@
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
           </div>
-          <div class="form-item col-6">
+          <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
                 التكلفة للمجال الثاني
@@ -356,54 +271,26 @@
             </mat-form-field>
           </div>
           <h6 class="x-font-regular col-12">
-            من أجل كل 10 دقائق يتم إيقاف الرحلة فيها من قبل الزبون يُضاف للفاتورة
-          </h6>
-          <div class="form-item col-6">
-            <mat-form-field class="example-full-width">
-              <mat-label>الكلفة</mat-label>
-              <input matInput name="nightTen_M" formControlName="nightTen_M">
-              <mat-error *ngIf="generalFields.controls.nightTen_M.invalid">{{getErrorRequiredMessage()}}
-              </mat-error>
-            </mat-form-field>
-          </div>
-          
-          <h6 class="x-font-regular col-12">
             الرحلة المفتوحة
           </h6>
-          <div class="row d-flex align-items-center">
-            <div class="form-item col-5">
-              <mat-form-field class="example-full-width">
-                <mat-label>مدة الرحلة بالساعات</mat-label>
-                <input matInput name="openTripTime" formControlName="openTripTime" [(ngModel)]="openTripTime">
-              </mat-form-field>
-            </div>
-            <div class="form-item col-5">
-              <mat-form-field class="example-full-width">
-                <mat-label>كلفة الرحلة</mat-label>
-                <input matInput name="tripCost" formControlName="tripCost" [(ngModel)]="tripCost">
-              </mat-form-field>
-            </div>
-            <button type="button" class="btn t_btn_blue col-2" (click)="addToOpenTrip('night')">
-              إضافة
-            </button>
-          </div>
           <div class="jay_taxi_table">
             <div class="table_div d-flex flex-column align-items-center">
               <table class="table">
                 <thead class="x-font-bold">
-                  <th>المدة بالساعات</th>
+                  <th width="50%"> الرحلة</th>
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of openTripCost.night">
                     <td>{{item.openTripTime}}</td>
-                    <td>{{item.tripCost}}</td>
+                    <td>
+                      <input type="text" class="form-control text-center">
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-          
         </div>
       </div>
 

@@ -1,14 +1,14 @@
-<div class="row mb-5">
+<!-- <div class="row mb-5">
   <div class="col-6 d-flex align-items-center">
     <button class="btn t_btn_blue w-30" (click)="addCity()">
       إضافة محافظة
     </button>
   </div>
-</div>
+</div> -->
 <div class="x-font-regular ">
   <div class="row city-container d-flex align-items-center" *ngFor="let city of cities">
     <div class="col-4 ">
-      <div class="x-font-black text-center city-name" (click)="editCity(city.id - 1)">{{city.arabicName}}</div>
+      <div class="x-font-black text-center city-name">{{city.arabicName}}</div>
       <div class="distance-price d-flex flex-column mt-3">
         <div class="distance-price-header text-right mb-1">
           تُحسب كلفة وصول السائق إلى الزبون من مسافة بعيدة بناءً على المجالات
@@ -29,8 +29,13 @@
         </div>
       </div>
     </div>
-    <div class="col-8 city-pic d-flex flex-column align-items-center">
+    <div class="col-6 city-pic d-flex flex-column align-items-center">
       <img [src]="city.pic" alt="city.name city pic">
+    </div>
+    <div class="col-2">
+      <button (click)="editCity(city)" class="btn t_btn_blue ms-1 me-1 x-font-bold w-100">
+        تعديل
+      </button>
     </div>
   </div>
 </div>

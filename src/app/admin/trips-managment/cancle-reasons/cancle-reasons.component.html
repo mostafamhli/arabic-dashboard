@@ -11,8 +11,8 @@
           </thead>
           <tbody>
             <tr *ngFor="let item of reasons">
-              <td>{{item.nameAr}}</td>
-              <td>{{item.nameEn}}</td>
+              <td>{{item.arReason}}</td>
+              <td>{{item.reason}}</td>
               <td>
                 <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
                   <mat-icon>delete</mat-icon>
@@ -40,7 +40,7 @@
           </div>
         </div>
       </div>
-      <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!arabicCancleName || arabicCancleName==''">إضافة</button>
+      <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!arabicCancleName || arabicCancleName=='' || !englishCancleName || englishCancleName==''">إضافة</button>
     </div>
   </div>
 </div>

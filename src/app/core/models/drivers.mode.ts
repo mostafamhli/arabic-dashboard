@@ -6,28 +6,36 @@ export class Driver {
     id: number
     name: string
     accountCreationDate: any
-    mobile: string
-    stock: number
+    phoneNumber: string
+    balance: number
     code: number
     accountStatus: number
-
+    firstName:string
+    lastName:string
+    profileImageUrl:string
     constructor(d?: Driver) {
         if (!d) {
             this.name = ""
             this.accountCreationDate = undefined
-            this.mobile = ""
+            this.phoneNumber = ""
             this.id = 0
-            this.stock = 0
+            this.balance = 0
             this.accountStatus = AccountStatus.inActive
             this.code = 0
+            this.firstName = ""
+            this.lastName = ""
+            this.profileImageUrl =""
         } else {
             this.id = d.id
             this.name = d.name
-            this.mobile = d.mobile
+            this.phoneNumber = d.phoneNumber
             this.accountCreationDate = d.accountCreationDate
             this.code = d.code
             this.accountStatus = d.accountStatus
-            this.stock = d.stock
+            this.balance = d.balance
+            this.firstName = d.firstName
+            this.lastName = d.lastName
+            this.profileImageUrl = d.profileImageUrl
         }
     }
 }
@@ -64,20 +72,20 @@ export class Transfer {
     driverName: string
     accountantName: string
     accountCreationDate: any
-    stock: number
+    balance: number
     tranferType: number
     constructor(t?: Transfer) {
         if (t) {
             this.id = t.id
             this.driverName = t.driverName
-            this.stock = t.stock
+            this.balance = t.balance
             this.tranferType = t.tranferType
             this.accountCreationDate = t.accountCreationDate
             this.accountantName = t.accountantName
         } else {
             this.id = 0
             this.driverName = ""
-            this.stock = 0
+            this.balance = 0
             this.tranferType = TransferType.remittance
             this.accountCreationDate = undefined
             this.accountantName = ""

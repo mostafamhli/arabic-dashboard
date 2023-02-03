@@ -9,8 +9,8 @@
     <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
       <mat-form-field>
         <mat-label>بحث</mat-label>
-        <input matInput (keyup)="getDrivers()" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
-        <mat-icon matSuffix (click)="searchInDriverList(input.value)">search</mat-icon>
+        <input matInput (keyup)="filter.skipCount=0;getDrivers();" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
+        <mat-icon matSuffix (click)="getDrivers()">search</mat-icon>
       </mat-form-field>
     </div>
   </div>
@@ -31,13 +31,13 @@
           <tr *ngFor="let item of drivers">
             <td>
               <div class="user-name d-flex align-items-center">
-                <img src="assets/img/user.png">
-                <div class="me-2">{{item.name}}</div>
+                <img [src]="item.profileImageUrl || 'assets/img/user.png'">
+                <div class="me-2">{{item.firstName}} {{item.lastName}}</div>
               </div>
             </td>
-            <td>{{item.mobile}}</td>
+            <td>{{item.phoneNumber}}</td>
             <td>{{item.accountCreationDate}}</td>
-            <td>{{item.stock}}</td>
+            <td>{{item.balance}}</td>
             <!-- <td>{{item.code}}</td> -->
             <td>
               <container-element [ngSwitch]="item.accountStatus">
@@ -63,7 +63,7 @@
       </table>
     </div>
   </div>
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
     <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
       تحميل المزيد
     </button>

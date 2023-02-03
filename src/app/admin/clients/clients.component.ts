@@ -17,26 +17,32 @@ export class ClientsComponent {
   clients: any[] = []
   filter: FilterWithSearch = new FilterWithSearch()
   accountStatusEnum = AccountStatus
-
+  endOfResult:boolean = false
 
   constructor(private confirmChangeStatus: MatDialog, private clientServices: ClientServicesService) {
     this.getClients()
   }
 
   getClients() {
-    this.clients = this.clientServices.getAllClients();
+    this.clientServices.getAllClients(this.filter).subscribe(
+      res => {
+        if (this.filter.skipCount == 0) {
+          this.clients = res.items
+        }
+        else
+          this.clients = this.clients.concat(res.items)
+          if(res.items.length < this.filter.maxResultCount) {
+            this.endOfResult = true;
+          } else this.endOfResult = false;
+      }
+    )
   }
 
-  searchClients(event: any) {
-    console.log(typeof event.value)
-    this.clients = this.clientServices.findClientByName(event.value);
-  }
 
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + 1;
     this.getClients()
   }
-
 
   confirm(item: any) {
     let dialog = this.confirmChangeStatus.open(ConfirmComponent, {

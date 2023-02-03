@@ -1,0 +1,46 @@
+
+
+mat-card {
+    width: 70%;
+}
+
+.title {
+    margin: 0 0 1rem 0;
+    color: var(--main-bg-color);
+    font-weight: var(--large-font-weight);
+    font-size: var(--large-font-size);
+    text-align: center;
+}
+
+
+mat-chip-row {
+    background-color: var(--main-bg-color) !important;
+    width: calc((100% / 4) - 10px);
+}
+
+mat-chip-row span {
+    color: #fff !important;
+    font-size: var(--meduim-font-size);
+}
+
+mat-chip-row button,
+mat-chip-row button mat-icon {
+    background-color: none !important;
+    color:var(--gold-color) !important;
+}
+
+
+.input-container {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    margin: 2rem auto 0;
+}
+
+.input_with_button {
+    width: 80%;
+}
+
+.english-input {
+    direction: ltr !important;
+}

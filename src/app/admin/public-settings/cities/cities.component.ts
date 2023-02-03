@@ -28,10 +28,10 @@ export class CitiesComponent {
     })
   }
 
-  editCity(id:number){
+  editCity(city:any){
     this.addNewCity.open(AddNewCityComponent, {
       width: "50%",
-      data:this.cities[id]
+      data:city
     })
   }
 

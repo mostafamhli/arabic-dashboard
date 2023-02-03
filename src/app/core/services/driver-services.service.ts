@@ -14,6 +14,7 @@ export class DriverServicesService {
   accountStatusEnum = AccountStatus;
   captainRequestsUrl:string
   baseUrl:string
+  captainsListUrl:string
   constructor(private httpClient:HttpClient) {
     this.baseUrl = environment.baseURL
   }
@@ -145,76 +146,23 @@ export class DriverServicesService {
     ]
   }
 
-  getDriversList() {
-    return [
-      {
-        id: 1,
-        name: "Wael",
-        mobile: "0949394417",
-        accountCreationDate: "12-9-2022",
-        accountStatus: AccountStatus.inActive,
-        code: 1,
-        stock: 200.12
-      },
-      {
-        id: 2,
-        name: "Wael",
-        mobile: "0949394417",
-        accountCreationDate: "12-9-2022",
-        accountStatus: AccountStatus.inActive,
-        code: 1,
-        stock: 200.12
-      },
-      {
-        id: 3,
-        name: "Wael",
-        mobile: "0949394417",
-        accountCreationDate: "12-9-2022",
-        accountStatus: AccountStatus.active,
-        code: 1,
-        stock: 200.12
-      },
-      {
-        id: 4,
-        name: "Wael",
-        mobile: "0949394417",
-        accountCreationDate: "12-9-2022",
-        accountStatus: AccountStatus.inActive,
-        code: 1,
-        stock: 200.12
-      },
-      {
-        id: 5,
-        name: "Wael",
-        mobile: "0949394417",
-        accountCreationDate: "12-9-2022",
-        accountStatus: AccountStatus.inActive,
-        code: 1,
-        stock: 200.12
-      },
-      {
-        id: 6,
-        name: "Mostafa",
-        mobile: "0949394417",
-        accountCreationDate: "12-9-2022",
-        accountStatus: AccountStatus.active,
-        code: 1,
-        stock: 200.12
-      },
-    ]
-  }
-
-  searchInDriverList(searchWord: string) {
-    return this.getDriversList().filter(item => {
-      return item.name.includes(searchWord);
-    })
+  getDriversList(filter:FilterWithSearch):Observable<any> {
+    this.captainsListUrl = this.baseUrl + '/api/app/manage-captains/captains'
+    let param_ = new HttpParams();
+    if(filter.filter) param_ = param_.append('filter',filter.filter);
+    param_ = param_.append('MaxResultCount',filter.maxResultCount);
+    param_ = param_.append('SkipCount',filter.skipCount);
+    //param_ = param_.append('Sorting',filter.sorting);
+    param_ = param_.append('Status',filter.status);
+    const response = this.httpClient.get(this.captainsListUrl,{params:param_}).pipe();
+    return response;
   }
 
   changeDriverStatus(driver: Driver) {
-    let driverIndex = this.getDriversList().findIndex(item => item.id == driver.id);
+    /*let driverIndex = this.getDriversList().findIndex(item => item.id == driver.id);
     if (driverIndex != -1) {
       return this.getDriversList()[driverIndex].accountStatus = driver.accountStatus;
-    }
+    }*/
     return null;
   }
 
@@ -245,7 +193,7 @@ export class DriverServicesService {
         driverName: "ali",
         accountCreationDate: "12-9-2022",
         tranferType: TransferType.remittance,
-        stock: 200.12
+        balance: 200.12
       },
       {
         id: 2,
@@ -253,7 +201,7 @@ export class DriverServicesService {
         driverName: "ali",
         accountCreationDate: "12-9-2022",
         tranferType: TransferType.remittance,
-        stock: 200.12
+        balance: 200.12
       },
       {
         id: 3,
@@ -261,7 +209,7 @@ export class DriverServicesService {
         driverName: "ali",
         accountCreationDate: "12-9-2022",
         tranferType: TransferType.remittance,
-        stock: 200.12
+        balance: 200.12
       },
       {
         id: 4,
@@ -269,7 +217,7 @@ export class DriverServicesService {
         driverName: "ali",
         accountCreationDate: "12-9-2022",
         tranferType: TransferType.recovery,
-        stock: 200.12
+        balance: 200.12
       },
       {
         id: 5,
@@ -277,7 +225,7 @@ export class DriverServicesService {
         driverName: "ali",
         accountCreationDate: "12-9-2022",
         tranferType: TransferType.recovery,
-        stock: 200.12
+        balance: 200.12
       }
     ]
   }

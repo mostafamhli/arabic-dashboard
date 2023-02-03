@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Driver } from 'src/app/core/models/drivers.mode';
-import { AccountStatus } from 'src/app/core/enums/genric.enums';
+import { AccountStatus, DriverRequestStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../../confirm/confirm.component';
@@ -15,17 +15,26 @@ export class DriversListComponent {
   drivers: Driver[] = [];
   filter: FilterWithSearch = new FilterWithSearch();
   accountStatusEnum = AccountStatus;
-
+  driverRequestStatusEnum = DriverRequestStatus
+  endOfResult:boolean = false
+  
   constructor(private confirmChangeStatus: MatDialog, private driverServcie: DriverServicesService) {
     this.getDrivers();
   }
 
   getDrivers() {
-    this.drivers = this.driverServcie.getDriversList();
-  }
-
-  changeDriverStatus(item: Driver) {
-    this.driverServcie.changeDriverStatus(item);
+    this.driverServcie.getDriversList(this.filter).subscribe(
+      res => {
+        if (this.filter.skipCount == 0) {
+          this.drivers = res.items
+        }
+        else
+          this.drivers = this.drivers.concat(res.items)
+          if(res.items.length < this.filter.maxResultCount) {
+            this.endOfResult = true;
+          } else this.endOfResult = false;
+      }
+    )
   }
 
   confirm(item: Driver) {
@@ -40,8 +49,8 @@ export class DriversListComponent {
     })
   }
 
-  searchInDriverList(searchWord: string) {
-    this.drivers = this.driverServcie.searchInDriverList(searchWord);
+  changeDriverStatus(item: Driver) {
+    this.driverServcie.changeDriverStatus(item);
   }
 
   loadMore() {

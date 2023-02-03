@@ -35,6 +35,7 @@ import { JaytaxiTransfersComponent } from './wallet/jaytaxi-transfers/jaytaxi-tr
 import { TransfersComponent } from './wallet/transfers/transfers.component';
 import { MoveDriverToCityComponent } from './drivers/move-driver-to-city/move-driver-to-city.component';
 import { CheckLoginGuard } from '../core/guards/check-login.guard';
+import { OpenTripComponent } from './trips-managment/open-trip/open-trip.component';
 
 
 const routes: Routes = [
@@ -82,9 +83,10 @@ const routes: Routes = [
       { path: 'transfers', component: TransfersComponent },
       { path: 'user-transfers', component: UserTransfersComponent },
       { path: 'jaytaxi-transfers', component: JaytaxiTransfersComponent },
-      { path: 'move-drivers', component: MoveDriverToCityComponent }
+      { path: 'move-drivers', component: MoveDriverToCityComponent },
+      { path: 'open-trips', component: OpenTripComponent }
     ],
-    canActivate:[CheckLoginGuard]
+    canActivate: [CheckLoginGuard]
   }
 ];
 

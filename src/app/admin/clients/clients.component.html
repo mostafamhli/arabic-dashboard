@@ -3,8 +3,8 @@
     <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
       <mat-form-field>
         <mat-label>بحث</mat-label>
-        <input matInput (keyup)="getClients()" #searchInput [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
-        <mat-icon matSuffix (click)="searchClients(searchInput)">search</mat-icon>
+        <input matInput (keyup)="filter.skipCount=0;getClients();" [(ngModel)]="filter.filter" #searchInput placeholder=" ابحث عن ما تريد" #input>
+        <mat-icon matSuffix (click)="getClients()">search</mat-icon>
       </mat-form-field>
     </div>
   </div>
@@ -23,11 +23,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of clients">
-            <td>{{item.userName}}</td>
-            <td>{{item.mobile}}</td>
-            <td>{{item.creationDate}}</td>
-            <td>{{item.NumOfTrips}}</td>
-            <td>{{item.eval}}</td>
+            <td>
+              <div class="user-name d-flex align-items-center">
+                  <img [src]="item.profileImageUrl || 'assets/img/user.png'">
+                  <div class="me-2">{{item.name}}</div>
+                </div>
+            </td>
+            <td>{{item.phoneNumber}}</td>
+            <td>{{item.creationTime}}</td>
+            <td>{{item.tripCount}}</td>
+            <td>{{item.rate}}</td>
             <!-- <td>{{item.activatedCode}}</td> -->
             <td>
               <container-element [ngSwitch]="item.accountStatus">
@@ -47,7 +52,7 @@
     </div>
   </div>
 
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
     <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
       تحميل المزيد
     </button>

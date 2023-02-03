@@ -5,6 +5,7 @@ import { MaterialModule } from '../material/material.module';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { ViewImageComponent } from './components/view-image/view-image.component';
+import { AddImageComponent } from './components/add-image/add-image.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ViewImageComponent } from './components/view-image/view-image.component
     MatCartComponent,
     PaginationComponent,
     UploadImageComponent,
-    ViewImageComponent
+    ViewImageComponent,
+    AddImageComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { ViewImageComponent } from './components/view-image/view-image.component
   ],
   exports:[
     MatCartComponent,
-    UploadImageComponent
+    UploadImageComponent,
+    AddImageComponent
   ]
 })
 export class SharedModule { }

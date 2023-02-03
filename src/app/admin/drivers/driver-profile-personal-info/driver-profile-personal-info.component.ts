@@ -1,21 +1,23 @@
-import { Component, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, ViewChild,OnInit } from '@angular/core';
+import { FormGroup, ControlContainer } from '@angular/forms';
 
 @Component({
   selector: 'app-driver-profile-personal-info',
   templateUrl: './driver-profile-personal-info.component.html',
   styleUrls: ['./driver-profile-personal-info.component.scss']
 })
-export class DriverProfilePersonalInfoComponent {
-  personalInfo: FormGroup;
+export class DriverProfilePersonalInfoComponent implements OnInit {
+
+  driverProfile: FormGroup;
   imageFile: any
   @ViewChild('fileInput') fileInput: any
 
-  constructor() {
-    this.personalInfo = new FormGroup({
-
-    })
+  constructor(private controlContainer: ControlContainer) {
   }
+  ngOnInit(): void {
+    this.driverProfile = <FormGroup>this.controlContainer.control;
+  }
+
   onFileInput(files: any): void {
     var reader = new FileReader();
     this.imageFile = files;
@@ -23,5 +25,11 @@ export class DriverProfilePersonalInfoComponent {
     reader.onload = (_event) => {
       this.imageFile = reader.result;
     };
+  }
+  temp:any
+  setIdImage($event:any){
+    if(event && event.target && event.target)
+    this.temp = event.target
+    this.temp = this.temp.result
   }
 }

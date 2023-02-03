@@ -20,18 +20,30 @@ export class CancleReasonsComponent {
   }
 
   getCancleReasons() {
-    this.reasons = this.tripsService.getAllCancleReason();
+    this.tripsService.getAllCancleReason().subscribe(res => {
+      this.reasons = res.items;
+    });
   }
 
   delete(id: number) {
-    this.reasons = this.tripsService.deleteCancleReason(id);
+    this.tripsService.deleteCancleReason(id);
   }
 
   onSubmit() {
-    let reason = { id: this.reasons[this.reasons.length - 1].id + 1, nameAr: this.tripsService.addCancleReason(this.arabicCancleName), nameEn: this.tripsService.addCancleReason(this.englishCancleName)  }
-    this.reasons.push(reason);
-    this.arabicCancleName = undefined;
-    this.englishCancleName = undefined;
+    if (this.englishCancleName) this.englishCancleName = this.englishCancleName.trim();
+    if (this.arabicCancleName) this.arabicCancleName = this.arabicCancleName.trim();
+    
+    if (this.englishCancleName != '' && this.arabicCancleName != '') {
+      let reason = {
+        reason: this.englishCancleName,
+        arReason: this.arabicCancleName
+      }
+      this.tripsService.addCancleReason(reason).subscribe(res => {
+        this.reasons.push(res)
+      })
+      this.arabicCancleName = undefined;
+      this.englishCancleName = undefined;
+    }
   }
 
   confirmDelete(id: number) {

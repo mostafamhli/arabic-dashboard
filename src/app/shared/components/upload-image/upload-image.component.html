@@ -9,12 +9,13 @@
       </div>
     </div>
     <div class="control d-flex align-items-center">
-      <button class="btn t_btn_blue_outline">
+      <button (click)="fileInput.click()" class="btn t_btn_blue_outline">
         اختيار
       </button>
+      <input #fileInput type="file" (change)="onFileInput(fileInput.files)" accept="image/*" style="display:none;" />
       <button class="btn t_btn_red_outline small_btn_full">
-            <mat-icon>delete</mat-icon>
-          </button>
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
   </div>
 </div>

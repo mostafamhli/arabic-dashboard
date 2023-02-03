@@ -5,7 +5,7 @@ export class Filter {
     skipCount:number
     constructor() {
         this.skipCount = 0
-        this.maxResultCount = 2
+        this.maxResultCount = 10
     }
 }
 

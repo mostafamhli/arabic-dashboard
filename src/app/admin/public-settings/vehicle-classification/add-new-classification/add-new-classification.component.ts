@@ -19,6 +19,8 @@ export class AddNewClassificationComponent {
 
   pageTypeEnum = pageType;
   activePageType = pageType.add;
+  image:any = "../../../assets/img/user.png"
+  openTripCost: any = {}
 
   generalFields = new FormGroup({
     arabicName: new FormControl('', [Validators.required]),
@@ -26,34 +28,24 @@ export class AddNewClassificationComponent {
     image: new FormControl(File, [Validators.required]),
     numOfSites: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     driverRatio: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
-    openTripTime: new FormControl({ value: 0, disabled: pageType.view == this.activePageType }, [Validators.required]),
-    tripCost: new FormControl({ value: 0, disabled: pageType.view == this.activePageType }, [Validators.required]),
     morningLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningSecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningOne_Km: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
-    morningBegin: new FormControl('06:00', [Validators.required]),
-    morningEnd: new FormControl('09:00', [Validators.required]),
     dayLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     dayFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     daySecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     dayOne_Km: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     dayTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
-    dayBegin: new FormControl('10:00', [Validators.required]),
-    dayEnd: new FormControl('06:00', [Validators.required]),
     nightLowestRent: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     nightFirstExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     nightSecondExtraCost: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
     nightOne_Km: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
-    nightTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
-    nightBegin: new FormControl('06:00', [Validators.required]),
-    nightEnd: new FormControl('12:00', [Validators.required])
+    nightTen_M: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")])
   });
 
-  openTripCost: any = {}
-  tripCost: number = 0
-  openTripTime: number = 0
+
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
     let id = this.activatedRoute.snapshot.params['id']
     if (id) {
@@ -96,17 +88,6 @@ export class AddNewClassificationComponent {
     return 'يجب أن تدخل قيمة';
   }
 
-  addToOpenTrip(key: string) {
-    if (this.openTripTime > 0 && this.tripCost > 0) {
-      if (this.openTripCost && this.openTripCost[key])
-        this.openTripCost[key].push({ openTripTime: this.openTripTime, tripCost: this.tripCost });
-      else
-        this.openTripCost[key] = { openTripTime: this.openTripTime, tripCost: this.tripCost }
-      this.tripCost = 0
-      this.openTripTime = 0
-    }
-  }
-
   onSubmit() {
     console.log(this.settingsService.addNewClassification(this.generalFields.value));
   }
@@ -118,33 +99,24 @@ export class AddNewClassificationComponent {
       image: new FormControl({ value: File, disabled: pageType.view == this.activePageType }, [Validators.required]),
       numOfSites: new FormControl({ value: 4, disabled: pageType.view == this.activePageType }, [Validators.required]),
       driverRatio: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      openTripTime: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      tripCost: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningLowestRent: new FormControl({ value: 5, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningFirstExtraCost: new FormControl({ value: 2, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningSecondExtraCost: new FormControl({ value: 1, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningOne_Km: new FormControl({ value: 6, disabled: pageType.view == this.activePageType }, [Validators.required]),
       morningTen_M: new FormControl({ value: 0.1, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningBegin: new FormControl({ value: '06:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningEnd: new FormControl({ value: '09:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
       dayLowestRent: new FormControl({ value: 4, disabled: pageType.view == this.activePageType }, [Validators.required]),
       dayFirstExtraCost: new FormControl({ value: 2, disabled: pageType.view == this.activePageType }, [Validators.required]),
       daySecondExtraCost: new FormControl({ value: 1, disabled: pageType.view == this.activePageType }, [Validators.required]),
       dayOne_Km: new FormControl({ value: 6, disabled: pageType.view == this.activePageType }, [Validators.required]),
       dayTen_M: new FormControl({ value: 0.1, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayBegin: new FormControl({ value: '09:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayEnd: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
       nightLowestRent: new FormControl({ value: 4, disabled: pageType.view == this.activePageType }, [Validators.required]),
       nightFirstExtraCost: new FormControl({ value: 2, disabled: pageType.view == this.activePageType }, [Validators.required]),
       nightSecondExtraCost: new FormControl({ value: 1, disabled: pageType.view == this.activePageType }, [Validators.required]),
       nightOne_Km: new FormControl({ value: 6, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightTen_M: new FormControl({ value: 0.1, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightBegin: new FormControl({ value: '22:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightEnd: new FormControl({ value: '06:00', disabled: pageType.view == this.activePageType }, [Validators.required]),
+      nightTen_M: new FormControl({ value: 0.1, disabled: pageType.view == this.activePageType }, [Validators.required])
     })
   }
 
-  image: any;
 
   onFileChange(e: any) {
     if (e.target.files) {
@@ -153,7 +125,6 @@ export class AddNewClassificationComponent {
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
         this.generalFields.controls.image.setValue(event.target.result);
-        console.log(this.generalFields.controls.image.value)
         this.image = this.generalFields.controls.image.value;
       }
     }

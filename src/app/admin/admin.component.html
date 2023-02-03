@@ -68,6 +68,14 @@
       </mat-list-item>
       <mat-list-item *ngIf="activeTab == activeTabsEnum.trips"
         [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}" role="listitem" routerLinkActive="active"
+        routerLink="/open-trips">
+        <div class="listItem">
+          <mat-icon>timer</mat-icon>
+          <span>الرحلات المفتوحة</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.trips"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}" role="listitem" routerLinkActive="active"
         routerLink="/discount-codes">
         <div class="listItem">
           <mat-icon>arrow_downward</mat-icon>

@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AccountStatus } from 'src/app/core/enums/genric.enums';
+import { FilterWithSearch } from '../models/filters.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,97 +11,29 @@ import { AccountStatus } from 'src/app/core/enums/genric.enums';
 export class ClientServicesService {
 
   accountStatusEnum = AccountStatus;
+  baseUrl: string;
+  clientsListUrl: string;
 
-  constructor() { }
-
-  getAllClients(){
-    return  [
-      {
-        id: 1,
-        userName: 'Mostafa Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.active
-      },
-
-      {
-        id: 2,
-        userName: 'Mostafa Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.inActive
-      },
-
-
-      {
-        id: 3,
-        userName: 'Mostafa Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.active
-      },
-
-
-      {
-        id: 4,
-        userName: 'Mostafa Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.active
-      },
-
-
-      {
-        id: 5,
-        userName: 'Mostafa Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.active
-      },
-
-      {
-        id: 6,
-        userName: 'ali Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.inActive
-      },
-
-
-      {
-        id: 7,
-        userName: 'Mostafa Mhli',
-        mobile: 95365522,
-        creationDate: '12-9-2022',
-        NumOfTrips: 62,
-        eval: 3.8,
-        activatedCode: 123456,
-        accountStatus: AccountStatus.inActive
-      },
-    ]
+  constructor(private httpClient: HttpClient) {
+    this.baseUrl = environment.baseURL
   }
 
-  findClientByName(name : string){
-    return this.getAllClients().filter(ele => {
+  getAllClients(filter: FilterWithSearch): Observable<any> {
+    this.clientsListUrl = this.baseUrl + '/api/app/customer/customers'
+    let param_ = new HttpParams();
+    if (filter.filter) param_ = param_.append('filter', filter.filter);
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
+    //param_ = param_.append('Sorting',filter.sorting);
+    param_ = param_.append('Status', filter.status);
+    const response = this.httpClient.get(this.clientsListUrl, { params: param_ }).pipe();
+    return response;
+  }
+
+  findClientByName(name: string) {
+    /*return this.getAllClients().filter(ele => {
       return ele.userName.includes(name);
-    })
+    })*/
+    return null;
   }
 }
