@@ -109,7 +109,8 @@ import { OpenTripComponent } from './trips-managment/open-trip/open-trip.compone
     MatNativeDateModule,
     AgmOverlays,
     AgmCoreModule.forRoot({
-      apiKey: "AIzaSyDbK718aZLiKlwzGd0IPy_qyWTWF1fY9lI",
+      //apiKey: "AIzaSyDbK718aZLiKlwzGd0IPy_qyWTWF1fY9lI",
+      apiKey: "AIzaSyD4bzBLXDJY05CYlzgXWuF9h4EoL91LRBg",
       libraries: ['places'],
       language: 'en'
     }),

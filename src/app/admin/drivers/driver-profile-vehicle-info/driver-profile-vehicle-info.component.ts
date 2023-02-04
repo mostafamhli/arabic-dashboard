@@ -1,19 +1,20 @@
-import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, ControlContainer } from '@angular/forms';
 
 @Component({
   selector: 'app-driver-profile-vehicle-info',
   templateUrl: './driver-profile-vehicle-info.component.html',
   styleUrls: ['./driver-profile-vehicle-info.component.scss']
 })
-export class DriverProfileVehicleInfoComponent {
-  vehicleInfo:FormGroup;
+export class DriverProfileVehicleInfoComponent implements OnInit {
+  driverProfile: FormGroup;
   imageFile:any;
-  constructor() {
-    this.vehicleInfo = new FormGroup({
-      
-    })
+  constructor(private controlContainer: ControlContainer) {
   }
+  ngOnInit(): void {
+    this.driverProfile = <FormGroup>this.controlContainer.control;
+  }
+
   onFileInput(files: any): void {
     var reader = new FileReader();
     this.imageFile = files;

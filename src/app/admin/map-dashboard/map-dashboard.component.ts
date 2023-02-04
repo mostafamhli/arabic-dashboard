@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { AgmMap, MapsAPILoader } from '@agm/core';
+import { ProvinceService } from 'src/app/core/services/province.service';
 declare var google: any;
 
 @Component({
@@ -9,12 +10,7 @@ declare var google: any;
 })
 export class MapDashboardComponent {
 
-  public location: any = {
-    lat: 49.63842,
-    lng: 15.2925372,
-    zoom: 6,
-    color:'#333'
-  };
+  public location: any = {};
 
   @ViewChild(AgmMap) map: AgmMap;
   _map: any;
@@ -22,12 +18,16 @@ export class MapDashboardComponent {
   afterViewinit: boolean = false;
   styles: any;
   previous: any;
-  detailsShown:any
-  constructor(public mapsApiLoader: MapsAPILoader) {
+  detailsShown: any
+  provinces: any
+  activeProvince: any
+  captains: any = []
+  constructor(public mapsApiLoader: MapsAPILoader, private provinceService: ProvinceService) {
 
   }
 
   ngOnInit() {
+    this.getProvinces()
   }
 
   testSameLocation() {
@@ -70,7 +70,11 @@ export class MapDashboardComponent {
       setTimeout(() => {
         let bounds = new google.maps.LatLngBounds();
         bounds.extend(new google.maps.LatLng(this.location.lat, this.location.lng));
+        this.captains.forEach((item:any) => {
+          bounds.extend(new google.maps.LatLng(item.vehicle.currentLocation.latitude, item.vehicle.currentLocation.longitude));
+        });
         map.fitBounds(bounds);
+        //map.setZoom(14);
       }, 2000);
     });
   }
@@ -79,11 +83,47 @@ export class MapDashboardComponent {
     setTimeout(() => {
       let bounds = new google.maps.LatLngBounds();
       bounds.extend(new google.maps.LatLng(this.location.lat, this.location.lng));
+      this.captains.forEach((item:any) => {
+        bounds.extend(new google.maps.LatLng(item.vehicle.currentLocation.latitude, item.vehicle.currentLocation.longitude));
+      });
       this._map.fitBounds(bounds);
+      //this._map.setZoom(14);
     }, 2000);
   }
 
   ngAfterViewInit() {
     this.initMapBoundaries();
+  }
+
+  getProvinces() {
+    this.provinceService.getProvinceList().subscribe((res: any) => {
+      this.provinces = res["items"];
+      if (this.provinces[0]) {
+        this.location = {
+          lat: this.provinces[0].point.latitude,
+          lng: this.provinces[0].point.longitude,
+          color: '#333'
+        };
+        this.activeProvince = this.provinces[0].id
+        this.getCaptainsByProvinceId(this.provinces[0].id);
+      }
+    }, err => { })
+  }
+
+  handleProvinceChange(i: any) {
+    this.location = {
+      lat: this.provinces[i].point.latitude,
+      lng: this.provinces[i].point.longitude,
+      color: '#333'
+    };
+    this.activeProvince = this.provinces[i].id
+    this.getCaptainsByProvinceId(this.provinces[i].id);
+  }
+
+  getCaptainsByProvinceId(id: any) {
+    this.provinceService.getCaptainByProvinceId(id).subscribe((res: any) => {
+      this.captains = res['items']
+      this.initMapBoundaries2()
+    }, err => { })
   }
 }

@@ -1,7 +1,8 @@
 <div class="map-dashboard-container">
-  <agm-map class="map-top" [latitude]="location.lat" [zoom]="location.zoom" [longitude]="location.lng"
+  <agm-map class="map-top" [latitude]="location.lat" [longitude]="location.lng" [zoom]="9"
     [mapTypeControl]="true" [fitBounds]="true" [fullscreenControl]="true">
-    <agm-overlay [latitude]="location.lat" [longitude]="location.lng">
+    <agm-overlay *ngFor="let item of captains" [latitude]="item.vehicle.currentLocation.latitude"
+    [longitude]="item.vehicle.currentLocation.longitude">
       <div class="stop-marker">
         <svg width="40" height="50" viewBox="0 0 50 58" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -30,25 +31,9 @@
     </agm-overlay>
   </agm-map>
   <div class="w-100 mt-3 x-font-bold d-flex align-items-center">
-    <div class="city-div  ms-auto me-auto d-flex align-items-center">
-      <input name="city" type="radio" id="baghdad">
-      <label class="me-3" for="baghdad">بغداد</label>
-    </div>
-    <div class="city-div  ms-auto me-auto d-flex align-items-center">
-      <input name="city" type="radio" id="anbar">
-      <label class="me-3" for="anbar">الأنبار</label>
-    </div>
-    <div class="city-div  ms-auto me-auto d-flex align-items-center">
-      <input name="city" type="radio" id="salah-aldeen">
-      <label class="me-3" for="salah-aldeen">صلاح الدين</label>
-    </div>
-    <div class="city-div  ms-auto me-auto d-flex align-items-center">
-      <input name="city" type="radio" id="nenawa">
-      <label class="me-3" for="nenawa">نينوى</label>
-    </div>
-    <div class="city-div  ms-auto me-auto d-flex align-items-center">
-      <input name="city" type="radio" id="babel">
-      <label class="me-3" for="babel">بابل</label>
+    <div class="city-div  ms-auto me-auto d-flex align-items-center" *ngFor="let item of provinces;let i =index;">
+      <input [name]="item.name" [value]="item.id" type="radio" [(ngModel)]="activeProvince" [id]="item.id" (change)="handleProvinceChange(i)">
+      <label class="me-3" [for]="item.name">{{item.name}}</label>
     </div>
   </div>
 </div>

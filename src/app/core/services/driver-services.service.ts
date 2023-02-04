@@ -2,7 +2,7 @@ import { Injectable, QueryList } from '@angular/core';
 import { AccountStatus, TransferType } from '../enums/genric.enums';
 import { Driver } from '../models/drivers.mode';
 import { environment } from 'src/environments/environment';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { FilterWithSearch } from '../models/filters.model';
 
@@ -12,22 +12,23 @@ import { FilterWithSearch } from '../models/filters.model';
 export class DriverServicesService {
   TransferTypeEnum = TransferType;
   accountStatusEnum = AccountStatus;
-  captainRequestsUrl:string
-  baseUrl:string
-  captainsListUrl:string
-  constructor(private httpClient:HttpClient) {
+  captainRequestsUrl: string
+  baseUrl: string
+  captainsListUrl: string
+  createDriverUrl: string
+  constructor(private httpClient: HttpClient) {
     this.baseUrl = environment.baseURL
   }
 
-  getDriversRequest(filter:FilterWithSearch):Observable<any> {
+  getDriversRequest(filter: FilterWithSearch): Observable<any> {
     this.captainRequestsUrl = this.baseUrl + '/api/app/manage-captains/captain-requests'
     let param_ = new HttpParams();
-    if(filter.filter) param_ = param_.append('filter',filter.filter);
-    param_ = param_.append('MaxResultCount',filter.maxResultCount);
-    param_ = param_.append('SkipCount',filter.skipCount);
+    if (filter.filter) param_ = param_.append('filter', filter.filter);
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
     //param_ = param_.append('Sorting',filter.sorting);
-    param_ = param_.append('Status',filter.status);
-    const response = this.httpClient.get(this.captainRequestsUrl,{params:param_}).pipe();
+    param_ = param_.append('Status', filter.status);
+    const response = this.httpClient.get(this.captainRequestsUrl, { params: param_ }).pipe();
     return response;
   }
 
@@ -146,15 +147,15 @@ export class DriverServicesService {
     ]
   }
 
-  getDriversList(filter:FilterWithSearch):Observable<any> {
+  getDriversList(filter: FilterWithSearch): Observable<any> {
     this.captainsListUrl = this.baseUrl + '/api/app/manage-captains/captains'
     let param_ = new HttpParams();
-    if(filter.filter) param_ = param_.append('filter',filter.filter);
-    param_ = param_.append('MaxResultCount',filter.maxResultCount);
-    param_ = param_.append('SkipCount',filter.skipCount);
+    if (filter.filter) param_ = param_.append('filter', filter.filter);
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
     //param_ = param_.append('Sorting',filter.sorting);
-    param_ = param_.append('Status',filter.status);
-    const response = this.httpClient.get(this.captainsListUrl,{params:param_}).pipe();
+    param_ = param_.append('Status', filter.status);
+    const response = this.httpClient.get(this.captainsListUrl, { params: param_ }).pipe();
     return response;
   }
 
@@ -182,7 +183,7 @@ export class DriverServicesService {
     }
   }
 
-  addIncentivesToDriver(driverId: number, formValue:any) {
+  addIncentivesToDriver(driverId: number, formValue: any) {
     return formValue;
   }
   getAllTransfers() {
@@ -241,4 +242,39 @@ export class DriverServicesService {
   }
 
 
+  createDriver(driver: any) {
+    let headers = new HttpHeaders();
+    //this is the important step. You need to set content type as null
+    headers.set('Content-Type', 'null');
+    headers.set('Accept', "multipart/form-data");
+
+    let request = new FormData();
+    request.append('firstName', driver.firstName)
+    request.append('lastName', driver.lastName)
+    request.append('phoneNumber', driver.phoneNumber)
+    request.append('gender', driver.gender)
+    request.append('provinceId',driver.provinceId)
+    /*request.append('profileImage',driver.profileImage)*/
+    request.append('licenseFrontImage', driver.licenseFrontImage)
+    request.append('licenseBackImage', driver.licenseBackImage)
+    /* request.append('idBackImage',driver.idBackImage)
+     request.append('idFrontImage',driver.idFrontImage)
+     request.append('residenceocumentFrontImage',driver.residenceocumentFrontImage)
+     request.append('residenceocumentBackImage',driver.residenceocumentBackImage)
+     request.append('securityCardImage',driver.securityCardImage)*/
+
+    request.append('vehicle.Color', driver.vehicleColor)
+    request.append('vehicle.PlateNumber', driver.vehiclePlateNumber)
+    request.append('vehicle.Model', driver.vehicleModel)
+    request.append('vehicle.ModelYear', driver.vehicleModelYear)
+    request.append('vehicle.SeatCount', driver.vehicleSeatCount)
+    /*request.append('vehicle.VehicleTypeId',driver.vehicleVehicleTypeId)
+    request.append('vehicle.Image',driver.vehicleImage)
+    request.append('vehicle.CarLicenseFrontImage',driver.vehicleCarLicenseFrontImage)
+    request.append('vehicle.CarLicenseBackImage',driver.vehicleCarLicenseBackImage)
+    request.append('vehicle.CarPlateImage',driver.vehicleCarPlateImage)*/
+    this.createDriverUrl = this.baseUrl + '/api/app/manage-captains/captain'
+    const response = this.httpClient.post(this.createDriverUrl, request, { headers }).pipe();
+    return response;
+  }
 }

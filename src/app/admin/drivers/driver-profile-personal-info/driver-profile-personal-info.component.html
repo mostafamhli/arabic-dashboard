@@ -22,7 +22,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>الجنس</mat-label>
-          <mat-select name="status" formControlName="gender">
+          <mat-select formControlName="gender">
             <mat-option value="1">ذكر</mat-option>
             <mat-option value="2">أنثى</mat-option>
           </mat-select>
@@ -41,40 +41,55 @@
     </div>
     <div class="sec_sec row w-100">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <mat-form-field appearance="fill">
+         <mat-form-field appearance="fill">
           <mat-label>المحافظة</mat-label>
           <mat-select name="provinceId" formControlName="provinceId">
-            <mat-option value="1">بغداد</mat-option>
-            <mat-option value="2">البصرة</mat-option>
+            <mat-option *ngFor="let item of provinces" [value]="''+item.id">{{item.name}}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> 
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>رقم الموبايل الاحتياطي</mat-label>
           <input matInput placeholder="رقم الموبايل الاحتياطي" #input>
-        </mat-form-field>
+        </mat-form-field> -->
       </div>
     </div>
     <div class="third_sec row w-100 mt-3">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/id1.png" (imageObject)="setIdImage($event)"
+        <app-upload-image path="/assets/img/temp/add-image.png"
           label="صورة الهوية (الوجه الأمامي)"></app-upload-image>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/driving2.png" label="صورة رخصة القيادة (الوجه الأمامي)">
+        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة الهوية (الوجه الخلفي)">
         </app-upload-image>
       </div>
     </div>
     <div class="fourth_sec row w-100 mt-3">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/id2.jpg" label="صورة الهوية (الوجه الخلفي)"></app-upload-image>
+        <app-upload-image [formGroup]="driverProfile" controlName="licenseFrontImage"  path="/assets/img/temp/add-image.png" label="صورة رخصة القيادة (الوجه الأمامي)">
+        </app-upload-image>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/driving.jpg" label="صورة رخصة القيادة (الوجه الخلفي)">
+        <app-upload-image [formGroup]="driverProfile" controlName="licenseBackImage" path="/assets/img/temp/add-image.png" label="صورة رخصة القيادة (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+    </div>
+    <div class="fourth_sec row w-100 mt-3">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الأمامي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+    </div>
+    <div class="fourth_sec row w-100 mt-3">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة البطاقة الأمنية (الوجه الأمامي)">
         </app-upload-image>
       </div>
     </div>
   </form>
-  <img [src]="temp">
 </div>

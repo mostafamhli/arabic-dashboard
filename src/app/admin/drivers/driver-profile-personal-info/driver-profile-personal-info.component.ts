@@ -1,5 +1,6 @@
-import { Component, ViewChild,OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
+import { ProvinceService } from 'src/app/core/services/province.service';
 
 @Component({
   selector: 'app-driver-profile-personal-info',
@@ -11,11 +12,20 @@ export class DriverProfilePersonalInfoComponent implements OnInit {
   driverProfile: FormGroup;
   imageFile: any
   @ViewChild('fileInput') fileInput: any
+  provinces: any
 
-  constructor(private controlContainer: ControlContainer) {
+  constructor(private controlContainer: ControlContainer, private provinceService: ProvinceService) {
+
   }
   ngOnInit(): void {
     this.driverProfile = <FormGroup>this.controlContainer.control;
+    this.getProvinces()
+  }
+
+  getProvinces() {
+    this.provinceService.getProvinceList().subscribe((res: any) => {
+      this.provinces = res["items"];
+    }, err => { })
   }
 
   onFileInput(files: any): void {
@@ -25,11 +35,5 @@ export class DriverProfilePersonalInfoComponent implements OnInit {
     reader.onload = (_event) => {
       this.imageFile = reader.result;
     };
-  }
-  temp:any
-  setIdImage($event:any){
-    if(event && event.target && event.target)
-    this.temp = event.target
-    this.temp = this.temp.result
   }
 }

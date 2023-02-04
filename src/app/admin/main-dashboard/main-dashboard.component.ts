@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DashboardServicesService } from '../../core/services/dashboard-services.service';
+
 @Component({
   selector: 'app-main-dashboard',
   templateUrl: './main-dashboard.component.html',
@@ -14,7 +15,6 @@ export class MainDashboardComponent {
 
   values: any
   total: any
-
   constructor(private dashboardServices: DashboardServicesService) {
     let now = new Date();
     let before7Days = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
@@ -39,4 +39,5 @@ export class MainDashboardComponent {
     if (this.range.value.start && this.range.value.end)
       this.dashboardServices.filter(this.range.value.start, this.range.value.end)
   }
+
 }
