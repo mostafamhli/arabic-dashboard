@@ -27,7 +27,6 @@ import { AddNewClassificationComponent } from './public-settings/vehicle-classif
 import { ReportsComponent } from './reports/reports.component';
 import { NotificationsComponent } from './notification/notifications/notifications.component';
 import { SendMessageComponent } from './notification/notifications/send-message/send-message.component';
-import { ViewClientDetailsComponent } from './clients/view-client-details/view-client-details.component';
 import { AddNewCityComponent } from './public-settings/cities/add-new-city/add-new-city.component';
 import { AddServiceComponent } from './public-settings/add-service/add-service.component';
 import { UserTransfersComponent } from './wallet/user-transfers/user-transfers.component';
@@ -79,7 +78,6 @@ const routes: Routes = [
       { path: 'reports', component: ReportsComponent },
       { path: 'notifications', component: NotificationsComponent },
       { path: 'send-message', component: SendMessageComponent },
-      { path: 'client/:id', component: ViewClientDetailsComponent },
       { path: 'transfers', component: TransfersComponent },
       { path: 'user-transfers', component: UserTransfersComponent },
       { path: 'jaytaxi-transfers', component: JaytaxiTransfersComponent },

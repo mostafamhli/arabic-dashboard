@@ -1,45 +1,54 @@
-<div class="view_request_details x-font-regular">
+<div class="view_request_details x-font-regular" *ngIf="driverRequestDetails">
   <div class="img_div">
     <div class="image">
-      <mat-icon>person</mat-icon>
-      <h1 class="x-font-bold">Test</h1>
+      <img *ngIf="driverRequestDetails.profileImageUrl && driverRequestDetails.profileImageUrl!=''" [src]="driverRequestDetails.profileImageUrl" >
+      <mat-icon *ngIf="!driverRequestDetails.profileImageUrl || driverRequestDetails.profileImageUrl ==''">person</mat-icon>
+      <h1 class="x-font-bold">{{driverRequestDetails.firstName}} {{driverRequestDetails.lastName}}</h1>
     </div>
   </div>
   <div class="row body">
     <div class="first_col col-lg-6 col-md-6 col-12">
-      <div class="info d-flex align-items-center">
+      <div class="info d-flex align-items-center" *ngIf="driverRequestDetails.email && driverRequestDetails.email!=''">
         <mat-icon>email</mat-icon>
         <div class="text">{{driverRequestDetails.email}}</div>
       </div>
       <div class="info mt-1 d-flex align-items-center">
         <mat-icon>stay_current_portrait</mat-icon>
-        <div class="text">{{driverRequestDetails.phone}}</div>
+        <div class="text" dir="ltr">{{driverRequestDetails.phoneNumber}}</div>
       </div>
-      <div class="info mt-1 d-flex align-items-center">
+      <!-- <div class="info mt-1 d-flex align-items-center">
         <mat-icon>calendar_today</mat-icon>
         <div class="text">{{driverRequestDetails.date}}</div>
-      </div>
+      </div> -->
       <div class="info mt-1 d-flex align-items-center">
         <mat-icon>location_city</mat-icon>
-        <div class="text">{{driverRequestDetails.city}}</div>
+        <div class="text">{{driverRequestDetails.provinceId}}</div>
       </div>
     </div>
-    <div class="sec_col col-lg-6 col-md-6 col-12">
+    <div class="sec_col col-lg-6 col-md-6 col-12" *ngIf="driverRequestDetails.vehicle">
       <div class="row">
         <div class="col-6 key x-font-bold">نوع السيارة</div>
-        <div class="col-6 val" (click)="accept()">انقر لاختيار نوع المركبة</div>
+        <div class="col-6 val cursor" (click)="changeVehicle()">
+          <ng-container *ngIf="driverRequestDetails.vehicle.vehicleType;else inputVehicle">
+            {{driverRequestDetails.vehicle.vehicleType.name || driverRequestDetails.vehicle.vehicleType.id}}
+          </ng-container>  
+          <ng-template #inputVehicle>
+              <ng-container *ngIf="vehicleType"> {{vehicleType.name}}</ng-container>  
+              <ng-container *ngIf="!vehicleType">انقر لاختيار نوع المركبة</ng-container>  
+          </ng-template>
+        </div>
       </div>
       <div class="row mt-1">
         <div class="col-6 key x-font-bold">موديل السيارة</div>
-        <div class="col-6 val">{{driverRequestDetails.carModel}}</div>
+        <div class="col-6 val">{{driverRequestDetails.vehicle.model}}</div>
       </div>
       <div class="row mt-1">
         <div class="col-6 key x-font-bold">لون السيارة</div>
-        <div class="col-6 val">{{driverRequestDetails.carColor}}</div>
+        <div class="col-6 val">{{driverRequestDetails.vehicle.color}}</div>
       </div>
       <div class="row mt-1">
         <div class="col-6 key x-font-bold">رقم السيارة</div>
-        <div class="col-6 val">{{driverRequestDetails.carNumber}}</div>
+        <div class="col-6 val">{{driverRequestDetails.vehicle.plateNumber}}</div>
       </div>
     </div>
   </div>
@@ -47,13 +56,13 @@
     <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" (click)="viewAssets()">
       عرض أوراق السائق المرفقة مع الطلب
     </button>
-    <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" [routerLink]="['/driver-profile',1]" routerLinkActive="router-link-active" >
+    <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" [routerLink]="['/driver-profile',driverRequestDetails.id]" routerLinkActive="router-link-active" >
       تعديل محتويات الطلب
     </button>
   </div>
   <div class="accept_reject x-font-bold row">
     <div class="col-4 d-flex">
-      <button class="btn t_btn_blue_outline">
+      <button class="btn t_btn_blue_outline" (click)="accept()">
         قبول
       </button>
     </div>

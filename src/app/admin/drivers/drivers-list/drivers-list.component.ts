@@ -40,7 +40,7 @@ export class DriversListComponent {
   confirm(item: Driver) {
     let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
       width: "40%",
-      data: item
+      data: 'هل أنت متأكد من تغيير حالة الحساب ؟'
     });
     dialog.afterClosed().subscribe((result: Driver) => {
       if (result) {
@@ -50,7 +50,9 @@ export class DriversListComponent {
   }
 
   changeDriverStatus(item: Driver) {
-    this.driverServcie.changeDriverStatus(item);
+    this.driverServcie.changeDriverStatus(item.id).subscribe(res=>{
+      item.isActive = item.isActive == 1 ? 0 : 1;
+    },err=>{})
   }
 
   loadMore() {

@@ -2,14 +2,16 @@
   <div class="assets x-font-bold">
     <h4 class="mb-5 x-font-bold w-100 text-center">الصور المرفقة</h4>
     <div class="row m-0 w-100">
-      <div class="col-6" *ngFor="let assets of requestAssets">
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img [src]="assets.image">
+      <ng-container *ngFor="let assets of requestAssets">
+        <div class="col-6" *ngIf="assets.image && assets.image != ''">
+          <div class="d-flex align-items-center asset">
+            <div class="img_div">
+              <img [src]="assets.image">
+            </div>
+            <label>{{assets.labelText}}</label>
           </div>
-          <label>{{assets.labelText}}</label>
         </div>
-      </div>
+      </ng-container>
     </div>
   </div>
 </div>

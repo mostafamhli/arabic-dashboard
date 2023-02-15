@@ -1,6 +1,6 @@
 <div class="upload_image x-font-regular">
   <div class="panel d-flex align-items-center w-100">
-    <div class="img_label">
+    <div class="img_label" [ngClass]="{'w-100': isEnableToSelect == 'false'}">
       <div class="img d-flex flex-column align-items-center" (click)="viewImage(path)">
         <img [src]="path">
       </div>
@@ -8,12 +8,12 @@
         <label class="x-font-bold">{{label}}</label>
       </div>
     </div>
-    <div class="control d-flex align-items-center">
-      <button (click)="fileInput.click()" class="btn t_btn_blue_outline">
+    <div class="control d-flex align-items-center" *ngIf="isEnableToSelect != 'false' || isEnableToDelete != 'false'">
+      <button (click)="fileInput.click()" *ngIf="isEnableToSelect != 'false'" class="btn t_btn_blue_outline">
         اختيار
       </button>
       <input #fileInput type="file" (change)="onFileInput(fileInput.files)" accept="image/*" style="display:none;" />
-      <button class="btn t_btn_red_outline small_btn_full">
+      <button *ngIf="isEnableToDelete != 'false'" (click)="deleteImage()" class="btn t_btn_red_outline small_btn_full" >
         <mat-icon>delete</mat-icon>
       </button>
     </div>

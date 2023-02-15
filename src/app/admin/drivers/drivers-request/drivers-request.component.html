@@ -25,7 +25,6 @@
           <th>اسم المستخدم</th>
           <th>تاريخ إنشاء الحساب</th>
           <th>رقم الموبايل</th>
-          <th>الحالة</th>
           <th>العمليات</th>
         </thead>
         <tbody>
@@ -37,8 +36,7 @@
               </div>
             </td>
             <td>{{item.creationTime | date:'YYY/MM/dd'}}</td>
-            <td>{{item.phoneNumber}}</td>
-            <td>{{item.status}}</td>
+            <td dir="ltr">{{item.phoneNumber}}</td>
             <td [routerLink]="['/driver-request',item.id]" routerLinkActive="router-link-active">
               <mat-icon class="cursor">edit</mat-icon>
             </td>

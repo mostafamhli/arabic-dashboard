@@ -1,4 +1,4 @@
-import { DriverRequestStatus, SortType } from '../enums/genric.enums';
+import { DriverRequestStatus, SortType, ServiceType } from '../enums/genric.enums';
 
 export class Filter {
     maxResultCount:number
@@ -19,5 +19,14 @@ export class FilterWithSearch extends Filter {
         this.status = DriverRequestStatus.Initial
         this.filter = ''
         this.sorting = SortType.Ascending
+    }
+}
+export class FilterVehiclesWithSearch extends FilterWithSearch {
+    provinceId:number
+    category:number
+    constructor() {
+        super()
+        this.provinceId = 0
+        this.category = 0
     }
 }

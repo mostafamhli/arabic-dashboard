@@ -22,7 +22,6 @@
           <th>رقم الموبايل</th>
           <th>تاريخ إنشاء الحساب</th>
           <th>رصيد السائق</th>
-          <!-- <th>رمز التفعيل</th> -->
           <th>حالة الحساب</th>
           <th>عمليات الدفع و التقارير</th>
           <th>العمليات</th>
@@ -35,12 +34,11 @@
                 <div class="me-2">{{item.firstName}} {{item.lastName}}</div>
               </div>
             </td>
-            <td>{{item.phoneNumber}}</td>
+            <td dir="ltr">{{item.phoneNumber}}</td>
             <td>{{item.accountCreationDate}}</td>
             <td>{{item.balance}}</td>
-            <!-- <td>{{item.code}}</td> -->
             <td>
-              <container-element [ngSwitch]="item.accountStatus">
+              <container-element [ngSwitch]="item.isActive">
                 <span (click)="confirm(item)" class="status active_status cursor"
                   *ngSwitchCase="accountStatusEnum.active">مفعل</span>
                 <span (click)="confirm(item)" class="status inactive_status cursor"

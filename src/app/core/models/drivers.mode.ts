@@ -3,13 +3,13 @@
 import { AccountStatus, TransferType } from '../enums/genric.enums';
 
 export class Driver {
-    id: number
+    id: string
     name: string
     accountCreationDate: any
     phoneNumber: string
     balance: number
     code: number
-    accountStatus: number
+    isActive: number
     firstName:string
     lastName:string
     profileImageUrl:string
@@ -18,9 +18,9 @@ export class Driver {
             this.name = ""
             this.accountCreationDate = undefined
             this.phoneNumber = ""
-            this.id = 0
+            this.id = ""
             this.balance = 0
-            this.accountStatus = AccountStatus.inActive
+            this.isActive = AccountStatus.inActive
             this.code = 0
             this.firstName = ""
             this.lastName = ""
@@ -31,7 +31,7 @@ export class Driver {
             this.phoneNumber = d.phoneNumber
             this.accountCreationDate = d.accountCreationDate
             this.code = d.code
-            this.accountStatus = d.accountStatus
+            this.isActive = d.isActive
             this.balance = d.balance
             this.firstName = d.firstName
             this.lastName = d.lastName

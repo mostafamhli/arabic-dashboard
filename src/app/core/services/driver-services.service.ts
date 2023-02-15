@@ -1,10 +1,10 @@
 import { Injectable, QueryList } from '@angular/core';
-import { AccountStatus, TransferType } from '../enums/genric.enums';
+import { AccountStatus, TransferType, PageType } from '../enums/genric.enums';
 import { Driver } from '../models/drivers.mode';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FilterWithSearch } from '../models/filters.model';
+import { FilterWithSearch, FilterVehiclesWithSearch } from '../models/filters.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,63 +33,15 @@ export class DriverServicesService {
   }
 
   getDriverRequestDetails(id: number) {
-    console.log(id)
-    return {
-      email: 'mostafa@gmail.com',
-      phone: '+963949394417',
-      date: '12-8-2022',
-      city: 'بغداد',
-      carType: 'مركبة صغيرة',
-      carModel: 'مازدا',
-      carColor: 'أحمر',
-      carNumber: 123456
-    }
+    let getDriverDetailsUrl = this.baseUrl + `/api/app/manage-captains/${id}`
+    const response = this.httpClient.get(getDriverDetailsUrl).pipe();
+    return response;
   }
 
-  getDriverRequestAssets(id: number) {
-    return [
-      {
-        image: "/assets/img/temp/id1.png",
-        labelText: "صورة رخصة القيادة (الوجه الأمامي)"
-      },
-      {
-        image: "/assets/img/temp/id1.png",
-        labelText: "رخصة السيارة (الوجه الأمامي)"
-      },
-      {
-        image: "/assets/img/temp/id1.png",
-        labelText: "صورة رخصة القيادة (الوجه الخلفي)"
-      },
-      {
-        image: "/assets/img/temp/id1.png",
-        labelText: "رخصة السيارة (الوجه الخلفي)"
-      },
-    ]
-  }
-
-  getAllVehicles() {
-    return [
-      {
-        id: 1,
-        name: "سيارة",
-        path: "/assets/img/vehicles/car.png",
-      },
-      {
-        id: 2,
-        name: "ونش",
-        path: "/assets/img/vehicles/wnch.png",
-      },
-      {
-        id: 3,
-        name: "سيارة VIP",
-        path: "/assets/img/vehicles/vip.png",
-      },
-      {
-        id: 4,
-        name: "توك توك",
-        path: "/assets/img/vehicles/toktok.png",
-      }
-    ]
+  acceptDriver(body: any) {
+    let acceptDriverUrl = this.baseUrl + '/api/app/manage-captains/process-captain-request'
+    const response = this.httpClient.post(acceptDriverUrl, body).pipe();
+    return response;
   }
 
   getVehiclesTypes() {
@@ -112,39 +64,18 @@ export class DriverServicesService {
     ]
   }
 
-  getToktoksType() {
-    return [
-      {
-        id: 1,
-        name: "توك توك",
-        path: "/assets/img/vehicles/toktok.png",
-      },
-      {
-        id: 2,
-        name: "توك توك",
-        path: "/assets/img/vehicles/toktok.png",
-      }
-    ]
-  }
-
-  getCars() {
-    return [
-      {
-        id: 1,
-        name: "سيارة",
-        path: "/assets/img/vehicles/car.png",
-      },
-      {
-        id: 2,
-        name: "ونش",
-        path: "/assets/img/vehicles/wnch.png",
-      },
-      {
-        id: 3,
-        name: "سيارة VIP",
-        path: "/assets/img/vehicles/vip.png",
-      }
-    ]
+  getVehicles(filter: FilterVehiclesWithSearch) {
+    let getVehiclesUrl = this.baseUrl + '/api/app/manage-vehicle-types'
+    let param_ = new HttpParams();
+    if (filter.filter) param_ = param_.append('filter', filter.filter);
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
+    param_ = param_.append('ProvinceId', filter.provinceId);
+    param_ = param_.append('Category', filter.category);
+    //param_ = param_.append('Sorting',filter.sorting);
+    //param_ = param_.append('Status', filter.status);
+    const response = this.httpClient.get(getVehiclesUrl, { params: param_ }).pipe();
+    return response;
   }
 
   getDriversList(filter: FilterWithSearch): Observable<any> {
@@ -159,12 +90,10 @@ export class DriverServicesService {
     return response;
   }
 
-  changeDriverStatus(driver: Driver) {
-    /*let driverIndex = this.getDriversList().findIndex(item => item.id == driver.id);
-    if (driverIndex != -1) {
-      return this.getDriversList()[driverIndex].accountStatus = driver.accountStatus;
-    }*/
-    return null;
+  changeDriverStatus(accountId: string) {
+    let changeCaptainStatusUrl = this.baseUrl + `/api/app/manage-captains/${accountId}/switch-active`
+    const response = this.httpClient.post(changeCaptainStatusUrl, {}).pipe();
+    return response;
   }
 
   getDriverDetails(id: number, begin?: any, end?: any) {
@@ -253,28 +182,48 @@ export class DriverServicesService {
     request.append('lastName', driver.lastName)
     request.append('phoneNumber', driver.phoneNumber)
     request.append('gender', driver.gender)
-    request.append('provinceId',driver.provinceId)
-    /*request.append('profileImage',driver.profileImage)*/
+    request.append('provinceId', driver.provinceId)
+    request.append('profileImage', driver.profileImageUrl)
     request.append('licenseFrontImage', driver.licenseFrontImage)
     request.append('licenseBackImage', driver.licenseBackImage)
-    /* request.append('idBackImage',driver.idBackImage)
-     request.append('idFrontImage',driver.idFrontImage)
-     request.append('residenceocumentFrontImage',driver.residenceocumentFrontImage)
-     request.append('residenceocumentBackImage',driver.residenceocumentBackImage)
-     request.append('securityCardImage',driver.securityCardImage)*/
+    request.append('idBackImage', driver.idBackImage)
+    request.append('idFrontImage', driver.idFrontImage)
+    request.append('residenceCardFrontImage', driver.residenceocumentFrontImage)
+    request.append('residenceCardBackImage', driver.residenceocumentBackImage)
+    request.append('securityCardImage', driver.securityCardImage)
+    request.append('deleteProfileImage', driver.deleteProfileImage)
+    request.append('deleteIdFrontImage', driver.deleteIdFrontImage)
+    request.append('deleteIdBackImage', driver.deleteIdBackImage)
+    request.append('deleteResidenceCardFrontImage', driver.deleteResidenceCardFrontImage)
+    request.append('deleteResidenceCardBackImage', driver.deleteResidenceCardBackImage)
+    request.append('deleteSecurityCardImage', driver.deleteSecurityCardImage)
+    
 
     request.append('vehicle.Color', driver.vehicleColor)
     request.append('vehicle.PlateNumber', driver.vehiclePlateNumber)
     request.append('vehicle.Model', driver.vehicleModel)
     request.append('vehicle.ModelYear', driver.vehicleModelYear)
     request.append('vehicle.SeatCount', driver.vehicleSeatCount)
-    /*request.append('vehicle.VehicleTypeId',driver.vehicleVehicleTypeId)
-    request.append('vehicle.Image',driver.vehicleImage)
-    request.append('vehicle.CarLicenseFrontImage',driver.vehicleCarLicenseFrontImage)
-    request.append('vehicle.CarLicenseBackImage',driver.vehicleCarLicenseBackImage)
-    request.append('vehicle.CarPlateImage',driver.vehicleCarPlateImage)*/
-    this.createDriverUrl = this.baseUrl + '/api/app/manage-captains/captain'
-    const response = this.httpClient.post(this.createDriverUrl, request, { headers }).pipe();
+    request.append('vehicle.VehicleTypeId', driver.vehicleVehicleTypeId)
+    request.append('vehicle.Image', driver.vehicleImage)
+    request.append('vehicle.CarLicenseFrontImage', driver.vehicleCarLicenseFrontImage)
+    request.append('vehicle.CarLicenseBackImage', driver.vehicleCarLicenseBackImage)
+    request.append('vehicle.PlateImage', driver.vehicleCarPlateImage)
+    request.append('deleteVehicleImage', driver.deleteVehicleImage)
+    request.append('deleteCarLicenseFrontImage', driver.deleteCarLicenseFrontImage)
+    request.append('deleteCarLicenseBackImage', driver.deleteCarLicenseBackImage)
+    let pageType = driver.id
+    console.log(pageType)
+    let response;
+    if (pageType) {
+      request.append('id', driver.id)
+      let editDriverUrl = this.baseUrl + '/api/app/manage-captains/captain'
+      response = this.httpClient.put(editDriverUrl, request, { headers }).pipe();
+    }
+    else {
+      let createDriverUrl = this.baseUrl + '/api/app/manage-captains/captain'
+      response = this.httpClient.post(createDriverUrl, request, { headers }).pipe();
+    }
     return response;
   }
 }

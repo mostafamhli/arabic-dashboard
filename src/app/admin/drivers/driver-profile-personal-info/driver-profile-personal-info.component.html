@@ -1,12 +1,12 @@
-<div class="driver_profile_personal_info x-font-regular">
+<div class="driver_profile_personal_info x-font-regular" *ngIf="(driverProfile && driverProfile.value.firstName) || pageType == pageTypeEnum.Create">
   <form [formGroup]="driverProfile">
     <div class="first_sec row w-100">
       <div
         class="col-lg-2 col-md-2 col-sm-12 col-12 mb-lg-0 mb-md-0 mb-3 d-flex flex-column align-items-center justify-content-center">
-        <div class="img_div_for_edit">
+        <div class="img_div_for_edit mb-1">
           <div class="image">
-            <img *ngIf="imageFile" [src]="imageFile">
-            <mat-icon *ngIf="!imageFile">person</mat-icon>
+            <img *ngIf="imageFile || (driverProfile.value.profileImageUrl && driverProfile.value.profileImageUrl != '')" [src]="imageFile || driverProfile.value.profileImageUrl">
+            <mat-icon *ngIf="!imageFile && (!driverProfile.value.profileImageUrl|| driverProfile.value.profileImageUrl == '')">person</mat-icon>
             <div class="edit-div" (click)="fileInput.click()">
               <mat-icon class="edit-icon">edit</mat-icon>
             </div>
@@ -14,6 +14,8 @@
               style="display:none;" />
           </div>
         </div>
+        المحافظة :
+        {{driverProfile.value.provinceName}} 
       </div>
       <div class="col-lg-5 col-md-5 col-sm-12 col-12">
         <mat-form-field>
@@ -22,9 +24,8 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>الجنس</mat-label>
-          <mat-select formControlName="gender">
-            <mat-option value="1">ذكر</mat-option>
-            <mat-option value="2">أنثى</mat-option>
+          <mat-select formControlName="gender" name="gender">
+            <mat-option *ngFor="let item of genders" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -35,59 +36,82 @@
         </mat-form-field>
         <mat-form-field>
           <mat-label>رقم الموبايل</mat-label>
-          <input [disabled]="true" formControlName="phoneNumber" matInput placeholder="رقم الموبايل" #input>
+          <input dir="ltr" formControlName="phoneNumber" matInput placeholder="رقم الموبايل" #input>
         </mat-form-field>
       </div>
     </div>
     <div class="sec_sec row w-100">
-      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-         <mat-form-field appearance="fill">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12" *ngIf="pageType == pageTypeEnum.Create">
+        <mat-form-field appearance="fill">
           <mat-label>المحافظة</mat-label>
           <mat-select name="provinceId" formControlName="provinceId">
-            <mat-option *ngFor="let item of provinces" [value]="''+item.id">{{item.name}}</mat-option>
+            <mat-option *ngFor="let item of provinces" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
-        </mat-form-field> 
-      </div>
+        </mat-form-field>
+      </div> 
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <!-- <mat-form-field>
+        <mat-form-field>
           <mat-label>رقم الموبايل الاحتياطي</mat-label>
-          <input matInput placeholder="رقم الموبايل الاحتياطي" #input>
-        </mat-form-field> -->
+          <input dir="ltr" matInput formControlName="secondPhoneNumber" placeholder="رقم الموبايل الاحتياطي" #input>
+        </mat-form-field>
       </div>
     </div>
-    <div class="third_sec row w-100 mt-3">
+    <!-- <div class="third_sec row w-100 mt-3">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/add-image.png"
-          label="صورة الهوية (الوجه الأمامي)"></app-upload-image>
+        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة الهوية (الوجه الأمامي)"></app-upload-image>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
         <app-upload-image path="/assets/img/temp/add-image.png" label="صورة الهوية (الوجه الخلفي)">
         </app-upload-image>
       </div>
-    </div>
+    </div> -->
     <div class="fourth_sec row w-100 mt-3">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image [formGroup]="driverProfile" controlName="licenseFrontImage"  path="/assets/img/temp/add-image.png" label="صورة رخصة القيادة (الوجه الأمامي)">
+        <app-upload-image [formGroup]="driverProfile" controlName="licenseFrontImage"
+          isEnableToDelete="false" deleteControlName=""
+          path="/assets/img/temp/add-image.png" label="صورة رخصة القيادة (الوجه الأمامي)">
         </app-upload-image>
       </div>
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image [formGroup]="driverProfile" controlName="licenseBackImage" path="/assets/img/temp/add-image.png" label="صورة رخصة القيادة (الوجه الخلفي)">
-        </app-upload-image>
-      </div>
-    </div>
-    <div class="fourth_sec row w-100 mt-3">
-      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الأمامي)">
-        </app-upload-image>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الخلفي)">
+        <app-upload-image [formGroup]="driverProfile" controlName="licenseBackImage"
+        isEnableToDelete="false" deleteControlName=""
+        path="/assets/img/temp/add-image.png" label="صورة رخصة القيادة (الوجه الخلفي)">
         </app-upload-image>
       </div>
     </div>
     <div class="fourth_sec row w-100 mt-3">
       <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-        <app-upload-image path="/assets/img/temp/add-image.png" label="صورة البطاقة الأمنية (الوجه الأمامي)">
+        <app-upload-image [formGroup]="driverProfile" controlName="idFrontImage"
+        isEnableToDelete="true" deleteControlName="deleteIdFrontImage"
+        path="/assets/img/temp/add-image.png" label="صورة الهوية (الوجه الأمامي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image [formGroup]="driverProfile" controlName="idBackImage"
+        isEnableToDelete="true" deleteControlName="deleteIdBackImage"  
+        path="/assets/img/temp/add-image.png" label="صورة الهوية (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+    </div>
+    <div class="fourth_sec row w-100 mt-3">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image [formGroup]="driverProfile" controlName="residenceocumentFrontImage"
+        isEnableToDelete="true" deleteControlName="deleteResidenceCardFrontImage"  
+        path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الأمامي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image [formGroup]="driverProfile" controlName="residenceocumentBackImage"
+        isEnableToDelete="true" deleteControlName="deleteResidenceCardBackImage"    
+        path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+    </div>
+    <div class="fourth_sec row w-100 mt-3">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <app-upload-image [formGroup]="driverProfile" controlName="securityCardImage"
+        isEnableToDelete="true" deleteControlName="deleteSecurityCardImage"    
+        path="/assets/img/temp/add-image.png" label="صورة البطاقة الأمنية (الوجه الأمامي)">
         </app-upload-image>
       </div>
     </div>

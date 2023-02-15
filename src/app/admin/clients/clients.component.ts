@@ -47,15 +47,15 @@ export class ClientsComponent {
   confirm(item: any) {
     let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
       width: "40%",
-      data: item
+      data: 'هل متأكد من تغيير حالة الحساب ؟'
     })
     dialog.afterClosed().subscribe((result: any) => {
       if (result) {
-        let clientIndex = this.clients.findIndex(a => a.id == result.id)
-        if (clientIndex != -1) {
-          this.clients[clientIndex].accountStatus = result.accountStatus
-          console.log(this.clients[clientIndex])
-        }
+       this.clientServices.changeClientStatus(item.id).subscribe(res=>{
+        item.isActive = item.isActive == 1 ? 0 : 1;
+       },err=>{})
+      } else {
+        
       }
     })
   }

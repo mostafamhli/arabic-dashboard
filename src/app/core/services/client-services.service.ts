@@ -30,10 +30,9 @@ export class ClientServicesService {
     return response;
   }
 
-  findClientByName(name: string) {
-    /*return this.getAllClients().filter(ele => {
-      return ele.userName.includes(name);
-    })*/
-    return null;
+  changeClientStatus(accountId:string){
+    let changeClientStatusUrl = this.baseUrl + `/api/app/customer/${accountId}/switch-active`
+    const response = this.httpClient.post(changeClientStatusUrl,{}).pipe();
+    return response;
   }
 }
