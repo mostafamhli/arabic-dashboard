@@ -1,18 +1,18 @@
 <div class="wizard d-flex align-items-center w-100 justify-content-center x-font-bold">
-  <div *ngFor="let city of cities" class="tab" (click)="activeCityTab = city.id">
-    <div class="city d-flex flex-column justify-content-center align-items-center"
+  <div *ngFor="let city of cities" class="tab" (click)="activeCityTab = city.id;">
+    <div class="city d-flex flex-column justify-content-center align-items-center"  (click)="onChangeCity(city.id);"
       [ngClass]="{active: activeCityTab == city.id}">
       <div class="img-div  d-flex flex-column justify-content-center align-items-center">
-        <img [src]="city.pic">
+        <img [src]="city?.imageUrl">
       </div>
-      <div class="text text-center">{{city.name}}</div>
+      <div class="text text-center">{{city?.name}}</div>
     </div>
   </div>
 </div>
 <div class="d-flex flex-column align-items-center w-100 mt-3 mb-3">
   <div class="d-flex align-items-center">
     <div class="d-flex align-items-center input-label" *ngFor="let vehicleType of vehicleTypes">
-      <input class="ms-1" type="radio" name="vehicleType" [id]="vehicleType.id">
+      <input class="ms-1" type="radio" name="vehicleType" (change)="onChangeType(vehicleType.id)" [id]="vehicleType.id">
       {{vehicleType.name}}
     </div>
   </div>
@@ -29,9 +29,9 @@
     <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
       <mat-form-field>
         <mat-label>بحث</mat-label>
-        <input matInput (keyup)="getClassifications()" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد"
+        <input matInput  (keyup)="filter.skipCount=0;getClassifications();" [(ngModel)]="filter.filter"placeholder=" ابحث عن ما تريد"
           #input>
-        <mat-icon matSuffix (click)="search(input)">search</mat-icon>
+        <mat-icon matSuffix (click)="getClassifications()">search</mat-icon>
       </mat-form-field>
     </div>
   </div>
@@ -50,12 +50,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of classifications">
-            <td>{{item.classificationName}}</td>
-            <td>{{item.numOfSeat}}</td>
-            <td>{{item.rentDuringMorning}}</td>
-            <td>{{item.rentDuringDay}}</td>
-            <td>{{item.rentDuringNight}}</td>
-            <td>{{item.driverRatio}}</td>
+            <td>{{item?.name}}</td>
+            <td>{{item?.seatCount}}</td>
+            <td>{{item?.shiftCostFactors[0]?.costFactor}}</td>
+            <td>{{item?.shiftCostFactors[1]?.costFactor}}</td>
+            <td>{{item?.shiftCostFactors[2]?.costFactor}}</td>
+            <td>{{item?.captainPercentage}}</td>
             <td>
               <mat-icon [routerLink]="['/classification-edit',item.id]" routerLinkActive="router-link-active"
                 class="cursor">edit</mat-icon>

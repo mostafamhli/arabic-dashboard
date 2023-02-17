@@ -8,11 +8,11 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="generalFields">
     <div class="row mb-5">
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-        <app-add-image [dimension]="100"></app-add-image>
+        <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="image" ></app-add-image>
         <span>صورة</span>
       </div>
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-        <app-add-image [dimension]="100"></app-add-image>
+        <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="icon"></app-add-image>
         <span>أيقونة</span>
       </div>
     </div>
@@ -84,8 +84,8 @@
           <div class="form-item col-6">
             <mat-form-field class="example-full-width">
               <mat-label>الكلفة</mat-label>
-              <input matInput name="morningTen_M" formControlName="morningTen_M">
-              <mat-error *ngIf="generalFields.controls.morningTen_M.invalid">{{getErrorRequiredMessage()}}
+              <input matInput name="morningStoppingFactor" formControlName="morningStoppingFactor">
+              <mat-error *ngIf="generalFields.controls.morningStoppingFactor.invalid">{{getErrorRequiredMessage()}}
               </mat-error>
             </mat-form-field>
           </div>
@@ -111,6 +111,42 @@
             </mat-form-field>
           </div>
 
+          <h6 class="x-font-regular col-6">
+            الفرق بين تقدير غوغل لزمن الرحلة وزمنها الحقيقي
+          </h6>
+          <h6 class="x-font-regular col-6">
+            الزمن الذي ينتظره الزبون ليتم تخديمه من منطقة الى اخرى
+          </h6>
+
+          <div class="form-item col-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>الزمن</mat-label>
+              <input matInput name="morningtimeDifferenceFactor" formControlName="morningtimeDifferenceFactor">
+              <mat-error *ngIf="generalFields.controls.morningtimeDifferenceFactor.invalid">{{getErrorRequiredMessage()}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-item col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>
+                 المجال الأول
+              </mat-label>
+              <input matInput name="morningFirstWaitingTime" formControlName="morningFirstWaitingTime">
+              <mat-error *ngIf="generalFields.controls.morningFirstWaitingTime.invalid">
+                {{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-item col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>
+                 المجال الثاني
+              </mat-label> <input matInput name="morningSecondWaitingTime" formControlName="morningSecondWaitingTime">
+              <mat-error *ngIf="generalFields.controls.morningSecondWaitingTime.invalid">
+                {{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
           <h6 class="x-font-regular col-12">الرحلة المفتوحة</h6>
           <div class="jay_taxi_table">
             <div class="table_div d-flex flex-column align-items-center">
@@ -120,10 +156,10 @@
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of openTripCost.morning">
-                    <td>{{item.openTripTime}}</td>
+                  <tr *ngFor="let item of shiftPackages; index as i">
+                    <td>{{item.arName}}</td>
                     <td>
-                      <input type="text" class="form-control text-center">
+                      <input type="text" formControlName="morningShiftPackages{{i}}" (click)="inputClicked($event)" class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -191,6 +227,44 @@
             </mat-form-field>
           </div>
 
+          
+          <h6 class="x-font-regular col-6">
+            الفرق بين تقدير غوغل لزمن الرحلة وزمنها الحقيقي
+          </h6>
+          <h6 class="x-font-regular col-6">
+            الزمن الذي ينتظره الزبون ليتم تخديمه من منطقة الى اخرى
+          </h6>
+
+          <div class="form-item col-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>الزمن</mat-label>
+              <input matInput name="daytimeDifferenceFactor" formControlName="daytimeDifferenceFactor">
+              <mat-error *ngIf="generalFields.controls.daytimeDifferenceFactor.invalid">{{getErrorRequiredMessage()}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-item col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>
+                 المجال الأول
+              </mat-label>
+              <input matInput name="dayFirstWaitingTime" formControlName="dayFirstWaitingTime">
+              <mat-error *ngIf="generalFields.controls.dayFirstWaitingTime.invalid">
+                {{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-item col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>
+                 المجال الثاني
+              </mat-label> <input matInput name="daySecondWaitingTime" formControlName="daySecondWaitingTime">
+              <mat-error *ngIf="generalFields.controls.daySecondWaitingTime.invalid">
+                {{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
           <h6 class="x-font-regular col-12">الرحلة المفتوحة</h6>
           <div class="jay_taxi_table">
             <div class="table_div d-flex flex-column align-items-center">
@@ -200,10 +274,10 @@
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of openTripCost.day">
+                  <tr *ngFor="let item of shiftPackages; index as i">
                     <td>{{item.openTripTime}}</td>
                     <td>
-                      <input type="text" class="form-control text-center">
+                      <input formControlName="dayShiftPackages{{i}}"  type="text" class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -270,6 +344,44 @@
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
           </div>
+
+          <h6 class="x-font-regular col-6">
+            الفرق بين تقدير غوغل لزمن الرحلة وزمنها الحقيقي
+          </h6>
+          <h6 class="x-font-regular col-6">
+            الزمن الذي ينتظره الزبون ليتم تخديمه من منطقة الى اخرى
+          </h6>
+
+          <div class="form-item col-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>الزمن</mat-label>
+              <input matInput name="nighttimeDifferenceFactor" formControlName="nighttimeDifferenceFactor">
+              <mat-error *ngIf="generalFields.controls.nighttimeDifferenceFactor.invalid">{{getErrorRequiredMessage()}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="form-item col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>
+                 المجال الأول
+              </mat-label>
+              <input matInput name="nightFirstWaitingTime" formControlName="nightFirstWaitingTime">
+              <mat-error *ngIf="generalFields.controls.nightFirstWaitingTime.invalid">
+                {{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="form-item col-3">
+            <mat-form-field class="example-full-width">
+              <mat-label>
+                 المجال الثاني
+              </mat-label> <input matInput name="nightSecondWaitingTime" formControlName="nightSecondWaitingTime">
+              <mat-error *ngIf="generalFields.controls.nightSecondWaitingTime.invalid">
+                {{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+          </div>
+
+
           <h6 class="x-font-regular col-12">
             الرحلة المفتوحة
           </h6>
@@ -281,10 +393,10 @@
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of openTripCost.night">
+                  <tr *ngFor="let item of shiftPackages; index as i">
                     <td>{{item.openTripTime}}</td>
                     <td>
-                      <input type="text" class="form-control text-center">
+                      <input formControlName="nightShiftPackages{{i}}" type="text" class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>

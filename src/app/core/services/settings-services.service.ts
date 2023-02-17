@@ -1,5 +1,8 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { AccountStatus } from '../enums/genric.enums';
+import { FilterWithSearch } from '../models/filters.model';
 import { Role } from '../models/roles.model';
 
 @Injectable({
@@ -7,9 +10,12 @@ import { Role } from '../models/roles.model';
 })
 export class SettingsServicesService {
 
+  baseUrl = environment.baseURL;
   accountStatusEnum = AccountStatus
 
-  constructor() { }
+  selectedProv = ''
+  selectedType = ''
+  constructor(private http: HttpClient) { }
 
   getAllDashboardUsers() {
     return [
@@ -115,72 +121,56 @@ export class SettingsServicesService {
     ]
   }
 
+  getCities() {
+    return []
+  }
+
   getVehicleTypes() {
     return [
       {
         id: 1,
         name: 'جاي تكسي',
-        image:'../../../../assets/img/vehicles/car.png'
+        image: '../../../../assets/img/vehicles/car.png'
       },
       {
         id: 2,
         name: 'آليات',
-        image:'../../../../assets/img/vehicles/wnch.png'
+        image: '../../../../assets/img/vehicles/wnch.png'
       },
       {
         id: 3,
         name: 'توك توك',
-        image:'../../../../assets/img/vehicles/toktok.png'
+        image: '../../../../assets/img/vehicles/toktok.png'
       }]
   }
 
-  getAllClassificationes() {
-    return [
-      {
-        id: 1,
-        classificationName: 'comfort',
-        numOfSeat: 5,
-        rentDuringMorning: 12,
-        rentDuringDay: 10,
-        rentDuringNight: 20,
-        driverRatio: 10
-      },
-      {
-        id: 2,
-        classificationName: 'classic',
-        numOfSeat: 5,
-        rentDuringMorning: 12,
-        rentDuringDay: 10,
-        rentDuringNight: 20,
-        driverRatio: 10
-      },
-      {
-        id: 3,
-        classificationName: 'comfort',
-        numOfSeat: 5,
-        rentDuringMorning: 12,
-        rentDuringDay: 10,
-        rentDuringNight: 20,
-        driverRatio: 10
-      }
-    ]
-  }
-
-  searchInClassificationTableByName(name: string) {
-    return this.getAllClassificationes().filter(item => {
-      return item.classificationName.includes(name);
-    })
+  getAllClassificationes(filter: FilterWithSearch, city?: any, type?: any) {
+    console.log(filter)
+    let param_ = new HttpParams();
+    if (filter.filter) param_ = param_.append('filter', filter.filter);
+    if (city) param_ = param_.append('ProvinceId', city);
+    if (type) param_ = param_.append('Category', type);
+    return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`,{ params: param_ })
   }
 
   addNewClassification(formValue: any) {
-    return formValue
+    formValue.forEach((ele: any) => {
+      console.log(ele)
+    });
+    return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue)
+  }
+
+  getClassificationById(id:any) {
+    return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types/${id}`)
+  }
+
+  getOpenTrips() {
+    return this.http.get(this.baseUrl + '/api/app/manage-vehicle-types/packages')
   }
 
   deleteClassification(id: number) {
     console.log(id)
-    return this.getAllClassificationes().filter(item => {
-      return item.id !== id
-    })
+
   }
 
   getAllRoles() {
@@ -223,38 +213,6 @@ export class SettingsServicesService {
 
   changeRoleAccountStatus(item: Role) {
     console.log(item);
-  }
-
-  getCities() {
-    return [
-      {
-        id:1,
-        arabicName: 'بغداد',
-        englishName:'Baghdad',
-        pic: '../../../../assets/img/baghdad.png',
-        firstValueAtFirstRange: 5,
-        secondValueAtFirstRange: 9,
-        secondValueAtSecondRange: 15,
-      },
-      {
-        id:2,
-        arabicName: 'الموصل',
-        englishName:'AL-Mosoul',
-        pic: '../../../../assets/img/basra.png',
-        firstValueAtFirstRange: 3,
-        secondValueAtFirstRange: 8,
-        secondValueAtSecondRange: 16,
-      },
-      {
-        id:3,
-        arabicName: 'الأنبار',
-        englishName: 'Al-Anbar',
-        pic: '../../../../assets/img/baghdad.png',
-        firstValueAtFirstRange: 2,
-        secondValueAtFirstRange: 8,
-        secondValueAtSecondRange: 20,
-      }
-    ]
   }
 
   addNewCity(formValue: any) {
