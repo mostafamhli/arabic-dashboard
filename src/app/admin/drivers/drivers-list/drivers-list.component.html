@@ -35,7 +35,7 @@
               </div>
             </td>
             <td dir="ltr">{{item.phoneNumber}}</td>
-            <td>{{item.accountCreationDate}}</td>
+            <td>{{toLocalString(item.creationTime) | date:'YY/MM/dd HH:mm'}}</td>
             <td>{{item.balance}}</td>
             <td>
               <container-element [ngSwitch]="item.isActive">
@@ -61,7 +61,7 @@
       </table>
     </div>
   </div>
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult && drivers && drivers.length">
     <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
       تحميل المزيد
     </button>

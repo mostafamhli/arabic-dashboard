@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { DiscountCodeStatus } from '../enums/genric.enums';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
+import { FilterVehiclesWithSearch, FilterWithSearch, FilterOrders } from '../models/filters.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,128 +12,42 @@ export class TripsServicesService {
 
 
   discountCodeStatusEnum = DiscountCodeStatus
-    baseUrl:string
-  addCancelReasonUrl:string
-  getCancelReasonesUrl:string
+  baseUrl: string
+  addCancelReasonUrl: string
+  getCancelReasonesUrl: string
 
-  constructor(private httpClient:HttpClient) {
+  constructor(private httpClient: HttpClient) {
     this.baseUrl = environment.baseURL
     this.addCancelReasonUrl = this.baseUrl + '/api/app/cancellation-reason'
     this.getCancelReasonesUrl = this.baseUrl + '/api/app/cancellation-reason/for-dashboard'
   }
 
-  getAllTrips() {
-    return [
-      {
-        id: 1,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 2,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 3,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 4,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 5,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 6,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      },
-      {
-        id: 7,
-        driverName: 'Mostafa Mhli',
-        clientName: 'Yazan Abbas',
-        tripState: 'مؤكدة',
-        tripType: 'عادية',
-        tripDate: moment().format('DD-MM-YYYY'),
-        tripTime: '10:58',
-        tripCost: 10000
-      }
-    ]
+  getAllTrips(filter: FilterOrders) {
+    let getTripsUrl = this.baseUrl + '/api/app/order'
+    let param_ = new HttpParams();
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
+    if (filter.captainId) param_ = param_.append('CaptainId', filter.captainId);
+    if (filter.clientId) param_ = param_.append('ClientId', filter.clientId);
+    if (filter.isOpen) param_ = param_.append('IsOpen', filter.isOpen);
+    if (filter.orderStatus) param_ = param_.append('OrderStatus', filter.orderStatus);
+    if (filter.fromDate) param_ = param_.append('FromDate', filter.fromDate.toLocaleString())
+    if (filter.toDate) param_ = param_.append('ToDate', filter.toDate.toLocaleString());
+    const response = this.httpClient.get(getTripsUrl, { params: param_ }).pipe();
+    return response
   }
 
   findTrip(formValue: any) {
     return formValue
   }
 
-  getAllDiscountCodes() {
-    return [
-      {
-        id: 1,
-        discountName: 'ABCDEFG',
-        discountCode: 'abcdef',
-        maxUsing : 10,
-        usingTimes: 5,
-        discountValue: 90,
-        outDate: '22-12-2022',
-        discountCodeStatus: DiscountCodeStatus.inActive,
-      },
-      {
-        id: 2,
-        discountName: 'ABCDEFG',
-        discountCode: 'abcdef',
-        maxUsing : 9,
-        usingTimes: 8,
-        discountValue: 90,
-        outDate: '22-12-2022',
-        discountCodeStatus: DiscountCodeStatus.active,
-      },
-      {
-        id: 3,
-        discountName: 'ABCDEFG',
-        discountCode: 'abcdef',
-        maxUsing : 9,
-        usingTimes: 5,
-        discountValue: 90,
-        outDate: '22-12-2022',
-        discountCodeStatus: DiscountCodeStatus.inActive,
-      },
-    ]
+  getAllDiscountCodes(filter: FilterWithSearch) {
+    let getVehiclesUrl = this.baseUrl + '/api/app/coupon'
+    let param_ = new HttpParams();
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
+    const response = this.httpClient.get(getVehiclesUrl, { params: param_ }).pipe();
+    return response;
   }
 
   addDiscountCode(formValue: any) {
@@ -140,9 +55,7 @@ export class TripsServicesService {
   }
 
   deleteDiscountCode(id: number) {
-    return this.getAllDiscountCodes().filter(item => {
-      return item.id !== id
-    })
+    return []
   }
 
   deleteOpentripType(id: number) {
@@ -170,7 +83,7 @@ export class TripsServicesService {
     ]
   }
 
-  getAllCancleReason():Observable<any> {
+  getAllCancleReason(): Observable<any> {
     const response = this.httpClient.get(this.getCancelReasonesUrl).pipe();
     return response;
   }
@@ -182,7 +95,7 @@ export class TripsServicesService {
   }
 
   addCancleReason(reason: any) {
-    const response = this.httpClient.post(this.addCancelReasonUrl,reason).pipe();
+    const response = this.httpClient.post(this.addCancelReasonUrl, reason).pipe();
     return response;
   }
 }

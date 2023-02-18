@@ -21,6 +21,7 @@ export class DriverProfileComponent {
   pageType = PageType.Create
   pageTypeEnum = PageType
   driverProfile: FormGroup
+  submitted= false
   constructor(
     private activatedRoute: ActivatedRoute,
     private driverService: DriverServicesService,
@@ -45,8 +46,8 @@ export class DriverProfileComponent {
       provinceName: new FormControl(''),
       secondPhoneNumber: new FormControl(''),
       profileImageUrl: new FormControl(),
-      licenseFrontImage: new FormControl(),
-      licenseBackImage: new FormControl(),
+      licenseFrontImage: new FormControl(Validators.required),
+      licenseBackImage: new FormControl(Validators.required),
       idBackImage: new FormControl(),
       idFrontImage: new FormControl(),
       residenceocumentFrontImage: new FormControl(),
@@ -62,14 +63,14 @@ export class DriverProfileComponent {
       vehicleColor: new FormControl('', Validators.required),
       vehiclePlateNumber: new FormControl('', Validators.required),
       vehicleModel: new FormControl('', Validators.required),
-      vehicleModelYear: new FormControl('', Validators.required),
-      vehicleSeatCount: new FormControl('', Validators.required),
+      vehicleModelYear: new FormControl(''),
+      vehicleSeatCount: new FormControl(''),
       vehicleVehicleTypeId: new FormControl(0, Validators.required),
       vehicleVehicleTypeName: new FormControl(''),
       vehicleImage: new FormControl(),
       vehicleCarLicenseFrontImage: new FormControl(),
       vehicleCarLicenseBackImage: new FormControl(),
-      vehicleCarPlateImage: new FormControl(),
+      vehicleCarPlateImage: new FormControl(Validators.required),
       deleteVehicleImage: new FormControl('false'),
       deleteCarLicenseFrontImage: new FormControl('false'),
       deleteCarLicenseBackImage: new FormControl('false'),
@@ -77,13 +78,17 @@ export class DriverProfileComponent {
   }
   save() {
     if (this.driverProfile.valid) {
+      this.submitted = true
       this.driverService.createDriver(this.driverProfile.value).subscribe((res: any) => {
+        this.submitted = false
         if (this.driverId) {
           this.router.navigate(['view-driver-profile', this.driverId])
         } else {
           if (res.id)
             this.router.navigate(['driver-request', res.id])
         }
+      },err=>{
+        this.submitted = false
       })
     }
   }

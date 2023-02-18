@@ -226,4 +226,10 @@ export class DriverServicesService {
     }
     return response;
   }
+
+  getLiteListOfCaptains(){
+    let getLiteListOfCaptainsUrl = this.baseUrl + '/api/app/manage-captains/active-lite-list'
+    const response = this.httpClient.get(getLiteListOfCaptainsUrl).pipe();
+    return response;
+  }
 }

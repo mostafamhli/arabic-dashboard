@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { FilterTurnOver } from '../models/filters.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,16 @@ export class DashboardServicesService {
       netProfitCompany: 150,
       netProfitDriver: 60
     }
+  }
+
+  turnOver(filter:FilterTurnOver){
+    let turnOverUrl = this.baseUrl + '/api/app/trip/turnover-report'
+    let param_ = new HttpParams();
+    if (filter.captainId) param_ = param_.append('CaptainId', filter.captainId);
+    if (filter.fromDate) param_ = param_.append('FromDate', filter.fromDate.toLocaleString())
+    if (filter.toDate) param_ = param_.append('ToDate', filter.toDate.toLocaleString());
+    
+    const response = this.http.get(turnOverUrl,{params:param_}).pipe();
+    return response;
   }
 }

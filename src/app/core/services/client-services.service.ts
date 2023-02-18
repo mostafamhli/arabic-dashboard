@@ -35,4 +35,10 @@ export class ClientServicesService {
     const response = this.httpClient.post(changeClientStatusUrl,{}).pipe();
     return response;
   }
+  
+  getLiteListOfClients(){
+    let getLiteListOfClientsUrl = this.baseUrl + '/api/app/customer/active-lite-list'
+    const response = this.httpClient.get(getLiteListOfClientsUrl).pipe();
+    return response;
+  }
 }

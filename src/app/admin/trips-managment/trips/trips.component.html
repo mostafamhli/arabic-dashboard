@@ -1,12 +1,11 @@
 <div class="forms x-font-regular ">
-  <form [formGroup]="generalFields" class="d-flex flex-wrap">
+  <div class="d-flex flex-wrap">
     <div class="row">
       <div class="form-item col-4">
         <mat-form-field appearance="fill">
           <mat-label>السائقين</mat-label>
-          <mat-select name="driversList" formControlName="driversList">
-            <mat-option value="one">السائق الأول</mat-option>
-            <mat-option value="two">السائق الثاني</mat-option>
+          <mat-select [(ngModel)]="filter.captainId">
+            <mat-option *ngFor="let item of captains" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -14,51 +13,56 @@
       <div class="form-item col-4">
         <mat-form-field appearance="fill">
           <mat-label>حالة الرحلة</mat-label>
-          <mat-select name="tripStatus" formControlName="tripStatus">
-            <mat-option value="one">مؤكدة</mat-option>
-            <mat-option value="two">منتهية</mat-option>
-            <mat-option value="three">ملغية</mat-option>
+          <mat-select [(ngModel)]="filter.orderStatus">
+            <mat-option [value]="orderStatusEnum.Initial">Initial</mat-option>
+            <mat-option [value]="orderStatusEnum.NotResponding">Not Responding</mat-option>
+            <mat-option [value]="orderStatusEnum.Confirmed">Confirmed</mat-option>
+            <mat-option [value]="orderStatusEnum.OnTheWay">On The Way</mat-option>
+            <mat-option [value]="orderStatusEnum.Canceled">Canceled</mat-option>
+            <mat-option [value]="orderStatusEnum.InProgress">In Progress</mat-option>
+            <mat-option [value]="orderStatusEnum.Completed">Completed</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="form-item col-4">
         <mat-form-field appearance="fill">
           <mat-label>تاريخ الرحلة</mat-label>
-          <mat-date-range-input [formGroup]="generalFields.controls.range" [rangePicker]="picker">
-            <input matStartDate formControlName="start" placeholder="Start date">
-            <input matEndDate formControlName="end" placeholder="End date">
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="filter.fromDate" placeholder="Start date">
+            <input matEndDate [(ngModel)]="filter.toDate" placeholder="End date">
           </mat-date-range-input>
           <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-date-range-picker #picker></mat-date-range-picker>
-
-          <mat-error *ngIf="generalFields.controls.range.controls.start.hasError('matStartDateInvalid')">Invalid start
-            date</mat-error>
-          <mat-error *ngIf="generalFields.controls.range.controls.end.hasError('matEndDateInvalid')">Invalid end
-            date</mat-error>
         </mat-form-field>
       </div>
       <div class="form-item col-4">
         <mat-form-field appearance="fill">
           <mat-label>نوع الرحلة</mat-label>
-          <mat-select name="tripType" formControlName="tripType">
-            <mat-option value="one">النوع الأول</mat-option>
-            <mat-option value="two">النوع الثاني</mat-option>
+          <mat-select [(ngModel)]="filter.isOpen">
+            <mat-option value="true">مفتوحة</mat-option>
+            <mat-option value="false">عادية</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="form-item col-4">
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>اسم الزبون</mat-label>
-          <input matInput placeholder="اسم الزبون" #input formControlName="clientName">
+          <input matInput placeholder="اسم الزبون" #input [(ngModel)]="filter.clientId">
           <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field> -->
+        <mat-form-field appearance="fill">
+          <mat-label>الزبائن</mat-label>
+          <mat-select [(ngModel)]="filter.clientId">
+            <mat-option *ngFor="let item of clients" [value]="item.id">{{item.name}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
     <div class="w-75 d-flex justify-content-center mx-auto buttons x-font-regular ">
-      <button type="submit" class="btn t_btn_blue_outline w-25" (click)="search()">بحث</button>
+      <button type="submit" class="btn t_btn_blue_outline w-25" (click)="getTrips()">بحث</button>
       <button class="btn t_btn_blue_outline w-25" (click)="resetForm()">مسح الفلاتر</button>
     </div>
-  </form>
+  </div>
 </div>
 
 
@@ -71,31 +75,52 @@
         <th>حالة الرحلة</th>
         <th> نوع الرحلة</th>
         <th> نوع السيارة</th>
-        <th>تاريخ الرحلة </th>
         <th>وقت الرحلة </th>
         <th>كلفة الرحلة </th>
         <th>عرض الرحلة</th>
       </thead>
       <tbody>
         <tr *ngFor="let item of trips">
-          <td>{{item.driverName}}</td>
-          <td>{{item.clientName}}</td>
-          <td>{{item.tripState}}</td>
-          <td>{{item.tripType}}</td>
-          <td>{{item.carType}}</td>
-          <td>{{item.tripDate}}</td>
-          <td>{{item.tripTime}}</td>
-          <td>{{item.tripCost}}</td>
           <td>
-            <mat-icon [routerLink]="['/trip-details']" routerLinkActive="router-link-active"
-              class="removed-eye cursor">remove_red_eye</mat-icon>
+            {{item?.captain?.name}}
+          </td>
+          <td>{{item?.customer?.name}}</td>
+          <td>
+            <container-element [ngSwitch]="item.status">
+              <span *ngSwitchCase="orderStatusEnum.Initial">Initial</span>
+              <span *ngSwitchCase="orderStatusEnum.NotResponding">Not Responding</span>
+              <span *ngSwitchCase="orderStatusEnum.Confirmed">Confirmed</span>
+              <span *ngSwitchCase="orderStatusEnum.OnTheWay">On The Way</span>
+              <span *ngSwitchCase="orderStatusEnum.Canceled">Canceled</span>
+              <span *ngSwitchCase="orderStatusEnum.InProgress">In Progress</span>
+              <span *ngSwitchCase="orderStatusEnum.Completed">Completed</span>
+            </container-element>
+          </td>
+          <td>
+            <container-element [ngSwitch]="item.isOpen">
+              <span *ngSwitchCase="true">مفتوحة</span>
+              <span *ngSwitchCase="false">عادية</span>
+            </container-element>
+          </td>
+          <td>{{item?.vehicleType?.name}}</td>
+          <td>{{toLocalString(item.creationTime) | date:'YY/MM/dd HH:mm'}}</td>
+          <td>{{item.price}}</td>
+          <td>
+            <mat-icon [routerLink]="['/trip-details']" routerLinkActive="router-link-active" class="removed-eye cursor">
+              remove_red_eye</mat-icon>
+          </td>
+        </tr>
+        <tr *ngIf="!trips || !trips.length">
+          <td colspan="8">
+            لا يوجد نتائج لعرضها
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-<div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+<div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold"
+  *ngIf="!endOfResult && trips && trips.length">
   <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
     تحميل المزيد
   </button>

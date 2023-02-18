@@ -5,7 +5,7 @@ import { AccountStatus, TransferType } from '../enums/genric.enums';
 export class Driver {
     id: string
     name: string
-    accountCreationDate: any
+    creationTime: any
     phoneNumber: string
     balance: number
     code: number
@@ -16,7 +16,7 @@ export class Driver {
     constructor(d?: Driver) {
         if (!d) {
             this.name = ""
-            this.accountCreationDate = undefined
+            this.creationTime = undefined
             this.phoneNumber = ""
             this.id = ""
             this.balance = 0
@@ -29,7 +29,7 @@ export class Driver {
             this.id = d.id
             this.name = d.name
             this.phoneNumber = d.phoneNumber
-            this.accountCreationDate = d.accountCreationDate
+            this.creationTime = d.creationTime
             this.code = d.code
             this.isActive = d.isActive
             this.balance = d.balance

@@ -21,14 +21,14 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of discountCodes">
-            <td>{{item.discountName}}</td>
-            <td>{{item.discountCode}}</td>
-            <td>{{item.discountValue}}</td>
-            <td>{{item.usingTimes}}</td>
-            <td>{{item.maxUsing}}</td>
-            <td>{{item.outDate}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.code}}</td>
+            <td>{{item.value}}</td>
+            <td>{{item.usageCount}}</td>
+            <td>{{item.maxUsageCount}}</td>
+            <td>{{item.expirationDate}}</td>
             <td>
-              <container-element [ngSwitch]="item.discountCodeStatus">
+              <container-element [ngSwitch]="item.isActive">
                 <span class="status discount_code_active_status py-1"
                   *ngSwitchCase="discountCodeStatusEnum.active">إلغاء التفعيل</span>
                 <span class="status inactive_status py-1" *ngSwitchCase="discountCodeStatusEnum.inActive">تفعيل</span>

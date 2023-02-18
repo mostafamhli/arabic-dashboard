@@ -1,4 +1,5 @@
-import { DriverRequestStatus, SortType, ServiceType } from '../enums/genric.enums';
+import { DriverRequestStatus, SortType, ServiceType, OrderStatusEnum } from '../enums/genric.enums';
+import { DateTime } from 'ts-luxon';
 
 export class Filter {
     maxResultCount:number
@@ -28,5 +29,29 @@ export class FilterVehiclesWithSearch extends FilterWithSearch {
         super()
         this.provinceId = 0
         this.category = 0
+    }
+}
+
+export class FilterTurnOver {
+    fromDate:Date | null | undefined
+    toDate:Date | null | undefined
+    captainId?:string
+}
+
+export class FilterOrders extends Filter {
+    captainId:string | null
+    clientId :string | null
+    fromDate:any
+    toDate:any
+    isOpen:boolean
+    orderStatus:number | null
+    constructor(){
+        super();
+        this.captainId = null
+        this.clientId = null
+        this.fromDate = null
+        this.toDate = null
+        this.isOpen = false
+        this.orderStatus =null
     }
 }

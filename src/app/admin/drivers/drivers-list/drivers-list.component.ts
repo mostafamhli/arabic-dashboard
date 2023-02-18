@@ -5,6 +5,7 @@ import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { DateTime } from 'ts-luxon';
 
 @Component({
   selector: 'app-drivers-list',
@@ -58,5 +59,10 @@ export class DriversListComponent {
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + 1;
     this.getDrivers();
+  }
+
+  toLocalString(date:any) {
+    let date_ = new Date(date)
+    return date_
   }
 }
