@@ -22,6 +22,7 @@ export class TokenInterceptor implements HttpInterceptor {
     request = request.clone({ headers });
 
     let token = this.authService.getToken()
+    console.log(token)
     if (token) {
       request = this.addToken(request, token);
     }
@@ -54,7 +55,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
       return this.authService.refreshToken().pipe(
         switchMap((token: any) => {
-          console.log("token: " + token);
           this.isRefreshing = false;
           this.refreshTokenSubject.next(token.access_token);
           return next.handle(this.addToken(request, token.access_token));

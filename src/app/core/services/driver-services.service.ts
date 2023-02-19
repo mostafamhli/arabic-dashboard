@@ -21,6 +21,7 @@ export class DriverServicesService {
   }
 
   getDriversRequest(filter: FilterWithSearch): Observable<any> {
+    console.log(filter)
     this.captainRequestsUrl = this.baseUrl + '/api/app/manage-captains/captain-requests'
     let param_ = new HttpParams();
     if (filter.filter) param_ = param_.append('filter', filter.filter);

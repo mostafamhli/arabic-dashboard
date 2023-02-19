@@ -4,6 +4,7 @@ import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
+import { ProvinceService } from 'src/app/core/services/province.service';
 
 
 @Component({
@@ -20,13 +21,29 @@ export class VehicleClassificationComponent {
   vehicleTypes: any[] = [];
   selectedValue: string = 'جاي تكسي';
   filter: FilterWithSearch = new FilterWithSearch();
-
-  constructor(private addClassification: MatDialog, private confirmDialog: MatDialog, private settingsService: SettingsServicesService) {
+  endOfResult: boolean = false
+  vehicleTypeName: any
+  constructor(
+    private addClassification: MatDialog,
+    private confirmDialog: MatDialog,
+    private settingsService: SettingsServicesService,
+    private provinceService: ProvinceService
+  ) {
     this.getCities();
     this.getVehicleTypes();
     this.getClassifications();
   }
+  onChangeType(event: any) {
+    console.log(event)
+    this.settingsService.selectedType = event;
+    this.getClassifications();
+  }
 
+  onChangeCity(event: any) {
+    console.log(event)
+    this.settingsService.selectedProv = event;
+    this.getClassifications();
+  }
   /*
     selectedValueChanged(event: Event) {
       this.selectedValue = event.toString();
@@ -34,11 +51,30 @@ export class VehicleClassificationComponent {
     }*/
 
   getClassifications(cityName?: string, vehicleType?: string) {
-    this.classifications = this.settingsService.getAllClassificationes();
+    if (this.settingsService.selectedProv) {
+      cityName = this.settingsService.selectedProv;
+    }
+    if (this.settingsService.selectedType) {
+      vehicleType = this.settingsService.selectedType;
+    }
+    console.log(cityName, vehicleType)
+    this.settingsService.getAllClassificationes(this.filter, cityName, vehicleType).subscribe((res: any) => {
+      if (this.filter.skipCount == 0) {
+        this.classifications = res.items
+      }
+      else
+        this.classifications = this.classifications.concat(res.items)
+      if (res.items.length < this.filter.maxResultCount) {
+        this.endOfResult = true;
+      } else this.endOfResult = false;
+    })
   }
 
   getCities() {
-    this.cities = this.settingsService.getAllCities();
+    this.provinceService.getProvinceList().subscribe((res: any) => {
+      this.cities = res.items;
+      console.log(this.cities)
+    });
   }
 
   getVehicleTypes() {
@@ -46,7 +82,7 @@ export class VehicleClassificationComponent {
   }
 
   search(inputText: any) {
-    this.classifications = this.settingsService.searchInClassificationTableByName(inputText.value);
+    //this.classifications = this.settingsService.searchInClassificationTableByName(inputText.value);
   }
 
   loadMore() {
@@ -61,7 +97,7 @@ export class VehicleClassificationComponent {
   }
 
   deleteTableItem(id: number) {
-    this.classifications = this.settingsService.deleteClassification(id)
+    //this.classifications = this.settingsService.deleteClassification(id)
   }
 
   confirmDelete(id: number) {
