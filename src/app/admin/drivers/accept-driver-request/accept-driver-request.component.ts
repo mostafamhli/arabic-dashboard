@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { FilterVehiclesWithSearch } from 'src/app/core/models/filters.model';
+import { ServiceType } from 'src/app/core/enums/genric.enums';
 
 @Component({
   selector: 'app-accept-driver-request',
@@ -9,39 +11,37 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
 })
 export class AcceptDriverRequestComponent {
 
-  activeVehicle: number = 1;
-  activeTypes: number = 0;
-  vehicles: any[] = [];
+  serviceType = ServiceType
+
+  activeVehicle:any
+  activeTypes: number;
   types: any = [];
-  toktoks: any[] = [];
-  cars: any[] = [];
-
-  constructor(private dialogRef: MatDialogRef<AcceptDriverRequestComponent>, private driverServices: DriverServicesService) {
-    this.getVehicles();
-    this.getTypes();
-    this.getToktoks();
-    this.getCars();
+  vehicles:any = []
+  filter: FilterVehiclesWithSearch = new FilterVehiclesWithSearch();
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private dialogRef: MatDialogRef<AcceptDriverRequestComponent>,
+    private driverServices: DriverServicesService) {
+    if (data) {
+      this.filter.provinceId = data
+    }
+    this.getServices()
+    this.filter.maxResultCount = 20;
   }
 
-  getVehicles() {
-    this.vehicles = this.driverServices.getAllVehicles();
-  }
-
-  getTypes() {
+  getServices() {
     this.types = this.driverServices.getVehiclesTypes();
   }
 
-  getToktoks() {
-    this.toktoks = this.driverServices.getToktoksType();
+  getVehicles(id:number) {
+    this.activeVehicle = undefined
+    this.filter.category = id
+    this.driverServices.getVehicles(this.filter).subscribe((res:any) => {
+      this.vehicles = res.items
+    }, err => { });
   }
-
-  getCars() {
-    this.cars = this.driverServices.getCars();
-  }
-
-
   accept() {
-
+    this.dialogRef.close(this.activeVehicle)
   }
 
   cancel() {

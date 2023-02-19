@@ -23,7 +23,9 @@ export class DiscountCodesComponent {
   }
 
   getDiscountCodes() {
-    this.discountCodes = this.tripsServices.getAllDiscountCodes();
+    this.tripsServices.getAllDiscountCodes(this.filter).subscribe((res:any)=>{
+      this.discountCodes = res['items']
+    },(err:any)=>{});
   }
 
 

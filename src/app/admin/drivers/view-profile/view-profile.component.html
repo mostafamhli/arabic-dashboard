@@ -1,21 +1,22 @@
-<div class="view_profile x-font-regular">
+<div class="view_profile x-font-regular" *ngIf="driver">
   <div class="info">
     <div class="img_div row d-flex">
       <div class="image col-6">
+        <img [src]="driver.profileImageUrl">
         <mat-icon>person</mat-icon>
-        <h1>Test</h1>
+        <h1>{{driver.firstName}} {{driver.lastName}}</h1>
       </div>
-      <div class="rating col-6">
+      <div class="rating col-6" *ngIf="driver.averageRate">
         <div class="h-100 d-flex flex-column align-items-end justify-content-center">
           <div class="stars text-centerv d-flex align-items-center">
-            <span>(3/5)</span>
-            <mat-icon class="gold">star</mat-icon>
-            <mat-icon class="gold">star</mat-icon>
-            <mat-icon class="gold">star</mat-icon>
-            <mat-icon>star</mat-icon>
-            <mat-icon>star</mat-icon>
+            <span>(driver.averageRate/5)</span>
+            <ng-container *ngFor="let item of [].constructor(driver.averageRate)">
+              <mat-icon class="gold">star</mat-icon>
+            </ng-container>
+            <ng-container *ngFor="let item of [].constructor(5 - driver.averageRate)">
+              <mat-icon>star</mat-icon>
+            </ng-container>
           </div>
-          <div>45 شخص قامو بالتقييم</div>
         </div>
       </div>
     </div>
@@ -24,22 +25,24 @@
     <div class="row">
       <div class="first_col col-lg-6 col-md-6 col-12">
         <div class="info d-flex align-items-center">
-          <mat-icon>email</mat-icon>
-          <div class="text">wael@gmail.com</div>
+          <mat-icon *ngIf="driver.gender == 1">male</mat-icon>
+          <mat-icon *ngIf="driver.gender == 2">female</mat-icon>
+          <div class="text" *ngIf="driver.gender == 1">ذكر</div>
+          <div class="text" *ngIf="driver.gender == 2">أنثى</div>
         </div>
         <div class="info mt-1 d-flex align-items-center">
           <mat-icon>stay_current_portrait</mat-icon>
-          <div class="text">+963949394417</div>
+          <div class="text" dir="ltr">{{driver.phoneNumber}}</div>
         </div>
       </div>
       <div class="sec_col col-lg-6 col-md-6 col-12">
         <div class="info mt-1 d-flex align-items-center">
           <mat-icon>location_city</mat-icon>
-          <div class="text">بغداد</div>
+          <div class="text">{{driver.provinceName}}</div>
         </div>
         <div class="info mt-1 d-flex align-items-center">
           <mat-icon>calendar_today</mat-icon>
-          <div class="text">12-8-2022</div>
+          <div class="text">{{driver.creationTime | date:'YYYY/MM/dd HH:mm'}}</div>
         </div>
       </div>
     </div>
@@ -49,21 +52,21 @@
       <div class="col-6">
         <div class="row">
           <div class="col-6 key x-font-bold">نوع السيارة</div>
-          <div class="col-6 val">مركبة صغيرة</div>
+          <div class="col-6 val">{{driver.vehicleVehicleTypeName}}</div>
         </div>
         <div class="row mt-1">
           <div class="col-6 key x-font-bold">موديل السيارة</div>
-          <div class="col-6 val">مازدا</div>
+          <div class="col-6 val">{{driver.vehicleModel}}</div>
         </div>
       </div>
       <div class="col-6">
         <div class="row mt-1">
           <div class="col-6 key x-font-bold">لون السيارة</div>
-          <div class="col-6 val">أحمر</div>
+          <div class="col-6 val">{{driver.vehicleColor}}</div>
         </div>
         <div class="row mt-1">
           <div class="col-6 key x-font-bold">رقم السيارة</div>
-          <div class="col-6 val">123456</div>
+          <div class="col-6 val">{{driver.vehiclePlateNumber}}</div>
         </div>
       </div>
     </div>
@@ -72,61 +75,79 @@
   <div class="assets x-font-bold">
     <h6 class="mb-3 x-font-bold w-100 ">مستندات المستخدم</h6>
     <div class="row">
-      <div class="col-6">
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id2.jpg">
-          </div>
-          <label>صورة الهوية (الوجه الأمامي)</label>
-        </div>
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id1.png">
-          </div>
-          <label>صورة رخصة القيادة (الوجه الأمامي)</label>
-        </div>
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id1.png">
-          </div>
-          <label>رخصة السيارة (الوجه الأمامي)</label>
-        </div>
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id1.png">
-          </div>
-          <label>لوحة السيارة</label>
-        </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.licenseFrontImage && driverProfile.value.licenseFrontImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="licenseFrontImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="" path="/assets/img/temp/add-image.png"
+          label="صورة رخصة القيادة (الوجه الأمامي)">
+        </app-upload-image>
       </div>
-      <div class="col-6">
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id1.png">
-          </div>
-          <label>صورة الهوية (الوجه الخلفي)</label>
-        </div>
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id2.jpg">
-          </div>
-          <label>صورة رخصة القيادة (الوجه الخلفي)</label>
-        </div>
-        <div class="d-flex align-items-center asset">
-          <div class="img_div">
-            <img src="/assets/img/temp/id2.jpg">
-          </div>
-          <label>رخصة السيارة (الوجه الخلفي)</label>
-        </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.licenseBackImage && driverProfile.value.licenseBackImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="licenseBackImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="" path="/assets/img/temp/add-image.png"
+          label="صورة رخصة القيادة (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.idFrontImage && driverProfile.value.idFrontImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="idFrontImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteIdFrontImage" path="/assets/img/temp/add-image.png"
+          label="صورة الهوية (الوجه الأمامي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.idBackImage && driverProfile.value.idBackImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="idBackImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteIdBackImage" path="/assets/img/temp/add-image.png"
+          label="صورة الهوية (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.residenceocumentFrontImage && driverProfile.value.residenceocumentFrontImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="residenceocumentFrontImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteResidenceCardFrontImage"
+          path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الأمامي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.residenceocumentBackImage && driverProfile.value.residenceocumentBackImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="residenceocumentBackImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteResidenceCardBackImage"
+          path="/assets/img/temp/add-image.png" label="صورة سند السكن (الوجه الخلفي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.securityCardImage && driverProfile.value.securityCardImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="securityCardImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteSecurityCardImage" path="/assets/img/temp/add-image.png"
+          label="صورة البطاقة الأمنية (الوجه الأمامي)">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.vehicleImage && driverProfile.value.vehicleImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="vehicleImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="" path="/assets/img/temp/add-image.png" label="صورة السيارة">
+        </app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.vehicleCarLicenseFrontImage && driverProfile.value.vehicleCarLicenseFrontImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="vehicleCarLicenseFrontImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteResidenceCardFrontImage"
+          path="/assets/img/temp/add-image.png" label="رخصة السيارة (الوجه الأمامي)"></app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.vehicleCarLicenseBackImage && driverProfile.value.vehicleCarLicenseBackImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="vehicleCarLicenseBackImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="deleteResidenceCardBackImage"
+          path="/assets/img/temp/add-image.png" label="رخصة السيارة (الوجه الخلفي)"></app-upload-image>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12 mt-3"
+        *ngIf="driverProfile && driverProfile.value.vehicleCarPlateImage && driverProfile.value.vehicleCarPlateImage != ''">
+        <app-upload-image [formGroup]="driverProfile" controlName="vehicleCarPlateImage" isEnableToDelete="false"
+          isEnableToSelect="false" deleteControlName="" path="/assets/img/temp/add-image.png" label="لوحة السيارة">
+        </app-upload-image>
       </div>
     </div>
   </div>
-  <!-- <hr>
-  <div class="reviews">
-    <div class="d-flex flex-column align-items-center">
-      <h6 class="mb-3 x-font-bold w-100 text-center">تقييمات الزبائن </h6>
-      <div class="w-100 stars text-center">
-        لا يوجد تقييمات
-      </div>
-    </div>
-  </div> -->
 </div>

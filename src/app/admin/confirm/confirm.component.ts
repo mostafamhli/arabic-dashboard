@@ -9,23 +9,16 @@ import { AccountStatus } from 'src/app/core/enums/genric.enums';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent {
-  @Input() messageText: string = "هل متأكد من تغيير حالة الحساب ؟"
+  messageText:string
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ConfirmComponent>) {
-    if (data && data.message) {
-      this.messageText = data.message
+    if (data) {
+      this.messageText = data
     }
   }
   confirm() {
-    if (this.data.accountStatus == AccountStatus.active) {
-      this.data.accountStatus = AccountStatus.inActive
-      this.dialogRef.close(this.data)
-    } else if (this.data.accountStatus == AccountStatus.inActive) {
-      this.data.accountStatus = AccountStatus.active
-      this.dialogRef.close(this.data)
-    } else if (this.data.message) {
-      this.dialogRef.close(true)
-    }
+    this.dialogRef.close(true)
   }
   cancel() {
     this.dialogRef.close()

@@ -1,6 +1,6 @@
 export enum AccountStatus {
     active = 1,
-    inActive = 2
+    inActive = 0
 }
 
 export enum TransferType {
@@ -30,4 +30,26 @@ export enum DriverRequestStatus {
 export enum SortType {
     Ascending = 1,
     Descending = 2
+}
+
+export enum ServiceType {
+    Toktok = 1,
+    Jaytaxi = 2,
+    Vehicles = 3
+}
+
+export enum PageType {
+    Create = 1,
+    Edit = 2,
+    Get = 3
+}
+
+export enum OrderStatusEnum {
+    Initial = 1,
+    NotResponding = 2,
+    Confirmed = 3,
+    OnTheWay = 4,
+    Canceled = 5,
+    InProgress = 6,
+    Completed = 7
 }

@@ -4,27 +4,25 @@
       <div class="col-6">
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>السائق</mat-label>
-          <mat-select name="driverName" formControlName="driverName">
-            <mat-option value="one">السائق الأول</mat-option>
-            <mat-option value="two">السائق الثاني</mat-option>
+          <mat-select name="id" formControlName="id">
+            <mat-option *ngFor="let item of drivers" [value]="item.id">{{item.firstName}} {{item.lastName}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-6">
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>المحافظة الجديدة</mat-label>
-          <mat-select name="cityName" formControlName="cityName">
-            <mat-option value="one">بغداد</mat-option>
-            <mat-option value="two">البصرة </mat-option>
+          <mat-label>المحافظة</mat-label>
+          <mat-select name="provinceId" formControlName="provinceId" (selectionChange)="getVehicles()">
+            <mat-option *ngFor="let item of provinces" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="col-6">
         <mat-form-field appearance="fill" class="w-100">
-          <mat-label>تصنيف المركبة الجديد</mat-label>
-          <mat-select name="newVehicleClassification" formControlName="newVehicleClassification">
-            <mat-optgroup *ngFor="let item of calssifications" [label]="item.label">
-              <mat-option *ngFor="let item2 of item.vehicles" [value]="{item,item2}">{{item2.name}}</mat-option>
+          <mat-label>فئة المركبة</mat-label>
+          <mat-select name="vehicleTypeId" formControlName="vehicleTypeId">
+            <mat-optgroup *ngFor="let item of calssifications" [label]="item.name">
+              <mat-option *ngFor="let item2 of item.vehicles" [value]="item2.id">{{item2.name}}</mat-option>
             </mat-optgroup>
           </mat-select>
         </mat-form-field>

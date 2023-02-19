@@ -17,9 +17,7 @@
           <th>تاريخ إنشاء الحساب</th>
           <th>عدد الرحلات </th>
           <th>التقييم</th>
-          <!-- <th>رمز التفعيل </th> -->
           <th>تفعيل الحساب</th>
-          <!-- <th></th> -->
         </thead>
         <tbody>
           <tr *ngFor="let item of clients">
@@ -30,12 +28,11 @@
                 </div>
             </td>
             <td>{{item.phoneNumber}}</td>
-            <td>{{item.creationTime}}</td>
+            <td>{{item.creationTime | date:'MM/dd HH:mm'}}</td>
             <td>{{item.tripCount}}</td>
             <td>{{item.rate}}</td>
-            <!-- <td>{{item.activatedCode}}</td> -->
             <td>
-              <container-element [ngSwitch]="item.accountStatus">
+              <container-element [ngSwitch]="item.isActive">
                 <span (click)="confirm(item)" class="status cursor active_status py-1"
                   *ngSwitchCase="accountStatusEnum.active">مفعل</span>
                 <span (click)="confirm(item)" class="status cursor inactive_status py-1"
@@ -43,9 +40,6 @@
                   مفعل</span>
               </container-element>
             </td>
-            <!-- <td>
-              <mat-icon class="cursor" [routerLink]="['/client',item.id]" routerLinkActive="router-link-active">visibility</mat-icon>
-            </td> -->
           </tr>
         </tbody>
       </table>

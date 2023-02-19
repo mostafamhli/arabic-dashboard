@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-view-request-assets',
@@ -8,12 +8,10 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
 })
 export class ViewRequestAssetsComponent {
 
-  requestAssets: any[] = [];
-  constructor(private driversService: DriverServicesService) {
-    this.getRequestAssets();
-  }
-
-  getRequestAssets() {
-    this.requestAssets = this.driversService.getDriverRequestAssets(1)
+  requestAssets: any[] 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
+    if(data && data.length){
+      this.requestAssets = data
+    }
   }
 }

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { DashboardServicesService } from 'src/app/core/services/dashboard-services.service';
+import { FilterTurnOver } from 'src/app/core/models/filters.model';
+import { TurnOver } from 'src/app/core/models/turnover.model';
 
 @Component({
   selector: 'app-driver-details',
@@ -10,19 +13,19 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
 })
 export class DriverDetailsComponent {
   quantity: any;
-  values: any;
-  total: any;
-  id!: number;
+  values: TurnOver;
+  total: TurnOver;
+  id: string;
   range = new FormGroup({
     start: new FormControl<Date | null>(null),
     end: new FormControl<Date | null>(null),
   });
 
-  constructor(private driverService: DriverServicesService, private activatedRoute: ActivatedRoute) {
+  constructor(private dashService: DashboardServicesService, private activatedRoute: ActivatedRoute) {
     this.quantity = undefined
     this.id = this.activatedRoute.snapshot.params['id'];
-    let now = new Date();
-    let before7Days = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
+    let now:any = new Date();
+    let before7Days:any = new Date(now.getTime() - (7 * 24 * 60 * 60 * 1000));
 
     this.range.controls.start.setValue(before7Days);
     this.range.controls.end.setValue(now);
@@ -31,12 +34,24 @@ export class DriverDetailsComponent {
   }
 
   filter(start?: any, end?: any) {
-    if (start && end)
-      this.values = this.driverService.getDriverDetails(1, this.range.value.start, this.range.value.end);
-    this.total = this.driverService.getDriverDetails(1);
-  }
-
-  addIncentivesToDriver() {
-    console.log(this.driverService.addIncentivesToDriver(this.id, this.quantity));
+    if (start && end) {
+      let filter: FilterTurnOver = {
+        captainId: this.id,
+        fromDate: this.range.value.start,
+        toDate: this.range.value.end
+      }
+      this.dashService.turnOver(filter).subscribe((res: any) => {
+        this.values = res
+      }, (err: any) => { })
+    } else {
+      let filter: FilterTurnOver = {
+        captainId: this.id,
+        fromDate: null,
+        toDate: null
+      }
+      this.dashService.turnOver(filter).subscribe((res: any) => {
+        this.total = res
+      }, (err: any) => { })
+    }
   }
 }

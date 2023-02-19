@@ -22,7 +22,6 @@
           <th>رقم الموبايل</th>
           <th>تاريخ إنشاء الحساب</th>
           <th>رصيد السائق</th>
-          <!-- <th>رمز التفعيل</th> -->
           <th>حالة الحساب</th>
           <th>عمليات الدفع و التقارير</th>
           <th>العمليات</th>
@@ -35,12 +34,11 @@
                 <div class="me-2">{{item.firstName}} {{item.lastName}}</div>
               </div>
             </td>
-            <td>{{item.phoneNumber}}</td>
-            <td>{{item.accountCreationDate}}</td>
+            <td dir="ltr">{{item.phoneNumber}}</td>
+            <td>{{toLocalString(item.creationTime) | date:'YY/MM/dd HH:mm'}}</td>
             <td>{{item.balance}}</td>
-            <!-- <td>{{item.code}}</td> -->
             <td>
-              <container-element [ngSwitch]="item.accountStatus">
+              <container-element [ngSwitch]="item.isActive">
                 <span (click)="confirm(item)" class="status active_status cursor"
                   *ngSwitchCase="accountStatusEnum.active">مفعل</span>
                 <span (click)="confirm(item)" class="status inactive_status cursor"
@@ -63,7 +61,7 @@
       </table>
     </div>
   </div>
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult && drivers && drivers.length">
     <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
       تحميل المزيد
     </button>

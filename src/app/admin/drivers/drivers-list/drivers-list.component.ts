@@ -5,6 +5,7 @@ import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { DateTime } from 'ts-luxon';
 
 @Component({
   selector: 'app-drivers-list',
@@ -40,7 +41,7 @@ export class DriversListComponent {
   confirm(item: Driver) {
     let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
       width: "40%",
-      data: item
+      data: 'هل أنت متأكد من تغيير حالة الحساب ؟'
     });
     dialog.afterClosed().subscribe((result: Driver) => {
       if (result) {
@@ -50,11 +51,18 @@ export class DriversListComponent {
   }
 
   changeDriverStatus(item: Driver) {
-    this.driverServcie.changeDriverStatus(item);
+    this.driverServcie.changeDriverStatus(item.id).subscribe(res=>{
+      item.isActive = item.isActive == 1 ? 0 : 1;
+    },err=>{})
   }
 
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + 1;
     this.getDrivers();
+  }
+
+  toLocalString(date:any) {
+    let date_ = new Date(date)
+    return date_
   }
 }

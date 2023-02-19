@@ -25,4 +25,10 @@ export class ProvinceService {
     const response = this.httpClient.get(getCaptainByProvinceId).pipe();
     return response;
   }
+
+  moveCaptaintoProvince(body:any){
+    let moveCaptaintoProvinceUrl = this.baseUrl + `/api/app/manage-captains/change-captain-province`
+    const response = this.httpClient.post(moveCaptaintoProvinceUrl,body).pipe();
+    return response;
+  }
 }

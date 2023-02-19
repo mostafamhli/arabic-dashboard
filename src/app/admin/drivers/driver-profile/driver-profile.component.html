@@ -15,10 +15,11 @@
     <app-driver-profile-vehicle-info *ngIf="activeTab == ActiveProfileTabEnum.vehicle">
     </app-driver-profile-vehicle-info>
   </form>
-  <div class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-5">
+  <div *ngIf="pageType == pageTypeEnum.Create || pageType == pageTypeEnum.Edit" class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-5">
     <div class="d-flex align-items-center">
       <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-30" (click)="save()">
-        حفظ التعديل
+        <ng-container *ngIf="pageType == pageTypeEnum.Create">إنشاء</ng-container>
+        <ng-container *ngIf="pageType == pageTypeEnum.Edit">حفظ التعديل</ng-container>
       </button>
       <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" [routerLink]="['/drivers']"
         routerLinkActive="router-link-active">

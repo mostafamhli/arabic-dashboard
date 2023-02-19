@@ -1,10 +1,10 @@
 <div class="driver_details x-font-regular">
-  <div class="img_div">
+  <!-- <div class="img_div">
     <div class="image">
       <mat-icon>person</mat-icon>
       <h1 class="x-font-bold">Test</h1>
     </div>
-  </div>
+  </div> -->
   <div class="filter_div d-flex align-items-center">
     <h6 class="x-font-bold ms-3">يمكنك الفلترة حسب مجال معين</h6>
     <mat-form-field appearance="fill">
@@ -25,7 +25,7 @@
       <table class="table">
         <thead class="x-font-bold">
           <th width="35%"></th>
-          <th width="35%" *ngIf="range && range.value && range.value.start && range.value.end">
+          <th width="35%" *ngIf="range && range.value && range.value.start && range.value.end && values">
             <div class="d-flex flex-column align-items-center">
               من {{range.value.start | date:'MMM d, y'}}
               إلى {{range.value.end | date:'MMM d, y'}}
@@ -36,37 +36,38 @@
         <tbody>
           <tr>
             <td class="x-font-bold text-right">عدد الرحلات</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.numOfTrips}}</td>
-            <td>{{total.numOfTrips}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.tripCount}}</td>
+            <td *ngIf="total">{{total.tripCount}}</td>
           </tr>
           <tr>
             <td class="x-font-bold">إجمالي الأرباح</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.totalProfit}}</td>
-            <td>{{total.totalProfit}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.turnover}}</td>
+            <td *ngIf="total">{{total.turnover}}</td>
           </tr>
           <tr>
             <td class="x-font-bold">أرباح الشركات الصافية</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.netProfitCompany}}</td>
-            <td>{{total.netProfitCompany}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.jayTaxiTurnover}}</td>
+            <td *ngIf="total">{{total.jayTaxiTurnover}}</td>
           </tr>
           <tr>
             <td class="x-font-bold">أرباح السائقين الصافية</td>
-            <td *ngIf="range && range.value && range.value.start && range.value.end">{{values.netProfitDriver}}</td>
-            <td>{{total.netProfitDriver}}</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.captainsTurnover}}</td>
+            <td *ngIf="total">{{total.captainsTurnover}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
-  <div class="w-100 mt-3 d-flex flex-column align-items-center">
+  <!-- <div class="w-100 mt-3 d-flex flex-column align-items-center">
     <label class="x-font-bold mb-2">إضافة حوافز للسائق</label>
     <div class="input_with_button d-flex align-items-center">
       <input class="form-control" [(ngModel)]="quantity" placeholder="الكمية">
       <button class="btn t_btn_blue" (click)="addIncentivesToDriver()">إضافة</button>
     </div>
-  </div>
+  </div> -->
   <div class="w-100 d-flex flex-column align-items-center back_to_list">
-    <button class="btn t_btn_blue w-30" [routerLink]="['/drivers']" routerLinkActive="router-link-active">عودة إلى
-      القائمة</button>
+    <button class="btn t_btn_blue w-30" [routerLink]="['/view-driver-profile',id]" routerLinkActive="router-link-active">
+    عودة إلى السائق
+    </button>
   </div>
 </div>
