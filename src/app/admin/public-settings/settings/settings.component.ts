@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators, FormGroup } from '@angular/forms';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
-import { pageType } from '../vehicle-classification/add-new-classification/add-new-classification.component';
+import { PageType } from 'src/app/core/enums/genric.enums';
 
 @Component({
   selector: 'app-settings',
@@ -18,8 +18,8 @@ export class SettingsComponent {
   email = 'mostafa@gmail.com';
 
   
-  pageTypeEnum = pageType;
-  activePageType = pageType.add;
+  pageTypeEnum = PageType;
+  activePageType = PageType.Create;
   socialMedia: any
 
   settingForm = new FormGroup({

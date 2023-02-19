@@ -14,14 +14,19 @@ export class AddImageComponent {
   imageFile: any
   @ViewChild('fileInput') fileInput: any
   @Input('dimension') dimension: number;
-
+  @Input('isEdit') isEdit:boolean
   constructor(private controlContainer: ControlContainer) {
 
   }
 
   ngOnInit(): void {
     this.generalFields = <FormGroup>this.controlContainer.control;
-    console.log(this.generalFields.value.image)
+    if (this.generalFields.controls[this.controlName] && this.generalFields.controls[this.controlName].value && this.generalFields.controls[this.controlName].value != "") {
+      this.imageFile = this.generalFields.controls[this.controlName].value
+      if (typeof (this.imageFile) != 'string') {
+        this.onFileInput([this.imageFile])
+      }
+    }
   }
 
   onFileInput(files: any): void {

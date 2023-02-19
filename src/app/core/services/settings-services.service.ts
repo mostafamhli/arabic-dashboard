@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { AccountStatus } from '../enums/genric.enums';
+import { AccountStatus, PageType } from '../enums/genric.enums';
 import { FilterWithSearch, FilterClassification } from '../models/filters.model';
 import { Role } from '../models/roles.model';
 
@@ -154,13 +154,18 @@ export class SettingsServicesService {
     return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`, { params: param_ })
   }
 
-  addNewClassification(formValue: any) {
+  addNewClassification(formValue: any,pageType:any) {
     let headers = new HttpHeaders();
     //this is the important step. You need to set content type as null
     headers.set('Content-Type', 'null');
     headers.set('Accept', "multipart/form-data");
-
-    return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers })
+    if(pageType == PageType.Edit){
+      const response =  this.http.put(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
+      return response
+    } else {
+    const response =  this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
+    return response
+    }
   }
 
   getClassificationById(id: any) {
