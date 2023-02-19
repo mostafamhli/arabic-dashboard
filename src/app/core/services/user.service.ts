@@ -37,7 +37,7 @@ export class UserService {
 
   logout() {
     this.removeTokens();
-    this._router.navigate(['/login']);
+    this._router.navigate(['/sign-in']);
   }
 
   isLoggedIn() {
@@ -50,7 +50,8 @@ export class UserService {
     let accessToken: any = this.getToken();
     const body = {
       token: accessToken,
-      refreshToken: refreshToken
+      refreshToken: refreshToken,
+      language : "ar"
     }
 
     return this.httpClient
