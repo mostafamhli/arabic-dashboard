@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AccountStatus } from '../enums/genric.enums';
-import { FilterWithSearch } from '../models/filters.model';
+import { FilterWithSearch, FilterClassification } from '../models/filters.model';
 import { Role } from '../models/roles.model';
 
 @Injectable({
@@ -133,34 +133,37 @@ export class SettingsServicesService {
         image: '../../../../assets/img/vehicles/car.png'
       },
       {
-        id: 2,
+        id: 3,
         name: 'آليات',
         image: '../../../../assets/img/vehicles/wnch.png'
       },
       {
-        id: 3,
+        id: 2,
         name: 'توك توك',
         image: '../../../../assets/img/vehicles/toktok.png'
       }]
   }
 
-  getAllClassificationes(filter: FilterWithSearch, city?: any, type?: any) {
-    console.log(filter)
+  getAllClassificationes(filter: FilterClassification) {
     let param_ = new HttpParams();
     if (filter.filter) param_ = param_.append('filter', filter.filter);
-    if (city) param_ = param_.append('ProvinceId', city);
-    if (type) param_ = param_.append('Category', type);
-    return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`,{ params: param_ })
+    if (filter.cityId) param_ = param_.append('ProvinceId', filter.cityId + '');
+    if (filter.categoryId) param_ = param_.append('Category', filter.categoryId + '');
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
+    return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`, { params: param_ })
   }
 
   addNewClassification(formValue: any) {
-    formValue.forEach((ele: any) => {
-      console.log(ele)
-    });
-    return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue)
+    let headers = new HttpHeaders();
+    //this is the important step. You need to set content type as null
+    headers.set('Content-Type', 'null');
+    headers.set('Accept', "multipart/form-data");
+
+    return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers })
   }
 
-  getClassificationById(id:any) {
+  getClassificationById(id: any) {
     return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types/${id}`)
   }
 

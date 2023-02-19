@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FilterWithSearch } from 'src/app/core/models/filters.model';
+import { FilterWithSearch, FilterClassification } from 'src/app/core/models/filters.model';
 import { ClassificationDisplayComponent } from '../classification-display/classification-display.component';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
@@ -17,12 +17,11 @@ export class VehicleClassificationComponent {
 
   classifications: any[] = [];
   cities: any[] = [];
-  activeCityTab = 1;
   vehicleTypes: any[] = [];
-  selectedValue: string = 'جاي تكسي';
-  filter: FilterWithSearch = new FilterWithSearch();
   endOfResult: boolean = false
   vehicleTypeName: any
+  filter: FilterClassification = new FilterClassification();
+
   constructor(
     private addClassification: MatDialog,
     private confirmDialog: MatDialog,
@@ -31,34 +30,12 @@ export class VehicleClassificationComponent {
   ) {
     this.getCities();
     this.getVehicleTypes();
-    this.getClassifications();
-  }
-  onChangeType(event: any) {
-    console.log(event)
-    this.settingsService.selectedType = event;
-    this.getClassifications();
+    this.getClassifications(this.filter.skipCount);
   }
 
-  onChangeCity(event: any) {
-    console.log(event)
-    this.settingsService.selectedProv = event;
-    this.getClassifications();
-  }
-  /*
-    selectedValueChanged(event: Event) {
-      this.selectedValue = event.toString();
-      this.getClassifications(this.activeCityTab, this.selectedValue)
-    }*/
-
-  getClassifications(cityName?: string, vehicleType?: string) {
-    if (this.settingsService.selectedProv) {
-      cityName = this.settingsService.selectedProv;
-    }
-    if (this.settingsService.selectedType) {
-      vehicleType = this.settingsService.selectedType;
-    }
-    console.log(cityName, vehicleType)
-    this.settingsService.getAllClassificationes(this.filter, cityName, vehicleType).subscribe((res: any) => {
+  getClassifications(pageIndex:number) {
+    this.filter.skipCount = pageIndex
+    this.settingsService.getAllClassificationes(this.filter).subscribe((res: any) => {
       if (this.filter.skipCount == 0) {
         this.classifications = res.items
       }
@@ -73,7 +50,7 @@ export class VehicleClassificationComponent {
   getCities() {
     this.provinceService.getProvinceList().subscribe((res: any) => {
       this.cities = res.items;
-      console.log(this.cities)
+      if(this.cities && this.cities.length) this.filter.cityId = this.cities[0].id
     });
   }
 
@@ -81,13 +58,9 @@ export class VehicleClassificationComponent {
     this.vehicleTypes = this.settingsService.getVehicleTypes();
   }
 
-  search(inputText: any) {
-    //this.classifications = this.settingsService.searchInClassificationTableByName(inputText.value);
-  }
-
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + 1;
-    this.getClassifications();
+    this.getClassifications(this.filter.skipCount);
   }
 
   addNewClassification() {

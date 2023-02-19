@@ -2,8 +2,8 @@ import { DriverRequestStatus, SortType, ServiceType, OrderStatusEnum } from '../
 import { DateTime } from 'ts-luxon';
 
 export class Filter {
-    maxResultCount:number
-    skipCount:number
+    maxResultCount: number
+    skipCount: number
     constructor() {
         this.skipCount = 0
         this.maxResultCount = 10
@@ -11,9 +11,9 @@ export class Filter {
 }
 
 export class FilterWithSearch extends Filter {
-    status:number
-    filter:string
-    sorting:number
+    status: number
+    filter: string
+    sorting: number
 
     constructor() {
         super()
@@ -23,8 +23,8 @@ export class FilterWithSearch extends Filter {
     }
 }
 export class FilterVehiclesWithSearch extends FilterWithSearch {
-    provinceId:number
-    category:number
+    provinceId: number
+    category: number
     constructor() {
         super()
         this.provinceId = 0
@@ -33,25 +33,37 @@ export class FilterVehiclesWithSearch extends FilterWithSearch {
 }
 
 export class FilterTurnOver {
-    fromDate:Date | null | undefined
-    toDate:Date | null | undefined
-    captainId?:string
+    fromDate: Date | null | undefined
+    toDate: Date | null | undefined
+    captainId?: string
 }
 
 export class FilterOrders extends Filter {
-    captainId:string | null
-    clientId :string | null
-    fromDate:any
-    toDate:any
-    isOpen:boolean
-    orderStatus:number | null
-    constructor(){
+    captainId: string | null
+    clientId: string | null
+    fromDate: any
+    toDate: any
+    isOpen: boolean
+    orderStatus: number | null
+    constructor() {
         super();
         this.captainId = null
         this.clientId = null
         this.fromDate = null
         this.toDate = null
         this.isOpen = false
-        this.orderStatus =null
+        this.orderStatus = null
+    }
+}
+
+export class FilterClassification extends Filter {
+    cityId: number | null
+    categoryId: number | null
+    filter: string | null
+    constructor() {
+        super()
+        this.cityId = null
+        this.categoryId = 2
+        this.filter = null
     }
 }

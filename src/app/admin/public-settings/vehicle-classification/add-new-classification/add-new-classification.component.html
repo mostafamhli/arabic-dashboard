@@ -6,7 +6,7 @@
 
 <div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular vehicle-classification-settings">
   <form (ngSubmit)="onSubmit()" [formGroup]="generalFields">
-    <div class="row mb-5">
+    <div class="row mb-5" *ngIf="(activePageType == pageTypeEnum.edit || activePageType == pageTypeEnum.view ) && generalFields.value.englishName">
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
         <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="image" ></app-add-image>
         <span>صورة</span>
@@ -156,10 +156,10 @@
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of shiftPackages; index as i">
-                    <td>{{item.arName}}</td>
+                  <tr *ngFor="let item of openTripCost['morning']; index as i">
+                    <td>{{item.packageName}}</td>
                     <td>
-                      <input type="text" formControlName="morningShiftPackages{{i}}" (click)="inputClicked($event)" class="form-control text-center">
+                      <input type="number" [name]="item.packageName" [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost" class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -274,10 +274,10 @@
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of shiftPackages; index as i">
-                    <td>{{item.openTripTime}}</td>
+                  <tr *ngFor="let item of openTripCost['day']; index as i">
+                    <td>{{item.packageName}}</td>
                     <td>
-                      <input formControlName="dayShiftPackages{{i}}"  type="text" class="form-control text-center">
+                      <input type="number" [name]="item.packageName" [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost" class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -393,10 +393,10 @@
                   <th>التكلفة</th>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of shiftPackages; index as i">
-                    <td>{{item.openTripTime}}</td>
+                  <tr *ngFor="let item of openTripCost['night']; index as i">
+                    <td>{{item.packageName}}</td>
                     <td>
-                      <input formControlName="nightShiftPackages{{i}}" type="text" class="form-control text-center">
+                      <input type="number" [name]="item.packageName" [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost" class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
