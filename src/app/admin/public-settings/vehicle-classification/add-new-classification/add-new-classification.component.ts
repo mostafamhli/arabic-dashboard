@@ -57,28 +57,6 @@ export class AddNewClassificationComponent {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
     this.getOpenTrips();
-    this.id = this.activatedRoute.snapshot.params['id']
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.cityId = params['cityId']
-      this.catId = params['catId']
-    })
-
-    if (this.id) {
-      if (router.url.includes("classification-edit"))
-        this.activePageType = PageType.Edit
-      else
-        this.activePageType = PageType.Get
-
-      this.settingsService.getClassificationById(this.id).subscribe((res: any) => {
-        this.setInfoForForm(res)
-      })
-    } else {
-      this.activePageType = PageType.Create
-    }
-
-    this.openTripCost['morning'] = []
-    this.openTripCost['day'] = []
-    this.openTripCost['night'] = []
   }
 
   ngOnInit() {
@@ -87,6 +65,10 @@ export class AddNewClassificationComponent {
   getOpenTrips() {
     this.settingsService.getOpenTrips().subscribe((res: any) => {
       let shiftPackages = res.items
+      this.openTripCost['morning'] = []
+      this.openTripCost['day'] = []
+      this.openTripCost['night'] = []
+
       for (let i = 0; i < shiftPackages.length; i++) {
         this.openTripCost['morning'].push({
           packageId: shiftPackages[i].id,
@@ -109,8 +91,31 @@ export class AddNewClassificationComponent {
           }
         )
       }
+      this.getData()
     })
   }
+
+  getData() {
+    this.id = this.activatedRoute.snapshot.params['id']
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.cityId = params['cityId']
+      this.catId = params['catId']
+    })
+
+    if (this.id) {
+      if (this.router.url.includes("classification-edit"))
+        this.activePageType = PageType.Edit
+      else
+        this.activePageType = PageType.Get
+
+      this.settingsService.getClassificationById(this.id).subscribe((res: any) => {
+        this.setInfoForForm(res)
+      })
+    } else {
+      this.activePageType = PageType.Create
+    }
+  }
+
   getErrorRequiredMessage() {
     if (
       this.generalFields.controls['numOfSites'].hasError('pattern') ||
@@ -137,88 +142,91 @@ export class AddNewClassificationComponent {
   }
 
   onSubmit() {
-    let arr1: ShiftPackage[] = [];
-    arr1 = arr1.concat(this.openTripCost['morning'])
-    arr1 = arr1.concat(this.openTripCost['day'])
-    arr1 = arr1.concat(this.openTripCost['night'])
+    this.generalFields.markAsTouched();
+    if (this.generalFields.valid) {
+      let arr1: ShiftPackage[] = [];
+      arr1 = arr1.concat(this.openTripCost['morning'])
+      arr1 = arr1.concat(this.openTripCost['day'])
+      arr1 = arr1.concat(this.openTripCost['night'])
 
-    let arr: Shift[] = [
-      {
-        shift: 1,
-        costFactor: this.generalFields.controls.morningLowestRent.value,
-        stoppingFactor: this.generalFields.controls.morningStoppingFactor.value,
-        additionalCost: this.generalFields.controls.morningOne_Km.value,
-        firstRangeCost: this.generalFields.controls.morningFirstExtraCost.value,
-        firstRangeTime: this.generalFields.controls.morningFirstWaitingTime.value,
-        secondRangeCost: this.generalFields.controls.morningSecondExtraCost.value,
-        secondRangeTime: this.generalFields.controls.morningSecondWaitingTime.value,
-        timeDifferenceFactor: this.generalFields.controls.morningtimeDifferenceFactor.value,
-      },
-      {
-        shift: 2,
-        costFactor: this.generalFields.controls.dayLowestRent.value,
-        stoppingFactor: this.generalFields.controls.dayTen_M.value,
-        additionalCost: this.generalFields.controls.dayOne_Km.value,
-        firstRangeCost: this.generalFields.controls.dayFirstExtraCost.value,
-        firstRangeTime: this.generalFields.controls.dayFirstWaitingTime.value,
-        secondRangeCost: this.generalFields.controls.daySecondExtraCost.value,
-        secondRangeTime: this.generalFields.controls.daySecondWaitingTime.value,
-        timeDifferenceFactor: this.generalFields.controls.daytimeDifferenceFactor.value,
-      },
-      {
-        shift: 3,
-        costFactor: this.generalFields.controls.nightLowestRent.value,
-        stoppingFactor: this.generalFields.controls.nightTen_M.value,
-        additionalCost: this.generalFields.controls.nightOne_Km.value,
-        firstRangeCost: this.generalFields.controls.nightFirstExtraCost.value,
-        firstRangeTime: this.generalFields.controls.nightFirstWaitingTime.value,
-        secondRangeCost: this.generalFields.controls.nightSecondExtraCost.value,
-        secondRangeTime: this.generalFields.controls.nightSecondWaitingTime.value,
-        timeDifferenceFactor: this.generalFields.controls.nighttimeDifferenceFactor.value,
-      }]
+      let arr: Shift[] = [
+        {
+          shift: 1,
+          costFactor: this.generalFields.controls.morningLowestRent.value,
+          stoppingFactor: this.generalFields.controls.morningStoppingFactor.value,
+          additionalCost: this.generalFields.controls.morningOne_Km.value,
+          firstRangeCost: this.generalFields.controls.morningFirstExtraCost.value,
+          firstRangeTime: this.generalFields.controls.morningFirstWaitingTime.value,
+          secondRangeCost: this.generalFields.controls.morningSecondExtraCost.value,
+          secondRangeTime: this.generalFields.controls.morningSecondWaitingTime.value,
+          timeDifferenceFactor: this.generalFields.controls.morningtimeDifferenceFactor.value,
+        },
+        {
+          shift: 2,
+          costFactor: this.generalFields.controls.dayLowestRent.value,
+          stoppingFactor: this.generalFields.controls.dayTen_M.value,
+          additionalCost: this.generalFields.controls.dayOne_Km.value,
+          firstRangeCost: this.generalFields.controls.dayFirstExtraCost.value,
+          firstRangeTime: this.generalFields.controls.dayFirstWaitingTime.value,
+          secondRangeCost: this.generalFields.controls.daySecondExtraCost.value,
+          secondRangeTime: this.generalFields.controls.daySecondWaitingTime.value,
+          timeDifferenceFactor: this.generalFields.controls.daytimeDifferenceFactor.value,
+        },
+        {
+          shift: 3,
+          costFactor: this.generalFields.controls.nightLowestRent.value,
+          stoppingFactor: this.generalFields.controls.nightTen_M.value,
+          additionalCost: this.generalFields.controls.nightOne_Km.value,
+          firstRangeCost: this.generalFields.controls.nightFirstExtraCost.value,
+          firstRangeTime: this.generalFields.controls.nightFirstWaitingTime.value,
+          secondRangeCost: this.generalFields.controls.nightSecondExtraCost.value,
+          secondRangeTime: this.generalFields.controls.nightSecondWaitingTime.value,
+          timeDifferenceFactor: this.generalFields.controls.nighttimeDifferenceFactor.value,
+        }]
 
-    let formData: any = new FormData();
-    if (this.activePageType == PageType.Edit)
-      formData.append('Id', this.id)
+      let formData: any = new FormData();
+      if (this.activePageType == PageType.Edit)
+        formData.append('Id', this.id)
 
-    formData.append('Name', this.generalFields.controls['englishName'].value)
-    formData.append('ProvinceId', this.cityId)
-    formData.append('ArName', this.generalFields.controls['arabicName'].value)
-    formData.append('Category', this.catId)
-    formData.append('Image', this.generalFields.controls['image'].value)
-    formData.append('Icon', this.generalFields.controls['icon'].value)
-    formData.append('SeatCount', this.generalFields.controls.numOfSites.value!)
-    formData.append('CaptainPercentage', this.generalFields.controls['driverRatio'].value)
-    let i = 0;
-    arr1.forEach((element: ShiftPackage) => {
-      formData.append(`ShiftPackages[${i}][packageId]`, element.packageId)
-      formData.append(`ShiftPackages[${i}][shift]`, element.shift)
-      formData.append(`ShiftPackages[${i}][cost]`, element.cost)
-      i++
-    });
-    arr.forEach((element: Shift) => {
-      formData.append(`ShiftCostFactors[${element.shift - 1}][shift]`, element.shift)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][additionalCost]`, element.additionalCost)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][costFactor]`, element.costFactor)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeCost]`, element.firstRangeCost)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeTime]`, element.firstRangeTime)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeCost]`, element.secondRangeCost)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeTime]`, element.secondRangeTime)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][stoppingFactor]`, element.stoppingFactor)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][timeDifferenceFactor]`, element.timeDifferenceFactor)
-    });
+      formData.append('Name', this.generalFields.controls['englishName'].value)
+      formData.append('ProvinceId', this.cityId)
+      formData.append('ArName', this.generalFields.controls['arabicName'].value)
+      formData.append('Category', this.catId)
+      formData.append('Image', this.generalFields.controls['image'].value)
+      formData.append('Icon', this.generalFields.controls['icon'].value)
+      formData.append('SeatCount', this.generalFields.controls.numOfSites.value!)
+      formData.append('CaptainPercentage', this.generalFields.controls['driverRatio'].value)
+      let i = 0;
+      arr1.forEach((element: ShiftPackage) => {
+        formData.append(`ShiftPackages[${i}][packageId]`, element.packageId)
+        formData.append(`ShiftPackages[${i}][shift]`, element.shift)
+        formData.append(`ShiftPackages[${i}][cost]`, element.cost)
+        i++
+      });
+      arr.forEach((element: Shift) => {
+        formData.append(`ShiftCostFactors[${element.shift - 1}][shift]`, element.shift)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][additionalCost]`, element.additionalCost)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][costFactor]`, element.costFactor)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeCost]`, element.firstRangeCost)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeTime]`, element.firstRangeTime)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeCost]`, element.secondRangeCost)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeTime]`, element.secondRangeTime)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][stoppingFactor]`, element.stoppingFactor)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][timeDifferenceFactor]`, element.timeDifferenceFactor)
+      });
 
-    this.submitted = true
-    this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res:any) => {
-      if(res.id)
-      this.router.navigate(['/classification-display',res.id])
-      else 
-      this.router.navigate(['/vehicle-classification'])
-      this.submitted = false
-    }, err => {
-      console.error(err)
-      this.submitted = false
-    })
+      this.submitted = true
+      this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res: any) => {
+        if (res.id)
+          this.router.navigate(['/classification-display', res.id])
+        else
+          this.router.navigate(['/vehicle-classification'])
+        this.submitted = false
+      }, err => {
+        console.error(err)
+        this.submitted = false
+      })
+    }
   }
 
   setInfoForForm(res: any) {

@@ -21,7 +21,6 @@ export class VehicleClassificationComponent {
   endOfResult: boolean = false
   vehicleTypeName: any
   filter: FilterClassification = new FilterClassification();
-
   constructor(
     private addClassification: MatDialog,
     private confirmDialog: MatDialog,
@@ -29,8 +28,6 @@ export class VehicleClassificationComponent {
     private provinceService: ProvinceService
   ) {
     this.getCities();
-    this.getVehicleTypes();
-    this.getClassifications(this.filter.skipCount);
   }
 
   getClassifications(pageIndex:number) {
@@ -51,11 +48,14 @@ export class VehicleClassificationComponent {
     this.provinceService.getProvinceList().subscribe((res: any) => {
       this.cities = res.items;
       if(this.cities && this.cities.length) this.filter.cityId = this.cities[0].id
+      this.getVehicleTypes();
+      this.getClassifications(this.filter.skipCount);
     });
   }
 
   getVehicleTypes() {
     this.vehicleTypes = this.settingsService.getVehicleTypes();
+    this.filter.categoryId = this.vehicleTypes[0].id
   }
 
   loadMore() {

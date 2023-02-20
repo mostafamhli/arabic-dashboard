@@ -10,9 +10,9 @@
     </div>
   </div>
   <form class="content" [formGroup]="driverProfile">
-    <app-driver-profile-personal-info  *ngIf="activeTab == ActiveProfileTabEnum.personal">
+    <app-driver-profile-personal-info [clickSubmit]="clickSubmit" *ngIf="activeTab == ActiveProfileTabEnum.personal">
     </app-driver-profile-personal-info>
-    <app-driver-profile-vehicle-info *ngIf="activeTab == ActiveProfileTabEnum.vehicle">
+    <app-driver-profile-vehicle-info [clickSubmit]="clickSubmit" *ngIf="activeTab == ActiveProfileTabEnum.vehicle">
     </app-driver-profile-vehicle-info>
   </form>
   <div *ngIf="pageType == pageTypeEnum.Create || pageType == pageTypeEnum.Edit" class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-5">

@@ -18,6 +18,7 @@ export class UploadImageComponent implements OnInit {
   @Input() label: string = "";
   @Input() path: any;
   @Output() imageObject: EventEmitter<any> = new EventEmitter<any>();
+  @Input() clickSubmit:any
 
   constructor(private viewImageDialog: MatDialog, private controlContainer: ControlContainer) {
 

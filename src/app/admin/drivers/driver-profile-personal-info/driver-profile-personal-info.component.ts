@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
 import { ProvinceService } from 'src/app/core/services/province.service';
 import { PageType } from 'src/app/core/enums/genric.enums';
@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./driver-profile-personal-info.component.scss']
 })
 export class DriverProfilePersonalInfoComponent implements OnInit {
+
+  @Input() clickSubmit:boolean;
 
   driverProfile: FormGroup;
   imageFile: any
@@ -40,7 +42,6 @@ export class DriverProfilePersonalInfoComponent implements OnInit {
   }
   ngOnInit(): void {
     this.driverProfile = <FormGroup>this.controlContainer.control;
-    console.log(this.driverProfile.value)
     if (this.driverProfile.controls['profileImageUrl'] && this.driverProfile.controls['profileImageUrl'].value && this.driverProfile.controls['profileImageUrl'].value != "") {
       this.imageFile = this.driverProfile.controls['profileImageUrl'].value
       if (typeof (this.imageFile) != 'string') {
@@ -60,10 +61,15 @@ export class DriverProfilePersonalInfoComponent implements OnInit {
     var reader = new FileReader();
     this.imageFile = files;
     this.driverProfile.controls['profileImageUrl'].setValue(files[0])
-    console.log(this.driverProfile.value)
     reader.readAsDataURL(files[0]);
     reader.onload = (_event) => {
       this.imageFile = reader.result;
     };
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.clickSubmit  && this.driverProfile){
+      this.driverProfile.markAllAsTouched()
+    }
   }
 }

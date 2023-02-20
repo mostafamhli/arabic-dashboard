@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, ControlContainer } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PageType } from 'src/app/core/enums/genric.enums';
@@ -11,15 +11,17 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
   styleUrls: ['./driver-profile-vehicle-info.component.scss']
 })
 export class DriverProfileVehicleInfoComponent implements OnInit {
-  driverProfile: FormGroup;
-  imageFile:any;
-  pageType:number
-  pageTypeEnum=PageType
-  driverId:string
-  filter: FilterVehiclesWithSearch = new FilterVehiclesWithSearch();
-  calssifications:any
+  @Input() clickSubmit: boolean;
 
-  constructor(private controlContainer: ControlContainer,private driverServices:DriverServicesService,private activatedRoute:ActivatedRoute) {
+  driverProfile: FormGroup;
+  imageFile: any;
+  pageType: number
+  pageTypeEnum = PageType
+  driverId: string
+  filter: FilterVehiclesWithSearch = new FilterVehiclesWithSearch();
+  calssifications: any
+
+  constructor(private controlContainer: ControlContainer, private driverServices: DriverServicesService, private activatedRoute: ActivatedRoute) {
     this.pageType = PageType.Get
     this.driverId = activatedRoute.snapshot.params['id']
     if (this.driverId) {
@@ -52,11 +54,16 @@ export class DriverProfileVehicleInfoComponent implements OnInit {
     this.calssifications = this.driverServices.getVehiclesTypes();
     this.filter.provinceId = this.driverProfile.value.provinceId
     this.filter.maxResultCount = 50
-    this.calssifications.forEach((element:any) => {
+    this.calssifications.forEach((element: any) => {
       this.filter.category = element.id
-      this.driverServices.getVehicles(this.filter).subscribe((res:any) => {
+      this.driverServices.getVehicles(this.filter).subscribe((res: any) => {
         element.vehicles = res.items
       }, err => { });
     });
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.clickSubmit && this.driverProfile) {
+      this.driverProfile.markAllAsTouched()
+    }
   }
 }

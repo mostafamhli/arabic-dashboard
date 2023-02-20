@@ -1,81 +1,88 @@
-<div class="wizard d-flex align-items-center w-100 justify-content-center x-font-bold">
-  <div *ngFor="let city of cities" class="tab" (click)="filter.cityId = city.id;getClassifications(filter.skipCount);">
-    <div class="city d-flex flex-column justify-content-center align-items-center"
-      [ngClass]="{active: filter.cityId == city.id}">
-      <div class="img-div  d-flex flex-column justify-content-center align-items-center">
-        <img [src]="city?.imageUrl">
+<ng-container *ngIf="cities && cities.length">
+  <div class="wizard d-flex align-items-center w-100 justify-content-center x-font-bold">
+    <div *ngFor="let city of cities" class="tab"
+      (click)="filter.cityId = city.id;getClassifications(filter.skipCount);">
+      <div class="city d-flex flex-column justify-content-center align-items-center"
+        [ngClass]="{active: filter.cityId == city.id}">
+        <div class="img-div  d-flex flex-column justify-content-center align-items-center">
+          <img [src]="city?.imageUrl">
+        </div>
+        <div class="text text-center">{{city?.name}}</div>
       </div>
-      <div class="text text-center">{{city?.name}}</div>
     </div>
   </div>
-</div>
-<div class="d-flex flex-column align-items-center w-100 mt-3 mb-3">
-  <div class="d-flex align-items-center">
-    <div class="d-flex align-items-center input-label" *ngFor="let vehicleType of vehicleTypes">
-      <input class="ms-1" type="radio" name="vehicleType"
-        (change)="filter.categoryId = vehicleType.id;getClassifications(filter.skipCount)" [id]="vehicleType.id">
-      {{vehicleType.name}}
+  <div class="d-flex flex-column align-items-center w-100 mt-3 mb-3">
+    <div class="d-flex align-items-center">
+      <div class="d-flex align-items-center input-label" *ngFor="let vehicleType of vehicleTypes">
+        <input class="ms-1" type="radio" name="vehicleType" [(ngModel)]="filter.categoryId" [value]="vehicleType.id"
+          (change)="filter.skipCount =0;getClassifications(filter.skipCount)" [id]="vehicleType.id">
+        {{vehicleType.name}}
+      </div>
     </div>
   </div>
-</div>
 
-<div class="drivers_list x-font-regular">
-  <div class="row">
-    <div class="col-6 d-flex align-items-center">
-      <button class="btn t_btn_blue w-25" routerLink='/add-new-classification' [queryParams]="{catId: filter.categoryId,cityId:filter.cityId}">
-        إضافة تصنيف
+  <div class="drivers_list x-font-regular">
+    <div class="row">
+      <div class="col-6 d-flex align-items-center">
+        <button class="btn t_btn_blue w-25" routerLink='/add-new-classification'
+          [queryParams]="{catId: filter.categoryId,cityId:filter.cityId}">
+          إضافة تصنيف
+        </button>
+      </div>
+      <div class="col"></div>
+      <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+        <mat-form-field>
+          <mat-label>بحث</mat-label>
+          <input matInput (keyup)="filter.skipCount=0;getClassifications(filter.skipCount);" [(ngModel)]="filter.filter"
+            placeholder=" ابحث عن ما تريد" #input>
+          <mat-icon matSuffix (click)="filter.skipCount=0;getClassifications(filter.skipCount)">search</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="jay_taxi_table">
+      <div class="table_div d-flex flex-column align-items-center">
+        <table class="table">
+          <thead class="x-font-bold">
+            <th>اسم التصنيف </th>
+            <th>عدد المقاعد</th>
+            <th>الأجرة خلال الصباح</th>
+            <th>الأجرة خلال النهار</th>
+            <th>الأجرة خلال الليل</th>
+            <th>نسبة السائق بالمئة</th>
+            <th>العمليات</th>
+            <th>عرض التصنيف</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of classifications">
+              <td>{{item?.name}}</td>
+              <td>{{item?.seatCount}}</td>
+              <td>{{item?.shiftCostFactors[0]?.costFactor}}</td>
+              <td>{{item?.shiftCostFactors[1]?.costFactor}}</td>
+              <td>{{item?.shiftCostFactors[2]?.costFactor}}</td>
+              <td>{{item?.captainPercentage}}</td>
+              <td>
+                <mat-icon [routerLink]="['/classification-edit',item.id]" routerLinkActive="router-link-active"
+                  class="cursor">edit</mat-icon>
+                <!-- <mat-icon class="cursor red" (click)="confirmDelete(item.id)">delete</mat-icon> -->
+              </td>
+              <td>
+                <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display',item.id]"
+                  routerLinkActive="router-link-active">
+                  عرض
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="8" *ngIf="!classifications || !classifications.length">لا يوجد عناصر لعرضها</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
+      <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+        تحميل المزيد
       </button>
     </div>
-    <div class="col"></div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
-      <mat-form-field>
-        <mat-label>بحث</mat-label>
-        <input matInput (keyup)="filter.skipCount=0;getClassifications(filter.skipCount);" [(ngModel)]="filter.filter"
-          placeholder=" ابحث عن ما تريد" #input>
-        <mat-icon matSuffix (click)="filter.skipCount=0;getClassifications(filter.skipCount)">search</mat-icon>
-      </mat-form-field>
-    </div>
   </div>
-  <div class="jay_taxi_table">
-    <div class="table_div d-flex flex-column align-items-center">
-      <table class="table">
-        <thead class="x-font-bold">
-          <th>اسم التصنيف </th>
-          <th>عدد المقاعد</th>
-          <th>الأجرة خلال الصباح</th>
-          <th>الأجرة خلال النهار</th>
-          <th>الأجرة خلال الليل</th>
-          <th>نسبة السائق بالمئة</th>
-          <th>العمليات</th>
-          <th>عرض التصنيف</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of classifications">
-            <td>{{item?.name}}</td>
-            <td>{{item?.seatCount}}</td>
-            <td>{{item?.shiftCostFactors[0]?.costFactor}}</td>
-            <td>{{item?.shiftCostFactors[1]?.costFactor}}</td>
-            <td>{{item?.shiftCostFactors[2]?.costFactor}}</td>
-            <td>{{item?.captainPercentage}}</td>
-            <td>
-              <mat-icon [routerLink]="['/classification-edit',item.id]" routerLinkActive="router-link-active"
-                class="cursor">edit</mat-icon>
-              <mat-icon class="cursor red" (click)="confirmDelete(item.id)">delete</mat-icon>
-            </td>
-            <td>
-              <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display',item.id]"
-                routerLinkActive="router-link-active">
-                عرض
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
-    <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
-      تحميل المزيد
-    </button>
-  </div>
-</div>
+</ng-container>
