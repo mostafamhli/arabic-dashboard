@@ -1,0 +1,11 @@
+@import 'src/app/shared/styles/variables';
+
+.img_div_for_edit{
+    img{
+        height: auto;;
+        width: auto;
+    }
+    .image{
+        background-color: $blue;
+    }
+}

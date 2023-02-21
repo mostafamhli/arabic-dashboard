@@ -6,6 +6,7 @@ import { PaginationComponent } from './components/pagination/pagination.componen
 import { UploadImageComponent } from './components/upload-image/upload-image.component';
 import { ViewImageComponent } from './components/view-image/view-image.component';
 import { AddImageComponent } from './components/add-image/add-image.component';
+import { ErrorHandelComponent } from './components/error-handel/error-handel.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { AddImageComponent } from './components/add-image/add-image.component';
     PaginationComponent,
     UploadImageComponent,
     ViewImageComponent,
-    AddImageComponent
+    AddImageComponent,
+    ErrorHandelComponent
   ],
   imports: [
     CommonModule,

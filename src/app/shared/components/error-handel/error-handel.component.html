@@ -1,0 +1,11 @@
+<div class="error-handel p-3" dir="ltr">
+  <h5 class="d-flex align-items-center justify-content-center red">
+        <mat-icon>error</mat-icon>
+    <div>{{error.title || 'Error'}}</div>
+  </h5>
+  <div class="d-flex flex-column align-items-start">
+    <div *ngFor="let item of error.errorList" class="error-text">
+        {{ item.message || item}}
+    </div>
+  </div>
+</div>

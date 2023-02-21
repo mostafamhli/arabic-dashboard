@@ -18,4 +18,7 @@
       </button>
     </div>
   </div>
+  <mat-error *ngIf="isEnableToDelete == 'false' && clickSubmit && (!path || path == '' || path=='/assets/img/temp/add-image.png')">
+  <small class="x-font-bold">هذا الحقل مطلوب</small>  
+  </mat-error>
 </div>

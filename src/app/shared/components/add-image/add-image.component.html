@@ -1,8 +1,8 @@
 <div class="img_div_for_edit">
-  <div class="image">
-    <img *ngIf="imageFile" [style.width.px]="dimension" [style.height.px]="dimension" [src]="imageFile">
+  <div class="image" [style.width.px]="dimension" [style.height.px]="dimension">
+    <img *ngIf="imageFile" [style.max-width.px]="dimension" [style.max-height.px]="dimension" [src]="imageFile">
     <mat-icon *ngIf="!imageFile" [style.width.px]="dimension" [style.height.px]="dimension">person</mat-icon>
-    <div class="edit-div" (click)="fileInput.click()">
+    <div class="edit-div" (click)="fileInput.click()" *ngIf="isEdit">
       <mat-icon class="edit-icon">edit</mat-icon>
     </div>
     <input #fileInput type="file" (change)="onFileInput(fileInput.files)" accept="image/*" style="display:none;" />

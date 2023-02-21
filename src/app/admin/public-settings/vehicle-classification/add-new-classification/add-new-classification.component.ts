@@ -2,12 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
-
-export enum pageType {
-  add = 1,
-  edit = 2,
-  view = 3
-}
+import { PageType } from 'src/app/core/enums/genric.enums';
 
 @Component({
   selector: 'app-add-new-classification',
@@ -17,8 +12,8 @@ export enum pageType {
 
 export class AddNewClassificationComponent {
 
-  pageTypeEnum = pageType;
-  activePageType = pageType.add;
+  pageTypeEnum = PageType;
+  activePageType = PageType.Create;
   image: any = "../../../assets/img/user.png"
   openTripCost: any = {}
   cityId: any
@@ -57,32 +52,11 @@ export class AddNewClassificationComponent {
     nightFirstWaitingTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     nightSecondWaitingTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")])
   });
-
+  id: any
+  submitted: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
     this.getOpenTrips();
-    let id = this.activatedRoute.snapshot.params['id']
-    this.activatedRoute.queryParams.subscribe((params) => {
-      this.cityId = params['cityId']
-      this.catId = params['catId']
-    })
-
-    if (id) {
-      if (router.url.includes("classification-edit"))
-        this.activePageType = pageType.edit
-      else
-        this.activePageType = pageType.view
-
-      this.settingsService.getClassificationById(id).subscribe((res: any) => {
-        this.setInfoForForm(res)
-      })
-    } else {
-      this.activePageType = pageType.add
-    }
-
-    this.openTripCost['morning'] = []
-    this.openTripCost['day'] = []
-    this.openTripCost['night'] = []
   }
 
   ngOnInit() {
@@ -91,6 +65,10 @@ export class AddNewClassificationComponent {
   getOpenTrips() {
     this.settingsService.getOpenTrips().subscribe((res: any) => {
       let shiftPackages = res.items
+      this.openTripCost['morning'] = []
+      this.openTripCost['day'] = []
+      this.openTripCost['night'] = []
+
       for (let i = 0; i < shiftPackages.length; i++) {
         this.openTripCost['morning'].push({
           packageId: shiftPackages[i].id,
@@ -113,8 +91,31 @@ export class AddNewClassificationComponent {
           }
         )
       }
+      this.getData()
     })
   }
+
+  getData() {
+    this.id = this.activatedRoute.snapshot.params['id']
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.cityId = params['cityId']
+      this.catId = params['catId']
+    })
+
+    if (this.id) {
+      if (this.router.url.includes("classification-edit"))
+        this.activePageType = PageType.Edit
+      else
+        this.activePageType = PageType.Get
+
+      this.settingsService.getClassificationById(this.id).subscribe((res: any) => {
+        this.setInfoForForm(res)
+      })
+    } else {
+      this.activePageType = PageType.Create
+    }
+  }
+
   getErrorRequiredMessage() {
     if (
       this.generalFields.controls['numOfSites'].hasError('pattern') ||
@@ -141,121 +142,129 @@ export class AddNewClassificationComponent {
   }
 
   onSubmit() {
-    let arr1: ShiftPackage[] = [];
-    arr1 = arr1.concat(this.openTripCost['morning'])
-    arr1 = arr1.concat(this.openTripCost['day'])
-    arr1 = arr1.concat(this.openTripCost['night'])
+    this.generalFields.markAsTouched();
+    if (this.generalFields.valid) {
+      let arr1: ShiftPackage[] = [];
+      arr1 = arr1.concat(this.openTripCost['morning'])
+      arr1 = arr1.concat(this.openTripCost['day'])
+      arr1 = arr1.concat(this.openTripCost['night'])
 
-    let arr: Shift[] = [
-      {
-        shift: 1,
-        costFactor: this.generalFields.controls.morningLowestRent.value,
-        stoppingFactor: this.generalFields.controls.morningStoppingFactor.value,
-        additionalCost: this.generalFields.controls.morningOne_Km.value,
-        firstRangeCost: this.generalFields.controls.morningFirstExtraCost.value,
-        firstRangeTime: this.generalFields.controls.morningFirstWaitingTime.value,
-        secondRangeCost: this.generalFields.controls.morningSecondExtraCost.value,
-        secondRangeTime: this.generalFields.controls.morningSecondWaitingTime.value,
-        timeDifferenceFactor: this.generalFields.controls.morningtimeDifferenceFactor.value,
-      },
-      {
-        shift: 2,
-        costFactor: this.generalFields.controls.dayLowestRent.value,
-        stoppingFactor: this.generalFields.controls.dayTen_M.value,
-        additionalCost: this.generalFields.controls.dayOne_Km.value,
-        firstRangeCost: this.generalFields.controls.dayFirstExtraCost.value,
-        firstRangeTime: this.generalFields.controls.dayFirstWaitingTime.value,
-        secondRangeCost: this.generalFields.controls.daySecondExtraCost.value,
-        secondRangeTime: this.generalFields.controls.daySecondWaitingTime.value,
-        timeDifferenceFactor: this.generalFields.controls.daytimeDifferenceFactor.value,
-      },
-      {
-        shift: 3,
-        costFactor: this.generalFields.controls.nightLowestRent.value,
-        stoppingFactor: this.generalFields.controls.nightTen_M.value,
-        additionalCost: this.generalFields.controls.nightOne_Km.value,
-        firstRangeCost: this.generalFields.controls.nightFirstExtraCost.value,
-        firstRangeTime: this.generalFields.controls.nightFirstWaitingTime.value,
-        secondRangeCost: this.generalFields.controls.nightSecondExtraCost.value,
-        secondRangeTime: this.generalFields.controls.nightSecondWaitingTime.value,
-        timeDifferenceFactor: this.generalFields.controls.nighttimeDifferenceFactor.value,
-      }]
+      let arr: Shift[] = [
+        {
+          shift: 1,
+          costFactor: this.generalFields.controls.morningLowestRent.value,
+          stoppingFactor: this.generalFields.controls.morningStoppingFactor.value,
+          additionalCost: this.generalFields.controls.morningOne_Km.value,
+          firstRangeCost: this.generalFields.controls.morningFirstExtraCost.value,
+          firstRangeTime: this.generalFields.controls.morningFirstWaitingTime.value,
+          secondRangeCost: this.generalFields.controls.morningSecondExtraCost.value,
+          secondRangeTime: this.generalFields.controls.morningSecondWaitingTime.value,
+          timeDifferenceFactor: this.generalFields.controls.morningtimeDifferenceFactor.value,
+        },
+        {
+          shift: 2,
+          costFactor: this.generalFields.controls.dayLowestRent.value,
+          stoppingFactor: this.generalFields.controls.dayTen_M.value,
+          additionalCost: this.generalFields.controls.dayOne_Km.value,
+          firstRangeCost: this.generalFields.controls.dayFirstExtraCost.value,
+          firstRangeTime: this.generalFields.controls.dayFirstWaitingTime.value,
+          secondRangeCost: this.generalFields.controls.daySecondExtraCost.value,
+          secondRangeTime: this.generalFields.controls.daySecondWaitingTime.value,
+          timeDifferenceFactor: this.generalFields.controls.daytimeDifferenceFactor.value,
+        },
+        {
+          shift: 3,
+          costFactor: this.generalFields.controls.nightLowestRent.value,
+          stoppingFactor: this.generalFields.controls.nightTen_M.value,
+          additionalCost: this.generalFields.controls.nightOne_Km.value,
+          firstRangeCost: this.generalFields.controls.nightFirstExtraCost.value,
+          firstRangeTime: this.generalFields.controls.nightFirstWaitingTime.value,
+          secondRangeCost: this.generalFields.controls.nightSecondExtraCost.value,
+          secondRangeTime: this.generalFields.controls.nightSecondWaitingTime.value,
+          timeDifferenceFactor: this.generalFields.controls.nighttimeDifferenceFactor.value,
+        }]
 
-    let formData: any = new FormData();
-    formData.append('Name', this.generalFields.controls['englishName'].value)
-    formData.append('ProvinceId', this.cityId)
-    formData.append('ArName', this.generalFields.controls['arabicName'].value)
-    formData.append('Category', this.catId)
-    console.log(this.generalFields.controls['image'].value)
-    formData.append('Image', this.generalFields.controls['image'].value)
-    formData.append('Icon', this.generalFields.controls['icon'].value)
-    formData.append('SeatCount', this.generalFields.controls.numOfSites.value!)
-    formData.append('CaptainPercentage', this.generalFields.controls['driverRatio'].value)
-    //formData.append('AlternativeId', '1')
-    let i = 0;
-    arr1.forEach((element: ShiftPackage) => {
-      formData.append(`ShiftPackages[${i}][packageId]`, element.packageId)
-      formData.append(`ShiftPackages[${i}][shift]`, element.shift)
-      formData.append(`ShiftPackages[${i}][cost]`, element.cost)
-      i++
-    });
-    arr.forEach((element: Shift) => {
-      formData.append(`ShiftCostFactors[${element.shift - 1}][shift]`, element.shift)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][additionalCost]`, element.additionalCost)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][costFactor]`, element.costFactor)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeCost]`, element.firstRangeCost)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeTime]`, element.firstRangeTime)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeCost]`, element.secondRangeCost)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeTime]`, element.secondRangeTime)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][stoppingFactor]`, element.stoppingFactor)
-      formData.append(`ShiftCostFactors[${element.shift - 1}][timeDifferenceFactor]`, element.timeDifferenceFactor)
-    });
+      let formData: any = new FormData();
+      if (this.activePageType == PageType.Edit)
+        formData.append('Id', this.id)
 
-    this.settingsService.addNewClassification(formData).subscribe(res => {
-      console.log(res)
-    }, err => { })
+      formData.append('Name', this.generalFields.controls['englishName'].value)
+      formData.append('ProvinceId', this.cityId)
+      formData.append('ArName', this.generalFields.controls['arabicName'].value)
+      formData.append('Category', this.catId)
+      formData.append('Image', this.generalFields.controls['image'].value)
+      formData.append('Icon', this.generalFields.controls['icon'].value)
+      formData.append('SeatCount', this.generalFields.controls.numOfSites.value!)
+      formData.append('CaptainPercentage', this.generalFields.controls['driverRatio'].value)
+      let i = 0;
+      arr1.forEach((element: ShiftPackage) => {
+        formData.append(`ShiftPackages[${i}][packageId]`, element.packageId)
+        formData.append(`ShiftPackages[${i}][shift]`, element.shift)
+        formData.append(`ShiftPackages[${i}][cost]`, element.cost)
+        i++
+      });
+      arr.forEach((element: Shift) => {
+        formData.append(`ShiftCostFactors[${element.shift - 1}][shift]`, element.shift)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][additionalCost]`, element.additionalCost)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][costFactor]`, element.costFactor)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeCost]`, element.firstRangeCost)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][firstRangeTime]`, element.firstRangeTime)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeCost]`, element.secondRangeCost)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][secondRangeTime]`, element.secondRangeTime)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][stoppingFactor]`, element.stoppingFactor)
+        formData.append(`ShiftCostFactors[${element.shift - 1}][timeDifferenceFactor]`, element.timeDifferenceFactor)
+      });
+
+      this.submitted = true
+      this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res: any) => {
+        if (res.id)
+          this.router.navigate(['/classification-display', res.id])
+        else
+          this.router.navigate(['/vehicle-classification'])
+        this.submitted = false
+      }, err => {
+        console.error(err)
+        this.submitted = false
+      })
+    }
   }
 
   setInfoForForm(res: any) {
-    console.log(res)
     this.generalFields = new FormGroup({
-      arabicName: new FormControl({ value: res.arName, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      englishName: new FormControl({ value: res.name, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      image: new FormControl({ value: res.imageUrl, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      icon: new FormControl({ value: res.iconUrl, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      numOfSites: new FormControl({ value: res.seatCount, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      driverRatio: new FormControl({ value: res.captainPercentage, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningLowestRent: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningFirstExtraCost: new FormControl({ value: res.shiftCostFactors[0].firstRangeCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningSecondExtraCost: new FormControl({ value: res.shiftCostFactors[0].secondRangeCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningOne_Km: new FormControl({ value: res.shiftCostFactors[0].costFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningStoppingFactor: new FormControl({ value: res.shiftCostFactors[0].stoppingFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningTen_M: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningWaitingTime: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[0].firstRangeTime, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningSecondWaitingTime: new FormControl({ value: res.shiftCostFactors[0].secondRangeTime, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      morningtimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[0].timeDifferenceFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayLowestRent: new FormControl({ value: res.shiftCostFactors[1].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayFirstExtraCost: new FormControl({ value: res.shiftCostFactors[1].firstRangeCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      daySecondExtraCost: new FormControl({ value: res.shiftCostFactors[1].secondRangeCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayOne_Km: new FormControl({ value: res.shiftCostFactors[1].costFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayTen_M: new FormControl({ value: res.shiftCostFactors[1].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      daytimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[1].timeDifferenceFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      dayFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[1].firstRangeTime, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      daySecondWaitingTime: new FormControl({ value: res.shiftCostFactors[1].secondRangeTime, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightLowestRent: new FormControl({ value: res.shiftCostFactors[2].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightFirstExtraCost: new FormControl({ value: res.shiftCostFactors[2].firstRangeCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightSecondExtraCost: new FormControl({ value: res.shiftCostFactors[2].secondRangeCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightOne_Km: new FormControl({ value: res.shiftCostFactors[2].costFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightTen_M: new FormControl({ value: res.shiftCostFactors[2].additionalCost, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nighttimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[2].timeDifferenceFactor, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[2].firstRangeTime, disabled: pageType.view == this.activePageType }, [Validators.required]),
-      nightSecondWaitingTime: new FormControl({ value: res.shiftCostFactors[2].secondRangeTime, disabled: pageType.view == this.activePageType }, [Validators.required])
+      arabicName: new FormControl({ value: res.arName, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      englishName: new FormControl({ value: res.name, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      image: new FormControl({ value: res.imageUrl, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      icon: new FormControl({ value: res.iconUrl, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      numOfSites: new FormControl({ value: res.seatCount, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      driverRatio: new FormControl({ value: res.captainPercentage, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningLowestRent: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningFirstExtraCost: new FormControl({ value: res.shiftCostFactors[0].firstRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningSecondExtraCost: new FormControl({ value: res.shiftCostFactors[0].secondRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningOne_Km: new FormControl({ value: res.shiftCostFactors[0].costFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningStoppingFactor: new FormControl({ value: res.shiftCostFactors[0].stoppingFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningTen_M: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningWaitingTime: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[0].firstRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningSecondWaitingTime: new FormControl({ value: res.shiftCostFactors[0].secondRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      morningtimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[0].timeDifferenceFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      dayLowestRent: new FormControl({ value: res.shiftCostFactors[1].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      dayFirstExtraCost: new FormControl({ value: res.shiftCostFactors[1].firstRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      daySecondExtraCost: new FormControl({ value: res.shiftCostFactors[1].secondRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      dayOne_Km: new FormControl({ value: res.shiftCostFactors[1].costFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      dayTen_M: new FormControl({ value: res.shiftCostFactors[1].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      daytimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[1].timeDifferenceFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      dayFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[1].firstRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      daySecondWaitingTime: new FormControl({ value: res.shiftCostFactors[1].secondRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightLowestRent: new FormControl({ value: res.shiftCostFactors[2].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightFirstExtraCost: new FormControl({ value: res.shiftCostFactors[2].firstRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightSecondExtraCost: new FormControl({ value: res.shiftCostFactors[2].secondRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightOne_Km: new FormControl({ value: res.shiftCostFactors[2].costFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightTen_M: new FormControl({ value: res.shiftCostFactors[2].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nighttimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[2].timeDifferenceFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[2].firstRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      nightSecondWaitingTime: new FormControl({ value: res.shiftCostFactors[2].secondRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required])
     })
-    console.log(res.shiftPackages)
-    console.log(this.openTripCost['morning'])
-    console.log(this.openTripCost['day'])
-    console.log(this.openTripCost['night'])
+
     res.shiftPackages.forEach((element: ShiftPackage) => {
       this.openTripCost['morning'].forEach((elementM: ShiftPackage) => {
         if (element.packageId == elementM.packageId && element.shift == elementM.shift) {
@@ -273,29 +282,6 @@ export class AddNewClassificationComponent {
         }
       })
     })
-    /*let shiftPackages = res.shiftPackages
-    for (let i = 0; i < shiftPackages.length; i++) {
-      this.openTripCost['morning'].push({
-        packageId: shiftPackages[i].packageId,
-        shift: 1,
-        cost: shiftPackages[i].cost,
-        packageName: shiftPackages[i].arName
-      })
-      this.openTripCost['day'].push({
-        packageId: shiftPackages[i].id,
-        shift: 2,
-        cost: 0,
-        packageName: shiftPackages[i].arName
-      })
-      this.openTripCost['night'].push(
-        {
-          packageId: shiftPackages[i].id,
-          shift: 3,
-          cost: 0,
-          packageName: shiftPackages[i].arName
-        }
-      )
-    }*/
   }
 
   inputClicked(event: any) {

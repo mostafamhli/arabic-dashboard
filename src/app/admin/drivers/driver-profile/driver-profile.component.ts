@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 import { PageType } from 'src/app/core/enums/genric.enums';
+import { MatDialog } from '@angular/material/dialog';
+import { ErrorHandelComponent } from 'src/app/shared/components/error-handel/error-handel.component';
 
 enum ActiveProfileTab {
   personal = 1,
@@ -22,14 +24,14 @@ export class DriverProfileComponent {
   pageTypeEnum = PageType
   driverProfile: FormGroup
   submitted= false
+  clickSubmit = false
   constructor(
     private activatedRoute: ActivatedRoute,
     private driverService: DriverServicesService,
-    private router: Router) {
+    private router: Router,
+    private errorModal:MatDialog) {
     this.pageType = PageType.Get
     this.driverId = activatedRoute.snapshot.params['id']
-    //this.fillForm()
-    console.log(this.driverId)
     if (this.driverId) {
       this.pageType = PageType.Edit
       this.getDriverInfo()
@@ -37,17 +39,17 @@ export class DriverProfileComponent {
       this.pageType = PageType.Create
     }
     this.driverProfile = new FormGroup({
-      id: new FormControl(),
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
-      phoneNumber: new FormControl({ value: '', disabled: this.pageType != PageType.Create }),
-      gender: new FormControl(Number),
-      provinceId: new FormControl('', Validators.required),
-      provinceName: new FormControl(''),
-      secondPhoneNumber: new FormControl(''),
+      id: new FormControl(undefined),
+      firstName: new FormControl(undefined, Validators.required),
+      lastName: new FormControl(undefined, Validators.required),
+      phoneNumber: new FormControl({value : undefined, disabled: this.pageType != PageType.Create }, Validators.required),
+      gender: new FormControl(undefined),
+      provinceId: new FormControl(undefined, Validators.required),
+      provinceName: new FormControl(),
+      secondPhoneNumber: new FormControl(),
       profileImageUrl: new FormControl(),
-      licenseFrontImage: new FormControl(Validators.required),
-      licenseBackImage: new FormControl(Validators.required),
+      licenseFrontImage: new FormControl(),
+      licenseBackImage: new FormControl(),
       idBackImage: new FormControl(),
       idFrontImage: new FormControl(),
       residenceocumentFrontImage: new FormControl(),
@@ -60,24 +62,30 @@ export class DriverProfileComponent {
       deleteResidenceCardBackImage: new FormControl('false'),
       deleteSecurityCardImage: new FormControl('false'),
 
-      vehicleColor: new FormControl('', Validators.required),
-      vehiclePlateNumber: new FormControl('', Validators.required),
-      vehicleModel: new FormControl('', Validators.required),
-      vehicleModelYear: new FormControl(''),
-      vehicleSeatCount: new FormControl(''),
+      vehicleColor: new FormControl(undefined, Validators.required),
+      vehiclePlateNumber: new FormControl(undefined, Validators.required),
+      vehicleModel: new FormControl(undefined, Validators.required),
+      vehicleModelYear: new FormControl(),
+      vehicleSeatCount: new FormControl(),
       vehicleVehicleTypeId: new FormControl(0, Validators.required),
-      vehicleVehicleTypeName: new FormControl(''),
+      vehicleVehicleTypeName: new FormControl(),
       vehicleImage: new FormControl(),
       vehicleCarLicenseFrontImage: new FormControl(),
       vehicleCarLicenseBackImage: new FormControl(),
-      vehicleCarPlateImage: new FormControl(Validators.required),
+      vehicleCarPlateImage: new FormControl(),
       deleteVehicleImage: new FormControl('false'),
       deleteCarLicenseFrontImage: new FormControl('false'),
       deleteCarLicenseBackImage: new FormControl('false'),
     })
   }
   save() {
-    if (this.driverProfile.valid) {
+    this.driverProfile.markAsTouched()
+    this.clickSubmit = true
+    if (this.driverProfile.valid
+      && this.driverProfile.value.vehicleCarPlateImage
+      && this.driverProfile.value.licenseFrontImage
+      && this.driverProfile.value.licenseBackImage
+      ) {
       this.submitted = true
       this.driverService.createDriver(this.driverProfile.value).subscribe((res: any) => {
         this.submitted = false
@@ -89,6 +97,15 @@ export class DriverProfileComponent {
         }
       },err=>{
         this.submitted = false
+        let error = err['error']
+        error = error['error']
+        let errorList = error.validationErrors
+        this.errorModal.open(ErrorHandelComponent,{
+          data: {
+            title : error.message,
+            errorList : errorList
+          }
+        })
       })
     }
   }
@@ -138,7 +155,6 @@ export class DriverProfileComponent {
           this.driverProfile.controls['vehicleCarLicenseBackImage'].setValue(res.vehicle.carLicenseBackImageUrl)
         if (res.vehicle.plateImageUrl)
           this.driverProfile.controls['vehicleCarPlateImage'].setValue(res.vehicle.plateImageUrl)
-        console.log(this.driverProfile.value)
       }
     }, err => { });
   }
