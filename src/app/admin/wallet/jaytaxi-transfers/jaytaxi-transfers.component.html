@@ -1,50 +1,52 @@
 <div class="transfers_list x-font-regular">
-        <div class="row">
-          <div class="col-6 d-flex align-items-center">
-            <button class="btn t_btn_blue w-25" (click)="addTransfer()">
-              إضافة 
-            </button>
-          </div>
-          <div class="col"></div>
-          <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
-            <mat-form-field>
-              <mat-label>بحث</mat-label>
-              <input matInput (keyup)="getDrivers()" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
-              <mat-icon matSuffix (click)="searchInTransferTable(input.value)">search</mat-icon>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="jay_taxi_table">
-          <div class="table_div d-flex flex-column align-items-center">
-            <table class="table">
-              <thead class="x-font-bold">
-                <th>الاسم</th>
-                <th>تاريخ الدفع</th>
-                <th>اسم المحاسب</th>
-                <th>المبلغ</th>
-                <th>نوع المناقلة</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of transfers">
-                  <td>{{item.driverName}}</td>
-                  <td>{{item.accountCreationDate}}</td>
-                  <td>{{item.accountantName}}</td>
-                  <td>{{item.balance}}</td>
-                  <td>
-                    <container-element [ngSwitch]="item.tranferType">
-                      <span *ngSwitchCase="TransferTypeEnum.remittance">إيداع</span>
-                      <span *ngSwitchCase="TransferTypeEnum.recovery">استرجاع</span>
-                    </container-element>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
-          <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
-            تحميل المزيد
-          </button>
-        </div>
-      </div>
-      
+  <div class="row">
+    <div class="col-6 d-flex align-items-center">
+      <button class="btn t_btn_blue w-25" (click)="addTransfer()">
+        إضافة
+      </button>
+    </div>
+    <div class="col"></div>
+    <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+      <mat-form-field>
+        <mat-label>بحث</mat-label>
+        <input matInput (keyup)="filter.skipCount=0;getTransactions()" [(ngModel)]="filter.filter"
+          placeholder=" ابحث عن ما تريد" #input>
+        <mat-icon matSuffix (click)="getTransactions()">search</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="jay_taxi_table">
+    <div class="table_div d-flex flex-column align-items-center">
+      <table class="table">
+        <thead class="x-font-bold">
+          <th>الاسم</th>
+          <th>تاريخ الدفع</th>
+          <th>اسم المحاسب</th>
+          <th>المبلغ</th>
+          <th>نوع المناقلة</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of transfers">
+            <td>{{item.creatorName}}</td>
+            <td>{{item.creationTime | date : 'short'}}</td>
+            <td>{{item.walletOwner}}</td>
+            <td>{{item.walletBalance}}</td>
+            <td>
+              <container-element [ngSwitch]="item.walletType">
+                <span *ngSwitchCase="TransferTypeEnum.remittance">إيداع</span>
+                <span *ngSwitchCase="TransferTypeEnum.recovery">استرجاع</span>
+                <span *ngSwitchCase="TransferTypeEnum.transfer_From">تحويل من</span>
+                <span *ngSwitchCase="TransferTypeEnum.transfer_To">تحويل إلى</span>
+              </container-element>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+    <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
+      تحميل المزيد
+    </button>
+  </div>
+</div>

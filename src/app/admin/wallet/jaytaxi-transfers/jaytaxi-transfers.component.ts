@@ -5,6 +5,7 @@ import { TransferType } from 'src/app/core/enums/genric.enums';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTransferComponent } from '../add-transfer/add-transfer.component';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { WalletService } from 'src/app/core/services/wallet.service';
 
 @Component({
   selector: 'app-jaytaxi-transfers',
@@ -12,25 +13,36 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
   styleUrls: ['./jaytaxi-transfers.component.scss']
 })
 export class JaytaxiTransfersComponent {
-  transfers: Transfer[] = [];
+  transfers: any[] = [];
   filter: FilterWithSearch = new FilterWithSearch();
   TransferTypeEnum = TransferType;
+  endOfResult: boolean = false
 
-  constructor(private addTransfers: MatDialog, private driverService: DriverServicesService) {
-    this.getDrivers();
+  constructor(private addTransfers: MatDialog, private walletService: WalletService) {
+    this.getTransactions();
   }
 
-  getDrivers() {
-    this.transfers = this.driverService.getAllTransfers();
+  getTransactions() {
+    this.walletService.getTransaction(this.filter).subscribe((res: any) => {
+      if (this.filter.skipCount == 0) {
+        this.transfers = res.items
+        console.log(this.transfers)
+      }
+      else
+        this.transfers = this.transfers.concat(res.items)
+      if (res.items.length < this.filter.maxResultCount) {
+        this.endOfResult = true;
+      } else this.endOfResult = false;
+    })
   }
 
   searchInTransferTable(searchWord: string) {
-    this.transfers = this.driverService.searchInTransferTable(searchWord);
+    //this.transfers = this.driverService.searchInTransferTable(searchWord);
   }
 
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + 1;
-    this.getDrivers()
+    this.getTransactions()
   }
 
   addTransfer() {

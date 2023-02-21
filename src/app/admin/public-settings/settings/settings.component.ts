@@ -9,32 +9,25 @@ import { pageType } from '../vehicle-classification/add-new-classification/add-n
   styleUrls: ['./settings.component.css']
 })
 export class SettingsComponent {
-  @ViewChild('myForm') form!: NgForm;
-  facebook = 'Mostafa F Mhli';
-  twitter = '@mostafa';
-  instagram = 'mostafa_mhli';
-  whatsapp = '0935526455';
-  phone = '0935526455';
-  email = 'mostafa@gmail.com';
 
-  
   pageTypeEnum = pageType;
   activePageType = pageType.add;
   socialMedia: any
 
   settingForm = new FormGroup({
-    facebook: new FormControl('Mostafa F Mhli', [Validators.required]),
-    twitter: new FormControl('@mostafa', [Validators.required]),
-    instagram: new FormControl('mostafa_mhli', [Validators.required]),
-    whatsapp: new FormControl('whatsapp', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    phone: new FormControl('phone', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    email: new FormControl('email', [Validators.required]),
-    morningBegin: new FormControl('06:00', [Validators.required]),
-    morningEnd: new FormControl('09:00', [Validators.required]),
-    dayBegin: new FormControl('10:00', [Validators.required]),
-    dayEnd: new FormControl('06:00', [Validators.required]),
-    nightBegin: new FormControl('06:00', [Validators.required]),
-    nightEnd: new FormControl('12:00', [Validators.required])
+    facebook: new FormControl('', [Validators.required]),
+    twitter: new FormControl('', [Validators.required]),
+    instagram: new FormControl('', [Validators.required]),
+    whatsapp: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    phone: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    email: new FormControl('', [Validators.required]),
+    morningEnd: new FormControl('', [Validators.required]),
+    dayEnd: new FormControl('', [Validators.required]),
+    captainCancellationFine: new FormControl('', [Validators.required]),
+    minimumCaptainWallet: new FormControl('', [Validators.required]),
+    minimumCountInRange: new FormControl('', [Validators.required]),
+    orderNotRespondingWaitMinutes: new FormControl('', [Validators.required]),
+
   });
 
   constructor(private settingsService: SettingsServicesService) {
@@ -42,10 +35,43 @@ export class SettingsComponent {
   }
 
   socialMediaInfo() {
-    this.socialMedia = this.settingsService.getSocialMediaInfo();
+    this.settingsService.getSocialMediaInfo().subscribe((res: any) => {
+      this.settingForm.get('facebook')?.setValue(res.contactFacebook)
+      this.settingForm.get('twitter')?.setValue(res.contactTwitter)
+      this.settingForm.get('instagram')?.setValue(res.contactInstagram)
+      this.settingForm.get('whatsapp')?.setValue(res.contactWhatsApp)
+      this.settingForm.get('phone')?.setValue(res.contactPhone)
+      this.settingForm.get('email')?.setValue(res.contactEmail)
+      this.settingForm.get('morningEnd')?.setValue(res.endMorningShiftTime)
+      this.settingForm.get('dayEnd')?.setValue(res.endAfternoonShiftTime)
+      this.settingForm.get('captainCancellationFine')?.setValue(res.captainCancellationFine)
+      this.settingForm.get('minimumCaptainWallet')?.setValue(res.minimumCaptainWallet)
+      this.settingForm.get('minimumCountInRange')?.setValue(res.minimumCountInRange)
+      this.settingForm.get('orderNotRespondingWaitMinutes')?.setValue(res.orderNotRespondingWaitMinutes)
+      console.log(res)
+    });
   }
 
-  onSubmit() {
-
+  edit() {
+    let modal =
+    {
+      contactFacebook: this.settingForm.value.facebook,
+      contactTwitter: this.settingForm.value.twitter,
+      contactInstagram: this.settingForm.value.instagram,
+      contactWhatsApp: this.settingForm.value.whatsapp,
+      contactEmail: this.settingForm.value.email,
+      contactPhone: this.settingForm.value.phone,
+      minimumCountInRange: this.settingForm.value.minimumCountInRange,
+      orderNotRespondingWaitMinutes: this.settingForm.value.orderNotRespondingWaitMinutes,
+      minimumCaptainWallet: this.settingForm.value.minimumCaptainWallet,
+      captainCancellationFine: this.settingForm.value.captainCancellationFine,
+      endMorningShiftTime: this.settingForm.value.morningEnd,
+      endAfternoonShiftTime: this.settingForm.value.dayEnd,
+      defaultZeroFeeRange: 2147483647,
+    }
+    this.settingsService.addSocialMediaInfo(modal).subscribe(res => {
+      console.log(res)
+      this.socialMediaInfo();
+    })
   }
 }

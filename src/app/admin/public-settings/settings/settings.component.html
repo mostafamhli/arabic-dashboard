@@ -90,18 +90,7 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="form-item col-6">
-      <mat-form-field class="w-100">
-        <mat-label>وقت ابتداء الفترة الصباحية </mat-label>
-        <input matInput name="selected_time_A" formControlName="morningBegin" [ngxMatTimepicker]="pickerA" readonly />
-        <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerA.open()">
-          watch_later
-        </mat-icon>
-      </mat-form-field>
-      <ngx-mat-timepicker #pickerA></ngx-mat-timepicker>
-    </div>
-
+  <div class="row w-100">
     <div class="form-item col-6">
       <mat-form-field class="w-100">
         <mat-label>وقت انتهاء الفترة الصباحية </mat-label>
@@ -112,16 +101,7 @@
       </mat-form-field>
       <ngx-mat-timepicker #pickerB></ngx-mat-timepicker>
     </div>
-    <div class="form-item col-6">
-      <mat-form-field class="w-100">
-        <mat-label>وقت ابتداء فترة النهار </mat-label>
-        <input matInput name="selected_time_A" formControlName="dayBegin" [ngxMatTimepicker]="pickerC" readonly />
-        <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerC.open()">
-          watch_later
-        </mat-icon>
-      </mat-form-field>
-      <ngx-mat-timepicker #pickerC></ngx-mat-timepicker>
-    </div>
+
     <div class="form-item col-6">
       <mat-form-field class="w-100">
         <mat-label>وقت انتهاء فترة النهار </mat-label>
@@ -132,25 +112,43 @@
       </mat-form-field>
       <ngx-mat-timepicker #pickerD></ngx-mat-timepicker>
     </div>
+  </div>
+
+
+  <div class="row w-100">
     <div class="form-item col-6">
       <mat-form-field class="w-100">
-        <mat-label>وقت ابتداء الفترة الليلة </mat-label>
-        <input matInput name="selected_time_A" formControlName="nightBegin" [ngxMatTimepicker]="pickerE" readonly />
-        <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerE.open()">
-          watch_later
-        </mat-icon>
+        <mat-label>الغرامة عند الغاء الكابتن للرحلة</mat-label>
+        <input matInput name="captainCancellationFine" formControlName="captainCancellationFine" />
       </mat-form-field>
-      <ngx-mat-timepicker #pickerE></ngx-mat-timepicker>
     </div>
+
     <div class="form-item col-6">
       <mat-form-field class="w-100">
-        <mat-label>وقت انتهاء الفترة الليلية </mat-label>
-        <input matInput name="selected_time_A" formControlName="nightEnd" [ngxMatTimepicker]="pickerF" readonly />
-        <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerF.open()">
-          watch_later
-        </mat-icon>
+        <mat-label>الحد الأدنى لمحفظة الكابتن</mat-label>
+        <input matInput name="minimumCaptainWallet" formControlName="minimumCaptainWallet" />
       </mat-form-field>
-      <ngx-mat-timepicker #pickerF></ngx-mat-timepicker>
     </div>
+  </div>
+  <div class="row w-100">
+    <div class="form-item col-6">
+      <mat-form-field class="w-100">
+        <mat-label>عدد الوصول للسائقين</mat-label>
+        <input matInput name="minimumCountInRange" formControlName="minimumCountInRange" />
+      </mat-form-field>
+    </div>
+
+    <div class="form-item col-6">
+      <mat-form-field class="w-100">
+        <mat-label>عدد دقائق الانتضار حتى تم الاستجابة على الطلب</mat-label>
+        <input matInput name="orderNotRespondingWaitMinutes" formControlName="orderNotRespondingWaitMinutes" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+    <button class="btn t_btn_blue_outline w-25" (click)="edit()">
+      تعديل
+    </button>
   </div>
 </form>

@@ -122,7 +122,7 @@ export class SettingsServicesService {
   }
 
   getCities() {
-    return []
+    return this.http.get(this.baseUrl + '/api/app/province/provinces')
   }
 
   getVehicleTypes() {
@@ -150,7 +150,7 @@ export class SettingsServicesService {
     if (filter.filter) param_ = param_.append('filter', filter.filter);
     if (city) param_ = param_.append('ProvinceId', city);
     if (type) param_ = param_.append('Category', type);
-    return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`,{ params: param_ })
+    return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`, { params: param_ })
   }
 
   addNewClassification(formValue: any) {
@@ -160,12 +160,16 @@ export class SettingsServicesService {
     return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue)
   }
 
-  getClassificationById(id:any) {
+  getClassificationById(id: any) {
     return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types/${id}`)
   }
 
   getOpenTrips() {
     return this.http.get(this.baseUrl + '/api/app/manage-vehicle-types/packages')
+  }
+
+  addPackage(model: any) {
+    return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types/package', model)
   }
 
   deleteClassification(id: number) {
@@ -220,13 +224,11 @@ export class SettingsServicesService {
   }
 
   getSocialMediaInfo() {
-    return {
-      facebook: 'Mostafa F Mhli',
-      twitter: '@mostafa',
-      instagram: 'mostafa_mhli',
-      whatsapp: '0935526455',
-      phone: '0935526455',
-      email: 'mostafa@gmail.com'
-    }
+    return this.http.get(this.baseUrl + '/api/app/manage-settings')
   }
+
+  addSocialMediaInfo(modal: any) {
+    return this.http.post(this.baseUrl + '/api/app/manage-settings', modal)
+  }
+
 }

@@ -59,9 +59,7 @@ export class TripsServicesService {
   }
 
   deleteOpentripType(id: number) {
-    return this.getAllOpenTripTypes().filter(item => {
-      return item.id !== id
-    })
+    return 
   }
 
   addOpenTripType(name: any) {
@@ -69,18 +67,7 @@ export class TripsServicesService {
   }
 
   getAllOpenTripTypes() {
-    return [
-      {
-        id: 1,
-        nameAr: "الباقة 1",
-        nameEn: "Package 1"
-      },
-      {
-        id: 2,
-        nameAr: "الباقة 2",
-        nameEn: "Package 2"
-      }
-    ]
+    return this.httpClient.get(this.baseUrl + '/api/app/vehicle-type/packages')
   }
 
   getAllCancleReason(): Observable<any> {

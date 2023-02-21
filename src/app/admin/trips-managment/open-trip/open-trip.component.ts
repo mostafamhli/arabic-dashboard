@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 import { TripsServicesService } from 'src/app/core/services/trips-services.service';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 
@@ -13,23 +14,35 @@ export class OpenTripComponent {
   englishPackageName: any;
   reasons: any[] = [];
 
-  constructor(private confirmDialog: MatDialog, private tripsService: TripsServicesService) {
+  constructor(private confirmDialog: MatDialog,
+    private tripsService: TripsServicesService,
+    private settingService: SettingsServicesService
+  ) {
     this.getOpenTrip();
   }
 
   getOpenTrip() {
-    this.reasons = this.tripsService.getAllOpenTripTypes();
+    this.settingService.getOpenTrips().subscribe((res: any) => {
+      this.reasons = res.items
+      console.log(this.reasons)
+    })
   }
 
   delete(id: number) {
-    this.reasons = this.tripsService.deleteOpentripType(id);
+    // this.reasons = this.tripsService.deleteOpentripType(id);
   }
 
   onSubmit() {
-    let reason = { id: this.reasons[this.reasons.length - 1].id + 1, nameAr: this.tripsService.addOpenTripType(this.arabicPackageName), nameEn: this.tripsService.addCancleReason(this.englishPackageName)  }
-    this.reasons.push(reason);
-    this.arabicPackageName = undefined;
-    this.englishPackageName = undefined;
+    if (this.arabicPackageName && this.englishPackageName) {
+      let model = {
+        name: this.englishPackageName,
+        arName: this.arabicPackageName
+      }
+      this.settingService.addPackage(model).subscribe(res => {
+        this.getOpenTrip();
+      })
+    }
+
   }
 
   confirmDelete(id: number) {

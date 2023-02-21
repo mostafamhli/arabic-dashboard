@@ -11,8 +11,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let item of reasons">
-                <td>{{item.nameAr}}</td>
-                <td>{{item.nameEn}}</td>
+                <td>{{item.arName}}</td>
+                <td>{{item.name}}</td>
                 <td>
                   <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
                     <mat-icon>delete</mat-icon>

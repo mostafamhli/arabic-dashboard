@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ClientServicesService } from 'src/app/core/services/client-services.service';
 import { CommunicationChannelServicesService } from 'src/app/core/services/communication-channel-services.service';
+import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 
 @Component({
   selector: 'app-send-message',
@@ -21,13 +24,55 @@ export class SendMessageComponent {
     slider: new FormControl(0, [Validators.required])
   });
 
-  constructor(private communicationService: CommunicationChannelServicesService) { }
+  constructor(
+    private communicationService: CommunicationChannelServicesService,
+    private driverService: DriverServicesService,
+    private clientService: ClientServicesService,
+    private router: Router
+  ) { }
 
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
   }
 
   send() {
-    console.log(this.communicationService.sendCustomMessage(this.generalFields.value));
+    let modal = {
+      Keyword: this.generalFields.value.search,
+      MinCreationDate: this.generalFields.value.range?.start,
+      MaxCreationDate: this.generalFields.value.range?.end
+    }
+
+    let usersIds: any[] = [];
+    if (this.generalFields.value.type === 'one') {
+      this.driverService.getLiteListOfCaptains(modal).subscribe((res: any) => {
+        res.items.forEach((ele: any) => {
+          usersIds.push(ele.id)
+        })
+        let modal = {
+          title: this.generalFields.value.messageTitle,
+          body: this.generalFields.value.messageContent,
+          targetType: 4,
+          targetUserIds: usersIds
+        }
+        this.communicationService.sendPublicMessage(modal).subscribe(res => {
+          this.router.navigate(['/notifications'])
+        })
+      })
+    } else {
+      this.clientService.getLiteListOfClients(modal).subscribe((res: any) => {
+        res.items.forEach((ele: any) => {
+          usersIds.push(ele.id)
+        })
+        let modal = {
+          title: this.generalFields.value.messageTitle,
+          body: this.generalFields.value.messageContent,
+          targetType: 4,
+          targetUserIds: usersIds
+        }
+        this.communicationService.sendPublicMessage(modal).subscribe(res => {
+          this.router.navigate(['/notifications'])
+        })
+      })
+    }
   }
 }
