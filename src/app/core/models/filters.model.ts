@@ -2,8 +2,8 @@ import { DriverRequestStatus, SortType, ServiceType, OrderStatusEnum } from '../
 import { DateTime } from 'ts-luxon';
 
 export class Filter {
-    maxResultCount: number
-    skipCount: number
+    maxResultCount:  number
+    skipCount:  number
     constructor() {
         this.skipCount = 0
         this.maxResultCount = 10
@@ -65,5 +65,16 @@ export class FilterOrders extends Filter {
         this.toDate = null
         this.isOpen = false
         this.orderStatus = null
+    }
+}
+export class FilterClassification extends Filter {
+    cityId: number | null
+    categoryId: number | null
+    filter: string | null
+    constructor() {
+        super()
+        this.cityId = null
+        this.categoryId = 2
+        this.filter = null
     }
 }

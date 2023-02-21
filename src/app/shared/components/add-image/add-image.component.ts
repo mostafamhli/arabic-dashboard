@@ -16,12 +16,12 @@ export class AddImageComponent {
   @Input('dimension') dimension: number;
 
   constructor(private controlContainer: ControlContainer) {
-    this.personalInfo = new FormGroup({
-    })
+
   }
 
   ngOnInit(): void {
     this.generalFields = <FormGroup>this.controlContainer.control;
+    console.log(this.generalFields.value.image)
   }
 
   onFileInput(files: any): void {

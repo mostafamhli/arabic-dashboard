@@ -66,9 +66,10 @@ export class SettingsComponent {
       minimumCaptainWallet: this.settingForm.value.minimumCaptainWallet,
       captainCancellationFine: this.settingForm.value.captainCancellationFine,
       endMorningShiftTime: this.settingForm.value.morningEnd,
-      endAfternoonShiftTime: this.settingForm.value.dayEnd,
-      defaultZeroFeeRange: 2147483647,
+      endAfternoonShiftTime: this.settingForm.value.dayEnd
     }
+
+    console.log(modal)
     this.settingsService.addSocialMediaInfo(modal).subscribe(res => {
       console.log(res)
       this.socialMediaInfo();
