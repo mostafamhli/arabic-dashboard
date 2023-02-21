@@ -6,13 +6,16 @@
 
 <div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular vehicle-classification-settings">
   <form (ngSubmit)="onSubmit()" [formGroup]="generalFields">
-    <div class="row mb-5" *ngIf="(activePageType == pageTypeEnum.Edit || activePageType == pageTypeEnum.Get ) && generalFields.value.englishName">
+    <div class="row mb-5"
+      *ngIf="(activePageType == pageTypeEnum.Edit || activePageType == pageTypeEnum.Get ) && generalFields.value.englishName">
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-        <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="image" [isEdit]="activePageType != pageTypeEnum.Get"></app-add-image>
+        <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="image"
+          [isEdit]="activePageType != pageTypeEnum.Get"></app-add-image>
         <span>صورة</span>
       </div>
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-        <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="icon" [isEdit]="activePageType != pageTypeEnum.Get"></app-add-image>
+        <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="icon"
+          [isEdit]="activePageType != pageTypeEnum.Get"></app-add-image>
         <span>أيقونة</span>
       </div>
     </div>
@@ -52,7 +55,15 @@
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
-
+      <div class="form-item head-item col-3">
+        <mat-form-field appearance="fill">
+          <mat-label>فئة المركبة</mat-label>
+          <mat-select name="vehicleVehicleTypeId" formControlName="vehicleVehicleTypeId">
+            <mat-option *ngFor="let item of altVehilces" [value]="item.id">{{item.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-9"></div>
     </div>
     <div class="d-flex flex-wrap justify-content-between mt-5 x-font-regular ">
       <div class="w-100 d-flex flex-column align-items-start day-rent-container">
@@ -105,7 +116,8 @@
               <mat-label>
                 التكلفة للمجال الثاني
                 <span>9 كم</span> - <span>15 كم</span>
-              </mat-label> <input matInput type="number" name="morningSecondExtraCost" formControlName="morningSecondExtraCost">
+              </mat-label> <input matInput type="number" name="morningSecondExtraCost"
+                formControlName="morningSecondExtraCost">
               <mat-error *ngIf="generalFields.controls.morningSecondExtraCost.invalid">
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
@@ -121,8 +133,10 @@
           <div class="form-item col-6">
             <mat-form-field class="example-full-width">
               <mat-label>الزمن</mat-label>
-              <input matInput type="number" name="morningtimeDifferenceFactor" formControlName="morningtimeDifferenceFactor">
-              <mat-error *ngIf="generalFields.controls.morningtimeDifferenceFactor.invalid">{{getErrorRequiredMessage()}}
+              <input matInput type="number" name="morningtimeDifferenceFactor"
+                formControlName="morningtimeDifferenceFactor">
+              <mat-error *ngIf="generalFields.controls.morningtimeDifferenceFactor.invalid">
+                {{getErrorRequiredMessage()}}
               </mat-error>
             </mat-form-field>
           </div>
@@ -130,7 +144,7 @@
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
-                 المجال الأول
+                المجال الأول
               </mat-label>
               <input matInput type="number" name="morningFirstWaitingTime" formControlName="morningFirstWaitingTime">
               <mat-error *ngIf="generalFields.controls.morningFirstWaitingTime.invalid">
@@ -140,8 +154,9 @@
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
-                 المجال الثاني
-              </mat-label> <input matInput type="number" name="morningSecondWaitingTime" formControlName="morningSecondWaitingTime">
+                المجال الثاني
+              </mat-label> <input matInput type="number" name="morningSecondWaitingTime"
+                formControlName="morningSecondWaitingTime">
               <mat-error *ngIf="generalFields.controls.morningSecondWaitingTime.invalid">
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
@@ -159,7 +174,9 @@
                   <tr *ngFor="let item of openTripCost['morning']; index as i">
                     <td>{{item.packageName}}</td>
                     <td>
-                      <input type="number" [disabled]="activePageType == pageTypeEnum.Get" [name]="item.packageName" [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost" class="form-control text-center">
+                      <input type="number" [disabled]="activePageType == pageTypeEnum.Get" [name]="item.packageName"
+                        [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost"
+                        class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -227,7 +244,7 @@
             </mat-form-field>
           </div>
 
-          
+
           <h6 class="x-font-regular col-6">
             الفرق بين تقدير غوغل لزمن الرحلة وزمنها الحقيقي
           </h6>
@@ -247,7 +264,7 @@
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
-                 المجال الأول
+                المجال الأول
               </mat-label>
               <input matInput type="number" name="dayFirstWaitingTime" formControlName="dayFirstWaitingTime">
               <mat-error *ngIf="generalFields.controls.dayFirstWaitingTime.invalid">
@@ -257,8 +274,9 @@
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
-                 المجال الثاني
-              </mat-label> <input matInput type="number" name="daySecondWaitingTime" formControlName="daySecondWaitingTime">
+                المجال الثاني
+              </mat-label> <input matInput type="number" name="daySecondWaitingTime"
+                formControlName="daySecondWaitingTime">
               <mat-error *ngIf="generalFields.controls.daySecondWaitingTime.invalid">
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
@@ -277,7 +295,9 @@
                   <tr *ngFor="let item of openTripCost['day']; index as i">
                     <td>{{item.packageName}}</td>
                     <td>
-                      <input type="number" [disabled]="activePageType == pageTypeEnum.Get" [name]="item.packageName" [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost" class="form-control text-center">
+                      <input type="number" [disabled]="activePageType == pageTypeEnum.Get" [name]="item.packageName"
+                        [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost"
+                        class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -339,7 +359,8 @@
               <mat-label>
                 التكلفة للمجال الثاني
                 <span>9 كم</span> - <span>15 كم</span>
-              </mat-label> <input matInput type="number" name="nightSecondExtraCost" formControlName="nightSecondExtraCost">
+              </mat-label> <input matInput type="number" name="nightSecondExtraCost"
+                formControlName="nightSecondExtraCost">
               <mat-error *ngIf="generalFields.controls.nightSecondExtraCost.invalid">
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
@@ -355,7 +376,8 @@
           <div class="form-item col-6">
             <mat-form-field class="example-full-width">
               <mat-label>الزمن</mat-label>
-              <input matInput type="number" name="nighttimeDifferenceFactor" formControlName="nighttimeDifferenceFactor">
+              <input matInput type="number" name="nighttimeDifferenceFactor"
+                formControlName="nighttimeDifferenceFactor">
               <mat-error *ngIf="generalFields.controls.nighttimeDifferenceFactor.invalid">{{getErrorRequiredMessage()}}
               </mat-error>
             </mat-form-field>
@@ -364,7 +386,7 @@
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
-                 المجال الأول
+                المجال الأول
               </mat-label>
               <input matInput type="number" name="nightFirstWaitingTime" formControlName="nightFirstWaitingTime">
               <mat-error *ngIf="generalFields.controls.nightFirstWaitingTime.invalid">
@@ -374,8 +396,9 @@
           <div class="form-item col-3">
             <mat-form-field class="example-full-width">
               <mat-label>
-                 المجال الثاني
-              </mat-label> <input matInput type="number" name="nightSecondWaitingTime" formControlName="nightSecondWaitingTime">
+                المجال الثاني
+              </mat-label> <input matInput type="number" name="nightSecondWaitingTime"
+                formControlName="nightSecondWaitingTime">
               <mat-error *ngIf="generalFields.controls.nightSecondWaitingTime.invalid">
                 {{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
@@ -396,7 +419,9 @@
                   <tr *ngFor="let item of openTripCost['night']; index as i">
                     <td>{{item.packageName}}</td>
                     <td>
-                      <input type="number" [disabled]="activePageType == pageTypeEnum.Get" [name]="item.packageName" [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost" class="form-control text-center">
+                      <input type="number" [disabled]="activePageType == pageTypeEnum.Get" [name]="item.packageName"
+                        [id]="item.packageId" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.cost"
+                        class="form-control text-center">
                     </td>
                   </tr>
                 </tbody>
@@ -410,7 +435,8 @@
         <div class="col-6 d-flex justify-content-center" *ngIf="pageTypeEnum.Get != activePageType">
           <button type="submit" [disabled]="submitted" *ngIf="pageTypeEnum.Create == activePageType"
             class="btn t_btn_blue_outline w-50">أضف</button>
-          <button type="submit" [disabled]="submitted" *ngIf="pageTypeEnum.Edit == activePageType" class="btn t_btn_blue_outline w-50">حفظ</button>
+          <button type="submit" [disabled]="submitted" *ngIf="pageTypeEnum.Edit == activePageType"
+            class="btn t_btn_blue_outline w-50">حفظ</button>
         </div>
         <div class="col-6 d-flex justify-content-center">
           <button class="btn t_btn_blue w-50" routerLink="/vehicle-classification"

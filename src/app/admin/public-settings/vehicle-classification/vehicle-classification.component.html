@@ -62,12 +62,13 @@
               <td>{{item?.captainPercentage}}</td>
               <td>
                 <mat-icon [routerLink]="['/classification-edit',item.id]" routerLinkActive="router-link-active"
+                [queryParams]="{catId: filter.categoryId,cityId:filter.cityId}"
                   class="cursor">edit</mat-icon>
                 <!-- <mat-icon class="cursor red" (click)="confirmDelete(item.id)">delete</mat-icon> -->
               </td>
               <td>
                 <button class="btn t_btn_blue small_btn" [routerLink]="['/classification-display',item.id]"
-                  routerLinkActive="router-link-active">
+                  routerLinkActive="router-link-active"  [queryParams]="{catId: filter.categoryId,cityId:filter.cityId}">
                   عرض
                 </button>
               </td>

@@ -16,6 +16,7 @@ export class ViewDriverRequestDetailsComponent {
   id!: number;
   driverRequestDetails: any;
   vehicleType:any
+  sumitted = false
   constructor(
     private viewAssetsDialog: MatDialog,
     private acceptDialog: MatDialog,
@@ -97,6 +98,7 @@ export class ViewDriverRequestDetailsComponent {
       width: "50%",
       data : "هل أنت متأكد من قبول السائق ؟"
     }).afterClosed().subscribe(res=>{
+      this.sumitted = true
       if(res && this.vehicleType && this.vehicleType.id ){
         let body = {
           "id": this.id,

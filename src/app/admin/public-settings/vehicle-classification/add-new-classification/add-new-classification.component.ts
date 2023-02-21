@@ -3,6 +3,8 @@ import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 import { PageType } from 'src/app/core/enums/genric.enums';
+import { DriverServicesService } from 'src/app/core/services/driver-services.service';
+import { FilterClassification, Filter, FilterVehiclesWithSearch } from 'src/app/core/models/filters.model';
 
 @Component({
   selector: 'app-add-new-classification',
@@ -23,6 +25,7 @@ export class AddNewClassificationComponent {
     englishName: new FormControl('', [Validators.required]),
     image: new FormControl([Validators.required]),
     icon: new FormControl([Validators.required]),
+    vehicleVehicleTypeId: new FormControl(),
     numOfSites: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     driverRatio: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningLowestRent: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
@@ -54,8 +57,9 @@ export class AddNewClassificationComponent {
   });
   id: any
   submitted: boolean = false;
+  altVehilces: any
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private settingsService: SettingsServicesService) {
+  constructor(private activatedRoute: ActivatedRoute, private driverServices: DriverServicesService, private router: Router, private settingsService: SettingsServicesService) {
     this.getOpenTrips();
   }
 
@@ -100,6 +104,9 @@ export class AddNewClassificationComponent {
     this.activatedRoute.queryParams.subscribe((params) => {
       this.cityId = params['cityId']
       this.catId = params['catId']
+      if (this.cityId && this.catId) {
+        this.getAltVehicles()
+      }
     })
 
     if (this.id) {
@@ -194,6 +201,7 @@ export class AddNewClassificationComponent {
       formData.append('Category', this.catId)
       formData.append('Image', this.generalFields.controls['image'].value)
       formData.append('Icon', this.generalFields.controls['icon'].value)
+      formData.append('AlternativeId', this.generalFields.controls['vehicleVehicleTypeId'].value)
       formData.append('SeatCount', this.generalFields.controls.numOfSites.value!)
       formData.append('CaptainPercentage', this.generalFields.controls['driverRatio'].value)
       let i = 0;
@@ -217,10 +225,7 @@ export class AddNewClassificationComponent {
 
       this.submitted = true
       this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res: any) => {
-        if (res.id)
-          this.router.navigate(['/classification-display', res.id])
-        else
-          this.router.navigate(['/vehicle-classification'])
+        this.router.navigate(['/vehicle-classification'])
         this.submitted = false
       }, err => {
         console.error(err)
@@ -235,6 +240,7 @@ export class AddNewClassificationComponent {
       englishName: new FormControl({ value: res.name, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       image: new FormControl({ value: res.imageUrl, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       icon: new FormControl({ value: res.iconUrl, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      vehicleVehicleTypeId: new FormControl({ value: res.alternativeId, disabled: PageType.Get == this.activePageType }),
       numOfSites: new FormControl({ value: res.seatCount, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       driverRatio: new FormControl({ value: res.captainPercentage, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       morningLowestRent: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
@@ -297,6 +303,16 @@ export class AddNewClassificationComponent {
         this.image = this.generalFields.controls.image.value;
       }
     }
+  }
+
+  getAltVehicles() {
+    let filter: FilterVehiclesWithSearch = new FilterVehiclesWithSearch()
+    filter.provinceId = this.cityId
+    filter.maxResultCount = 50
+    filter.category = this.catId
+    this.driverServices.getVehicles(filter).subscribe((res: any) => {
+      this.altVehilces = res['items']
+    }, err => { });
   }
 }
 

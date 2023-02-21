@@ -1,8 +1,10 @@
 <div class="view_request_details x-font-regular" *ngIf="driverRequestDetails">
   <div class="img_div">
     <div class="image">
-      <img *ngIf="driverRequestDetails.profileImageUrl && driverRequestDetails.profileImageUrl!=''" [src]="driverRequestDetails.profileImageUrl" >
-      <mat-icon *ngIf="!driverRequestDetails.profileImageUrl || driverRequestDetails.profileImageUrl ==''">person</mat-icon>
+      <img *ngIf="driverRequestDetails.profileImageUrl && driverRequestDetails.profileImageUrl!=''"
+        [src]="driverRequestDetails.profileImageUrl">
+      <mat-icon *ngIf="!driverRequestDetails.profileImageUrl || driverRequestDetails.profileImageUrl ==''">person
+      </mat-icon>
       <h1 class="x-font-bold">{{driverRequestDetails.firstName}} {{driverRequestDetails.lastName}}</h1>
     </div>
   </div>
@@ -31,11 +33,16 @@
         <div class="col-6 val cursor" (click)="changeVehicle()">
           <ng-container *ngIf="driverRequestDetails.vehicle.vehicleType;else inputVehicle">
             {{driverRequestDetails.vehicle.vehicleType.name || driverRequestDetails.vehicle.vehicleType.id}}
-          </ng-container>  
+          </ng-container>
           <ng-template #inputVehicle>
-              <ng-container *ngIf="vehicleType"> {{vehicleType.name}}</ng-container>  
-              <ng-container *ngIf="!vehicleType">انقر لاختيار نوع المركبة</ng-container>  
+            <ng-container *ngIf="vehicleType"> {{vehicleType.name}}</ng-container>
+            <ng-container *ngIf="!vehicleType">انقر لاختيار نوع المركبة</ng-container>
           </ng-template>
+        </div>
+        <div class="col-6"></div>
+        <div class="col-6">
+          <mat-error *ngIf="!driverRequestDetails.vehicle.vehicleType && !vehicleType && sumitted">اختر مركبة قبل قبول
+            الطلب</mat-error>
         </div>
       </div>
       <div class="row mt-1">
@@ -56,7 +63,8 @@
     <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" (click)="viewAssets()">
       عرض أوراق السائق المرفقة مع الطلب
     </button>
-    <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" [routerLink]="['/driver-profile',driverRequestDetails.id]" routerLinkActive="router-link-active" >
+    <button class="btn t_btn_blue_outline col-5 ms-auto me-auto"
+      [routerLink]="['/driver-profile',driverRequestDetails.id]" routerLinkActive="router-link-active">
       تعديل محتويات الطلب
     </button>
   </div>
