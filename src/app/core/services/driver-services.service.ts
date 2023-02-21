@@ -228,9 +228,13 @@ export class DriverServicesService {
     return response;
   }
 
-  getLiteListOfCaptains(){
+  getLiteListOfCaptains(modal?:any){
+    let _param = new HttpParams()
+    if (modal?.Keyword) _param.append('Keyword', modal?.Keyword)
+    if (modal?.MinCreationDate) _param.append('MinCreationDate', modal?.MinCreationDate)
+    if (modal?.MaxCreationDate) _param.append('MaxCreationDate', modal?.MaxCreationDate)
     let getLiteListOfCaptainsUrl = this.baseUrl + '/api/app/manage-captains/active-lite-list'
-    const response = this.httpClient.get(getLiteListOfCaptainsUrl).pipe();
+    const response = this.httpClient.get(getLiteListOfCaptainsUrl, {params:_param}).pipe();
     return response;
   }
 }

@@ -1,7 +1,6 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Driver } from 'src/app/core/models/drivers.mode';
-import { AccountStatus } from 'src/app/core/enums/genric.enums';
+
 
 @Component({
   selector: 'app-confirm',
@@ -14,7 +13,8 @@ export class ConfirmComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ConfirmComponent>) {
     if (data) {
-      this.messageText = data
+      console.log(data)
+      this.messageText = data.message
     }
   }
   confirm() {

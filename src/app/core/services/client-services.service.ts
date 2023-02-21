@@ -36,9 +36,13 @@ export class ClientServicesService {
     return response;
   }
   
-  getLiteListOfClients(){
+  getLiteListOfClients(modal?:any){
+    let _param = new HttpParams()
+    if (modal?.Keyword) _param.append('Keyword', modal?.Keyword)
+    if (modal?.MinCreationDate) _param.append('MinCreationDate', modal?.MinCreationDate)
+    if (modal?.MaxCreationDate) _param.append('MaxCreationDate', modal?.MaxCreationDate)
     let getLiteListOfClientsUrl = this.baseUrl + '/api/app/customer/active-lite-list'
-    const response = this.httpClient.get(getLiteListOfClientsUrl).pipe();
+    const response = this.httpClient.get(getLiteListOfClientsUrl, {params:_param}).pipe();
     return response;
   }
 }

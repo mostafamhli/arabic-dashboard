@@ -112,7 +112,7 @@ import { OpenTripComponent } from './trips-managment/open-trip/open-trip.compone
       libraries: ['places'],
       language: 'en'
     }),
-    NgxMatTimepickerModule.setLocale('ar-AE')
+    NgxMatTimepickerModule.setLocale('en-GB')
   ],
 })
 export class AdminModule { }

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AccountStatus, PageType } from '../enums/genric.enums';
-import { FilterWithSearch, FilterClassification } from '../models/filters.model';
+import { FilterClassification, FilterWithSearch } from '../models/filters.model';
 import { Role } from '../models/roles.model';
 
 @Injectable({
@@ -122,7 +122,7 @@ export class SettingsServicesService {
   }
 
   getCities() {
-    return []
+    return this.http.get(this.baseUrl + '/api/app/province/provinces')
   }
 
   getVehicleTypes() {
@@ -174,6 +174,10 @@ export class SettingsServicesService {
 
   getOpenTrips() {
     return this.http.get(this.baseUrl + '/api/app/manage-vehicle-types/packages')
+  }
+
+  addPackage(model: any) {
+    return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types/package', model)
   }
 
   deleteClassification(id: number) {
@@ -228,13 +232,11 @@ export class SettingsServicesService {
   }
 
   getSocialMediaInfo() {
-    return {
-      facebook: 'Mostafa F Mhli',
-      twitter: '@mostafa',
-      instagram: 'mostafa_mhli',
-      whatsapp: '0935526455',
-      phone: '0935526455',
-      email: 'mostafa@gmail.com'
-    }
+    return this.http.get(this.baseUrl + '/api/app/manage-settings')
   }
+
+  addSocialMediaInfo(modal: any) {
+    return this.http.put(this.baseUrl + '/api/app/manage-settings', modal)
+  }
+
 }

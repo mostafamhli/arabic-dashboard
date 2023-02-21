@@ -2,13 +2,14 @@ import { DriverRequestStatus, SortType, ServiceType, OrderStatusEnum } from '../
 import { DateTime } from 'ts-luxon';
 
 export class Filter {
-    maxResultCount: number
-    skipCount: number
+    maxResultCount:  number
+    skipCount:  number
     constructor() {
         this.skipCount = 0
         this.maxResultCount = 10
     }
 }
+
 
 export class FilterWithSearch extends Filter {
     status: number
@@ -22,6 +23,17 @@ export class FilterWithSearch extends Filter {
         this.sorting = SortType.Ascending
     }
 }
+
+export class WalletFilter extends FilterWithSearch {
+    type: number;
+    WalletType: number;
+    constructor() {
+        super()
+        this.type = 1;
+        this.WalletType = 1;
+    }
+}
+
 export class FilterVehiclesWithSearch extends FilterWithSearch {
     provinceId: number
     category: number
@@ -55,7 +67,6 @@ export class FilterOrders extends Filter {
         this.orderStatus = null
     }
 }
-
 export class FilterClassification extends Filter {
     cityId: number | null
     categoryId: number | null
