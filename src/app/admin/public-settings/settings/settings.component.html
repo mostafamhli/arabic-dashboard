@@ -95,7 +95,7 @@
       <mat-form-field class="w-100">
         <mat-label>وقت انتهاء الفترة الصباحية </mat-label>
         <input matInput name="selected_time_A" formControlName="morningEnd" [ngxMatTimepicker]="pickerB" [format]="24"  readonly />
-        <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerB.open()">
+        <mat-icon matSuffix (click)="pageTypeEnum.Get== activePageType ? null : pickerB.open()">
           watch_later
         </mat-icon>
       </mat-form-field>
@@ -106,7 +106,7 @@
       <mat-form-field class="w-100">
         <mat-label>وقت انتهاء فترة النهار </mat-label>
         <input matInput name="selected_time_A" formControlName="dayEnd" [ngxMatTimepicker]="pickerD" [format]="24" readonly />
-        <mat-icon matSuffix (click)="pageTypeEnum.view == activePageType ? null : pickerD.open()">
+        <mat-icon matSuffix (click)="pageTypeEnum.Get == activePageType ? null : pickerD.open()">
           watch_later
         </mat-icon>
       </mat-form-field>
