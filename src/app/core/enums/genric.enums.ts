@@ -5,7 +5,9 @@ export enum AccountStatus {
 
 export enum TransferType {
     remittance = 1,
-    recovery = 2
+    recovery = 2,
+    transfer_From = 3,
+    transfer_To = 4
 }
 
 

@@ -14,13 +14,16 @@ export class CitiesComponent {
 
   cities: any[] = [];
 
-  constructor(private addNewCity: MatDialog, private settingsService:SettingsServicesService) {
+  constructor(private addNewCity: MatDialog, private settingsService: SettingsServicesService) {
     this.getCities();
   }
 
-  getCities(){
-    this.cities = this.settingsService.getCities();
-    console.log(this.cities[1])
+  getCities() {
+    this.settingsService.getCities().subscribe((res: any) => {
+      this.cities = res.items
+      console.log(this.cities)
+    });
+    
   }
   addCity() {
     this.addNewCity.open(AddNewCityComponent, {
@@ -28,10 +31,10 @@ export class CitiesComponent {
     })
   }
 
-  editCity(city:any){
+  editCity(city: any) {
     this.addNewCity.open(AddNewCityComponent, {
       width: "50%",
-      data:city
+      data: city
     })
   }
 

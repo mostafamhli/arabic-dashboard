@@ -2,10 +2,17 @@
   <form [formGroup]="transfer">
     <div class="d-flex flex-column align-items-center">
       <mat-form-field appearance="fill">
-        <mat-label>المستخدم </mat-label>
-        <mat-select name="drivers" formControlName="drivers">
-          <mat-option value="one">wael</mat-option>
-          <mat-option value="two">Omar</mat-option>
+        <mat-label>النوع</mat-label>
+        <mat-select name="walletType" formControlName="walletType" (selectionChange)="onChangeType($event)">
+          <mat-option value="3">زبائن</mat-option>
+          <mat-option value="2">سائقين</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field *ngIf="usersList" appearance="fill">
+        <mat-label>اختر مستخدم</mat-label>
+        <mat-select name="user" formControlName="user">
+          <mat-option *ngFor="let user of usersList" [value]="user.id">{{user.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
@@ -14,9 +21,11 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>نوع المناقلة</mat-label>
-        <mat-select name="transactionType" formControlName="transactionType">
-          <mat-option value="one">إيداع</mat-option>
-          <mat-option value="two">استرجاع</mat-option>
+        <mat-select name="type" formControlName="type">
+          <mat-option value="1">إيداع</mat-option>
+          <mat-option value="2">استرجاع</mat-option>
+          <mat-option value="3">تحويل من</mat-option>
+          <mat-option value="4">تحويل إلى</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="add_cancel w-100 d-flex align-items-center x-font-bold">
