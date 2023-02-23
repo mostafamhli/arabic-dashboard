@@ -26,6 +26,7 @@ export class SettingsComponent {
     captainCancellationFine: new FormControl('', [Validators.required]),
     minimumCaptainWallet: new FormControl('', [Validators.required]),
     minimumCountInRange: new FormControl('', [Validators.required]),
+    defaultZeroFeeRange: new FormControl('', [Validators.required]),
     orderNotRespondingWaitMinutes: new FormControl('', [Validators.required]),
 
   });
@@ -47,6 +48,7 @@ export class SettingsComponent {
       this.settingForm.get('captainCancellationFine')?.setValue(res.captainCancellationFine)
       this.settingForm.get('minimumCaptainWallet')?.setValue(res.minimumCaptainWallet)
       this.settingForm.get('minimumCountInRange')?.setValue(res.minimumCountInRange)
+      this.settingForm.get('defaultZeroFeeRange')?.setValue(res.defaultZeroFeeRange)
       this.settingForm.get('orderNotRespondingWaitMinutes')?.setValue(res.orderNotRespondingWaitMinutes)
       console.log(res)
     });
@@ -66,7 +68,8 @@ export class SettingsComponent {
       minimumCaptainWallet: this.settingForm.value.minimumCaptainWallet,
       captainCancellationFine: this.settingForm.value.captainCancellationFine,
       endMorningShiftTime: this.settingForm.value.morningEnd,
-      endAfternoonShiftTime: this.settingForm.value.dayEnd
+      endAfternoonShiftTime: this.settingForm.value.dayEnd,
+      defaultZeroFeeRange: this.settingForm.value.defaultZeroFeeRange
     }
 
     console.log(modal)

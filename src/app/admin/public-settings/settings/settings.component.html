@@ -94,7 +94,8 @@
     <div class="form-item col-6">
       <mat-form-field class="w-100">
         <mat-label>وقت انتهاء الفترة الصباحية </mat-label>
-        <input matInput name="selected_time_A" formControlName="morningEnd" [ngxMatTimepicker]="pickerB" [format]="24"  readonly />
+        <input matInput name="selected_time_A" formControlName="morningEnd" [ngxMatTimepicker]="pickerB" [format]="24"
+          readonly />
         <mat-icon matSuffix (click)="pageTypeEnum.Get== activePageType ? null : pickerB.open()">
           watch_later
         </mat-icon>
@@ -105,7 +106,8 @@
     <div class="form-item col-6">
       <mat-form-field class="w-100">
         <mat-label>وقت انتهاء فترة النهار </mat-label>
-        <input matInput name="selected_time_A" formControlName="dayEnd" [ngxMatTimepicker]="pickerD" [format]="24" readonly />
+        <input matInput name="selected_time_A" formControlName="dayEnd" [ngxMatTimepicker]="pickerD" [format]="24"
+          readonly />
         <mat-icon matSuffix (click)="pageTypeEnum.Get == activePageType ? null : pickerD.open()">
           watch_later
         </mat-icon>
@@ -142,6 +144,15 @@
       <mat-form-field class="w-100">
         <mat-label>عدد دقائق الانتضار حتى تم الاستجابة على الطلب</mat-label>
         <input matInput name="orderNotRespondingWaitMinutes" formControlName="orderNotRespondingWaitMinutes" />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row w-100">
+    <div class="form-item col-6">
+      <mat-form-field class="w-100">
+        <mat-label>المجال الافتراضي</mat-label>
+        <input matInput name="defaultZeroFeeRange" formControlName="defaultZeroFeeRange" />
       </mat-form-field>
     </div>
   </div>

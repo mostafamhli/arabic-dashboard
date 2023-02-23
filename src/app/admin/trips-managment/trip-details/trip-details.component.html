@@ -1,57 +1,51 @@
 <div class="d-flex flex-wrap justify-content-between align-items-center x-font-regular">
     <div class="d-flex flex-column trip-info">
         <div class="d-flex trip-info-item">
-            <span>تاريخ إنشاء الرحلة&#58; </span>
-            <span>2022-10-22</span>
+            <span>تاريخ إنشاء ووقت الرحلة&#58; </span>
+            <span>{{tripDetails?.creationTime | date: 'short'}}</span>
         </div>
+       
         <div class="d-flex trip-info-item">
-            <span>وقت الرحلة&#58; </span>
-            <span>10:55</span>
+            <span>نوع السيارة&#58; </span>
+            <span>{{tripDetails?.vehicleType.name}}</span>
         </div>
+
         <div class="d-flex trip-info-item">
             <span>موقع الإنطلاق&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.from.label}}</span>
         </div>
         <div class="d-flex trip-info-item">
             <span>موقع الوجهة&#58; </span>
-            <span>Empty</span>
-        </div>
-        <div class="d-flex trip-info-item">
-            <span> تاريخ بدء الرحلة&#58; </span>
-            <span>Empty</span>
-        </div>
-        <div class="d-flex trip-info-item">
-            <span>تاريخ نهاية الرحلة&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.to.label}}</span>
         </div>
         <div class="d-flex trip-info-item">
             <span>اسم السائق&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.captain.name}}</span>
         </div>
         <div class="d-flex trip-info-item">
             <span>اسم الزبون&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.customer.name}}</span>
         </div>
 
         <div class="d-flex trip-info-item">
             <span>تقييم السائق&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.captainRate}}</span>
         </div>
         <div class="d-flex trip-info-item">
             <span>تقييم الزبون&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.customerRate}}</span>
         </div>
         <div class="d-flex trip-info-item">
             <span>اجرة الرحلة&#58; </span>
-            <span>Empty</span>
+            <span>{{tripDetails?.price}}</span>
         </div>
         <div class="d-flex trip-info-item">
             <span>ملاحظات الزبون&#58; </span>
-            <span>Empty</span>
+            <span></span>
         </div>
         <div class="d-flex trip-info-item">
             <span>ملاحظات الكابتن&#58; </span>
-            <span>Empty</span>
+            <span></span>
         </div>
     </div>
     <div class="trip-image">
@@ -60,7 +54,7 @@
 </div>
 <div class="d-flex justify-content-center w-100  x-font-regular ">
     <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" [routerLink]="['/trips']"
-            routerLinkActive="router-link-active">
-            عودة إلى القائمة
-          </button>
+        routerLinkActive="router-link-active">
+        عودة إلى القائمة
+    </button>
 </div>

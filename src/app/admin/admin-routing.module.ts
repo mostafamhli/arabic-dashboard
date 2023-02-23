@@ -45,7 +45,7 @@ const routes: Routes = [
       { path: '', component: MainDashboardComponent },
       { path: 'clients', component: ClientsComponent },
       { path: 'trips', component: TripsComponent },
-      { path: 'trip-details', component: TripDetailsComponent },
+      { path: 'trip-details/:id', component: TripDetailsComponent },
       { path: 'discount-codes', component: DiscountCodesComponent },
       { path: 'cancle', component: CancleReasonsComponent },
       { path: 'drivers-request', component: DriversRequestComponent },

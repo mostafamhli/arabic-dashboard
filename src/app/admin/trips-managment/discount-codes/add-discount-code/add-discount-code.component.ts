@@ -2,6 +2,7 @@ import { Component, ViewChild, Inject, Optional } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TripsServicesService } from 'src/app/core/services/trips-services.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DialogConfig, DialogRef } from '@angular/cdk/dialog';
 
 @Component({
   selector: 'app-add-discount-code',
@@ -20,16 +21,17 @@ export class AddDiscountCodeComponent {
 
   constructor(
     private tripsServices: TripsServicesService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog:DialogRef
     ) {
-      if(data){
-        console.log(data)
+      if(data?.status === 'edit'){
+       
         this.addDiscountForm = new FormGroup({
-          discountName: new FormControl(data.discountName, [Validators.required]),
-          discountCode: new FormControl(data.discountCode, [Validators.required]),
-          outDate: new FormControl(data.outDate, [Validators.required]),
-          usingTimes: new FormControl(data.usingTimes, [Validators.required]),
-          discountValue: new FormControl(data.discountValue, [Validators.required, Validators.pattern("^[0-9]*$")])
+          discountName: new FormControl(data.name, [Validators.required]),
+          discountCode: new FormControl(data.code, [Validators.required]),
+          outDate: new FormControl(data.expirationDate, [Validators.required]),
+          usingTimes: new FormControl(data.maxUsageCount, [Validators.required]),
+          discountValue: new FormControl(data.value, [Validators.required, Validators.pattern("^[0-9]*$")])
         })
       }
     }
@@ -42,6 +44,33 @@ export class AddDiscountCodeComponent {
   }
 
   onSubmit() {
-    console.log(this.tripsServices.addDiscountCode(this.addDiscountForm.value))
+    if(this.data?.status === 'edit') {
+      let modal = {
+        name: this.addDiscountForm.value.discountName,
+        code: this.addDiscountForm.value.discountCode,
+        value: this.addDiscountForm.value.discountValue,
+        maxUsageCount: this.addDiscountForm.value.usingTimes,
+        expirationDate: this.addDiscountForm.value.outDate
+      }
+      this.tripsServices.editDiscountCode(modal,this.data.id).subscribe(res => {
+        console.log(res)
+        this.dialog.close('closed')
+      })
+    } else {
+      let modal = {
+        name: this.addDiscountForm.value.discountName,
+        code: this.addDiscountForm.value.discountCode,
+        value: this.addDiscountForm.value.discountValue,
+        maxUsageCount: this.addDiscountForm.value.usingTimes,
+        expirationDate: this.addDiscountForm.value.outDate
+      }
+      this.tripsServices.addDiscountCode(modal).subscribe(res => {
+        console.log(res)
+        this.dialog.close('closed')
+      })
+    }
+    
+    
+    //console.log(this.tripsServices.addDiscountCode(this.addDiscountForm.value))
   }
 }
