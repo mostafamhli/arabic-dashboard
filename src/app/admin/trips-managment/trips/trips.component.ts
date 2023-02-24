@@ -62,6 +62,7 @@ export class TripsComponent {
 
   resetForm() {
     this.filter = new FilterOrders()
+    this.getTrips()
   }
   toLocalString(date: any) {
     let date_ = new Date(date)

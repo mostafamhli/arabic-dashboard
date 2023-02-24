@@ -2,8 +2,8 @@
   <div class="info">
     <div class="img_div row d-flex">
       <div class="image col-6">
-        <img [src]="driver.profileImageUrl">
-        <mat-icon>person</mat-icon>
+        <img *ngIf="driver.profileImageUrl && driver.profileImageUrl != ''" [src]="driver.profileImageUrl">
+        <mat-icon *ngIf="!driver.profileImageUrl || driver.profileImageUrl == ''">person</mat-icon>
         <h1>{{driver.firstName}} {{driver.lastName}}</h1>
       </div>
       <div class="rating col-6" *ngIf="driver.averageRate">

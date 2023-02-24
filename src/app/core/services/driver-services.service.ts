@@ -86,7 +86,7 @@ export class DriverServicesService {
     param_ = param_.append('MaxResultCount', filter.maxResultCount);
     param_ = param_.append('SkipCount', filter.skipCount);
     //param_ = param_.append('Sorting',filter.sorting);
-    param_ = param_.append('Status', filter.status);
+    //param_ = param_.append('IsActive', filter.status == 1 ? true : false);
     const response = this.httpClient.get(this.captainsListUrl, { params: param_ }).pipe();
     return response;
   }

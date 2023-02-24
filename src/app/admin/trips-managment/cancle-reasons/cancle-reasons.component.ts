@@ -25,14 +25,18 @@ export class CancleReasonsComponent {
     });
   }
 
-  delete(id: number) {
-    this.tripsService.deleteCancleReason(id);
+  inActivate(id: number) {
+    this.tripsService.inActivateCancel(id).subscribe(res => {
+
+    }, err => {
+
+    });
   }
 
   onSubmit() {
     if (this.englishCancleName) this.englishCancleName = this.englishCancleName.trim();
     if (this.arabicCancleName) this.arabicCancleName = this.arabicCancleName.trim();
-    
+
     if (this.englishCancleName != '' && this.arabicCancleName != '') {
       let reason = {
         reason: this.englishCancleName,
@@ -49,12 +53,12 @@ export class CancleReasonsComponent {
   confirmDelete(id: number) {
     let dialog = this.confirmDialog.open(ConfirmComponent, {
       data: {
-        message: "هل أنت متأكد من حذف السبب ؟"
+        message: "هل أنت متأكد من إلغاء تفعيل السبب ؟"
       }
     })
     dialog.afterClosed().subscribe((res: boolean) => {
       if (res) {
-        this.delete(id)
+        this.inActivate(id)
       } else {
 
       }
