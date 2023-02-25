@@ -14,6 +14,7 @@ export class TripsServicesService {
   discountCodeStatusEnum = DiscountCodeStatus
   baseUrl: string
   addCancelReasonUrl: string
+  inAcrivateCancelReasonUrl: string
   getCancelReasonesUrl: string
 
   constructor(private httpClient: HttpClient) {
@@ -91,14 +92,14 @@ export class TripsServicesService {
     return response;
   }
 
-  deleteCancleReason(id: number) {
-    //return this.getAllCancleReason().filter(item => {
-    //  return item.id !== id
-    //})
-  }
-
   addCancleReason(reason: any) {
     const response = this.httpClient.post(this.addCancelReasonUrl, reason).pipe();
+    return response;
+  }
+
+  inActivateCancel(id:any){
+    this.inAcrivateCancelReasonUrl = this.baseUrl + `/api/app/cancellation-reason/${id}/deactivate`
+    const response = this.httpClient.post(this.inAcrivateCancelReasonUrl,{}).pipe();
     return response;
   }
 }

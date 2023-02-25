@@ -13,6 +13,8 @@ export class OpenTripComponent {
   arabicPackageName: any;
   englishPackageName: any;
   reasons: any[] = [];
+  editMode: boolean = false
+  id: any
 
   constructor(private confirmDialog: MatDialog,
     private tripsService: TripsServicesService,
@@ -24,7 +26,6 @@ export class OpenTripComponent {
   getOpenTrip() {
     this.settingService.getOpenTrips().subscribe((res: any) => {
       this.reasons = res.items
-      console.log(this.reasons)
     })
   }
 
@@ -33,18 +34,38 @@ export class OpenTripComponent {
   }
 
   onSubmit() {
-    if (this.arabicPackageName && this.englishPackageName) {
+    if (this.arabicPackageName && this.englishPackageName && !this.editMode) {
       let model = {
         name: this.englishPackageName,
         arName: this.arabicPackageName
       }
       this.settingService.addPackage(model).subscribe(res => {
         this.getOpenTrip();
+        this.editMode = false
+        this.englishPackageName = undefined
+        this.arabicPackageName = undefined
+      })
+    } else {
+      let model = {
+        id: this.id,
+        name: this.englishPackageName,
+        arName: this.arabicPackageName
+      }
+      this.settingService.editPackage(model).subscribe(res => {
+        this.getOpenTrip();
+        this.editMode = false
+        this.englishPackageName = undefined
+        this.arabicPackageName = undefined
       })
     }
-
   }
 
+  fillToEdit(item: any) {
+    this.editMode = true
+    this.arabicPackageName = item.name
+    this.englishPackageName = item.arName
+    this.id = item.id
+  }
   confirmDelete(id: number) {
     let dialog = this.confirmDialog.open(ConfirmComponent, {
       data: {

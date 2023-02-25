@@ -66,7 +66,7 @@ export class DriverProfileComponent {
       vehiclePlateNumber: new FormControl(undefined, Validators.required),
       vehicleModel: new FormControl(undefined, Validators.required),
       vehicleModelYear: new FormControl(),
-      vehicleSeatCount: new FormControl(),
+      vehicleSeatCount: new FormControl(undefined, Validators.required),
       vehicleVehicleTypeId: new FormControl(0, Validators.required),
       vehicleVehicleTypeName: new FormControl(),
       vehicleImage: new FormControl(),

@@ -12,7 +12,7 @@
         <mat-label>الحالة</mat-label>
         <mat-select name="status" [(ngModel)]="filter.status" (selectionChange)="filter.skipCount=0;getDrivers();">
           <mat-option [value]="driverRequestStatusEnum.Initial">Initial</mat-option>
-          <mat-option [value]="driverRequestStatusEnum.Approved">Approved</mat-option>
+          <!-- <mat-option [value]="driverRequestStatusEnum.Approved">Approved</mat-option> -->
           <mat-option [value]="driverRequestStatusEnum.Rejected">Rejected</mat-option>
         </mat-select>
       </mat-form-field>
