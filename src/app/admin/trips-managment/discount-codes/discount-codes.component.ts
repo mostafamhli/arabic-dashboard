@@ -17,15 +17,22 @@ export class DiscountCodesComponent {
   discountCodes: any[] = []
   filter: FilterWithSearch = new FilterWithSearch()
   discountCodeStatusEnum = DiscountCodeStatus
-
+  endOfResult: boolean = false
   constructor(private addDiscountCodes: MatDialog, private confirmDialog: MatDialog, private tripsServices: TripsServicesService) {
     this.getDiscountCodes()
   }
 
   getDiscountCodes() {
-    this.tripsServices.getAllDiscountCodes(this.filter).subscribe((res:any)=>{
-      this.discountCodes = res['items']
-    },(err:any)=>{});
+    this.tripsServices.getAllDiscountCodes(this.filter).subscribe((res: any) => {
+      if (this.filter.skipCount == 0) {
+        this.discountCodes = res.items
+      }
+      else
+        this.discountCodes = this.discountCodes.concat(res.items)
+      if (res.items.length < this.filter.maxResultCount) {
+        this.endOfResult = true;
+      } else this.endOfResult = false;
+    }, (err: any) => { });
   }
 
 
@@ -35,20 +42,30 @@ export class DiscountCodesComponent {
   }
 
   addDiscountCode() {
-    this.addDiscountCodes.open(AddDiscountCodeComponent, {
+    let dialog = this.confirmDialog.open(AddDiscountCodeComponent, {
       width: "50%"
+    })
+    dialog.afterClosed().subscribe((res: any) => {
+      this.getDiscountCodes();
     })
   }
 
   edit(item: any) {
-    this.addDiscountCodes.open(AddDiscountCodeComponent, {
+    item.status = 'edit';
+    let dialog = this.confirmDialog.open(AddDiscountCodeComponent, {
       width: "50%",
-      data: item
+      data: item,
+    })
+    dialog.afterClosed().subscribe((res: any) => {
+      this.getDiscountCodes();
     })
   }
 
   deleteTableItem(elementId: number) {
-    this.discountCodes = this.tripsServices.deleteDiscountCode(elementId);
+    this.tripsServices.deleteDiscountCode(elementId).subscribe(res => {
+      console.log(res);
+      this.getDiscountCodes();
+    });
   }
 
   confirmDelete(id: number) {
