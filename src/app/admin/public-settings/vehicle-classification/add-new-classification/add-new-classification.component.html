@@ -7,7 +7,7 @@
 <div class="d-flex flex-wrap justify-content-center mt-4 mb-3 x-font-regular vehicle-classification-settings">
   <form (ngSubmit)="onSubmit()" [formGroup]="generalFields">
     <div class="row mb-5"
-      *ngIf="(activePageType == pageTypeEnum.Edit || activePageType == pageTypeEnum.Get ) && generalFields.value.englishName">
+      *ngIf="((activePageType == pageTypeEnum.Edit || activePageType == pageTypeEnum.Get ) && generalFields.value.englishName) || activePageType == pageTypeEnum.Create">
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
         <app-add-image [dimension]="100" [formGroup]="generalFields" controlName="image"
           [isEdit]="activePageType != pageTypeEnum.Get"></app-add-image>
@@ -57,7 +57,7 @@
       </div>
       <div class="form-item head-item col-3">
         <mat-form-field appearance="fill">
-          <mat-label>فئة المركبة</mat-label>
+          <mat-label>التصنيف البديل</mat-label>
           <mat-select name="vehicleVehicleTypeId" formControlName="vehicleVehicleTypeId">
             <mat-option *ngFor="let item of altVehilces" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
