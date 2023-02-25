@@ -38,6 +38,12 @@ export class TripsServicesService {
     return response
   }
 
+  getTripDetails(id: any) {
+    let getTripsUrl = this.baseUrl + `/api/app/order/${id}/for-dashboard`
+    console.log(getTripsUrl)
+    const response = this.httpClient.get(getTripsUrl).pipe();
+    return response
+  }
   findTrip(formValue: any) {
     return formValue
   }
@@ -51,16 +57,26 @@ export class TripsServicesService {
     return response;
   }
 
-  addDiscountCode(formValue: any) {
-    return formValue
+  addDiscountCode(modal: any) {
+    let getVehiclesUrl = this.baseUrl + '/api/app/coupon';
+    const response = this.httpClient.post(getVehiclesUrl, modal).pipe();
+    return response;
   }
 
   deleteDiscountCode(id: number) {
-    return []
+    let getVehiclesUrl = this.baseUrl + `/api/app/coupon/${id}`;
+    const response = this.httpClient.delete(getVehiclesUrl).pipe();
+    return response;
+  }
+
+  editDiscountCode(modal: any,id:any) {
+    let getVehiclesUrl = this.baseUrl + `/api/app/coupon/${id}`;
+    const response = this.httpClient.put(getVehiclesUrl,modal).pipe();
+    return response;
   }
 
   deleteOpentripType(id: number) {
-    return 
+    return
   }
 
   addOpenTripType(name: any) {
