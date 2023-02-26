@@ -29,7 +29,7 @@ export class TripsServicesService {
     param_ = param_.append('MaxResultCount', filter.maxResultCount);
     param_ = param_.append('SkipCount', filter.skipCount);
     if (filter.captainId) param_ = param_.append('CaptainId', filter.captainId);
-    if (filter.clientId) param_ = param_.append('ClientId', filter.clientId);
+    if (filter.clientId) param_ = param_.append('CustomerId', filter.clientId);
     if (filter.isOpen) param_ = param_.append('IsOpen', filter.isOpen);
     if (filter.orderStatus) param_ = param_.append('OrderStatus', filter.orderStatus);
     if (filter.fromDate) param_ = param_.append('FromDate', filter.fromDate.toLocaleString())

@@ -25,9 +25,9 @@ export class CancleReasonsComponent {
     });
   }
 
-  inActivate(id: number) {
-    this.tripsService.inActivateCancel(id).subscribe(res => {
-
+  inActivate(item: any) {
+    this.tripsService.inActivateCancel(item.id).subscribe(res => {
+      item.deleted = true
     }, err => {
 
     });

@@ -1,7 +1,8 @@
 <div class="driver_details x-font-regular">
-    <div class="filter_div d-flex align-items-center">
-      <h6 class="x-font-bold ms-3">يمكنك الفلترة حسب مجال معين</h6>
-      <mat-form-field appearance="fill">
+  <div class="row">
+    <div class="col-4 d-flex align-items-center">
+      <!-- <h6 class="x-font-bold ms-3">يمكنك الفلترة حسب مجال معين</h6> -->
+      <mat-form-field appearance="fill"  class="w-100">
         <mat-label>أدخل المجال</mat-label>
         <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
           <input matStartDate formControlName="start" placeholder="Start date">
@@ -9,47 +10,58 @@
         </mat-date-range-input>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
-  
+
         <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
         <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error>
       </mat-form-field>
     </div>
-    <div class="jay_taxi_table">
-      <div class="table_div d-flex flex-column align-items-center">
-        <table class="table">
-          <thead class="x-font-bold">
-            <th width="35%"></th>
-            <th width="35%" *ngIf="range && range.value && range.value.start && range.value.end && values">
-              <div class="d-flex flex-column align-items-center">
-                من {{range.value.start | date:'MMM d, y'}}
-                إلى {{range.value.end | date:'MMM d, y'}}
-              </div>
-            </th>
-            <th width="35%"></th>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="x-font-bold text-right">عدد الرحلات</td>
-              <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.tripCount}}</td>
-              <td *ngIf="total">{{total.tripCount}}</td>
-            </tr>
-            <tr>
-              <td class="x-font-bold">إجمالي الأرباح</td>
-              <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.turnover}}</td>
-              <td *ngIf="total">{{total.turnover}}</td>
-            </tr>
-            <tr>
-              <td class="x-font-bold">أرباح الشركات الصافية</td>
-              <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.jayTaxiTurnover}}</td>
-              <td *ngIf="total">{{total.jayTaxiTurnover}}</td>
-            </tr>
-            <tr>
-              <td class="x-font-bold">أرباح السائقين الصافية</td>
-              <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.captainsTurnover}}</td>
-              <td *ngIf="total">{{total.captainsTurnover}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="col-4">
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>المحافظة</mat-label>
+        <mat-select name="provinceId" [(ngModel)]="selectedProvince" (selectionChange)="filter();filter(true);">
+          <mat-option *ngFor="let item of provinces" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
   </div>
+  <div class="jay_taxi_table">
+    <div class="table_div d-flex flex-column align-items-center">
+      <table class="table">
+        <thead class="x-font-bold">
+          <th width="35%"></th>
+          <th width="35%" *ngIf="range && range.value && range.value.start && range.value.end && values">
+            <div class="d-flex flex-column align-items-center">
+              من {{range.value.start | date:'MMM d, y'}}
+              إلى {{range.value.end | date:'MMM d, y'}}
+            </div>
+          </th>
+          <th width="35%"></th>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="x-font-bold text-right">عدد الرحلات</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.tripCount}}</td>
+            <td *ngIf="total">{{total.tripCount}}</td>
+          </tr>
+          <tr>
+            <td class="x-font-bold">إجمالي الأرباح</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">{{values.turnover}}</td>
+            <td *ngIf="total">{{total.turnover}}</td>
+          </tr>
+          <tr>
+            <td class="x-font-bold">أرباح الشركات الصافية</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">
+              {{values.jayTaxiTurnover}}</td>
+            <td *ngIf="total">{{total.jayTaxiTurnover}}</td>
+          </tr>
+          <tr>
+            <td class="x-font-bold">أرباح السائقين الصافية</td>
+            <td *ngIf="range && range.value && range.value.start && range.value.end && values">
+              {{values.captainsTurnover}}</td>
+            <td *ngIf="total">{{total.captainsTurnover}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

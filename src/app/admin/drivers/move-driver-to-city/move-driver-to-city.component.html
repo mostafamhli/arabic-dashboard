@@ -5,7 +5,10 @@
         <mat-form-field appearance="fill" class="w-100">
           <mat-label>السائق</mat-label>
           <mat-select name="id" formControlName="id">
-            <mat-option *ngFor="let item of drivers" [value]="item.id">{{item.firstName}} {{item.lastName}}</mat-option>
+            <mat-option>
+              <ngx-mat-select-search formControlName="searchWord" (keyup)="getDrivers()" placeholderLabel="ابحث عن سائق"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let item of drivers" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

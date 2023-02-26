@@ -1,21 +1,15 @@
 import { AccountStatus } from '../enums/genric.enums';
 
 export class Role {
-    id: number
     name: string
     permissions: Permisson[]
-    accountStatus:number
     constructor(r?: Role) {
         if (r) {
             this.name = r.name
             this.permissions = r.permissions
-            this.id = r.id
-            this.accountStatus = r.accountStatus
         } else {
-            this.id = 0
             this.name = ""
             this.permissions = []
-            this.accountStatus = AccountStatus.inActive
         }
     }
 }

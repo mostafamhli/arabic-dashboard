@@ -30,7 +30,7 @@
             <td>{{item.phoneNumber}}</td>
             <td>{{item.creationTime | date:'MM/dd HH:mm'}}</td>
             <td>{{item.tripCount}}</td>
-            <td>{{item.rate}}</td>
+            <td>{{item.rate ? item.rate.toFixed(1) : '-' }}</td>
             <td>
               <container-element [ngSwitch]="item.isActive">
                 <span (click)="confirm(item)" class="status cursor active_status py-1"

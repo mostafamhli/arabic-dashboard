@@ -56,7 +56,7 @@ export class TripsComponent {
   }
 
   loadMore() {
-    this.filter.skipCount = this.filter.skipCount + 1;
+    this.filter.skipCount = this.filter.skipCount + this.filter.maxResultCount;
     this.callApi()
   }
 
@@ -69,13 +69,18 @@ export class TripsComponent {
     return date_
   }
 
+  searchWordCap:any = undefined
   getCaptains() {
-    this.driverService.getLiteListOfCaptains().subscribe((res: any) => {
+    let modal = {Keyword : this.searchWordCap}
+    this.driverService.getLiteListOfCaptains(modal).subscribe((res: any) => {
       this.captains = res.items
     }, err => { })
   }
+
+  searchWordClient:any = undefined
   getCleints() {
-    this.clientService.getLiteListOfClients().subscribe((res: any) => {
+    let modal = {Keyword : this.searchWordClient}
+    this.clientService.getLiteListOfClients(modal).subscribe((res: any) => {
       this.clients = res.items
     }, err => { })
   }
