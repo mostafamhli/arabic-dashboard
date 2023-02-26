@@ -24,7 +24,9 @@ export class TypesComponent {
   }
 
   getTypes() {
-    this.roles = this.settingsServcie.getAllRoles();
+    this.settingsServcie.getAllRoles().subscribe((res: any) => {
+      this.roles = res['items']
+    }, err => { });
   }
 
 
@@ -42,10 +44,11 @@ export class TypesComponent {
     })
     dialog.afterClosed().subscribe((result: any) => {
       if (result) {
-        let index = this.roles.findIndex(a => a.id == result.id);
+       /* let index = this.roles.findIndex(a => a.id == result.id);
         if (index != -1) {
           this.roles[index].accountStatus = result.accountStatus;
         }
+        */
       }
     })
   }

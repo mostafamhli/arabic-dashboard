@@ -40,7 +40,7 @@ export class ClientsComponent {
 
 
   loadMore() {
-    this.filter.skipCount = this.filter.skipCount + 1;
+    this.filter.skipCount = this.filter.skipCount + this.filter.maxResultCount;
     this.getClients()
   }
 

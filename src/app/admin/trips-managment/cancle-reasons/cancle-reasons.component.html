@@ -10,15 +10,17 @@
             <th></th>
           </thead>
           <tbody>
-            <tr *ngFor="let item of reasons">
+            <ng-container *ngFor="let item of reasons">
+            <tr *ngIf="!item.deleted">
               <td>{{item.arReason}}</td>
               <td>{{item.reason}}</td>
               <td>
-                <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
+                <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item)">
                   <div>إلغاء تفعيل</div>
                 </div>
               </td>
             </tr>
+          </ng-container>
           </tbody>
         </table>
       </div>

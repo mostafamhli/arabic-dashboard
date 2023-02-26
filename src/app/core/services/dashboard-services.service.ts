@@ -34,6 +34,7 @@ export class DashboardServicesService {
     let turnOverUrl = this.baseUrl + '/api/app/trip/turnover-report'
     let param_ = new HttpParams();
     if (filter.captainId) param_ = param_.append('CaptainId', filter.captainId);
+    if (filter.provinceId) param_ = param_.append('ProvinceId', filter.provinceId);
     if (filter.fromDate) param_ = param_.append('FromDate', filter.fromDate.toLocaleString())
     if (filter.toDate) param_ = param_.append('ToDate', filter.toDate.toLocaleString());
     

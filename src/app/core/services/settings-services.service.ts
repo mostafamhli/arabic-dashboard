@@ -189,41 +189,9 @@ export class SettingsServicesService {
   }
 
   getAllRoles() {
-    return [
-      {
-        id: 1,
-        name: "Admin",
-        accountStatus: AccountStatus.active,
-        permissions:
-          [
-            {
-              id: 1,
-              name: "إدارة السائقين",
-              accountStatus: AccountStatus.active
-            },
-            {
-              id: 2,
-              name: "إدارة الزبائن",
-              accountStatus: AccountStatus.active
-            },
-            {
-              id: 3,
-              name: "إدارة الرحلات",
-              accountStatus: AccountStatus.active
-            },
-          ]
-      },
-      {
-        id: 2,
-        name: "Sub Admin",
-        accountStatus: AccountStatus.inActive,
-        permissions: [{
-          id: 1,
-          name: "إدارة الزبائن",
-          accountStatus: AccountStatus.inActive
-        }]
-      }
-    ];
+    let getAllRolesUrl = this.baseUrl + '/api/app/manage-users/roles'
+    const response =  this.http.get(getAllRolesUrl).pipe()
+    return response
   }
 
   changeRoleAccountStatus(item: Role) {
