@@ -1,11 +1,15 @@
 <div class="drivers_list x-font-regular">
-  <div class="row">
-    <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
+  <div class="row d-flex align-items-center">
+    <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-start">
       <mat-form-field>
         <mat-label>بحث</mat-label>
-        <input matInput (keyup)="filter.skipCount=0;getClients();" [(ngModel)]="filter.filter" #searchInput placeholder=" ابحث عن ما تريد" #input>
+        <input matInput (keyup)="filter.skipCount=0;getClients();" [(ngModel)]="filter.filter" #searchInput
+          placeholder=" ابحث عن ما تريد" #input>
         <mat-icon matSuffix (click)="getClients()">search</mat-icon>
       </mat-form-field>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-6 col-12 d-flex flex-column align-items-end x-font-bold">
+      عدد النتائج : {{resultCount}}
     </div>
   </div>
   <div class="jay_taxi_table">
@@ -23,9 +27,9 @@
           <tr *ngFor="let item of clients">
             <td>
               <div class="user-name d-flex align-items-center">
-                  <img [src]="item.profileImageUrl || 'assets/img/user.png'">
-                  <div class="me-2">{{item.name}}</div>
-                </div>
+                <img [src]="item.profileImageUrl || 'assets/img/user.png'">
+                <div class="me-2">{{item.name}}</div>
+              </div>
             </td>
             <td>{{item.phoneNumber}}</td>
             <td>{{item.creationTime | date:'MM/dd HH:mm'}}</td>
@@ -46,7 +50,8 @@
     </div>
   </div>
 
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
+  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold"
+    *ngIf="!endOfResult && clients && clients.length">
     <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
       تحميل المزيد
     </button>

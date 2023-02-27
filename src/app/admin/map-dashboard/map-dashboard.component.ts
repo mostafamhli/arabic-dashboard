@@ -40,9 +40,9 @@ export class MapDashboardComponent {
 
   onClickedOutside($event: any) {
     this.detailsShown = [];
-    /* if (this.previous) {
+    if (this.previous) {
       this.previous.close();
-  }*/
+    }
   }
 
   showStopInfo($event: any, marker: any) {
@@ -70,7 +70,7 @@ export class MapDashboardComponent {
       setTimeout(() => {
         let bounds = new google.maps.LatLngBounds();
         bounds.extend(new google.maps.LatLng(this.location.lat, this.location.lng));
-        this.captains.forEach((item:any) => {
+        this.captains.forEach((item: any) => {
           bounds.extend(new google.maps.LatLng(item.vehicle.currentLocation.latitude, item.vehicle.currentLocation.longitude));
         });
         map.fitBounds(bounds);
@@ -83,7 +83,7 @@ export class MapDashboardComponent {
     setTimeout(() => {
       let bounds = new google.maps.LatLngBounds();
       bounds.extend(new google.maps.LatLng(this.location.lat, this.location.lng));
-      this.captains.forEach((item:any) => {
+      this.captains.forEach((item: any) => {
         bounds.extend(new google.maps.LatLng(item.vehicle.currentLocation.latitude, item.vehicle.currentLocation.longitude));
       });
       this._map.fitBounds(bounds);

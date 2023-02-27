@@ -18,7 +18,7 @@ export class ClientsComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   accountStatusEnum = AccountStatus
   endOfResult:boolean = false
-
+  resultCount= 0
   constructor(private confirmChangeStatus: MatDialog, private clientServices: ClientServicesService) {
     this.getClients()
   }
@@ -26,6 +26,7 @@ export class ClientsComponent {
   getClients() {
     this.clientServices.getAllClients(this.filter).subscribe(
       res => {
+        this.resultCount = res.totalCount
         if (this.filter.skipCount == 0) {
           this.clients = res.items
         }

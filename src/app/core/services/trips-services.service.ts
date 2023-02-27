@@ -97,6 +97,11 @@ export class TripsServicesService {
     return response;
   }
 
+  editCancleReason(reason: any) {
+    const response = this.httpClient.put(this.addCancelReasonUrl, reason).pipe();
+    return response;
+  }
+
   inActivateCancel(id:any){
     this.inAcrivateCancelReasonUrl = this.baseUrl + `/api/app/cancellation-reason/${id}/deactivate`
     const response = this.httpClient.post(this.inAcrivateCancelReasonUrl,{}).pipe();
