@@ -24,7 +24,7 @@ export class TypesComponent {
   }
 
   getTypes() {
-    this.roles = this.settingsServcie.getAllRoles();
+    //this.roles = this.settingsServcie.getAllRoles();
   }
 
 

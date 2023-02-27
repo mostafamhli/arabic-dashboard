@@ -9,10 +9,16 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field *ngIf="usersList" appearance="fill">
+      <mat-form-field *ngIf="clientsList.length !== 0" appearance="fill">
         <mat-label>اختر مستخدم</mat-label>
         <mat-select name="user" formControlName="user">
-          <mat-option *ngFor="let user of usersList" [value]="user.id">{{user.name}}</mat-option>
+          <mat-option *ngFor="let user of clientsList" [value]="user.id">{{user.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="captinList.length !== 0" appearance="fill">
+        <mat-label>اختر مستخدم</mat-label>
+        <mat-select name="user" formControlName="user">
+          <mat-option *ngFor="let user of captinList" [value]="user.id">{{user.firstName  }}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>

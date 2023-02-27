@@ -48,6 +48,8 @@ export class JaytaxiTransfersComponent {
   addTransfer() {
     this.addTransfers.open(AddTransferComponent, {
       width: "50%"
+    }).afterClosed().subscribe(res => {
+      this.getTransactions()
     })
   }
 }

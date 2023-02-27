@@ -50,6 +50,7 @@ export class ClientsComponent {
       data: 'هل متأكد من تغيير حالة الحساب ؟'
     })
     dialog.afterClosed().subscribe((result: any) => {
+      console.log(result)
       if (result) {
        this.clientServices.changeClientStatus(item.id).subscribe(res=>{
         item.isActive = item.isActive == 1 ? 0 : 1;

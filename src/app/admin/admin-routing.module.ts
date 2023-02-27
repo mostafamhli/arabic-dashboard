@@ -74,6 +74,7 @@ const routes: Routes = [
       { path: 'city-edit/:id', component: AddNewCityComponent },
       { path: 'add-service', component: AddServiceComponent },
       { path: 'add-new-user', component: AddNewUserComponent },
+      { path: 'edit-user/:id', component: AddNewUserComponent },
       { path: 'add-new-classification', component: AddNewClassificationComponent },
       { path: 'reports', component: ReportsComponent },
       { path: 'notifications', component: NotificationsComponent },
