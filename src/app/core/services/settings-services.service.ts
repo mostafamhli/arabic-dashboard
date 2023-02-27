@@ -166,15 +166,20 @@ export class SettingsServicesService {
   addPackage(model: any) {
     return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types/package', model)
   }
+  editPackage(model: any) {
+    return this.http.put(this.baseUrl + '/api/app/manage-vehicle-types/package', model)
+  }
 
   deleteClassification(id: number) {
     console.log(id)
 
   }
 
-  getAllRoles(): Observable<any>{
-    return this.http.get(this.baseUrl + '/api/app/manage-users/roles')
-    
+
+  getAllRoles() {
+    let getAllRolesUrl = this.baseUrl + '/api/app/manage-users/roles'
+    const response =  this.http.get(getAllRolesUrl).pipe()
+    return response
   }
 
   changeRoleAccountStatus(item: Role) {

@@ -14,9 +14,9 @@
                 <td>{{item.arName}}</td>
                 <td>{{item.name}}</td>
                 <td>
-                  <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
-                    <mat-icon>delete</mat-icon>
-                    <div>حذف</div>
+                  <div class="d-flex align-items-center w-fit-content cursor" (click)="fillToEdit(item)">
+                    <mat-icon>edit</mat-icon>
+                    <div>تعديل</div>
                   </div>
                 </td>
               </tr>
@@ -40,7 +40,10 @@
             </div>
           </div>
         </div>
-        <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!arabicPackageName || arabicPackageName==''">إضافة</button>
+        <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!arabicPackageName || arabicPackageName=='' || !englishPackageName || englishPackageName==''">
+        <ng-container *ngIf="!editMode">إضافة</ng-container>
+        <ng-container *ngIf="editMode">حفظ</ng-container>
+        </button>
       </div>
     </div>
   </div>

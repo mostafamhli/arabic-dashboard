@@ -8,13 +8,14 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./confirm.component.scss']
 })
 export class ConfirmComponent {
-  messageText:string
+  messageText: string
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<ConfirmComponent>) {
-    if (data) {
-      console.log(data)
+    if (data && data.message) {
       this.messageText = data.message
+    } else {
+      this.messageText = data
     }
   }
   confirm() {

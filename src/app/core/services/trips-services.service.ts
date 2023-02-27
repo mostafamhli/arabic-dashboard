@@ -14,6 +14,7 @@ export class TripsServicesService {
   discountCodeStatusEnum = DiscountCodeStatus
   baseUrl: string
   addCancelReasonUrl: string
+  inAcrivateCancelReasonUrl: string
   getCancelReasonesUrl: string
 
   constructor(private httpClient: HttpClient) {
@@ -28,7 +29,7 @@ export class TripsServicesService {
     param_ = param_.append('MaxResultCount', filter.maxResultCount);
     param_ = param_.append('SkipCount', filter.skipCount);
     if (filter.captainId) param_ = param_.append('CaptainId', filter.captainId);
-    if (filter.clientId) param_ = param_.append('ClientId', filter.clientId);
+    if (filter.clientId) param_ = param_.append('CustomerId', filter.clientId);
     if (filter.isOpen) param_ = param_.append('IsOpen', filter.isOpen);
     if (filter.orderStatus) param_ = param_.append('OrderStatus', filter.orderStatus);
     if (filter.fromDate) param_ = param_.append('FromDate', filter.fromDate.toLocaleString())
@@ -96,14 +97,19 @@ export class TripsServicesService {
     return response;
   }
 
-  deleteCancleReason(id: number) {
-    //return this.getAllCancleReason().filter(item => {
-    //  return item.id !== id
-    //})
-  }
-
   addCancleReason(reason: any) {
     const response = this.httpClient.post(this.addCancelReasonUrl, reason).pipe();
+    return response;
+  }
+
+  editCancleReason(reason: any) {
+    const response = this.httpClient.put(this.addCancelReasonUrl, reason).pipe();
+    return response;
+  }
+
+  inActivateCancel(id:any){
+    this.inAcrivateCancelReasonUrl = this.baseUrl + `/api/app/cancellation-reason/${id}/deactivate`
+    const response = this.httpClient.post(this.inAcrivateCancelReasonUrl,{}).pipe();
     return response;
   }
 }

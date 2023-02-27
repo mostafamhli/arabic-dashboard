@@ -7,18 +7,29 @@
           <thead class="x-font-bold">
             <th>السبب</th>
             <th>Reason</th>
-            <th></th>
+            <th>عمليات</th>
+            <th>إلغاء</th>
           </thead>
           <tbody>
-            <tr *ngFor="let item of reasons">
-              <td>{{item.arReason}}</td>
-              <td>{{item.reason}}</td>
-              <td>
-                <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item.id)">
-                  <mat-icon>delete</mat-icon>
-                  <div>حذف</div>
-                </div>
-              </td>
+            <ng-container *ngFor="let item of reasons">
+              <tr *ngIf="!item.deleted">
+                <td>{{item.arReason}}</td>
+                <td>{{item.reason}}</td>
+                <td>
+                  <div class="d-flex align-items-center w-fit-content cursor" (click)="fillToEdit(item)">
+                    <mat-icon>edit</mat-icon>
+                    <div>تعديل</div>
+                  </div>
+                </td>
+                <td>
+                  <div class="d-flex align-items-center w-fit-content red cursor" (click)="confirmDelete(item)">
+                    <div>إلغاء تفعيل</div>
+                  </div>
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="!reasons || !reasons.length">
+              <td colspan="4">لا يوجد نتائج</td>
             </tr>
           </tbody>
         </table>
@@ -40,7 +51,11 @@
           </div>
         </div>
       </div>
-      <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!arabicCancleName || arabicCancleName=='' || !englishCancleName || englishCancleName==''">إضافة</button>
+      <button class="btn t_btn_blue" (click)="onSubmit()"
+        [disabled]="!arabicCancleName || arabicCancleName=='' || !englishCancleName || englishCancleName==''">
+        <ng-container *ngIf="!editMode">إضافة</ng-container>
+        <ng-container *ngIf="editMode">حفظ</ng-container>
+      </button>
     </div>
   </div>
 </div>

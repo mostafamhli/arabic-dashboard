@@ -48,6 +48,7 @@ export class FilterTurnOver {
     fromDate: Date | null | undefined
     toDate: Date | null | undefined
     captainId?: string
+    provinceId?: any
 }
 
 export class FilterOrders extends Filter {
