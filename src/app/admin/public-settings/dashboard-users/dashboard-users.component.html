@@ -9,10 +9,10 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
             <mat-form-field>
                 <mat-label>بحث</mat-label>
-                <input matInput (keyup)="getDashboardUsers()" [(ngModel)]="filter.filter"
-                    placeholder=" ابحث عن ما تريد" #input>
-                    <mat-icon matSuffix (click)="search(input)">search</mat-icon>
-                </mat-form-field>
+                <input matInput (keyup)="filter.skipCount=0;getDashboardUsers();" [(ngModel)]="filter.filter"
+                    [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
+                <mat-icon matSuffix (click)="getDashboardUsers()">search</mat-icon>
+            </mat-form-field>
         </div>
     </div>
     <div class="jay_taxi_table">
@@ -28,19 +28,20 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of dashboardUsers">
-                        <td>{{item.userName}}</td>
-                        <td>{{item.type}}</td>
-                        <td>{{item.accountCreateDate}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.role}}</td>
+                        <td>{{item.creationTime | date : 'shortDate'}}</td>
                         <td>{{item.email}}</td>
                         <td>
-                            <container-element [ngSwitch]="item.accountStatus">
-                                <span class="status active_status py-1"
+                            <container-element [ngSwitch]="item.isActive">
+                                <span (click)="confirm(item)" class="status cursor active_status py-1"
                                     *ngSwitchCase="accountStatusEnum.active">مفعل</span>
-                                <span class="status inactive_status py-1" *ngSwitchCase="accountStatusEnum.inActive">غير
+                                <span (click)="confirm(item)" class="status cursor inactive_status py-1"
+                                    *ngSwitchCase="accountStatusEnum.inActive">غير
                                     مفعل</span>
                             </container-element>
                         </td>
-                        <td>
+                        <td [routerLink]="['/edit-user', item.id]">
                             <mat-icon>edit</mat-icon>
                         </td>
                     </tr>
@@ -48,7 +49,7 @@
             </table>
         </div>
     </div>
-    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
+    <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold" *ngIf="!endOfResult">
         <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
             تحميل المزيد
         </button>

@@ -11,6 +11,8 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class AddNewCityComponent {
 
   addNewCityForm = new FormGroup({
+    image: new FormControl(),
+    isActive: new FormControl(false),
     cityNameInArabic: new FormControl('', [Validators.required]),
     cityNameInEnglish: new FormControl('', [Validators.required]),
     cityPhoto: new FormControl(File, [Validators.required]),
@@ -28,10 +30,11 @@ export class AddNewCityComponent {
     if (this.data) {
       this.addNewCityForm.controls.cityNameInArabic.setValue(this.data.arabicName);
       this.addNewCityForm.controls.cityNameInEnglish.setValue(this.data.englishName);
-      this.addNewCityForm.controls.firstValueInRangeOne.setValue(this.data.firstValueAtFirstRange);
-      this.addNewCityForm.controls.secondValueInRangeOne.setValue(this.data.secondValueAtFirstRange);
-      this.addNewCityForm.controls.firstValueInRangeTwo.setValue(this.data.secondValueAtFirstRange);
-      this.addNewCityForm.controls.secondValueInRangeTwo.setValue(this.data.secondValueAtSecondRange);
+      this.addNewCityForm.controls.firstValueInRangeOne.setValue(this.data.zeroFeeRange);
+      this.addNewCityForm.controls.secondValueInRangeOne.setValue(this.data.firstFeeRange);
+      this.addNewCityForm.controls.firstValueInRangeTwo.setValue('');
+      this.addNewCityForm.controls.secondValueInRangeTwo.setValue(this.data.secondFeeRange);
+      this.addNewCityForm.controls.isActive.setValue(this.data.isActive);
     }
 
   }
@@ -51,7 +54,6 @@ export class AddNewCityComponent {
 
   onSelectedFile(e: any) {
     if (e.target.files) {
-
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
@@ -61,7 +63,20 @@ export class AddNewCityComponent {
   }
 
   onSubmit() {
-    console.log(this.settingsService.addNewCity(this.addNewCityForm.value));
+    
+    let formData:any = new FormData();
+    formData.append('IsActive',this.addNewCityForm.get('isActive')?.value);
+    formData.append('ZeroFeeRange',this.addNewCityForm.get('firstValueInRangeOne')?.value);
+    formData.append('FirstFeeRange',this.addNewCityForm.get('secondValueInRangeOne')?.value);
+    formData.append('SecondFeeRange', this.addNewCityForm.get('secondValueInRangeTwo')?.value);
+    formData.append('Image',this.addNewCityForm.get('image')?.value);
+    formData.append('Id',this.data.id);
+    formData.forEach((ele :any) => {
+      console.log(ele)
+    });
+    this.settingsService.editCity(formData).subscribe(res => {
+      console.log(res)
+    })
   }
 
   cancel() {

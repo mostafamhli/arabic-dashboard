@@ -30,7 +30,7 @@
             <td>{{item.creatorName}}</td>
             <td>{{item.creationTime | date : 'short'}}</td>
             <td>{{item.walletOwner}}</td>
-            <td>{{item.walletBalance}}</td>
+            <td>{{item.amount}}</td>
             <td>
               <container-element [ngSwitch]="item.walletType">
                 <span *ngSwitchCase="TransferTypeEnum.remittance">إيداع</span>

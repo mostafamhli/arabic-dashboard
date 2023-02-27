@@ -75,6 +75,11 @@ export class TripsServicesService {
     return response;
   }
 
+  changeDiscountStatus(accountId:string){
+    let changeClientStatusUrl = this.baseUrl + `/api/app/coupon/${accountId}/switch-active`
+    const response = this.httpClient.post(changeClientStatusUrl,{}).pipe();
+    return response;
+  }
   deleteOpentripType(id: number) {
     return
   }

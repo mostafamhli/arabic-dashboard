@@ -1,6 +1,7 @@
 import { DialogRef } from '@angular/cdk/dialog';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { ClientServicesService } from 'src/app/core/services/client-services.service';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 import { WalletService } from 'src/app/core/services/wallet.service';
@@ -11,6 +12,7 @@ import { WalletService } from 'src/app/core/services/wallet.service';
   styleUrls: ['./add-transfer.component.scss']
 })
 export class AddTransferComponent {
+  filter: FilterWithSearch = new FilterWithSearch()
   transfer = new FormGroup({
     user: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
@@ -22,7 +24,7 @@ export class AddTransferComponent {
     private driverService: DriverServicesService,
     private clinicService: ClientServicesService,
     private walletService: WalletService,
-    private dialog : DialogRef
+    private dialog: DialogRef
   ) {
   }
 
@@ -36,24 +38,38 @@ export class AddTransferComponent {
     console.log(modal)
     this.walletService.createTransaction(modal).subscribe(res => {
       console.log(res)
-      this.dialog.close()
+      this.dialog.close(true)
     })
   }
 
-  usersList: any[] = [];
+  clientsList: any[] = [];
+  captinList: any[] = [];
+
+  getLiteListOfClients() {
+    this.clinicService.getLiteListOfClients().subscribe((res: any) => {
+      this.clientsList = res.items
+      console.log(res)
+    })
+  }
+
+
+  getDriversList() {
+    this.filter.maxResultCount = 50
+    this.driverService.getDriversList(this.filter).subscribe(
+      res => {
+        this.captinList = res['items']
+        console.log(this.captinList)
+      })
+  }
+
   onChangeType(event: any) {
     console.log(event)
-    if (event.value === '1') {
-      console.log('1')
-      this.clinicService.getLiteListOfClients().subscribe((res: any) => {
-        this.usersList = res.items
-        console.log(res)
-      })
+    if (event.value === '3') {
+      this.captinList=[]
+      this.getLiteListOfClients();
     } else {
-      this.driverService.getLiteListOfCaptains().subscribe((res: any) => {
-        this.usersList = res.items
-        console.log(res)
-      })
+      this.clientsList=[];
+      this.getDriversList();
     }
   }
 }
