@@ -28,17 +28,7 @@
                     *ngIf="generalFields.controls.search.invalid && generalFields.controls.search.touched">{{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
         </div>
-        <div class="w-50 d-flex flex-column mt-3 align-items-center ">
-            <div class="w-75">
-                <div class="example-label-container">
-                    <label id="example-name-label" class="example-name-label">عدد الرحلات :</label>
-                </div>
-                <mat-slider class="example-margin" [max]="10" [min]="0" [step]="1" [discrete]="true"
-                    [showTickMarks]="true">
-                    <input matSliderThumb formControlName="slider">
-                </mat-slider>
-            </div>
-        </div>
+        
         <div class="w-50 d-flex flex-column align-items-center justify-content-center mt-3">
             <mat-form-field appearance="fill" class="w-75">
                 <mat-label>نوع الحساب</mat-label>

@@ -18,7 +18,7 @@ export class ClientsComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   accountStatusEnum = AccountStatus
   endOfResult:boolean = false
-
+  resultCount= 0
   constructor(private confirmChangeStatus: MatDialog, private clientServices: ClientServicesService) {
     this.getClients()
   }
@@ -26,6 +26,7 @@ export class ClientsComponent {
   getClients() {
     this.clientServices.getAllClients(this.filter).subscribe(
       res => {
+        this.resultCount = res.totalCount
         if (this.filter.skipCount == 0) {
           this.clients = res.items
         }
@@ -50,6 +51,7 @@ export class ClientsComponent {
       data: 'هل متأكد من تغيير حالة الحساب ؟'
     })
     dialog.afterClosed().subscribe((result: any) => {
+      console.log(result)
       if (result) {
        this.clientServices.changeClientStatus(item.id).subscribe(res=>{
         item.isActive = item.isActive == 1 ? 0 : 1;

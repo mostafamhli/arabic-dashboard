@@ -56,6 +56,7 @@ export class OpenTripComponent {
         this.editMode = false
         this.englishPackageName = undefined
         this.arabicPackageName = undefined
+        this.id = undefined
       })
     }
   }

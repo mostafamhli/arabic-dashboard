@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AccountStatus, PageType } from '../enums/genric.enums';
 import { FilterClassification, FilterWithSearch } from '../models/filters.model';
@@ -17,45 +18,31 @@ export class SettingsServicesService {
   selectedType = ''
   constructor(private http: HttpClient) { }
 
-  getAllDashboardUsers() {
-    return [
-      {
-        id: 1,
-        userName: 'Mostafa Mhli',
-        type: 'admin',
-        accountCreateDate: '22-12-2022',
-        email: 'mostafa1234@gmail.com',
-        accountStatus: AccountStatus.active,
-      },
-      {
-        id: 2,
-        userName: 'Mostafa Mhli',
-        type: 'admin',
-        accountCreateDate: '22-12-2022',
-        email: 'mostafa1234@gmail.com',
-        accountStatus: AccountStatus.active,
-      },
-      {
-        id: 3,
-        userName: 'Ali Mhli',
-        type: 'admin',
-        accountCreateDate: '22-12-2022',
-        email: 'mostafa1234@gmail.com',
-        accountStatus: AccountStatus.inActive,
-      },
-    ]
+  getAllDashboardUsers(filter: FilterWithSearch): Observable<any> {
+    let dashboardUsersListUrl = this.baseUrl + '/api/app/manage-users'
+    let param_ = new HttpParams();
+    if (filter.filter) param_ = param_.append('filter', filter.filter);
+    param_ = param_.append('MaxResultCount', filter.maxResultCount);
+    param_ = param_.append('SkipCount', filter.skipCount);
+    param_ = param_.append('Status', filter.status);
+    const response = this.http.get(dashboardUsersListUrl, { params: param_ }).pipe();
+    return response;
   }
 
-  searchInDashboardService(text: any) {
-    return this.getAllDashboardUsers().filter(item => {
-      return item.userName.includes(text);
-    })
+  changeUserStatus(accountId:string){
+    let changeUserStatusUrl = this.baseUrl + `/api/app/manage-users/${accountId}/switch-active`
+    const response = this.http.post(changeUserStatusUrl,{}).pipe();
+    return response;
   }
+
 
   addNewUser(formValue: any) {
-    return formValue
+    return this.http.post(this.baseUrl + '/api/app/manage-users/user', formValue)
   }
 
+  editUser(formValue: any) {
+    return this.http.put(this.baseUrl + '/api/app/manage-users/user', formValue)
+  }
   getAllCities() {
     return [
       {
@@ -188,6 +175,7 @@ export class SettingsServicesService {
 
   }
 
+
   getAllRoles() {
     let getAllRolesUrl = this.baseUrl + '/api/app/manage-users/roles'
     const response =  this.http.get(getAllRolesUrl).pipe()
@@ -202,6 +190,10 @@ export class SettingsServicesService {
     return formValue;
   }
 
+  editCity(formValue: any) {
+    return this.http.put(this.baseUrl + '/api/app/province',formValue)
+  }
+  
   getSocialMediaInfo() {
     return this.http.get(this.baseUrl + '/api/app/manage-settings')
   }

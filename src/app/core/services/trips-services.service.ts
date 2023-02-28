@@ -75,6 +75,11 @@ export class TripsServicesService {
     return response;
   }
 
+  changeDiscountStatus(accountId:string){
+    let changeClientStatusUrl = this.baseUrl + `/api/app/coupon/${accountId}/switch-active`
+    const response = this.httpClient.post(changeClientStatusUrl,{}).pipe();
+    return response;
+  }
   deleteOpentripType(id: number) {
     return
   }
@@ -94,6 +99,11 @@ export class TripsServicesService {
 
   addCancleReason(reason: any) {
     const response = this.httpClient.post(this.addCancelReasonUrl, reason).pipe();
+    return response;
+  }
+
+  editCancleReason(reason: any) {
+    const response = this.httpClient.put(this.addCancelReasonUrl, reason).pipe();
     return response;
   }
 

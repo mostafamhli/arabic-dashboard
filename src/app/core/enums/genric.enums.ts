@@ -13,7 +13,7 @@ export enum TransferType {
 
 export enum DiscountCodeStatus {
     active = 1,
-    inActive = 2
+    inActive = 0
 }
 
 export enum MessageType {

@@ -26,12 +26,14 @@
             <td>{{item.value}}</td>
             <td>{{item.usageCount}}</td>
             <td>{{item.maxUsageCount}}</td>
-            <td>{{item.expirationDate | date:'short'}}</td>
+            <td>{{item.expirationDate | date:'shortDate'}}</td>
             <td>
               <container-element [ngSwitch]="item.isActive">
-                <span class="status discount_code_active_status py-1"
-                  *ngSwitchCase="discountCodeStatusEnum.active">إلغاء التفعيل</span>
-                <span class="status inactive_status py-1" *ngSwitchCase="discountCodeStatusEnum.inActive">تفعيل</span>
+                <span (click)="confirm(item)" class="status cursor active_status py-1"
+                  *ngSwitchCase="discountCodeStatusEnum.active">مفعل</span>
+                <span (click)="confirm(item)" class="status cursor inactive_status py-1"
+                  *ngSwitchCase="discountCodeStatusEnum.inActive">غير
+                  مفعل</span>
               </container-element>
             </td>
             <td>

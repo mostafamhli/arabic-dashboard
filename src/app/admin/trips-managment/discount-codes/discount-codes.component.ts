@@ -18,7 +18,7 @@ export class DiscountCodesComponent {
   filter: FilterWithSearch = new FilterWithSearch()
   discountCodeStatusEnum = DiscountCodeStatus
   endOfResult: boolean = false
-  constructor(private addDiscountCodes: MatDialog, private confirmDialog: MatDialog, private tripsServices: TripsServicesService) {
+  constructor(private confirmChangeStatus: MatDialog, private confirmDialog: MatDialog, private tripsServices: TripsServicesService) {
     this.getDiscountCodes()
   }
 
@@ -35,6 +35,23 @@ export class DiscountCodesComponent {
     }, (err: any) => { });
   }
 
+  
+  confirm(item: any) {
+    let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
+      width: "40%",
+      data: 'هل متأكد من تغيير حالة الحساب ؟'
+    })
+    dialog.afterClosed().subscribe((result: any) => {
+      console.log(result)
+      if (result) {
+       this.tripsServices.changeDiscountStatus(item.id).subscribe(res=>{
+        item.isActive = item.isActive == 1 ? 0 : 1;
+       },err=>{})
+      } else {
+        
+      }
+    })
+  }
 
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + this.filter.maxResultCount;
