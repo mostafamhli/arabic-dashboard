@@ -27,7 +27,6 @@ export class SignInComponent {
       null,
       [
         Validators.required,
-        Validators.pattern(/^[A-z0-9]*$/),
         Validators.minLength(3),
       ],
     ],
