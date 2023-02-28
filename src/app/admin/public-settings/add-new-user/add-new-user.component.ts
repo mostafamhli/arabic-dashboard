@@ -28,7 +28,6 @@ export class AddNewUserComponent {
   id: any
   constructor(private settingsServices: SettingsServicesService, private router: Router, private route: ActivatedRoute) {
     this.id = route.snapshot.params['id']
-    console.log(this.id)
   }
 
   getErrorRequiredMessage() {
