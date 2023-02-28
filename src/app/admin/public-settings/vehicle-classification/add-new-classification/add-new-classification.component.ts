@@ -232,6 +232,7 @@ export class AddNewClassificationComponent {
         this.submitted = false
       }, err => {
         let error = err['error']
+        error = error['error']
         let errorList = error.validationErrors
         this.errorModal.open(ErrorHandelComponent, {
           data: {

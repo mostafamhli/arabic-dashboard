@@ -21,11 +21,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-
 
 @NgModule({
   declarations: [],
@@ -79,7 +76,6 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatSnackBarModule,
     MatSlideToggleModule,
     NgxMatSelectSearchModule
-
   ]
 })
 export class MaterialModule { }

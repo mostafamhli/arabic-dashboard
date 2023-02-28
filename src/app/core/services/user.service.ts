@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, filter, take, switchMap, tap, mapTo } from 'rxjs/operators';
-import { TAXI_ACCESS_TOKEN, TAXI_REFRESH_TOKEN } from '../constants/genric.const';
+import { TAXI_ACCESS_TOKEN, TAXI_REFRESH_TOKEN, TAXI_REFRESH_ROLE } from '../constants/genric.const';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -51,7 +51,7 @@ export class UserService {
     const body = {
       token: accessToken,
       refreshToken: refreshToken,
-      language : "ar"
+      language: "ar"
     }
 
     return this.httpClient
@@ -66,6 +66,9 @@ export class UserService {
   public getToken() {
     return localStorage.getItem(TAXI_ACCESS_TOKEN);
   }
+  public getRole() {
+    return localStorage.getItem(TAXI_REFRESH_ROLE);
+  }
 
   private getRefreshToken() {
     return localStorage.getItem(TAXI_REFRESH_TOKEN);
@@ -74,10 +77,12 @@ export class UserService {
   private storeTokens(tokens: any) {
     localStorage.setItem(TAXI_ACCESS_TOKEN, tokens.token);
     localStorage.setItem(TAXI_REFRESH_TOKEN, tokens.refreshToken);
+    localStorage.setItem(TAXI_REFRESH_ROLE, tokens.role);
   }
 
   public removeTokens() {
     localStorage.removeItem(TAXI_ACCESS_TOKEN);
     localStorage.removeItem(TAXI_REFRESH_TOKEN);
+    localStorage.removeItem(TAXI_REFRESH_ROLE);
   }
 }

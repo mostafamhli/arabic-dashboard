@@ -11,13 +11,13 @@
           <span>لوحة التحكم</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="activeTab = 0" routerLinkActive="active" routerLink="/clients">
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('Customers Management')" (click)="activeTab = 0" routerLinkActive="active" routerLink="/clients">
         <div class="listItem">
           <mat-icon>supervisor_account</mat-icon>
           <span>الزبائن</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}"
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('Captains Management')" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.drivers}"
         (click)="activeTab == activeTabsEnum.drivers ? activeTab = 0 : activeTab = activeTabsEnum.drivers">
         <div class="listItem">
           <mat-icon *ngIf="activeTab != activeTabsEnum.drivers">keyboard_arrow_left</mat-icon>
@@ -50,7 +50,7 @@
         </div>
       </mat-list-item>
 
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}"
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('Trips Management')" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.trips}"
         (click)="activeTab == activeTabsEnum.trips ? activeTab = 0 : activeTab = activeTabsEnum.trips">
         <div class="listItem">
           <mat-icon *ngIf="activeTab != activeTabsEnum.trips">keyboard_arrow_left</mat-icon>
@@ -90,7 +90,7 @@
           <span>أسباب إلغاء الرحلة</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}"
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('General Settings')" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}"
         (click)="activeTab == activeTabsEnum.setting ? activeTab = 0 : activeTab = activeTabsEnum.setting">
         <div class="listItem">
           <mat-icon *ngIf="activeTab != activeTabsEnum.setting">keyboard_arrow_left</mat-icon>
@@ -98,15 +98,16 @@
           <span>الإعدادات العامة</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
-        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting && permissions && checkPermisson('Users Management')"
+        [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}"
+        role="listitem" routerLinkActive="active"
         routerLink="/dashboard-users">
         <div class="listItem">
           <mat-icon>supervised_user_circle</mat-icon>
           <span>مستخدمي لوحة التحكم</span>
         </div>
       </mat-list-item>
-      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting"
+      <mat-list-item *ngIf="activeTab == activeTabsEnum.setting  && permissions && checkPermisson('Vehicle Types Management')"
         [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.setting}" role="listitem" routerLinkActive="active"
         routerLink="/vehicle-classification">
         <div class="listItem">
@@ -146,7 +147,7 @@
           <span>الإعدادات</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.notifications}"
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('Communication Channels')" [ngClass]="{bg_grey_light: activeTab == activeTabsEnum.notifications}"
         (click)="activeTab == activeTabsEnum.notifications ? activeTab = 0 : activeTab = activeTabsEnum.notifications">
         <div class="listItem">
           <mat-icon *ngIf="activeTab != activeTabsEnum.notifications">keyboard_arrow_left</mat-icon>
@@ -170,18 +171,25 @@
           <span>ارسال رسالة مخصصة</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('Reports')" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
         routerLinkActive="active" routerLink="/reports">
         <div class="listItem">
           <mat-icon>assignment</mat-icon>
           <span>التقارير</span>
         </div>
       </mat-list-item>
-      <mat-list-item role="listitem" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
+      <mat-list-item role="listitem" *ngIf="permissions && checkPermisson('Transactions')" (click)="activeTab = 0" [routerLinkActiveOptions]="{exact: true}"
         routerLinkActive="active" routerLink="/jaytaxi-transfers">
         <div class="listItem">
-          <mat-icon>assignment</mat-icon>
+          <mat-icon>account_balance_wallet</mat-icon>
           <span>المحفظة</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listitem" (click)="logout()" [routerLinkActiveOptions]="{exact: true}"
+        routerLinkActive="active" routerLink="/jaytaxi-transfers">
+        <div class="listItem">
+          <mat-icon>keyboard_tab</mat-icon>
+          <span>تسجيل الخروج</span>
         </div>
       </mat-list-item>
 
