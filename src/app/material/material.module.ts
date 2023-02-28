@@ -52,11 +52,8 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatSliderModule,
     MatRadioModule,
     MatSnackBarModule,
-
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
     NgxMatSelectSearchModule
-
   ],
   exports:[
     MatSidenavModule,
@@ -80,9 +77,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
     MatSliderModule,
     MatRadioModule,
     MatSnackBarModule,
-
-    MatSlideToggleModule
-
+    MatSlideToggleModule,
     NgxMatSelectSearchModule
 
   ]

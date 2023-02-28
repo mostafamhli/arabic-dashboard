@@ -13,13 +13,14 @@ import { WalletService } from 'src/app/core/services/wallet.service';
 })
 export class AddTransferComponent {
   filter: FilterWithSearch = new FilterWithSearch()
+  searchWord:any = undefined
   transfer = new FormGroup({
     user: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     amountOfMoney: new FormControl('', [Validators.required]),
-    walletType: new FormControl('', [Validators.required])
+    walletType: new FormControl('', [Validators.required]),
+    searchWord: new FormControl(''),
   })
-
   constructor(
     private driverService: DriverServicesService,
     private clinicService: ClientServicesService,
@@ -46,7 +47,8 @@ export class AddTransferComponent {
   captinList: any[] = [];
 
   getLiteListOfClients() {
-    this.clinicService.getLiteListOfClients().subscribe((res: any) => {
+    let modal = {Keyword : this.transfer?.value?.searchWord}
+    this.clinicService.getLiteListOfClients(modal).subscribe((res: any) => {
       this.clientsList = res.items
       console.log(res)
     })
@@ -54,12 +56,20 @@ export class AddTransferComponent {
 
 
   getDriversList() {
+    let modal = {Keyword : this.transfer?.value?.searchWord}
+    this.driverService.getLiteListOfCaptains(modal).subscribe(
+      (res:any) => {
+        this.captinList = res['items']
+        console.log(this.captinList)
+      }
+    )
+/*
     this.filter.maxResultCount = 50
     this.driverService.getDriversList(this.filter).subscribe(
       res => {
-        this.captinList = res['items']
+        this. = res['items']
         console.log(this.captinList)
-      })
+      })*/
   }
 
   onChangeType(event: any) {
