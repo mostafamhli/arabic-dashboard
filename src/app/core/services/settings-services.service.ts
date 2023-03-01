@@ -43,6 +43,10 @@ export class SettingsServicesService {
   editUser(formValue: any) {
     return this.http.put(this.baseUrl + '/api/app/manage-users/user', formValue)
   }
+
+  getUserById(id:any):Observable<any>{
+    return this.http.get(this.baseUrl + `/api/app/manage-users/${id}/user`)
+  }
   getAllCities() {
     return [
       {

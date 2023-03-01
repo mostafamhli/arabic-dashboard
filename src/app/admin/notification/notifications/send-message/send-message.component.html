@@ -3,6 +3,19 @@
 </div>
 <form [formGroup]="generalFields">
     <div class="d-flex flex-wrap">
+
+        <div class="w-50 d-flex flex-wrap  justify-content-center">
+            <mat-form-field appearance="fill" class="w-75">
+                <mat-label>نوع الحساب</mat-label>
+                <mat-select name="type" formControlName="type">
+                    <mat-option value="one">كابتن</mat-option>
+                    <mat-option value="two">زبون</mat-option>
+                </mat-select>
+                <mat-error
+                    *ngIf="generalFields.controls.type.invalid && generalFields.controls.type.touched">{{getErrorRequiredMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+
         <div class="w-50 d-flex flex-wrap justify-content-center">
             <mat-form-field appearance="fill" class=" d-flex justify-content-center w-75">
                 <mat-label>تاريخ إنشاء الحساب</mat-label>
@@ -20,26 +33,33 @@
                     date</mat-error>
             </mat-form-field>
         </div>
-        <div class="w-50 d-flex flex-wrap justify-content-center">
-            <mat-form-field class="example-full-width d-flex justify-content-center w-75">
-                <mat-label>بحث بالاسم أو رقم الموبايل</mat-label>
-                <input matInput name="search" formControlName="search">
-                <mat-error
-                    *ngIf="generalFields.controls.search.invalid && generalFields.controls.search.touched">{{getErrorRequiredMessage()}}</mat-error>
-            </mat-form-field>
-        </div>
-        
-        <div class="w-50 d-flex flex-column align-items-center justify-content-center mt-3">
+
+        <div class="w-50 d-flex flex-wrap justify-content-center"  *ngIf="generalFields.controls.type.value == 'one'">
             <mat-form-field appearance="fill" class="w-75">
-                <mat-label>نوع الحساب</mat-label>
-                <mat-select name="type" formControlName="type">
-                    <mat-option value="one">كابتن</mat-option>
-                    <mat-option value="two">زبون</mat-option>
+                <mat-label>بحث بالاسم أو رقم الموبايل</mat-label>
+                <mat-select name="id" formControlName="id" multiple>
+                    <mat-option>
+                        <ngx-mat-select-search formControlName="searchWord" (keyup)="getDrivers()"
+                            placeholderLabel="ابحث عن سائق"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let item of drivers" [value]="item.id">{{item.name}}</mat-option>
                 </mat-select>
-                <mat-error
-                    *ngIf="generalFields.controls.type.invalid && generalFields.controls.type.touched">{{getErrorRequiredMessage()}}</mat-error>
             </mat-form-field>
         </div>
+
+        <div class="w-50 d-flex flex-wrap justify-content-center"  *ngIf="generalFields.controls.type.value == 'two'">
+            <mat-form-field appearance="fill" class="w-75">
+                <mat-label>بحث بالاسم أو رقم الموبايل</mat-label>
+                <mat-select name="id" formControlName="id" multiple>
+                    <mat-option>
+                        <ngx-mat-select-search formControlName="searchWord" (keyup)="getClients()"
+                            placeholderLabel="ابحث عن زبون"></ngx-mat-select-search>
+                    </mat-option>
+                    <mat-option *ngFor="let item of clients" [value]="item.id">{{item.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
     </div>
     <div class="add_notification">
         <div class="d-flex flex-column align-items-center">

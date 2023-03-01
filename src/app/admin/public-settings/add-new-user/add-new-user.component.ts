@@ -43,20 +43,22 @@ export class AddNewUserComponent {
       this.roles = res.items
       console.log(this.roles)
     })
-    this.settingsServices.getAllDashboardUsers(new FilterWithSearch()).subscribe(res => {
-      this.selectedUser = res.items.filter((item: any) => {
-        return item.id === this.id
+    if(this.id){
+      this.settingsServices.getUserById(this.id).subscribe(res => {
+        console.log(res)
+        this.selectedUser = res
+        if (this.selectedUser) {
+          this.addNewUserGroupForm.get('firstName')?.setValue(this.selectedUser?.name)
+          this.addNewUserGroupForm.get('lastName')?.setValue(this.selectedUser?.surname)
+          this.addNewUserGroupForm.get('mobile')?.setValue(this.selectedUser?.phoneNumber)
+          this.addNewUserGroupForm.get('type')?.setValue(this.selectedUser?.role)
+          this.addNewUserGroupForm.get('email')?.setValue(this.selectedUser?.email)
+          this.addNewUserGroupForm.get('password')?.setValue(this.selectedUser?.password)
+          this.addNewUserGroupForm.get('image')?.setValue(this.selectedUser?.profileImageUrl)
+        }
       })
-      console.log(this.selectedUser)
-      if (this.selectedUser) {
-        this.addNewUserGroupForm.get('firstName')?.setValue(this.selectedUser[0].name)
-        this.addNewUserGroupForm.get('lastName')?.setValue(this.selectedUser[0].surname)
-        this.addNewUserGroupForm.get('mobile')?.setValue(this.selectedUser[0].phoneNumber)
-        this.addNewUserGroupForm.get('type')?.setValue(this.selectedUser[0].role)
-        this.addNewUserGroupForm.get('email')?.setValue(this.selectedUser[0].email)
-        this.addNewUserGroupForm.get('image')?.setValue(this.selectedUser[0].profileImageUrl)
-      }
-    })
+    }
+    
   }
 
   edit() {
@@ -65,7 +67,7 @@ export class AddNewUserComponent {
     formData.append('Surname', this.addNewUserGroupForm.value.lastName)
     formData.append('Email', this.addNewUserGroupForm.value.email)
     formData.append('PhoneNumber', this.addNewUserGroupForm.value.mobile)
-    formData.append('Password', null)
+    formData.append('Password', this.addNewUserGroupForm.value.password)
     formData.append('Role', this.addNewUserGroupForm.value.type)
     formData.append('ProfileImage', null)
     formData.append('Id', this.id)

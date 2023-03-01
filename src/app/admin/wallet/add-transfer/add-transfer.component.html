@@ -11,7 +11,7 @@
 
       <mat-form-field *ngIf="clientsList.length !== 0" appearance="fill">
         <mat-label>اختر مستخدم</mat-label>
-        <mat-select name="user" formControlName="user">
+        <mat-select name="user" formControlName="user" (selectionChange)="onChangeSelection()">
           <mat-option>
             <ngx-mat-select-search formControlName="searchWord" (keyup)="getLiteListOfClients()"></ngx-mat-select-search>
           </mat-option>
