@@ -46,12 +46,13 @@ export class DriversListComponent {
     });
     dialog.afterClosed().subscribe((result: Driver) => {
       if (result) {
-        this.changeDriverStatus(result);
+        this.changeDriverStatus(item);
       }
     })
   }
 
   changeDriverStatus(item: Driver) {
+    console.log(item)
     this.driverServcie.changeDriverStatus(item.id).subscribe(res=>{
       item.isActive = item.isActive == 1 ? 0 : 1;
     },err=>{})
