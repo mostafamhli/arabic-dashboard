@@ -13,16 +13,20 @@ import { DriverServicesService } from 'src/app/core/services/driver-services.ser
 })
 export class SendMessageComponent {
 
+  searchWord: any = undefined
+  drivers: any = []
+  clients: any = []
   filter: FilterWithSearch = new FilterWithSearch()
   generalFields = new FormGroup({
     range: new FormGroup({
       start: new FormControl<Date | null>(null),
       end: new FormControl<Date | null>(null),
     }),
-    search: new FormControl('', [Validators.required]),
+    searchWord: new FormControl('', [Validators.required]),
     type: new FormControl('', [Validators.required]),
     messageContent: new FormControl('', [Validators.required]),
-    messageTitle: new FormControl('', [Validators.required])
+    messageTitle: new FormControl('', [Validators.required]),
+    id: new FormControl('', Validators.required),
   });
 
   constructor(
@@ -30,53 +34,44 @@ export class SendMessageComponent {
     private driverService: DriverServicesService,
     private clientService: ClientServicesService,
     private router: Router
-  ) { }
+  ) {
+    this.getDrivers()
+    this.getClients()
+  }
 
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
   }
 
+  getDrivers() {
+    let modal = { Keyword: this.generalFields?.value?.searchWord }
+    this.driverService.getLiteListOfCaptains(modal).subscribe(
+      (res: any) => {
+        this.drivers = res['items']
+      }
+    )
+  }
+
+  getClients() {
+    let modal = { Keyword: this.generalFields?.value?.searchWord }
+    this.clientService.getLiteListOfClients(modal).subscribe(
+      (res: any) => {
+        this.clients = res['items']
+      }
+    )
+  }
   send() {
-    let modal = {
-      Keyword: this.generalFields.value.search,
-      MinCreationDate: this.generalFields.value.range?.start,
-      MaxCreationDate: this.generalFields.value.range?.end
+    let modal1 = {
+      title: this.generalFields.value.messageTitle,
+      body: this.generalFields.value.messageContent,
+      targetType: 4,
+      targetUserIds: this.generalFields.get('id')?.value
     }
 
-    let usersIds: any[] = [];
-    if (this.generalFields.value.type === 'one') {
-      this.filter.maxResultCount = 50
-      this.driverService.getDriversList(this.filter).subscribe(
-        res => {
-          res['items'].forEach((ele: any) => {
-            usersIds.push(ele.id)
-          })
-          let modal = {
-            title: this.generalFields.value.messageTitle,
-            body: this.generalFields.value.messageContent,
-            targetType: 4,
-            targetUserIds: usersIds
-          }
-          this.communicationService.sendPublicMessage(modal).subscribe(res => {
-            this.router.navigate(['/notifications'])
-          })
-        }
-      )
-    } else {
-      this.clientService.getLiteListOfClients(modal).subscribe((res: any) => {
-        res.items.forEach((ele: any) => {
-          usersIds.push(ele.id)
-        })
-        let modal = {
-          title: this.generalFields.value.messageTitle,
-          body: this.generalFields.value.messageContent,
-          targetType: 4,
-          targetUserIds: usersIds
-        }
-        this.communicationService.sendPublicMessage(modal).subscribe(res => {
-          this.router.navigate(['/notifications'])
-        })
-      })
-    }
+    this.communicationService.sendPublicMessage(modal1).subscribe(res => {
+      console.log(res)
+      this.router.navigate(['/notifications'])
+    })
+
   }
 }

@@ -11,14 +11,20 @@
 
       <mat-form-field *ngIf="clientsList.length !== 0" appearance="fill">
         <mat-label>اختر مستخدم</mat-label>
-        <mat-select name="user" formControlName="user">
+        <mat-select name="user" formControlName="user" (selectionChange)="onChangeSelection()">
+          <mat-option>
+            <ngx-mat-select-search formControlName="searchWord" (keyup)="getLiteListOfClients()"></ngx-mat-select-search>
+          </mat-option>
           <mat-option *ngFor="let user of clientsList" [value]="user.id">{{user.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field *ngIf="captinList.length !== 0" appearance="fill">
         <mat-label>اختر مستخدم</mat-label>
         <mat-select name="user" formControlName="user">
-          <mat-option *ngFor="let user of captinList" [value]="user.id">{{user.firstName  }}</mat-option>
+          <mat-option>
+            <ngx-mat-select-search formControlName="searchWord" (keyup)="getDriversList()" ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option *ngFor="let user of captinList" [value]="user.id">{{user.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
@@ -30,8 +36,6 @@
         <mat-select name="type" formControlName="type">
           <mat-option value="1">إيداع</mat-option>
           <mat-option value="2">استرجاع</mat-option>
-          <mat-option value="3">تحويل من</mat-option>
-          <mat-option value="4">تحويل إلى</mat-option>
         </mat-select>
       </mat-form-field>
       <div class="add_cancel w-100 d-flex align-items-center x-font-bold">
