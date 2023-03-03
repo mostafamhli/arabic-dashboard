@@ -1,0 +1,30 @@
+<div class="main-container p-4">
+    <div class="img-container d-flex justify-content-center align-items-center">
+        <img [src]="user.profileImageUrl ? user.profileImageUrl : '/assets/img/user.png'" alt="" srcset="">
+    </div>
+    <div class="row mt-4 me-4 ms-4">
+        <div class="header-container col-6 d-flex justify-content-start align-items-center">
+            <h4>{{user.name}}</h4>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center">
+            <div>
+                <span *ngFor="let i of numOfEmptyStars"><mat-icon
+                        style="color:black; font-size: 18px; margin-right: 0.1rem;">star</mat-icon></span>
+                <span *ngFor="let i of numOfStars"><mat-icon
+                        style="color:#ffd609; font-size: 18px; margin-right: 0.1rem;">star</mat-icon></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4 me-4 ms-4">
+        <div class="content-container col-12 d-flex justify-content-start align-items-center ">
+            <label for="phoneNumber">رقم الهاتف:</label>
+            <p id="phoneNumber">{{user.phoneNumber}}</p>
+        </div>
+        <div class="col-12 d-flex justify-content-start align-items-center mt-4">
+            <label for="numOfTrips">عدد الرحلات:</label>
+            <p id="numOfTrips">{{user.tripCount}}</p>
+        </div>
+    </div>
+
+</div>

@@ -18,6 +18,7 @@
           <th>عدد الرحلات </th>
           <th>التقييم</th>
           <th>تفعيل الحساب</th>
+          <th>عرض</th>
         </thead>
         <tbody>
           <tr *ngFor="let item of clients">
@@ -30,7 +31,7 @@
             <td>{{item.phoneNumber}}</td>
             <td>{{item.creationTime | date:'MM/dd HH:mm'}}</td>
             <td>{{item.tripCount}}</td>
-            <td>{{item.rate}}</td>
+            <td>{{item.rate | number : '1.1-1'}}</td>
             <td>
               <container-element [ngSwitch]="item.isActive">
                 <span (click)="confirm(item)" class="status cursor active_status py-1"
@@ -40,6 +41,7 @@
                   مفعل</span>
               </container-element>
             </td>
+            <td (click)="showUser(item)"><mat-icon>remove_red_eye</mat-icon></td>
           </tr>
         </tbody>
       </table>

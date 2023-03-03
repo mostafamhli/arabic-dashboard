@@ -4,6 +4,7 @@ import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmComponent } from '../confirm/confirm.component';
 import { ClientServicesService } from '../../core/services/client-services.service';
+import { ShowClientComponent } from './show-client/show-client.component';
 
 
 
@@ -19,7 +20,7 @@ export class ClientsComponent {
   accountStatusEnum = AccountStatus
   endOfResult:boolean = false
 
-  constructor(private confirmChangeStatus: MatDialog, private clientServices: ClientServicesService) {
+  constructor(private dialog: MatDialog, private clientServices: ClientServicesService) {
     this.getClients()
   }
 
@@ -28,6 +29,7 @@ export class ClientsComponent {
       res => {
         if (this.filter.skipCount == 0) {
           this.clients = res.items
+          console.log(this.clients)
         }
         else
           this.clients = this.clients.concat(res.items)
@@ -36,8 +38,17 @@ export class ClientsComponent {
           } else this.endOfResult = false;
       }
     )
+    
   }
 
+
+  showUser(item:any){
+    console.log(item)
+    let dialog = this.dialog.open(ShowClientComponent, {
+      width: '50%',
+      data: item
+    })
+  }
 
   loadMore() {
     this.filter.skipCount = this.filter.skipCount + 1;
@@ -45,7 +56,7 @@ export class ClientsComponent {
   }
 
   confirm(item: any) {
-    let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
+    let dialog = this.dialog.open(ConfirmComponent, {
       width: "40%",
       data: 'هل متأكد من تغيير حالة الحساب ؟'
     })
