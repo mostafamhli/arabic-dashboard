@@ -1,8 +1,8 @@
 <div class="map-dashboard-container">
-  <agm-map class="map-top" [latitude]="location.lat" [longitude]="location.lng" [zoom]="9"
-    [mapTypeControl]="true" [fitBounds]="true" [fullscreenControl]="true">
+  <agm-map class="map-top" [latitude]="location.lat" [longitude]="location.lng" [zoom]="9" [mapTypeControl]="true"
+    [fitBounds]="true" [fullscreenControl]="true">
     <agm-overlay *ngFor="let item of captains" [latitude]="item.vehicle.currentLocation.latitude"
-    [longitude]="item.vehicle.currentLocation.longitude">
+      [longitude]="item.vehicle.currentLocation.longitude" (markerClick)="clickedMarker(infowindow)">
       <div class="stop-marker">
         <svg width="40" height="50" viewBox="0 0 50 58" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g>
@@ -24,15 +24,35 @@
             </filter>
           </defs>
         </svg>
+        <img [src]="item.vehicle.iconUrl">
       </div>
       <agm-info-window #infowindow>
-
+        <div class="p-2">
+          <div class="row x-font-bold">
+            <div class="col-12 d-flex flex-column align-items-center" *ngIf="item.profileImageUrl">
+              <img class="imgInfo" [src]="item.profileImageUrl">
+            </div>
+            <div class="col-6" *ngIf="item.name">الاسم : </div>
+            <div class="col-6" dir="ltr" *ngIf="item.name">{{item.name}}</div>
+            <div class="col-6" *ngIf="item.phoneNumber">رقم الموبايل : </div>
+            <div class="col-6" dir="ltr" *ngIf="item.phoneNumber">{{item.phoneNumber}}</div>
+            <ng-container *ngIf="item.vehicle">
+              <div class="col-6" *ngIf="item.vehicle.plateNumber">لوحة السيارة : </div>
+              <div class="col-6" dir="ltr" *ngIf="item.vehicle.plateNumber">{{item.vehicle.plateNumber}}</div>
+              <div class="col-6" *ngIf="item.vehicle.model">موديل السيارة : </div>
+              <div class="col-6" dir="ltr" *ngIf="item.vehicle.model">{{item.vehicle.model}}</div>
+              <div class="col-6" *ngIf="item.vehicle.color">لون السيارة : </div>
+              <div class="col-6" dir="ltr" *ngIf="item.vehicle.color">{{item.vehicle.color}}</div>
+            </ng-container>
+          </div>
+        </div>
       </agm-info-window>
     </agm-overlay>
   </agm-map>
   <div class="w-100 mt-3 x-font-bold d-flex align-items-center">
     <div class="city-div  ms-auto me-auto d-flex align-items-center" *ngFor="let item of provinces;let i =index;">
-      <input [name]="item.name" [value]="item.id" type="radio" [(ngModel)]="activeProvince" [id]="item.id" (change)="handleProvinceChange(i)">
+      <input [name]="item.name" [value]="item.id" type="radio" [(ngModel)]="activeProvince" [id]="item.id"
+        (change)="handleProvinceChange(i)">
       <label class="me-3" [for]="item.name">{{item.name}}</label>
     </div>
   </div>

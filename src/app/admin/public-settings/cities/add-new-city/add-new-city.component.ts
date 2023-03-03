@@ -15,7 +15,7 @@ export class AddNewCityComponent {
     isActive: new FormControl(false),
     cityNameInArabic: new FormControl('', [Validators.required]),
     cityNameInEnglish: new FormControl('', [Validators.required]),
-    cityPhoto: new FormControl(File, [Validators.required]),
+    cityPhoto: new FormControl(),
     firstValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     secondValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     firstValueInRangeTwo: new FormControl({ value: '', disabled: true }),
@@ -28,15 +28,15 @@ export class AddNewCityComponent {
 
   ngOnInit() {
     if (this.data) {
-      this.addNewCityForm.controls.cityNameInArabic.setValue(this.data.arabicName);
-      this.addNewCityForm.controls.cityNameInEnglish.setValue(this.data.englishName);
+      this.addNewCityForm.controls.cityPhoto.setValue(this.data.imageUrl);
+      this.addNewCityForm.controls.cityNameInArabic.setValue(this.data.arName);
+      this.addNewCityForm.controls.cityNameInEnglish.setValue(this.data.name);
       this.addNewCityForm.controls.firstValueInRangeOne.setValue(this.data.zeroFeeRange);
       this.addNewCityForm.controls.secondValueInRangeOne.setValue(this.data.firstFeeRange);
       this.addNewCityForm.controls.firstValueInRangeTwo.setValue('');
       this.addNewCityForm.controls.secondValueInRangeTwo.setValue(this.data.secondFeeRange);
       this.addNewCityForm.controls.isActive.setValue(this.data.isActive);
     }
-
   }
 
 

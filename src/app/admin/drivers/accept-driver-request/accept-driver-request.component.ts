@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 import { FilterVehiclesWithSearch } from 'src/app/core/models/filters.model';
 import { ServiceType } from 'src/app/core/enums/genric.enums';
+import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 
 @Component({
   selector: 'app-accept-driver-request',
@@ -21,7 +22,8 @@ export class AcceptDriverRequestComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<AcceptDriverRequestComponent>,
-    private driverServices: DriverServicesService) {
+    private driverServices: DriverServicesService,
+    private settingService:SettingsServicesService) {
     if (data) {
       this.filter.provinceId = data
     }
@@ -30,7 +32,7 @@ export class AcceptDriverRequestComponent {
   }
 
   getServices() {
-    this.types = this.driverServices.getVehiclesTypes();
+    this.types = this.settingService.getVehicleTypes();
   }
 
   getVehicles(id:number) {

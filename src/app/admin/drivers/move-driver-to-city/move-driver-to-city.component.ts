@@ -14,10 +14,11 @@ export class MoveDriverToCityComponent {
 
   moveDriver: FormGroup
   calssifications: any = []
-  filter: FilterWithSearch = new FilterWithSearch()
   provinces: any = []
+  filter:FilterWithSearch = new FilterWithSearch()
   filter_: FilterVehiclesWithSearch = new FilterVehiclesWithSearch()
   drivers: any = []
+  searchWord:any = undefined
   constructor(
     private driverServices: DriverServicesService,
     private provinceService: ProvinceService,
@@ -29,6 +30,7 @@ export class MoveDriverToCityComponent {
       id: new FormControl('',Validators.required),
       provinceId: new FormControl(6,Validators.required),
       vehicleTypeId: new FormControl(0,Validators.required),
+      searchWord: new FormControl(''),
     })
     this.getVehicles()
   }
@@ -55,9 +57,9 @@ export class MoveDriverToCityComponent {
   }
 
   getDrivers() {
-    this.filter.maxResultCount = 50
-    this.driverServcie.getDriversList(this.filter).subscribe(
-      res => {
+    let modal = {Keyword : this.moveDriver?.value?.searchWord}
+    this.driverServcie.getLiteListOfCaptains(modal).subscribe(
+      (res:any) => {
         this.drivers = res['items']
       }
     )

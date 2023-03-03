@@ -16,14 +16,18 @@
       </div>
     </ng-container>
     <ng-container *ngIf="filter.category">
+      <ng-container *ngIf="!vehicles || vehicles.length == 0">
+        لا يوجد مركبات
+      </ng-container>
+      <ng-container *ngIf="vehicles && vehicles.length">
       <div class="vehicle" *ngFor="let item of vehicles" [ngClass]="{active: activeVehicle && activeVehicle.id == item.id}"
         (click)="activeVehicle = item">
         <div class="img_div">
           <img [src]="item.imageUrl">
         </div>
-        <label>{{item.name}}</label>
-        <label>{{item.arName}}</label>
+        <label>{{item.arName || item.name}}</label>
       </div>
+    </ng-container>
     </ng-container>
   </div>
   <div class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-3">

@@ -86,7 +86,7 @@ export class DriverServicesService {
     param_ = param_.append('MaxResultCount', filter.maxResultCount);
     param_ = param_.append('SkipCount', filter.skipCount);
     //param_ = param_.append('Sorting',filter.sorting);
-    param_ = param_.append('Status', filter.status);
+    //param_ = param_.append('IsActive', filter.status == 1 ? true : false);
     const response = this.httpClient.get(this.captainsListUrl, { params: param_ }).pipe();
     return response;
   }
@@ -230,9 +230,9 @@ export class DriverServicesService {
 
   getLiteListOfCaptains(modal?:any){
     let _param = new HttpParams()
-    if (modal?.Keyword) _param.append('Keyword', modal?.Keyword)
-    if (modal?.MinCreationDate) _param.append('MinCreationDate', modal?.MinCreationDate)
-    if (modal?.MaxCreationDate) _param.append('MaxCreationDate', modal?.MaxCreationDate)
+    if (modal?.Keyword) _param = _param.append('Keyword', modal?.Keyword)
+    if (modal?.MinCreationDate) _param = _param.append('MinCreationDate', modal?.MinCreationDate)
+    if (modal?.MaxCreationDate) _param = _param.append('MaxCreationDate', modal?.MaxCreationDate)
     let getLiteListOfCaptainsUrl = this.baseUrl + '/api/app/manage-captains/active-lite-list'
     const response = this.httpClient.get(getLiteListOfCaptainsUrl, {params:_param}).pipe();
     return response;

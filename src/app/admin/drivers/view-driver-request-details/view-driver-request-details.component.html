@@ -24,7 +24,7 @@
       </div> -->
       <div class="info mt-1 d-flex align-items-center">
         <mat-icon>location_city</mat-icon>
-        <div class="text">{{driverRequestDetails.provinceId}}</div>
+        <div class="text">{{driverRequestDetails.provinceName || driverRequestDetails.provinceId}}</div>
       </div>
     </div>
     <div class="sec_col col-lg-6 col-md-6 col-12" *ngIf="driverRequestDetails.vehicle">

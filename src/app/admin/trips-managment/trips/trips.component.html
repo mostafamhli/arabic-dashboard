@@ -5,6 +5,10 @@
         <mat-form-field appearance="fill">
           <mat-label>السائقين</mat-label>
           <mat-select [(ngModel)]="filter.captainId">
+            <mat-option>
+              <ngx-mat-select-search [(ngModel)]="searchWordCap" (keyup)="getCaptains()"
+                placeholderLabel="ابحث عن سائق"></ngx-mat-select-search>
+            </mat-option>
             <mat-option *ngFor="let item of captains" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -53,6 +57,10 @@
         <mat-form-field appearance="fill">
           <mat-label>الزبائن</mat-label>
           <mat-select [(ngModel)]="filter.clientId">
+            <mat-option>
+              <ngx-mat-select-search [(ngModel)]="searchWordClient" (keyup)="getCleints()"
+                placeholderLabel="ابحث عن زبون"></ngx-mat-select-search>
+            </mat-option>
             <mat-option *ngFor="let item of clients" [value]="item.id">{{item.name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -106,7 +114,8 @@
           <td>{{toLocalString(item.creationTime) | date:'YY/MM/dd HH:mm'}}</td>
           <td>{{item.price}}</td>
           <td>
-            <mat-icon [routerLink]="['/trip-details',item.id]" routerLinkActive="router-link-active" class="removed-eye cursor">
+            <mat-icon [routerLink]="['/trip-details',item.id]" routerLinkActive="router-link-active"
+              class="removed-eye cursor">
               remove_red_eye</mat-icon>
           </td>
         </tr>

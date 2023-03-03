@@ -5,6 +5,8 @@ import { SettingsServicesService } from 'src/app/core/services/settings-services
 import { PageType } from 'src/app/core/enums/genric.enums';
 import { DriverServicesService } from 'src/app/core/services/driver-services.service';
 import { FilterClassification, Filter, FilterVehiclesWithSearch } from 'src/app/core/models/filters.model';
+import { ErrorHandelComponent } from 'src/app/shared/components/error-handel/error-handel.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-new-classification',
@@ -23,8 +25,8 @@ export class AddNewClassificationComponent {
   generalFields = new FormGroup({
     arabicName: new FormControl('', [Validators.required]),
     englishName: new FormControl('', [Validators.required]),
-    image: new FormControl([Validators.required]),
-    icon: new FormControl([Validators.required]),
+    image: new FormControl(),
+    icon: new FormControl(),
     vehicleVehicleTypeId: new FormControl(),
     numOfSites: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     driverRatio: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
@@ -33,8 +35,8 @@ export class AddNewClassificationComponent {
     morningSecondExtraCost: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningOne_Km: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningStoppingFactor: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    morningTen_M: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
-    morningWaitingTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    // morningTen_M: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
+    //morningWaitingTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningFirstWaitingTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningSecondWaitingTime: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     morningtimeDifferenceFactor: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
@@ -59,7 +61,7 @@ export class AddNewClassificationComponent {
   submitted: boolean = false;
   altVehilces: any
 
-  constructor(private activatedRoute: ActivatedRoute, private driverServices: DriverServicesService, private router: Router, private settingsService: SettingsServicesService) {
+  constructor(private activatedRoute: ActivatedRoute, private errorModal: MatDialog, private driverServices: DriverServicesService, private router: Router, private settingsService: SettingsServicesService) {
     this.getOpenTrips();
   }
 
@@ -131,7 +133,7 @@ export class AddNewClassificationComponent {
       this.generalFields.controls['morningFirstExtraCost'].hasError('pattern') ||
       this.generalFields.controls['morningSecondExtraCost'].hasError('pattern') ||
       this.generalFields.controls['morningOne_Km'].hasError('pattern') ||
-      this.generalFields.controls['morningTen_M'].hasError('pattern') ||
+      // this.generalFields.controls['morningTen_M'].hasError('pattern') ||
       this.generalFields.controls['dayLowestRent'].hasError('pattern') ||
       this.generalFields.controls['dayFirstExtraCost'].hasError('pattern') ||
       this.generalFields.controls['daySecondExtraCost'].hasError('pattern') ||
@@ -150,6 +152,7 @@ export class AddNewClassificationComponent {
 
   onSubmit() {
     this.generalFields.markAsTouched();
+    console.log(this.generalFields)
     if (this.generalFields.valid) {
       let arr1: ShiftPackage[] = [];
       arr1 = arr1.concat(this.openTripCost['morning'])
@@ -228,7 +231,15 @@ export class AddNewClassificationComponent {
         this.router.navigate(['/vehicle-classification'])
         this.submitted = false
       }, err => {
-        console.error(err)
+        let error = err['error']
+        error = error['error']
+        let errorList = error.validationErrors
+        this.errorModal.open(ErrorHandelComponent, {
+          data: {
+            title: error.message,
+            errorList: errorList
+          }
+        })
         this.submitted = false
       })
     }
@@ -248,8 +259,8 @@ export class AddNewClassificationComponent {
       morningSecondExtraCost: new FormControl({ value: res.shiftCostFactors[0].secondRangeCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       morningOne_Km: new FormControl({ value: res.shiftCostFactors[0].costFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       morningStoppingFactor: new FormControl({ value: res.shiftCostFactors[0].stoppingFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),
-      morningTen_M: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
-      morningWaitingTime: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      // morningTen_M: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
+      //morningWaitingTime: new FormControl({ value: res.shiftCostFactors[0].additionalCost, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       morningFirstWaitingTime: new FormControl({ value: res.shiftCostFactors[0].firstRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       morningSecondWaitingTime: new FormControl({ value: res.shiftCostFactors[0].secondRangeTime, disabled: PageType.Get == this.activePageType }, [Validators.required]),
       morningtimeDifferenceFactor: new FormControl({ value: res.shiftCostFactors[0].timeDifferenceFactor, disabled: PageType.Get == this.activePageType }, [Validators.required]),

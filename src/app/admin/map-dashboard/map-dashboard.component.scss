@@ -2,7 +2,25 @@
   z-index: 9;
 }
 
+.imgInfo{
+  width: 60px;
+  height: 60px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
 
+.stop-marker{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    border-radius: 12.5px;
+    margin-top: -15px;
+  }
+}
 /*
 .stop-marker-text {
     position: absolute;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AccountStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from '../models/filters.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -31,6 +31,8 @@ export class ClientServicesService {
   }
 
   getClientDetails(id:string){
+    console.log(localStorage.getItem('token'))
+    let header = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`)
     this.clientsListUrl = this.baseUrl + `/api/app/manage-users/${id}/user`
     const response = this.httpClient.get(this.clientsListUrl).pipe();
     return response;
@@ -44,9 +46,9 @@ export class ClientServicesService {
   
   getLiteListOfClients(modal?:any){
     let _param = new HttpParams()
-    if (modal?.Keyword) _param.append('Keyword', modal?.Keyword)
-    if (modal?.MinCreationDate) _param.append('MinCreationDate', modal?.MinCreationDate)
-    if (modal?.MaxCreationDate) _param.append('MaxCreationDate', modal?.MaxCreationDate)
+    if (modal?.Keyword) _param = _param.append('Keyword', modal?.Keyword)
+    if (modal?.MinCreationDate) _param = _param.append('MinCreationDate', modal?.MinCreationDate)
+    if (modal?.MaxCreationDate) _param = _param.append('MaxCreationDate', modal?.MaxCreationDate)
     let getLiteListOfClientsUrl = this.baseUrl + '/api/app/customer/active-lite-list'
     const response = this.httpClient.get(getLiteListOfClientsUrl, {params:_param}).pipe();
     return response;
