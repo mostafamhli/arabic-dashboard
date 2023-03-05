@@ -66,8 +66,8 @@ export class CancleReasonsComponent {
   
   fillToEdit(item: any) {
     this.editMode = true
-    this.arabicCancleName = item.reason
-    this.englishCancleName = item.arReason
+    this.arabicCancleName = item.arReason
+    this.englishCancleName = item.reason
     this.id = item.id
   }
 

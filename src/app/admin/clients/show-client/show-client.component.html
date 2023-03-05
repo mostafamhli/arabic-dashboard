@@ -1,12 +1,12 @@
-<div class="main-container p-4">
-    <div class="img-container d-flex justify-content-center align-items-center">
-        <img [src]="user.profileImageUrl ? user.profileImageUrl : '/assets/img/user.png'" alt="" srcset="">
-    </div>
-    <div class="row mt-4 me-4 ms-4">
-        <div class="header-container col-6 d-flex justify-content-start align-items-center">
+<div class="main-container row p-4">
+    <div class="content-container">
+
+        <div style="height: 15vh; width: 100%;"></div>
+        <div class="w-100 d-flex flex-wrap justify-content-center">
             <h4>{{user.name}}</h4>
         </div>
-        <div class="col-6 d-flex justify-content-end align-items-center">
+
+        <div class="w-100 d-flex flex-wrap justify-content-center" style="margin: 0;">
             <div>
                 <span *ngFor="let i of numOfEmptyStars"><mat-icon
                         style="color:black; font-size: 18px; margin-right: 0.1rem;">star</mat-icon></span>
@@ -14,17 +14,31 @@
                         style="color:#ffd609; font-size: 18px; margin-right: 0.1rem;">star</mat-icon></span>
             </div>
         </div>
-    </div>
 
-    <div class="row mt-4 me-4 ms-4">
-        <div class="content-container col-12 d-flex justify-content-start align-items-center ">
-            <label for="phoneNumber">رقم الهاتف:</label>
+        <div class="w-100 d-flex flex-wrap justify-content-start">
+            <label for="phoneNumber">رقم الهاتف الأول:</label>
             <p id="phoneNumber">{{user.phoneNumber}}</p>
         </div>
-        <div class="col-12 d-flex justify-content-start align-items-center mt-4">
+        <div *ngIf="user.secondPhoneNumber" class="w-100 d-flex flex-wrap justify-content-start">
+            <label for="phoneNumber">رقم الهاتف الثاني:</label>
+            <p id="phoneNumber">{{user?.secondPhoneNumber}}</p>
+        </div>
+        <div class="w-100 d-flex flex-wrap justify-content-start">
+            <label for="numOfTrips"> المحفظة:</label>
+            <p id="numOfTrips">{{user.balance}}</p>
+        </div>
+        <div class="w-100 d-flex flex-wrap justify-content-start">
             <label for="numOfTrips">عدد الرحلات:</label>
             <p id="numOfTrips">{{user.tripCount}}</p>
         </div>
+        <div style="height: 10vh;  width: 100%;"></div>
+        <button class="btn t_btn_blue" [mat-dialog-close]="true">
+            عودة إلى القائمة
+        </button>
+        <div style="height: 10vh;  width: 100%;"></div>
     </div>
 
+    <div class="img-container ">
+        <img [src]="user.profileImageUrl ? user.profileImageUrl : '/assets/img/user.png'" alt="" srcset="">
+    </div>
 </div>

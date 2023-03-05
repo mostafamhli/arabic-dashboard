@@ -1,45 +1,12 @@
 <div class="notifications_list x-font-regular">
   <div class="row">
-    <div class="col-6 d-flex align-items-center">
-      <button class="btn t_btn_blue w-25" (click)="sendNotifications()">
+    <div class="col-12 d-flex justify-content-center align-items-center" style="height:80vh">
+      <button class="btn t_btn_blue w-25 h-25" (click)="sendNotifications()">
         رسالة عامة
       </button>
-      <button class="btn t_btn_blue w-40 me-3" [routerLink]="['/send-message']" routerLinkActive="router-link-active" >
+      <button class="btn t_btn_blue w-25 h-25 me-3" [routerLink]="['/send-message']" routerLinkActive="router-link-active" >
         رسالة مخصصة
       </button>
-    </div>
-    <div class="col"></div>
-    <div class="col-lg-3 col-md-3 col-sm-6 col-12 d-flex flex-column align-items-left">
-      <mat-form-field>
-        <mat-label>بحث</mat-label>
-        <input matInput (keyup)="getNotifications()" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
-        <mat-icon matSuffix (click)="search(input.value)">search</mat-icon>
-      </mat-form-field>
-    </div>
-  </div>
-  <div class="jay_taxi_table">
-    <div class="table_div d-flex flex-column align-items-center">
-      <table class="table">
-        <thead class="x-font-bold">
-          <th>اسم المستخدم</th>
-          <th>تاريخ الإرسال</th>
-          <th>عنوان الرسالة</th>
-          <th>محتوى الرسالة</th>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of notifications">
-            <td>{{item.userName}}</td>
-            <td>{{item.dateOfSend | date:'MMM d, y hh:mm'}}</td>
-            <td>{{item.messageTitle}}</td>
-            <td>{{item.messageContent}}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="load_more_div w-100 d-flex flex-column align-items-center x-font-bold">
-    <button class="btn t_btn_blue_outline w-25" (click)="loadMore()">
-      تحميل المزيد
-    </button>
+    </div>    
   </div>
 </div>

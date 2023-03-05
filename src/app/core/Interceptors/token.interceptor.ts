@@ -23,6 +23,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     let token = this.authService.getToken()
     if (token) {
+      console.log(token)
       request = this.addToken(request, token);
     }
 

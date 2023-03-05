@@ -63,8 +63,8 @@
     <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" (click)="viewAssets()">
       عرض أوراق السائق المرفقة مع الطلب
     </button>
-    <button class="btn t_btn_blue_outline col-5 ms-auto me-auto"
-      [routerLink]="['/driver-profile',driverRequestDetails.id]" routerLinkActive="router-link-active">
+    <button class="btn t_btn_blue_outline col-5 ms-auto me-auto" [queryParams]="{r: 'true'}"
+      [routerLink]="['/driver-profile',driverRequestDetails.id]"  routerLinkActive="router-link-active">
       تعديل محتويات الطلب
     </button>
   </div>

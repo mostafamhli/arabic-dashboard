@@ -1,25 +1,33 @@
 <h3 class="main-header">إضافة خدمة جديدة</h3>
 <form [formGroup]="generalForm">
-    <div class="d-flex justify-content-evenly align-items-center gap-4">
-        <mat-form-field class="example-full-width">
+    <div class="row w-100 d-flex justify-content-center user-img">
+        <div class="col-6 d-flex flex-column align-items-center justify-content-center">
+            <app-add-image [dimension]="100" [formGroup]="generalForm" controlName="image"
+                [isEdit]="true"></app-add-image>
+            <span>صورة</span>
+        </div>
+    </div>
+    <div class="d-flex w-100 justify-content-center align-items-center gap-4 mt-4">
+        <mat-form-field class="example-full-width w-75 d-flex justify-content-center">
             <mat-label>اسم الخدمة</mat-label>
             <input matInput name="name" formControlName="name">
             <mat-error *ngIf="generalForm.controls.name.invalid">{{getErrorRequiredMessage()}}
             </mat-error>
         </mat-form-field>
-        <div class="file-input col-3 d-flex flex-column align-items-center justify-content-start mb-1">
-            <input type="file" id="file" class="file" name="image" (change)="onSelectedFile($event)">
-            <label for="file">
-                اختر صورة الخدمة
-                <p class="file-name"></p>
-            </label>
-        </div>
+    </div>
+    <div class="d-flex w-100 justify-content-center align-items-center gap-4">
+        <mat-form-field class="example-full-width w-75 d-flex justify-content-center">
+            <mat-label>وصف الخدمة</mat-label>
+            <textarea matInput name="description" formControlName="description"></textarea>
+            <mat-error *ngIf="generalForm.controls.description.invalid">{{getErrorRequiredMessage()}}
+            </mat-error>
+        </mat-form-field>
     </div>
     <div class="add_cancel w-100 d-flex align-items-center justify-content-evenly x-font-bold">
         <button class="btn t_btn_blue w-40" (click)="send()">
             حفظ
         </button>
-        <button class="btn t_btn_blue_outline w-40"  mat-dialog-close>
+        <button class="btn t_btn_blue_outline w-40" mat-dialog-close>
             إلغاء
         </button>
     </div>

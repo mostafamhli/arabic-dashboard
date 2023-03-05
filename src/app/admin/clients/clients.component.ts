@@ -44,9 +44,11 @@ export class ClientsComponent {
 
 
   showUser(item:any){
+  
     console.log(item)
     let dialog = this.dialog.open(ShowClientComponent, {
-      width: '50%',
+      width: '100%',
+      height:'80%',
       data: item
     })
   }

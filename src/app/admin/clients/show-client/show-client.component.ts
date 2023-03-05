@@ -18,10 +18,6 @@ export class ShowClientComponent {
     ) {
     if (data) {
       this.user = data
-      console.log(this.user)
-      this.clientsService.getClientDetails(data.id).subscribe(res => {
-        console.log(res)
-      })
       if (this.user.rate) {
         let rate = Math.floor(+this.user.rate)
         this.numOfStars = Array(rate).fill(1).map((x, i) => i + 1); // [0,1,2,3,4]
