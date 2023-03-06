@@ -40,9 +40,7 @@ export class AddNewServiceComponent {
     formData.append('Name', this.generalForm.value.name)
     formData.append('Description', this.generalForm.value.description)
     this.settingsService.addNewVehcleType(formData).subscribe(res => {
-      console.log(res)
       this.dialogRef.close(true)
     })
-    console.log(this.generalForm.value);
   }
 }

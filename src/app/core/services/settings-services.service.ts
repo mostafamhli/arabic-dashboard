@@ -118,7 +118,6 @@ export class SettingsServicesService {
   }
 
   deleteClassification(id: number) {
-    console.log(id)
 
   }
 
@@ -130,7 +129,6 @@ export class SettingsServicesService {
   }
 
   changeRoleAccountStatus(item: Role) {
-    console.log(item);
   }
 
   addNewCity(formValue: any) {

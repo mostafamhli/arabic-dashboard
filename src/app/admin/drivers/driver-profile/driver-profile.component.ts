@@ -35,7 +35,6 @@ export class DriverProfileComponent {
     this.driverId = activatedRoute.snapshot.params['id']
     this.activatedRoute.queryParams.subscribe(params => {
       this.queryParams = params['r'];
-      console.log(this.queryParams);
     })
 
     if (this.driverId) {

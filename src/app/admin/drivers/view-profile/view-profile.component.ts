@@ -55,7 +55,6 @@ export class ViewProfileComponent implements OnInit {
       deleteCarLicenseFrontImage: new FormControl('false'),
       deleteCarLicenseBackImage: new FormControl('false'),
     })
-    console.log(this.driverProfile.value)
   }
 
   ngOnInit(): void {
@@ -111,7 +110,6 @@ export class ViewProfileComponent implements OnInit {
 
         this.driver = this.driverProfile.value
         this.driver.averageRate = res.averageRate
-        console.log(this.driver)
       }
     }, err => { });
   }

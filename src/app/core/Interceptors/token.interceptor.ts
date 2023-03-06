@@ -23,7 +23,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
     let token = this.authService.getToken()
     if (token) {
-      console.log(token)
       request = this.addToken(request, token);
     }
 
@@ -48,7 +47,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    console.log("Unauthorized");
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);

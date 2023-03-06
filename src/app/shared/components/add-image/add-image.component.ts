@@ -23,7 +23,6 @@ export class AddImageComponent {
     this.generalFields = <FormGroup>this.controlContainer.control;
     if (this.generalFields.controls[this.controlName] && this.generalFields.controls[this.controlName].value && this.generalFields.controls[this.controlName].value != "") {
       this.imageFile = this.generalFields.controls[this.controlName].value
-      console.log(this.imageFile)
       if (typeof (this.imageFile) != 'string') {
         this.onFileInput([this.imageFile])
       }

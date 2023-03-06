@@ -53,7 +53,7 @@ export class AddDiscountCodeComponent {
         expirationDate: this.addDiscountForm.value.outDate
       }
       this.tripsServices.editDiscountCode(modal,this.data.id).subscribe(res => {
-        console.log(res)
+
         this.dialog.close('closed')
       })
     } else {
@@ -65,12 +65,9 @@ export class AddDiscountCodeComponent {
         expirationDate: this.addDiscountForm.value.outDate
       }
       this.tripsServices.addDiscountCode(modal).subscribe(res => {
-        console.log(res)
+     
         this.dialog.close('closed')
       })
     }
-    
-    
-    //console.log(this.tripsServices.addDiscountCode(this.addDiscountForm.value))
   }
 }

@@ -19,7 +19,6 @@ export class WalletService {
   }
 
   createTransaction(modal: any) {
-    console.log(modal)
     return this.http.post(this.baseUrl + '/api/app/transaction', modal)
   }
 }

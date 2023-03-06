@@ -52,7 +52,6 @@ export class SettingsComponent {
       this.settingForm.get('minimumCountInRange')?.setValue(res.minimumCountInRange)
       this.settingForm.get('defaultZeroFeeRange')?.setValue(res.defaultZeroFeeRange)
       this.settingForm.get('orderNotRespondingWaitMinutes')?.setValue(res.orderNotRespondingWaitMinutes)
-      console.log(res)
     });
   }
 
@@ -74,9 +73,8 @@ export class SettingsComponent {
       defaultZeroFeeRange: this.settingForm.value.defaultZeroFeeRange
     }
 
-    console.log(modal)
     this.settingsService.addSocialMediaInfo(modal).subscribe(res => {
-      console.log(res)
+     
       this.openSnackBar('تمت العملية بنجاح' , 'x')
       this.socialMediaInfo();
     })

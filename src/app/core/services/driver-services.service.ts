@@ -21,7 +21,6 @@ export class DriverServicesService {
   }
 
   getDriversRequest(filter: FilterWithSearch): Observable<any> {
-    console.log(filter)
     this.captainRequestsUrl = this.baseUrl + '/api/app/manage-captains/captain-requests'
     let param_ = new HttpParams();
     if (filter.filter) param_ = param_.append('filter', filter.filter);
@@ -214,7 +213,6 @@ export class DriverServicesService {
     request.append('deleteCarLicenseFrontImage', driver.deleteCarLicenseFrontImage)
     request.append('deleteCarLicenseBackImage', driver.deleteCarLicenseBackImage)
     let pageType = driver.id
-    console.log(pageType)
     let response;
     if (pageType) {
       request.append('id', driver.id)

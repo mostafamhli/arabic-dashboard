@@ -30,7 +30,6 @@ export class ClientsComponent {
         this.resultCount = res.totalCount
         if (this.filter.skipCount == 0) {
           this.clients = res.items
-          console.log(this.clients)
         }
         else
           this.clients = this.clients.concat(res.items)
@@ -44,8 +43,6 @@ export class ClientsComponent {
 
 
   showUser(item:any){
-  
-    console.log(item)
     let dialog = this.dialog.open(ShowClientComponent, {
       width: '100%',
       height:'80%',
@@ -64,7 +61,6 @@ export class ClientsComponent {
       data: 'هل متأكد من تغيير حالة الحساب ؟'
     })
     dialog.afterClosed().subscribe((result: any) => {
-      console.log(result)
       if (result) {
        this.clientServices.changeClientStatus(item.id).subscribe(res=>{
         item.isActive = item.isActive == 1 ? 0 : 1;

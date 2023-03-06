@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AccountStatus } from 'src/app/core/enums/genric.enums';
 import { FilterWithSearch } from '../models/filters.model';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment.prod';
 import { Observable } from 'rxjs';
 
@@ -31,8 +31,6 @@ export class ClientServicesService {
   }
 
   getClientDetails(id:string){
-    console.log(localStorage.getItem('token'))
-    let header = new HttpHeaders().set('Authorization', `Bearer ${localStorage.getItem('token')}`)
     this.clientsListUrl = this.baseUrl + `/api/app/manage-users/${id}/user`
     const response = this.httpClient.get(this.clientsListUrl).pipe();
     return response;

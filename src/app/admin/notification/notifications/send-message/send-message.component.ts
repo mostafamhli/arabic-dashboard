@@ -50,7 +50,6 @@ export class SendMessageComponent {
       MinCreationDate:moment(this.generalFields?.value?.range?.start).format('YYYY-DD-MM'),
       MaxCreationDate:moment(this.generalFields?.value?.range?.end).format('YYYY-DD-MM'),
     }
-    console.log(modal)
     this.driverService.getLiteListOfCaptains(modal).subscribe(
       (res: any) => {
         this.drivers = res['items']
@@ -75,7 +74,6 @@ export class SendMessageComponent {
     }
 
     this.communicationService.sendPublicMessage(modal1).subscribe(res => {
-      console.log(res)
       this.router.navigate(['/notifications'])
     })
 

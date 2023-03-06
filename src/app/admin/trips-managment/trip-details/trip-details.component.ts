@@ -16,10 +16,7 @@ export class TripDetailsComponent {
 
   ngOnInit() {
     this.routeSub = this.route.params.subscribe(params => {
-      console.log(params) //log the entire params object
-      console.log(params['id']) //log the value of id
       this.tripServcie.getTripDetails(params['id']).subscribe(res => {
-        console.log(res)
         this.tripDetails= res
       })
     });

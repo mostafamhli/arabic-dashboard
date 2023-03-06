@@ -19,9 +19,7 @@ export class AddServiceComponent {
     //this.services= this.settingsService.getVehicleTypes();
     this.settingsService.getAllVehcleType().subscribe((res:any) => {
       this.services = res.items
-      console.log(this.services)
     })
-    console.log(this.services)
    }
 
    addNewService(){

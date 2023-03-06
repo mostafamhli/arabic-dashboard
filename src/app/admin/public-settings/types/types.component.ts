@@ -37,7 +37,6 @@ export class TypesComponent {
   }
 
   confirm(item: Role) {
-    console.log(item)
     let dialog = this.confirmChangeStatus.open(ConfirmComponent, {
       width: "40%",
       data: item
