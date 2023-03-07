@@ -40,7 +40,6 @@ export class TripsServicesService {
 
   getTripDetails(id: any) {
     let getTripsUrl = this.baseUrl + `/api/app/order/${id}/for-dashboard`
-    console.log(getTripsUrl)
     const response = this.httpClient.get(getTripsUrl).pipe();
     return response
   }

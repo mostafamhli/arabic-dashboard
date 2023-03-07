@@ -47,7 +47,6 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-    console.log("Unauthorized");
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshTokenSubject.next(null);

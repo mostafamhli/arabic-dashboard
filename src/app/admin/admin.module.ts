@@ -49,7 +49,8 @@ import { MapDashboardComponent } from './map-dashboard/map-dashboard.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { AgmOverlays } from "agm-overlays";
 import { MoveDriverToCityComponent } from './drivers/move-driver-to-city/move-driver-to-city.component';
-import { OpenTripComponent } from './trips-managment/open-trip/open-trip.component'
+import { OpenTripComponent } from './trips-managment/open-trip/open-trip.component';
+import { ShowClientComponent } from './clients/show-client/show-client.component'
 
 @NgModule({
   declarations: [
@@ -94,7 +95,8 @@ import { OpenTripComponent } from './trips-managment/open-trip/open-trip.compone
     JaytaxiTransfersComponent,
     MapDashboardComponent,
     MoveDriverToCityComponent,
-    OpenTripComponent
+    OpenTripComponent,
+    ShowClientComponent
   ],
 
   imports: [

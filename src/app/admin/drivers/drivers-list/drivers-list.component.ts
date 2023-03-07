@@ -51,7 +51,6 @@ export class DriversListComponent {
   }
 
   changeDriverStatus(item: Driver) {
-    console.log(item)
     this.driverServcie.changeDriverStatus(item.id).subscribe(res=>{
       item.isActive = item.isActive == 1 ? 0 : 1;
     },err=>{})

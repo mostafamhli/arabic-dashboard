@@ -37,7 +37,6 @@ export class DashboardServicesService {
     if (filter.provinceId) param_ = param_.append('ProvinceId', filter.provinceId);
     if (filter.fromDate) param_ = param_.append('FromDate', filter.fromDate.toLocaleString())
     if (filter.toDate) param_ = param_.append('ToDate', filter.toDate.toLocaleString());
-    
     const response = this.http.get(turnOverUrl,{params:param_}).pipe();
     return response;
   }

@@ -25,7 +25,6 @@ export class MainDashboardComponent {
   }
 
   ngOnInit() {
-    console.log(this.values)
   }
 
   filter(start?: any, end?: any) {

@@ -23,15 +23,20 @@ export class DriverProfileComponent {
   pageType = PageType.Create
   pageTypeEnum = PageType
   driverProfile: FormGroup
-  submitted= false
+  submitted = false
   clickSubmit = false
+  queryParams: any
   constructor(
     private activatedRoute: ActivatedRoute,
     private driverService: DriverServicesService,
     private router: Router,
-    private errorModal:MatDialog) {
+    private errorModal: MatDialog) {
     this.pageType = PageType.Get
     this.driverId = activatedRoute.snapshot.params['id']
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.queryParams = params['r'];
+    })
+
     if (this.driverId) {
       this.pageType = PageType.Edit
       this.getDriverInfo()
@@ -42,7 +47,7 @@ export class DriverProfileComponent {
       id: new FormControl(undefined),
       firstName: new FormControl(undefined, Validators.required),
       lastName: new FormControl(undefined, Validators.required),
-      phoneNumber: new FormControl({value : undefined, disabled: this.pageType != PageType.Create }, Validators.required),
+      phoneNumber: new FormControl({ value: undefined, disabled: this.pageType != PageType.Create }, Validators.required),
       gender: new FormControl(undefined),
       provinceId: new FormControl(undefined, Validators.required),
       provinceName: new FormControl(),
@@ -85,25 +90,30 @@ export class DriverProfileComponent {
       && this.driverProfile.value.vehicleCarPlateImage
       && this.driverProfile.value.licenseFrontImage
       && this.driverProfile.value.licenseBackImage
-      ) {
+    ) {
       this.submitted = true
       this.driverService.createDriver(this.driverProfile.value).subscribe((res: any) => {
         this.submitted = false
-        if (this.driverId) {
-          this.router.navigate(['view-driver-profile', this.driverId])
+        if (this.queryParams === 'true') {
+          this.router.navigate(['driver-request', this.driverId])
         } else {
-          if (res.id)
-            this.router.navigate(['driver-request', res.id])
+          if (this.driverId) {
+            this.router.navigate(['view-driver-profile', this.driverId])
+          } else {
+            if (res.id)
+              this.router.navigate(['driver-request', res.id])
+          }
         }
-      },err=>{
+
+      }, err => {
         this.submitted = false
         let error = err['error']
         error = error['error']
         let errorList = error.validationErrors
-        this.errorModal.open(ErrorHandelComponent,{
+        this.errorModal.open(ErrorHandelComponent, {
           data: {
-            title : error.message,
-            errorList : errorList
+            title: error.message,
+            errorList: errorList
           }
         })
       })

@@ -36,7 +36,6 @@ export class SendNotificationComponent {
       targetType: this.notification.value.targetType,
     }
     this.communicationService.sendPublicMessage(modal).subscribe(res => {
-      console.log(res)
       this.openSnackBar('تم إرسال الرسالة بنجاح', 'تم')
       this.dialogRef.close();
     })

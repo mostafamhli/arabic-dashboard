@@ -23,7 +23,7 @@ export class AddNewCityComponent {
   });
 
   constructor(private dialogRef: MatDialogRef<AddNewCityComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private settingsService: SettingsServicesService) {
-    console.log(data)
+    
   }
 
   ngOnInit() {
@@ -72,10 +72,8 @@ export class AddNewCityComponent {
     formData.append('Image',this.addNewCityForm.get('image')?.value);
     formData.append('Id',this.data.id);
     formData.forEach((ele :any) => {
-      console.log(ele)
     });
     this.settingsService.editCity(formData).subscribe(res => {
-      console.log(res)
     })
   }
 

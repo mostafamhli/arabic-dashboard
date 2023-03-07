@@ -39,9 +39,8 @@ export class AddTransferComponent {
       walletType: +this.transfer.value.walletType!,
       walletId: this.transfer.value.user
     }
-    console.log(modal)
     this.walletService.createTransaction(modal).subscribe(res => {
-      console.log(res)
+     
       this.dialog.close(true)
     }, err => {
       let error = err['error']
@@ -63,13 +62,11 @@ export class AddTransferComponent {
     let modal = { Keyword: this.transfer?.value?.searchWord }
     this.clinicService.getLiteListOfClients(modal).subscribe((res: any) => {
       this.clientsList = res.items
-      console.log(res)
     })
     
   }
 
   onChangeSelection() {
-    console.log(this.transfer.value.user)
 
   }
 
@@ -78,20 +75,11 @@ export class AddTransferComponent {
     this.driverService.getLiteListOfCaptains(modal).subscribe(
       (res: any) => {
         this.captinList = res['items']
-        console.log(this.captinList)
       }
     )
-    /*
-        this.filter.maxResultCount = 50
-        this.driverService.getDriversList(this.filter).subscribe(
-          res => {
-            this. = res['items']
-            console.log(this.captinList)
-          })*/
   }
 
   onChangeType(event: any) {
-    console.log(event)
     if (event.value === '3') {
       this.captinList = []
       this.getLiteListOfClients();

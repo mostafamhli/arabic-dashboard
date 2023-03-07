@@ -28,7 +28,6 @@ export class DashboardUsersComponent {
       res => {
         if (this.filter.skipCount == 0) {
           this.dashboardUsers = res.items
-          console.log(this.dashboardUsers)
         }
         else
           this.dashboardUsers = this.dashboardUsers.concat(res.items)

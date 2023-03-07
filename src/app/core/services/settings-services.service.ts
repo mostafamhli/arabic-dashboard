@@ -29,9 +29,9 @@ export class SettingsServicesService {
     return response;
   }
 
-  changeUserStatus(accountId:string){
+  changeUserStatus(accountId: string) {
     let changeUserStatusUrl = this.baseUrl + `/api/app/manage-users/${accountId}/switch-active`
-    const response = this.http.post(changeUserStatusUrl,{}).pipe();
+    const response = this.http.post(changeUserStatusUrl, {}).pipe();
     return response;
   }
 
@@ -44,72 +44,8 @@ export class SettingsServicesService {
     return this.http.put(this.baseUrl + '/api/app/manage-users/user', formValue)
   }
 
-  getUserById(id:any):Observable<any>{
+  getUserById(id: any): Observable<any> {
     return this.http.get(this.baseUrl + `/api/app/manage-users/${id}/user`)
-  }
-  getAllCities() {
-    return [
-      {
-        id: 1,
-        name: 'بغداد',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 2,
-        name: 'الموصل',
-        pic: '/assets/img/basra.png',
-      },
-      {
-        id: 3,
-        name: 'الأنبار',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 4,
-        name: 'البصرة',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 5,
-        name: 'النجف',
-        pic: '/assets/img/basra.png',
-      },
-      {
-        id: 6,
-        name: 'بابل',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 7,
-        name: 'بغداد',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 8,
-        name: 'الموصل',
-        pic: '/assets/img/basra.png',
-      },
-      {
-        id: 9,
-        name: 'الأنبار',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 10,
-        name: 'البصرة',
-        pic: '/assets/img/baghdad.png',
-      },
-      {
-        id: 11,
-        name: 'النجف',
-        pic: '/assets/img/basra.png',
-      },
-      {
-        id: 12,
-        name: 'بابل',
-        pic: '/assets/img/baghdad.png',
-      }
-    ]
   }
 
   getCities() {
@@ -135,6 +71,13 @@ export class SettingsServicesService {
       }]
   }
 
+  getAllVehcleType() {
+    return this.http.get(this.baseUrl + `/api/app/vehicle-category`)
+  }
+
+  addNewVehcleType(formData: any) {
+    return this.http.post(this.baseUrl + `/api/app/vehicle-category`, formData)
+  }
   getAllClassificationes(filter: FilterClassification) {
     let param_ = new HttpParams();
     if (filter.filter) param_ = param_.append('filter', filter.filter);
@@ -145,17 +88,17 @@ export class SettingsServicesService {
     return this.http.get(this.baseUrl + `/api/app/manage-vehicle-types`, { params: param_ })
   }
 
-  addNewClassification(formValue: any,pageType:any) {
+  addNewClassification(formValue: any, pageType: any) {
     let headers = new HttpHeaders();
     //this is the important step. You need to set content type as null
     headers.set('Content-Type', 'null');
     headers.set('Accept', "multipart/form-data");
-    if(pageType == PageType.Edit){
-      const response =  this.http.put(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
+    if (pageType == PageType.Edit) {
+      const response = this.http.put(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
       return response
     } else {
-    const response =  this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
-    return response
+      const response = this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
+      return response
     }
   }
 
@@ -175,19 +118,17 @@ export class SettingsServicesService {
   }
 
   deleteClassification(id: number) {
-    console.log(id)
 
   }
 
 
   getAllRoles() {
     let getAllRolesUrl = this.baseUrl + '/api/app/manage-users/roles'
-    const response =  this.http.get(getAllRolesUrl).pipe()
+    const response = this.http.get(getAllRolesUrl).pipe()
     return response
   }
 
   changeRoleAccountStatus(item: Role) {
-    console.log(item);
   }
 
   addNewCity(formValue: any) {
@@ -195,9 +136,9 @@ export class SettingsServicesService {
   }
 
   editCity(formValue: any) {
-    return this.http.put(this.baseUrl + '/api/app/province',formValue)
+    return this.http.put(this.baseUrl + '/api/app/province', formValue)
   }
-  
+
   getSocialMediaInfo() {
     return this.http.get(this.baseUrl + '/api/app/manage-settings')
   }

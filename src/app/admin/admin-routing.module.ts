@@ -35,6 +35,7 @@ import { TransfersComponent } from './wallet/transfers/transfers.component';
 import { MoveDriverToCityComponent } from './drivers/move-driver-to-city/move-driver-to-city.component';
 import { CheckLoginGuard } from '../core/guards/check-login.guard';
 import { OpenTripComponent } from './trips-managment/open-trip/open-trip.component';
+import { ShowClientComponent } from './clients/show-client/show-client.component';
 
 
 const routes: Routes = [
@@ -44,6 +45,7 @@ const routes: Routes = [
     children: [
       { path: '', component: MainDashboardComponent },
       { path: 'clients', component: ClientsComponent },
+      { path:  'clients-details/:id', component: ShowClientComponent },
       { path: 'trips', component: TripsComponent },
       { path: 'trip-details/:id', component: TripDetailsComponent },
       { path: 'discount-codes', component: DiscountCodesComponent },

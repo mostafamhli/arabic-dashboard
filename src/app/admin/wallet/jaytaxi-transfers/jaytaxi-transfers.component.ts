@@ -26,7 +26,6 @@ export class JaytaxiTransfersComponent {
     this.walletService.getTransaction(this.filter).subscribe((res: any) => {
       if (this.filter.skipCount == 0) {
         this.transfers = res.items
-        console.log(this.transfers)
       }
       else
         this.transfers = this.transfers.concat(res.items)

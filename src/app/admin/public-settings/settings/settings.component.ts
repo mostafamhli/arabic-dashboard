@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { FormControl, NgForm, Validators, FormGroup } from '@angular/forms';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 import { PageType } from 'src/app/core/enums/genric.enums';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { duration } from 'moment';
 
 @Component({
   selector: 'app-settings',
@@ -31,7 +33,7 @@ export class SettingsComponent {
 
   });
 
-  constructor(private settingsService: SettingsServicesService) {
+  constructor(private settingsService: SettingsServicesService, private _snackBar: MatSnackBar) {
     this.socialMediaInfo();
   }
 
@@ -50,7 +52,6 @@ export class SettingsComponent {
       this.settingForm.get('minimumCountInRange')?.setValue(res.minimumCountInRange)
       this.settingForm.get('defaultZeroFeeRange')?.setValue(res.defaultZeroFeeRange)
       this.settingForm.get('orderNotRespondingWaitMinutes')?.setValue(res.orderNotRespondingWaitMinutes)
-      console.log(res)
     });
   }
 
@@ -72,10 +73,16 @@ export class SettingsComponent {
       defaultZeroFeeRange: this.settingForm.value.defaultZeroFeeRange
     }
 
-    console.log(modal)
     this.settingsService.addSocialMediaInfo(modal).subscribe(res => {
-      console.log(res)
+     
+      this.openSnackBar('تمت العملية بنجاح' , 'x')
       this.socialMediaInfo();
     })
+  }
+
+  
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+    duration:1000
   }
 }

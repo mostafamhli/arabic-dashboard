@@ -21,7 +21,6 @@ export class CitiesComponent {
   getCities() {
     this.settingsService.getCities().subscribe((res: any) => {
       this.cities = res.items
-      console.log(this.cities)
     });
     
   }

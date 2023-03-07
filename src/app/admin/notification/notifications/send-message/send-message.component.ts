@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
 import { ClientServicesService } from 'src/app/core/services/client-services.service';
 import { CommunicationChannelServicesService } from 'src/app/core/services/communication-channel-services.service';
@@ -44,7 +45,11 @@ export class SendMessageComponent {
   }
 
   getDrivers() {
-    let modal = { Keyword: this.generalFields?.value?.searchWord }
+    let modal = { 
+      Keyword: this.generalFields?.value?.searchWord,
+      MinCreationDate:moment(this.generalFields?.value?.range?.start).format('YYYY-DD-MM'),
+      MaxCreationDate:moment(this.generalFields?.value?.range?.end).format('YYYY-DD-MM'),
+    }
     this.driverService.getLiteListOfCaptains(modal).subscribe(
       (res: any) => {
         this.drivers = res['items']
@@ -69,7 +74,6 @@ export class SendMessageComponent {
     }
 
     this.communicationService.sendPublicMessage(modal1).subscribe(res => {
-      console.log(res)
       this.router.navigate(['/notifications'])
     })
 

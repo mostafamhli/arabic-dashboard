@@ -36,7 +36,6 @@ export class MoveDriverToCityComponent {
   }
 
   submit() {
-    console.log(this.moveDriver.value)
     if(this.moveDriver.valid){
     this.provinceService.moveCaptaintoProvince(this.moveDriver.value).subscribe(res=>{
       this.moveDriver.reset()

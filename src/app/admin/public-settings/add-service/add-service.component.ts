@@ -16,13 +16,17 @@ export class AddServiceComponent {
    }
 
    getAllServices() {
-    this.services= this.settingsService.getVehicleTypes();
-    console.log(this.services)
+    //this.services= this.settingsService.getVehicleTypes();
+    this.settingsService.getAllVehcleType().subscribe((res:any) => {
+      this.services = res.items
+    })
    }
 
    addNewService(){
     this.addNewServiceDialog.open(AddNewServiceComponent, {
       width: "50%"
+    }).afterClosed().subscribe(res => {
+      this.getAllServices()
     })
    }
 }

@@ -152,7 +152,6 @@ export class AddNewClassificationComponent {
 
   onSubmit() {
     this.generalFields.markAsTouched();
-    console.log(this.generalFields)
     if (this.generalFields.valid) {
       let arr1: ShiftPackage[] = [];
       arr1 = arr1.concat(this.openTripCost['morning'])
@@ -302,7 +301,6 @@ export class AddNewClassificationComponent {
   }
 
   inputClicked(event: any) {
-    console.log(event)
   }
 
   onFileChange(e: any) {

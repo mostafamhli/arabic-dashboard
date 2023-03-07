@@ -42,7 +42,6 @@ export class DiscountCodesComponent {
       data: 'هل متأكد من تغيير حالة الحساب ؟'
     })
     dialog.afterClosed().subscribe((result: any) => {
-      console.log(result)
       if (result) {
        this.tripsServices.changeDiscountStatus(item.id).subscribe(res=>{
         item.isActive = item.isActive == 1 ? 0 : 1;
@@ -80,7 +79,6 @@ export class DiscountCodesComponent {
 
   deleteTableItem(elementId: number) {
     this.tripsServices.deleteDiscountCode(elementId).subscribe(res => {
-      console.log(res);
       this.getDiscountCodes();
     });
   }

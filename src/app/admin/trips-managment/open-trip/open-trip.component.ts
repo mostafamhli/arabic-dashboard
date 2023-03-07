@@ -63,8 +63,8 @@ export class OpenTripComponent {
 
   fillToEdit(item: any) {
     this.editMode = true
-    this.arabicPackageName = item.name
-    this.englishPackageName = item.arName
+    this.arabicPackageName = item.arName
+    this.englishPackageName = item.name
     this.id = item.id
   }
   confirmDelete(id: number) {

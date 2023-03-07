@@ -30,6 +30,12 @@ export class ClientServicesService {
     return response;
   }
 
+  getClientDetails(id:string){
+    this.clientsListUrl = this.baseUrl + `/api/app/manage-users/${id}/user`
+    const response = this.httpClient.get(this.clientsListUrl).pipe();
+    return response;
+  }
+
   changeClientStatus(accountId:string){
     let changeClientStatusUrl = this.baseUrl + `/api/app/customer/${accountId}/switch-active`
     const response = this.httpClient.post(changeClientStatusUrl,{}).pipe();

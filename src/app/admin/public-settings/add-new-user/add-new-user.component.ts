@@ -41,11 +41,9 @@ export class AddNewUserComponent {
   ngOnInit() {
     this.settingsServices.getAllRoles().subscribe((res: any) => {
       this.roles = res.items
-      console.log(this.roles)
     })
     if(this.id){
       this.settingsServices.getUserById(this.id).subscribe(res => {
-        console.log(res)
         this.selectedUser = res
         if (this.selectedUser) {
           this.addNewUserGroupForm.get('firstName')?.setValue(this.selectedUser?.name)
@@ -72,7 +70,6 @@ export class AddNewUserComponent {
     formData.append('ProfileImage', null)
     formData.append('Id', this.id)
     this.settingsServices.editUser(formData).subscribe(res => {
-      console.log(res)
       this.router.navigate(['/dashboard-users'])
     })
   }
@@ -88,7 +85,6 @@ export class AddNewUserComponent {
       formData.append('Role', this.addNewUserGroupForm.value.type)
       formData.append('ProfileImage', this.addNewUserGroupForm.value.image)
       this.settingsServices.addNewUser(formData).subscribe(res => {
-        console.log(res)
         this.router.navigate(['/dashboard-users'])
       })
     }
