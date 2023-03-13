@@ -63,7 +63,7 @@ export class CancleReasonsComponent {
     }
   }
 
-  
+
   fillToEdit(item: any) {
     this.editMode = true
     this.arabicCancleName = item.arReason
@@ -74,7 +74,7 @@ export class CancleReasonsComponent {
   confirmDelete(id: number) {
     let dialog = this.confirmDialog.open(ConfirmComponent, {
       data: {
-        message: "هل أنت متأكد من إلغاء تفعيل السبب ؟"
+        message: "هل أنت متأكد من حذف السبب ؟"
       }
     })
     dialog.afterClosed().subscribe((res: boolean) => {

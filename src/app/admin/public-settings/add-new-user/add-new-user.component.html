@@ -2,11 +2,12 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="addNewUserGroupForm" class="d-flex flex-wrap justify-content-center">
     <div class="row w-100 d-flex justify-content-center user-img">
       <div class="col-6 d-flex flex-column align-items-center justify-content-center">
-        <app-add-image [dimension]="100" *ngIf="!id || (id&&addNewUserGroupForm.value.firstName)" [formGroup]="addNewUserGroupForm"
-          controlName="image" [isEdit]="true"></app-add-image>
+        <app-add-image [dimension]="100" *ngIf="!id || (id&&addNewUserGroupForm.value.firstName)"
+          [formGroup]="addNewUserGroupForm" controlName="image" [isEdit]="true"></app-add-image>
         <span>صورة</span>
       </div>
     </div>
+
     <div class="form-group">
       <div class="form-item">
         <mat-form-field class="example-full-width">
@@ -31,12 +32,25 @@
     <div class="form-group">
       <div class="form-item">
         <mat-form-field class="example-full-width">
+          <mat-label>اسم المستخدم</mat-label>
+          <input matInput name="userName" formControlName="userName">
+          <mat-error
+            *ngIf="addNewUserGroupForm.controls.userName.invalid && addNewUserGroupForm.controls.userName.touched">
+            {{getErrorRequiredMessage()}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-item">
+        <mat-form-field class="example-full-width">
           <mat-label>البريد الإلكتروني</mat-label>
           <input matInput name="email" formControlName="email">
           <mat-error *ngIf="addNewUserGroupForm.controls.email.invalid && addNewUserGroupForm.controls.email.touched">
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
+    </div>
+
+    <div class="form-group">
       <div class="form-item">
         <mat-form-field class="example-full-width">
           <mat-label>رقم الموبايل</mat-label>
@@ -45,13 +59,11 @@
             {{getErrorRequiredMessage()}}</mat-error>
         </mat-form-field>
       </div>
-    </div>
-
-    <div class="form-group">
       <div class="form-item">
         <mat-form-field appearance="fill">
           <mat-label>كلمة السر</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName="password">
+          <input id="pass" class="form-control" matInput [type]="hide ? 'password' : 'text'" name="password"
+            formControlName="password">
           <mat-error
             *ngIf="addNewUserGroupForm.controls.password.invalid && addNewUserGroupForm.controls.password.touched">
             {{getErrorRequiredMessage()}}</mat-error>
@@ -61,6 +73,8 @@
           </button>
         </mat-form-field>
       </div>
+    </div>
+    <div class="form-group">
       <div class="form-item">
         <mat-form-field appearance="fill">
           <mat-label>الدور</mat-label>
@@ -73,12 +87,13 @@
       </div>
     </div>
     <div class="buttons w-75 mb-3 d-flex justify-content-center align-items-center">
-      <button *ngIf="selectedUser?.length === 0" type="submit"
+      <button *ngIf="!selectedUser" type="submit"
         [disabled]="!addNewUserGroupForm.valid || addNewUserGroupForm.untouched" class="btn t_btn_blue w-25">إضافة
       </button>
-      <button *ngIf="selectedUser?.length !== 0" type="submit" (click)="edit()" class="btn t_btn_blue w-25">تعديل
+      <button *ngIf="selectedUser" type="submit" (click)="edit()" class="btn t_btn_blue w-25">تعديل
       </button>
-      <button type="button" class="btn t_btn_blue w-25" routerLink="/dashboard-users">إلغاء
+      <button type="button" class="btn t_btn_blue w-25" (click)="addNewUserGroupForm.reset()"
+        routerLink="/dashboard-users">إلغاء
       </button>
     </div>
   </form>

@@ -13,33 +13,28 @@ export class AddNewServiceComponent {
   generalForm = new FormGroup({
     image: new FormControl(),
     name: new FormControl('', [Validators.required]),
+    enName: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
+    enDescription: new FormControl('', [Validators.required]),
   });
 
-  constructor(private settingsService:SettingsServicesService, private dialogRef:MatDialogRef<AddNewServiceComponent>) { }
+  constructor(private settingsService: SettingsServicesService, private dialogRef: MatDialogRef<AddNewServiceComponent>) { }
 
   getErrorRequiredMessage() {
     return 'يجب أن تدخل قيمة';
   }
 
-  onSelectedFile(e: any) {
-    if (e.target.files) {
-      var reader = new FileReader();
-      reader.readAsDataURL(e.target.files[0]);
-      reader.onload = (event: any) => {
-        this.generalForm.controls.image.setValue(event.target.result);
-      }
-    } 
-  }
-
-
-
+  disableButton: boolean = false;
   send() {
+    this.disableButton = true;
     let formData: any = new FormData()
     formData.append('Image', this.generalForm.value.image)
-    formData.append('Name', this.generalForm.value.name)
-    formData.append('Description', this.generalForm.value.description)
+    formData.append('Name', this.generalForm.value.enName)
+    formData.append('Description', this.generalForm.value.enDescription)
+    formData.append('ArName', this.generalForm.value.name)
+    formData.append('ArDescription', this.generalForm.value.description)
     this.settingsService.addNewVehcleType(formData).subscribe(res => {
+      this.disableButton = false;
       this.dialogRef.close(true)
     })
   }

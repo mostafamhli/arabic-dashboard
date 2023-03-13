@@ -7,6 +7,7 @@ import { UploadImageComponent } from './components/upload-image/upload-image.com
 import { ViewImageComponent } from './components/view-image/view-image.component';
 import { AddImageComponent } from './components/add-image/add-image.component';
 import { ErrorHandelComponent } from './components/error-handel/error-handel.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 
 @NgModule({
@@ -20,9 +21,10 @@ import { ErrorHandelComponent } from './components/error-handel/error-handel.com
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ImageCropperModule
   ],
-  exports:[
+  exports: [
     MatCartComponent,
     UploadImageComponent,
     AddImageComponent

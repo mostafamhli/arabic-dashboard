@@ -22,7 +22,7 @@ export class CitiesComponent {
     this.settingsService.getCities().subscribe((res: any) => {
       this.cities = res.items
     });
-    
+
   }
   addCity() {
     this.addNewCity.open(AddNewCityComponent, {
@@ -34,6 +34,8 @@ export class CitiesComponent {
     this.addNewCity.open(AddNewCityComponent, {
       width: "50%",
       data: city
+    }).afterClosed().subscribe(res => {
+      this.getCities();
     })
   }
 

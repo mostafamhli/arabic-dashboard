@@ -16,9 +16,10 @@ export class AddNewUserComponent {
 
   roles: any[] = [];
   addNewUserGroupForm = new FormGroup({
-    image: new FormControl([Validators.required]),
+    image: new FormControl(),
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
+    userName: new FormControl('', [Validators.required]),
     mobile: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -37,17 +38,18 @@ export class AddNewUserComponent {
     return 'يجب أن تدخل قيمة';
   }
 
-  selectedUser:any;
+  selectedUser: any;
   ngOnInit() {
     this.settingsServices.getAllRoles().subscribe((res: any) => {
       this.roles = res.items
     })
-    if(this.id){
+    if (this.id) {
       this.settingsServices.getUserById(this.id).subscribe(res => {
         this.selectedUser = res
         if (this.selectedUser) {
           this.addNewUserGroupForm.get('firstName')?.setValue(this.selectedUser?.name)
           this.addNewUserGroupForm.get('lastName')?.setValue(this.selectedUser?.surname)
+          this.addNewUserGroupForm.get('userName')?.setValue(this.selectedUser?.userName)
           this.addNewUserGroupForm.get('mobile')?.setValue(this.selectedUser?.phoneNumber)
           this.addNewUserGroupForm.get('type')?.setValue(this.selectedUser?.role)
           this.addNewUserGroupForm.get('email')?.setValue(this.selectedUser?.email)
@@ -56,13 +58,28 @@ export class AddNewUserComponent {
         }
       })
     }
-    
   }
+
+  /*
+  ngAfterViewInit() {
+    window.setTimeout(function () {
+
+      var arr: HTMLCollection = document.getElementsByClassName('form-control');
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i].hasAttribute("readonly")) {
+          arr[i].removeAttribute('readonly');
+        }
+      }
+
+    }, 500);
+  }
+*/
 
   edit() {
     let formData: any = new FormData();
     formData.append('Name', this.addNewUserGroupForm.value.firstName)
     formData.append('Surname', this.addNewUserGroupForm.value.lastName)
+    formData.append('Username', this.addNewUserGroupForm.value.userName)
     formData.append('Email', this.addNewUserGroupForm.value.email)
     formData.append('PhoneNumber', this.addNewUserGroupForm.value.mobile)
     formData.append('Password', this.addNewUserGroupForm.value.password)
@@ -75,10 +92,11 @@ export class AddNewUserComponent {
   }
 
   onSubmit() {
-    if(!this.id){
+    if (!this.id) {
       let formData: any = new FormData();
       formData.append('Name', this.addNewUserGroupForm.value.firstName)
       formData.append('Surname', this.addNewUserGroupForm.value.lastName)
+      formData.append('Username', this.addNewUserGroupForm.value.userName)
       formData.append('Email', this.addNewUserGroupForm.value.email)
       formData.append('PhoneNumber', this.addNewUserGroupForm.value.mobile)
       formData.append('Password', this.addNewUserGroupForm.value.password)
@@ -88,7 +106,7 @@ export class AddNewUserComponent {
         this.router.navigate(['/dashboard-users'])
       })
     }
-    
+
   }
 
 }

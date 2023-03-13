@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { FilterWithSearch } from 'src/app/core/models/filters.model';
@@ -34,8 +35,10 @@ export class SendMessageComponent {
     private communicationService: CommunicationChannelServicesService,
     private driverService: DriverServicesService,
     private clientService: ClientServicesService,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar,
   ) {
+    this.generalFields.get('type')?.setValue('one')
     this.getDrivers()
     this.getClients()
   }
@@ -45,10 +48,10 @@ export class SendMessageComponent {
   }
 
   getDrivers() {
-    let modal = { 
+    let modal = {
       Keyword: this.generalFields?.value?.searchWord,
-      MinCreationDate:moment(this.generalFields?.value?.range?.start).format('YYYY-DD-MM'),
-      MaxCreationDate:moment(this.generalFields?.value?.range?.end).format('YYYY-DD-MM'),
+      MinCreationDate: this.generalFields?.value?.range?.start ? moment(this.generalFields?.value?.range?.start).format('YYYY-MM-DD') : null,
+      MaxCreationDate: this.generalFields?.value?.range?.end ? moment(this.generalFields?.value?.range?.end).format('YYYY-MM-DD') : null,
     }
     this.driverService.getLiteListOfCaptains(modal).subscribe(
       (res: any) => {
@@ -58,7 +61,11 @@ export class SendMessageComponent {
   }
 
   getClients() {
-    let modal = { Keyword: this.generalFields?.value?.searchWord }
+    let modal = {
+      Keyword: this.generalFields?.value?.searchWord,
+      MinCreationDate: this.generalFields?.value?.range?.start ? moment(this.generalFields?.value?.range?.start).format('YYYY-MM-DD') : null,
+      MaxCreationDate: this.generalFields?.value?.range?.end ? moment(this.generalFields?.value?.range?.end).format('YYYY-MM-DD') : null,
+    }
     this.clientService.getLiteListOfClients(modal).subscribe(
       (res: any) => {
         this.clients = res['items']
@@ -74,8 +81,14 @@ export class SendMessageComponent {
     }
 
     this.communicationService.sendPublicMessage(modal1).subscribe(res => {
+      this.openSnackBar('تم إرسال الرسالة بنجاح', 'تم')
       this.router.navigate(['/notifications'])
     })
 
   }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
+
 }

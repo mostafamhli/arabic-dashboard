@@ -5,16 +5,21 @@
                 <h2 class="my-5">تسجيل الدخول</h2>
                 <mat-form-field class="w-75 mb-3">
                     <input matInput placeholder="اسم المستخدم" formControlName="userName">
-                    <mat-error *ngIf="!form.get('userName')?.valid && form.get('userName')?.touched">
-                        اسم المستخدم غير صالح
-                    </mat-error>
+
                 </mat-form-field>
                 <mat-form-field class="w-75 mb-3">
-                    <input matInput type="password" placeholder="كلمة السر" formControlName="password">
-                    <mat-error  *ngIf="!form.get('password')?.valid && form.get('password')?.touched">
-                        كلمة السر غير صحيحة
-                    </mat-error>
+                    <mat-label>كلمة السر</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" type="password" placeholder="كلمة السر"
+                        formControlName="password">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                 </mat-form-field>
+
+                <mat-error *ngIf="errorMessage">
+                    {{errorMessage}}
+                </mat-error>
                 <button type="submit" mat-raised-button color="primary">تسجيل الدخول</button>
             </form>
         </div>

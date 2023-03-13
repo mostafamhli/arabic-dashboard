@@ -1,4 +1,9 @@
-<div class="driver_profile">
+
+<div *ngIf="showSpinner" class="w-100 d-flex justify-content-center align-items-center" style="height: 100vh;">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="driver_profile" *ngIf="!showSpinner">
   <div class="wizard d-flex align-items-start justify-content-center x-font-bold">
     <div class="tab" (click)="activeTab = ActiveProfileTabEnum.personal">
       <div class="text">معلومات السائق</div>
@@ -15,12 +20,17 @@
     <app-driver-profile-vehicle-info [clickSubmit]="clickSubmit" *ngIf="activeTab == ActiveProfileTabEnum.vehicle">
     </app-driver-profile-vehicle-info>
   </form>
-  <div *ngIf="pageType == pageTypeEnum.Create || pageType == pageTypeEnum.Edit" class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-5">
+  <mat-error *ngIf="errorMessage">
+    {{errorMessage}}
+  </mat-error>
+  <div *ngIf="pageType == pageTypeEnum.Create || pageType == pageTypeEnum.Edit"
+    class="save_btn w-100 d-flex flex-column align-items-center justify-content-center mt-5">
     <div class="d-flex align-items-center">
       <button class="btn t_btn_blue ms-1 me-1 x-font-bold w-30" (click)="save()">
         <ng-container *ngIf="pageType == pageTypeEnum.Create">إنشاء</ng-container>
         <ng-container *ngIf="pageType == pageTypeEnum.Edit">حفظ التعديل</ng-container>
       </button>
+
       <button class="btn t_btn_blue_outline x-font-bold ms-1 me-1 w-30" [routerLink]="['/drivers']"
         routerLinkActive="router-link-active">
         إلغاء

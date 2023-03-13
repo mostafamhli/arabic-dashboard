@@ -18,13 +18,13 @@
         <mat-form-field appearance="fill">
           <mat-label>حالة الرحلة</mat-label>
           <mat-select [(ngModel)]="filter.orderStatus">
-            <mat-option [value]="orderStatusEnum.Initial">Initial</mat-option>
-            <mat-option [value]="orderStatusEnum.NotResponding">Not Responding</mat-option>
-            <mat-option [value]="orderStatusEnum.Confirmed">Confirmed</mat-option>
-            <mat-option [value]="orderStatusEnum.OnTheWay">On The Way</mat-option>
-            <mat-option [value]="orderStatusEnum.Canceled">Canceled</mat-option>
-            <mat-option [value]="orderStatusEnum.InProgress">In Progress</mat-option>
-            <mat-option [value]="orderStatusEnum.Completed">Completed</mat-option>
+            <mat-option [value]="orderStatusEnum.Initial">في المرحلة الابتدائية</mat-option>
+            <mat-option [value]="orderStatusEnum.NotResponding">غير مُجابة</mat-option>
+            <mat-option [value]="orderStatusEnum.Confirmed">مؤكدة</mat-option>
+            <mat-option [value]="orderStatusEnum.OnTheWay">على الطريق</mat-option>
+            <mat-option [value]="orderStatusEnum.Canceled">مُلغاة</mat-option>
+            <mat-option [value]="orderStatusEnum.InProgress">طور التنفيذ</mat-option>
+            <mat-option [value]="orderStatusEnum.Completed">مكتملة</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

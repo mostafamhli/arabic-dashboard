@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ErrorHandelComponent } from 'src/app/shared/components/error-handel/error-handel.component';
 @Component({
   selector: 'app-add-new-city',
   templateUrl: './add-new-city.component.html',
@@ -15,20 +16,23 @@ export class AddNewCityComponent {
     isActive: new FormControl(false),
     cityNameInArabic: new FormControl('', [Validators.required]),
     cityNameInEnglish: new FormControl('', [Validators.required]),
-    cityPhoto: new FormControl(),
     firstValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     secondValueInRangeOne: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
     firstValueInRangeTwo: new FormControl({ value: '', disabled: true }),
     secondValueInRangeTwo: new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$")]),
   });
 
-  constructor(private dialogRef: MatDialogRef<AddNewCityComponent>, @Inject(MAT_DIALOG_DATA) public data: any, private settingsService: SettingsServicesService) {
-    
+  constructor(
+    private dialogRef: MatDialogRef<AddNewCityComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private settingsService: SettingsServicesService,
+    private errorModal: MatDialog) {
+
   }
 
   ngOnInit() {
     if (this.data) {
-      this.addNewCityForm.controls.cityPhoto.setValue(this.data.imageUrl);
+      this.addNewCityForm.controls.image.setValue(this.data.imageUrl);
       this.addNewCityForm.controls.cityNameInArabic.setValue(this.data.arName);
       this.addNewCityForm.controls.cityNameInEnglish.setValue(this.data.name);
       this.addNewCityForm.controls.firstValueInRangeOne.setValue(this.data.zeroFeeRange);
@@ -57,23 +61,33 @@ export class AddNewCityComponent {
       var reader = new FileReader();
       reader.readAsDataURL(e.target.files[0]);
       reader.onload = (event: any) => {
-        this.addNewCityForm.controls.cityPhoto.setValue(event.target.result);
+        this.addNewCityForm.get('image')?.setValue(event.target.result);
       }
     }
+
   }
 
   onSubmit() {
-    
-    let formData:any = new FormData();
-    formData.append('IsActive',this.addNewCityForm.get('isActive')?.value);
-    formData.append('ZeroFeeRange',this.addNewCityForm.get('firstValueInRangeOne')?.value);
-    formData.append('FirstFeeRange',this.addNewCityForm.get('secondValueInRangeOne')?.value);
+
+    let formData: any = new FormData();
+    formData.append('IsActive', this.addNewCityForm.get('isActive')?.value);
+    formData.append('ZeroFeeRange', this.addNewCityForm.get('firstValueInRangeOne')?.value);
+    formData.append('FirstFeeRange', this.addNewCityForm.get('secondValueInRangeOne')?.value);
     formData.append('SecondFeeRange', this.addNewCityForm.get('secondValueInRangeTwo')?.value);
-    formData.append('Image',this.addNewCityForm.get('image')?.value);
-    formData.append('Id',this.data.id);
-    formData.forEach((ele :any) => {
-    });
+    formData.append('Image', this.addNewCityForm.get('image')?.value);
+    formData.append('Id', this.data.id);
     this.settingsService.editCity(formData).subscribe(res => {
+      this.dialogRef.close(true);
+    }, err => {
+      let error = err['error']
+      error = error['error']
+      let errorList = error.validationErrors
+      this.errorModal.open(ErrorHandelComponent, {
+        data: {
+          title: error.message,
+          errorList: errorList
+        }
+      })
     })
   }
 

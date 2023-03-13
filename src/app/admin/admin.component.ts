@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../core/services/user.service';
 import { SettingsServicesService } from '../core/services/settings-services.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmComponent } from './confirm/confirm.component';
 
 enum ActiveTabs {
   drivers = 1,
@@ -23,7 +25,12 @@ export class AdminComponent {
   activeTab = 0
   permissions: any
 
-  constructor(private router: Router, private userService: UserService, private settingsServcie: SettingsServicesService) {
+  constructor(
+    private router: Router,
+    private userService: UserService,
+    private settingsServcie: SettingsServicesService,
+    private dialog: MatDialog
+  ) {
     this.getTypes()
     let url = router.url
     if (
@@ -73,10 +80,19 @@ export class AdminComponent {
   }
 
   checkPermisson(P: string) {
-    return this.permissions.find((a:string) => a == P);
+    return this.permissions.find((a: string) => a == P);
   }
 
   logout() {
-    this.userService.logout()
+    this.dialog.open(ConfirmComponent, {
+      width: "40%",
+      data: 'هل أنت متأكد أنك تريد تسجيل الخروج ؟'
+    }).afterClosed().subscribe(res => {
+      if (res) {
+        this.userService.logout()
+      }
+
+    })
+
   }
 }

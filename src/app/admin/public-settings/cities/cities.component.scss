@@ -4,21 +4,18 @@
   background-color: $grey_light;
 }
 
-.img-info img {
-  width: 100%;
-}
-
 .city-name p {
   color: $blue;
   font-weight: 600;
   font-size: 1.2rem;
 }
 
-.city-pic img{
-  max-width: 20rem;
-  max-height: 20rem;
-  height: auto;
-  width: auto;
+.city-pic img {
+  max-width: 19rem;
+  max-height: 15rem;
+  height: 15rem;
+  width: 19rem;
+  object-fit: cover;
 }
 
 .distance-price-header {
@@ -39,6 +36,7 @@
   font-size: 1.2rem;
   margin-right: 1rem;
 }
+
 /*
 .city-container:nth-child(2n+1) {
   display: flex;
@@ -72,7 +70,7 @@
   }
 }
 
-.city-name{
+.city-name {
   cursor: pointer;
   background-color: #fff !important;
 }

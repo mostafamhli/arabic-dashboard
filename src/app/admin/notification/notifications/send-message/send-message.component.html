@@ -20,8 +20,10 @@
             <mat-form-field appearance="fill" class=" d-flex justify-content-center w-75">
                 <mat-label>تاريخ إنشاء الحساب</mat-label>
                 <mat-date-range-input [formGroup]="generalFields.controls.range" [rangePicker]="picker">
-                    <input matStartDate formControlName="start" (dateChange)="getDrivers(); getClients();" placeholder="تاريخ البداية">
-                    <input matEndDate formControlName="end" (dateChange)="getDrivers(); getClients();" placeholder="تاريخ النهاية">
+                    <input matStartDate formControlName="start" (dateChange)="getDrivers(); getClients();"
+                        placeholder="تاريخ البداية">
+                    <input matEndDate formControlName="end" (dateChange)="getDrivers(); getClients();"
+                        placeholder="تاريخ النهاية">
                 </mat-date-range-input>
                 <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-date-range-picker #picker></mat-date-range-picker>
@@ -34,7 +36,8 @@
             </mat-form-field>
         </div>
 
-        <div class="w-50 d-flex flex-wrap justify-content-center"  *ngIf="generalFields.controls.type.value == 'one'; else isClient">
+        <div class="w-50 d-flex flex-wrap justify-content-center"
+            *ngIf="generalFields.controls.type.value == 'one'; else isClient">
             <mat-form-field appearance="fill" class="w-75">
                 <mat-label>بحث بالاسم أو رقم الموبايل</mat-label>
                 <mat-select name="id" formControlName="id" multiple>
@@ -48,7 +51,7 @@
         </div>
 
         <ng-template #isClient>
-            <div class="w-50 d-flex flex-wrap justify-content-center" >
+            <div class="w-50 d-flex flex-wrap justify-content-center">
                 <mat-form-field appearance="fill" class="w-75">
                     <mat-label>بحث بالاسم أو رقم الموبايل</mat-label>
                     <mat-select name="id" formControlName="id" multiple>
@@ -60,10 +63,10 @@
                     </mat-select>
                 </mat-form-field>
             </div>
-    
+
         </ng-template>
 
-        
+
     </div>
     <div class="add_notification">
         <div class="d-flex flex-column align-items-center">
