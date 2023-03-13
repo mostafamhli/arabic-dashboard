@@ -78,6 +78,11 @@ export class SettingsServicesService {
   addNewVehcleType(formData: any) {
     return this.http.post(this.baseUrl + `/api/app/vehicle-category`, formData)
   }
+
+  deleteVehcleType(id: number) {
+    return this.http.delete(this.baseUrl + `/api/app/vehicle-category/${id}`)
+  }
+
   getAllClassificationes(filter: FilterClassification) {
     let param_ = new HttpParams();
     if (filter.filter) param_ = param_.append('filter', filter.filter);

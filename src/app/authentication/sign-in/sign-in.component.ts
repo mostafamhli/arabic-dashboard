@@ -13,6 +13,7 @@ export class SignInComponent {
   password: string = ''
   username: string = ''
 
+  hide = true;
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
@@ -39,15 +40,14 @@ export class SignInComponent {
   })
 
 
+  errorMessage: string = '';
   public onSubmit(): void {
     if (this.form.valid) {
       this.userService.login(this.form.value).subscribe(res => {
         this.router.navigateByUrl('/')
       }, err => {
-          console.error(err)
-        })
-    } else {
-      console.error('Form values are invalid.');
+        this.errorMessage = err.error.error.message
+      })
     }
   }
 }

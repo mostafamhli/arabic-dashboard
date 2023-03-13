@@ -3,17 +3,18 @@
     <div class="col-lg-3 col-sm-3 col-6">
       <mat-form-field class="w-100">
         <mat-label>بحث</mat-label>
-        <input matInput (keyup)="filter.skipCount=0;getDrivers();" [(ngModel)]="filter.filter" placeholder=" ابحث عن ما تريد" #input>
+        <input matInput (keyup)="filter.skipCount=0;getDrivers();" [(ngModel)]="filter.filter"
+          placeholder=" ابحث عن ما تريد" #input>
         <mat-icon matSuffix (click)="getDrivers()">search</mat-icon>
       </mat-form-field>
     </div>
     <div class="col-lg-3 col-sm-3 col-6">
-      <mat-form-field appearance="fill"  class="w-100">
+      <mat-form-field appearance="fill" class="w-100">
         <mat-label>الحالة</mat-label>
         <mat-select name="status" [(ngModel)]="filter.status" (selectionChange)="filter.skipCount=0;getDrivers();">
-          <mat-option [value]="driverRequestStatusEnum.Initial">Initial</mat-option>
+          <mat-option [value]="driverRequestStatusEnum.Initial">ابتدائية</mat-option>
           <!-- <mat-option [value]="driverRequestStatusEnum.Approved">Approved</mat-option> -->
-          <mat-option [value]="driverRequestStatusEnum.Rejected">Rejected</mat-option>
+          <mat-option [value]="driverRequestStatusEnum.Rejected">مرفوضة</mat-option>
         </mat-select>
       </mat-form-field>
     </div>

@@ -83,7 +83,11 @@ export class DriverProfileComponent {
       deleteCarLicenseBackImage: new FormControl('false'),
     })
   }
+
+  errorMessage: string = '';
+  showSpinner: boolean = false;
   save() {
+
     this.driverProfile.markAsTouched()
     this.clickSubmit = true
     if (this.driverProfile.valid
@@ -92,7 +96,9 @@ export class DriverProfileComponent {
       && this.driverProfile.value.licenseBackImage
     ) {
       this.submitted = true
+      this.showSpinner = true
       this.driverService.createDriver(this.driverProfile.value).subscribe((res: any) => {
+        this.showSpinner = false;
         this.submitted = false
         if (this.queryParams === 'true') {
           this.router.navigate(['driver-request', this.driverId])
@@ -106,6 +112,7 @@ export class DriverProfileComponent {
         }
 
       }, err => {
+        this.showSpinner = false;
         this.submitted = false
         let error = err['error']
         error = error['error']
@@ -117,6 +124,8 @@ export class DriverProfileComponent {
           }
         })
       })
+    } else {
+      this.errorMessage = 'يجب أن تقوم بملئ جميع الحقول المطلوبة'
     }
   }
 

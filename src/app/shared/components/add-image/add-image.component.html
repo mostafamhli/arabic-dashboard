@@ -1,10 +1,23 @@
 <div class="img_div_for_edit">
   <div class="image" [style.width.px]="dimension" [style.height.px]="dimension">
-    <img *ngIf="imageFile" [style.max-width.px]="dimension" [style.max-height.px]="dimension" [src]="imageFile">
+    <img *ngIf="imageFile" [style.max-width.px]="dimension" [style.max-height.px]="dimension"
+      [src]="croppedImage ? croppedImage : imageFile">
     <mat-icon *ngIf="!imageFile" [style.width.px]="dimension" [style.height.px]="dimension">person</mat-icon>
     <div class="edit-div" (click)="fileInput.click()" *ngIf="isEdit">
       <mat-icon class="edit-icon">edit</mat-icon>
     </div>
-    <input #fileInput type="file" (change)="onFileInput(fileInput.files)" accept="image/*" style="display:none;" />
+    <input #fileInput type="file" (change)="onFileInput($event)" accept="image/*" style="display:none;" />
+
   </div>
+  <div *ngIf="isOpened" class="position-relative">
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1" format="png"
+      (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+      (loadImageFailed)="loadImageFailed()"></image-cropper>
+    <div *ngIf="isOpened" class="file-upload1 text-center">
+      <label for="file-input" (click)="closeCropper($event)">
+        <span><mat-icon>check_circle</mat-icon></span>
+      </label>
+    </div>
+  </div>
+
 </div>

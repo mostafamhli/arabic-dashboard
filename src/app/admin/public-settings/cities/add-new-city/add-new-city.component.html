@@ -2,8 +2,10 @@
   class="modal-form py-5 px-3 d-flex flex-wrap justify-content-center">
   <div class="content-form d-flex flex-coulmn align-items-center flex-wrap">
     <div class="w-100 d-flex align-items-center justify-content-center">
-      <div class="col-9 d-flex flex-column align-items-center justify-content-center" *ngIf="addNewCityForm.value.cityNameInEnglish">
-        <app-add-image [dimension]="100" [formGroup]="addNewCityForm" controlName="cityPhoto" [isEdit]="true"></app-add-image>
+      <div class="col-9 d-flex flex-column align-items-center justify-content-center"
+        *ngIf="addNewCityForm.value.cityNameInEnglish">
+        <app-add-image [dimension]="100" [formGroup]="addNewCityForm" controlName="image"
+          [isEdit]="true"></app-add-image>
         <span>صورة</span>
       </div>
       <div class="col-3 d-flex justify-content-end">

@@ -203,7 +203,7 @@ export class AddNewClassificationComponent {
       formData.append('Category', this.catId)
       formData.append('Image', this.generalFields.controls['image'].value)
       formData.append('Icon', this.generalFields.controls['icon'].value)
-      formData.append('AlternativeId', this.generalFields.controls['vehicleVehicleTypeId'].value)
+      formData.append('AlternativeId', this.generalFields.controls['vehicleVehicleTypeId'].value ? this.generalFields.controls['vehicleVehicleTypeId'].value : '')
       formData.append('SeatCount', this.generalFields.controls.numOfSites.value!)
       formData.append('CaptainPercentage', this.generalFields.controls['driverRatio'].value)
       let i = 0;

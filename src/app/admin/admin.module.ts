@@ -51,6 +51,7 @@ import { AgmOverlays } from "agm-overlays";
 import { MoveDriverToCityComponent } from './drivers/move-driver-to-city/move-driver-to-city.component';
 import { OpenTripComponent } from './trips-managment/open-trip/open-trip.component';
 import { ShowClientComponent } from './clients/show-client/show-client.component'
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { ShowClientComponent } from './clients/show-client/show-client.component
   imports: [
     CommonModule,
     AdminRoutingModule,
+    ImageCropperModule,
     MaterialModule,
     SharedModule,
     FormsModule,
@@ -114,7 +116,7 @@ import { ShowClientComponent } from './clients/show-client/show-client.component
       libraries: ['places'],
       language: 'en'
     }),
-    NgxMatTimepickerModule.setLocale('en-GB')
+    NgxMatTimepickerModule.setLocale('en-US')
   ],
 })
 export class AdminModule { }
