@@ -11,6 +11,7 @@ export class AddImageComponent {
   imageChangedEvent: any = '';
   croppedImage: any = '';
   generalFields: FormGroup;
+  @Input() fromCity: string;
   @Input() controlName: string
   @Output() imageObject: EventEmitter<any> = new EventEmitter<any>();
   personalInfo: FormGroup;
@@ -36,8 +37,11 @@ export class AddImageComponent {
 
   isOpened: boolean = false;
   onFileInput(files: any): void {
-    this.isOpened = true;
-    this.imageChangedEvent = files;
+    if (this.fromCity) {
+      this.isOpened = true;
+      this.imageChangedEvent = files;
+    }
+
     var reader = new FileReader();
     this.generalFields.controls[this.controlName].setValue(files.target.files[0])
     this.imageFile = files.target.files[0];
@@ -84,9 +88,3 @@ export class AddImageComponent {
 
 }
 
-export async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
-
-  const res: Response = await fetch(dataUrl);
-  const blob: Blob = await res.blob();
-  return new File([blob], fileName, { type: 'image/png' });
-}

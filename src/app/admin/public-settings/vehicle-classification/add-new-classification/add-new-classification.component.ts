@@ -226,6 +226,8 @@ export class AddNewClassificationComponent {
       });
 
       this.submitted = true
+
+
       this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res: any) => {
         this.router.navigate(['/vehicle-classification'])
         this.submitted = false
@@ -241,6 +243,8 @@ export class AddNewClassificationComponent {
         })
         this.submitted = false
       })
+
+
     }
   }
 
