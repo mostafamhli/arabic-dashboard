@@ -13,18 +13,19 @@
         <mat-label>اختر مستخدم</mat-label>
         <mat-select name="user" formControlName="user" (selectionChange)="onChangeSelection()">
           <mat-option>
-            <ngx-mat-select-search formControlName="searchWord" (keyup)="getLiteListOfClients()"></ngx-mat-select-search>
+            <ngx-mat-select-search formControlName="searchWord"
+              (keyup)="getLiteListOfClients()"></ngx-mat-select-search>
           </mat-option>
-          <mat-option *ngFor="let user of clientsList" [value]="user.id">{{user.name}}</mat-option>
+          <mat-option *ngFor="let user of clientsList; index as k" [value]="user.id">{{k}}- {{user.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field *ngIf="captinList.length !== 0" appearance="fill">
         <mat-label>اختر مستخدم</mat-label>
         <mat-select name="user" formControlName="user">
           <mat-option>
-            <ngx-mat-select-search formControlName="searchWord" (keyup)="getDriversList()" ></ngx-mat-select-search>
+            <ngx-mat-select-search formControlName="searchWord" (keyup)="getDriversList()"></ngx-mat-select-search>
           </mat-option>
-          <mat-option *ngFor="let user of captinList" [value]="user.id">{{user.name}}</mat-option>
+          <mat-option *ngFor="let user of captinList; index as j" [value]="user.id">{{j}}- {{user.name}}</mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>

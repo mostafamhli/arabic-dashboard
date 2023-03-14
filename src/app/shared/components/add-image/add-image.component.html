@@ -10,7 +10,7 @@
 
   </div>
   <div *ngIf="isOpened" class="position-relative">
-    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1" format="png"
+    <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="2" format="png"
       (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
       (loadImageFailed)="loadImageFailed()"></image-cropper>
     <div *ngIf="isOpened" class="file-upload1 text-center">
