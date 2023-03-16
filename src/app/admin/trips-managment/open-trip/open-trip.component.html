@@ -1,50 +1,57 @@
 <div class="cancels_container x-font-regular p-3">
-    <h4 class="title mb-5">باقات الرحلات المفتوحة</h4>
-    <div class="d-flex flex-column align-items-center justify-content-center">
-      <div class="jay_taxi_table w-100">
-        <div class="table_div d-flex flex-column align-items-center">
-          <table class="table">
-            <thead class="x-font-bold">
-              <th>الباقة</th>
-              <th>Package</th>
-              <th></th>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of reasons">
-                <td>{{item.arName}}</td>
-                <td>{{item.name}}</td>
-                <td>
-                  <div class="d-flex align-items-center w-fit-content cursor" (click)="fillToEdit(item)">
+  <h4 class="title mb-5">باقات الرحلات المفتوحة</h4>
+  <div class="d-flex flex-column align-items-center justify-content-center">
+    <div class="jay_taxi_table w-100">
+      <div class="table_div d-flex flex-column align-items-center">
+        <table class="table">
+          <thead class="x-font-bold">
+            <th>الباقة</th>
+            <th>Package</th>
+            <th></th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of reasons; index as i">
+              <td>{{item.arName}}</td>
+              <td>{{item.name}}</td>
+              <td>
+                <div class="d-flex align-items-center w-fit-content cursor" (click)="fillToEdit(item)">
+                  <div class="edit-container ms-4">
                     <mat-icon>edit</mat-icon>
                     <div>تعديل</div>
                   </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-  
-      <div class="w-100 mt-5 d-flex flex-column align-items-center">
-        <div class="w-100 d-flex flex-row align-items-center gap-5">
-          <div class="w-50 mt-5 d-flex flex-column align-items-center">
-            <label class="x-font-bold mb-2">إضافة باقة باللغة العربية</label>
-            <div class="input_with_button d-flex align-items-center">
-              <input class="form-control" [(ngModel)]="arabicPackageName" placeholder="الباقة">
-            </div>
-          </div>
-          <div class="w-50 mt-5 d-flex flex-column align-items-center">
-            <label class="x-font-bold mb-2">إضافة باقة باللغة الانجليزية</label>
-            <div class="input_with_button d-flex align-items-center">
-              <input class="form-control english-input" [(ngModel)]="englishPackageName" placeholder="The Package">
-            </div>
-          </div>
-        </div>
-        <button class="btn t_btn_blue" (click)="onSubmit()" [disabled]="!arabicPackageName || arabicPackageName=='' || !englishPackageName || englishPackageName==''">
-        <ng-container *ngIf="!editMode">إضافة</ng-container>
-        <ng-container *ngIf="editMode">حفظ</ng-container>
-        </button>
+
+                  <div class="delete-container me-4" *ngIf="i === reasons.length - 1" (click)="fillToDelete(item)">
+                    <mat-icon>delete</mat-icon>
+                    <div>حذف</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
+    <div class="w-100 mt-5 d-flex flex-column align-items-center">
+      <div class="w-100 d-flex flex-row align-items-center gap-5">
+        <div class="w-50 mt-5 d-flex flex-column align-items-center">
+          <label class="x-font-bold mb-2">إضافة باقة باللغة العربية</label>
+          <div class="input_with_button d-flex align-items-center">
+            <input class="form-control" [(ngModel)]="arabicPackageName" placeholder="الباقة">
+          </div>
+        </div>
+        <div class="w-50 mt-5 d-flex flex-column align-items-center">
+          <label class="x-font-bold mb-2">إضافة باقة باللغة الانجليزية</label>
+          <div class="input_with_button d-flex align-items-center">
+            <input class="form-control english-input" [(ngModel)]="englishPackageName" placeholder="The Package">
+          </div>
+        </div>
+      </div>
+      <button class="btn t_btn_blue" (click)="onSubmit()"
+        [disabled]="!arabicPackageName || arabicPackageName=='' || !englishPackageName || englishPackageName==''">
+        <ng-container *ngIf="!editMode">إضافة</ng-container>
+        <ng-container *ngIf="editMode">حفظ</ng-container>
+      </button>
+    </div>
   </div>
-  
+</div>

@@ -152,7 +152,7 @@ export class AddNewClassificationComponent {
 
   onSubmit() {
     this.generalFields.markAsTouched();
-    if (this.generalFields.valid) {
+    if (this.generalFields.valid || this.activePageType == PageType.Edit) {
       let arr1: ShiftPackage[] = [];
       arr1 = arr1.concat(this.openTripCost['morning'])
       arr1 = arr1.concat(this.openTripCost['day'])
@@ -226,6 +226,9 @@ export class AddNewClassificationComponent {
       });
 
       this.submitted = true
+      console.log('hi')
+
+      console.log(this.activePageType)
       this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res: any) => {
         this.router.navigate(['/vehicle-classification'])
         this.submitted = false
@@ -241,6 +244,8 @@ export class AddNewClassificationComponent {
         })
         this.submitted = false
       })
+
+
     }
   }
 
