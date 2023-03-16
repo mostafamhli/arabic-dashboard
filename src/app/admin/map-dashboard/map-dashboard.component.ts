@@ -86,6 +86,7 @@ export class MapDashboardComponent {
       this.captains.forEach((item: any) => {
         bounds.extend(new google.maps.LatLng(item.vehicle.currentLocation.latitude, item.vehicle.currentLocation.longitude));
       });
+
       this._map.fitBounds(bounds);
       //this._map.setZoom(14);
     }, 2000);

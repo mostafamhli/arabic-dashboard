@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { SettingsServicesService } from 'src/app/core/services/settings-services.service';
 import { TripsServicesService } from 'src/app/core/services/trips-services.service';
+import { ErrorHandelComponent } from 'src/app/shared/components/error-handel/error-handel.component';
 import { ConfirmComponent } from '../../confirm/confirm.component';
 
 @Component({
@@ -18,8 +19,8 @@ export class OpenTripComponent {
 
   constructor(private confirmDialog: MatDialog,
     private tripsService: TripsServicesService,
-    private settingService: SettingsServicesService
-  ) {
+    private settingService: SettingsServicesService,
+    private errorModal: MatDialog) {
     this.getOpenTrip();
   }
 
@@ -66,6 +67,22 @@ export class OpenTripComponent {
     this.arabicPackageName = item.arName
     this.englishPackageName = item.name
     this.id = item.id
+  }
+
+  fillToDelete(item: any) {
+    this.settingService.deletePackage(item.id).subscribe(res => {
+      this.getOpenTrip();
+    }, err => {
+      let error = err['error']
+      error = error['error']
+      let errorList = error.validationErrors
+      this.errorModal.open(ErrorHandelComponent, {
+        data: {
+          title: error.message,
+          errorList: errorList
+        }
+      })
+    })
   }
   confirmDelete(id: number) {
     let dialog = this.confirmDialog.open(ConfirmComponent, {

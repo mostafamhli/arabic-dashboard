@@ -94,6 +94,7 @@ export class SettingsServicesService {
   }
 
   addNewClassification(formValue: any, pageType: any) {
+    console.log(pageType)
     let headers = new HttpHeaders();
     //this is the important step. You need to set content type as null
     headers.set('Content-Type', 'null');
@@ -101,6 +102,7 @@ export class SettingsServicesService {
     if (pageType == PageType.Edit) {
       const response = this.http.put(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
       return response
+
     } else {
       const response = this.http.post(this.baseUrl + '/api/app/manage-vehicle-types', formValue, { headers }).pipe()
       return response
@@ -118,8 +120,13 @@ export class SettingsServicesService {
   addPackage(model: any) {
     return this.http.post(this.baseUrl + '/api/app/manage-vehicle-types/package', model)
   }
+
   editPackage(model: any) {
     return this.http.put(this.baseUrl + '/api/app/manage-vehicle-types/package', model)
+  }
+
+  deletePackage(id: any) {
+    return this.http.delete(this.baseUrl + `/api/app/manage-vehicle-types/${id}/package`);
   }
 
   deleteClassification(id: number) {
