@@ -94,7 +94,6 @@ export class SettingsServicesService {
   }
 
   addNewClassification(formValue: any, pageType: any) {
-    console.log(pageType)
     let headers = new HttpHeaders();
     //this is the important step. You need to set content type as null
     headers.set('Content-Type', 'null');
