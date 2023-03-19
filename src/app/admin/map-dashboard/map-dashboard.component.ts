@@ -51,8 +51,7 @@ export class MapDashboardComponent {
     this.detailsShown = [];
     this.detailsShown[marker.lat + '-' + marker.lng + '-' + marker.type] = true;
     if (oldStatus) {
-      this.detailsShown[marker.lat + '-' + marker.lng + '-' + marker.type] =
-        false;
+      this.detailsShown[marker.lat + '-' + marker.lng + '-' + marker.type] = false;
     }
   }
 

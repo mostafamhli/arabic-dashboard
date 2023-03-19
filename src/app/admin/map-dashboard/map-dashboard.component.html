@@ -3,10 +3,6 @@
     [fitBounds]="true" [fullscreenControl]="true">
     <agm-overlay *ngFor="let item of captains" [latitude]="item.vehicle.currentLocation.latitude"
       [longitude]="item.vehicle.currentLocation.longitude" (markerClick)="clickedMarker(infowindow)">
-      <div class="stop-marker">
-
-        <img [src]="item.vehicle.iconUrl">
-      </div>
       <agm-info-window #infowindow>
         <div class="p-2">
           <div class="row x-font-bold">

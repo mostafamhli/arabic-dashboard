@@ -226,9 +226,6 @@ export class AddNewClassificationComponent {
       });
 
       this.submitted = true
-      console.log('hi')
-
-      console.log(this.activePageType)
       this.settingsService.addNewClassification(formData, this.activePageType).subscribe((res: any) => {
         this.router.navigate(['/vehicle-classification'])
         this.submitted = false
