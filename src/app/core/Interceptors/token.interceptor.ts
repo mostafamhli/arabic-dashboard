@@ -18,7 +18,10 @@ export class TokenInterceptor implements HttpInterceptor {
     let headers = new HttpHeaders();
     headers = request.headers;
     headers = headers.set('Content-Type', 'application/json');
-    headers = headers.set('Accept-Language', 'ar')
+    headers = headers.set('Accept', 'application/json');
+    headers = headers.set('Accept-Language', 'Ar')
+    headers = headers.set('Access-Control-Allow-Origin', '*');
+
     request = request.clone({ headers });
 
     let token = this.authService.getToken()
