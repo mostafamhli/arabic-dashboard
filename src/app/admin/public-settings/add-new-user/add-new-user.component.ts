@@ -16,7 +16,7 @@ export class AddNewUserComponent {
 
   roles: any[] = [];
   addNewUserGroupForm = new FormGroup({
-    image: new FormControl(),
+    image: new FormControl(File),
     firstName: new FormControl('', [Validators.required]),
     lastName: new FormControl('', [Validators.required]),
     userName: new FormControl('', [Validators.required]),
@@ -93,15 +93,15 @@ export class AddNewUserComponent {
 
   onSubmit() {
     if (!this.id) {
-      let formData: any = new FormData();
-      formData.append('Name', this.addNewUserGroupForm.value.firstName)
-      formData.append('Surname', this.addNewUserGroupForm.value.lastName)
-      formData.append('Username', this.addNewUserGroupForm.value.userName)
-      formData.append('Email', this.addNewUserGroupForm.value.email)
-      formData.append('PhoneNumber', this.addNewUserGroupForm.value.mobile)
-      formData.append('Password', this.addNewUserGroupForm.value.password)
-      formData.append('Role', this.addNewUserGroupForm.value.type)
-      formData.append('ProfileImage', this.addNewUserGroupForm.value.image)
+      let formData = new FormData();
+      formData.append('Name', JSON.stringify(this.addNewUserGroupForm.value.firstName))
+      formData.append('Surname', JSON.stringify(this.addNewUserGroupForm.value.lastName))
+      formData.append('Username', JSON.stringify(this.addNewUserGroupForm.value.userName))
+      formData.append('Email', JSON.stringify(this.addNewUserGroupForm.value.email))
+      formData.append('PhoneNumber', JSON.stringify(this.addNewUserGroupForm.value.mobile))
+      formData.append('Password', JSON.stringify(this.addNewUserGroupForm.value.password))
+      formData.append('Role', JSON.stringify(this.addNewUserGroupForm.value.type))
+      formData.append('ProfileImage', JSON.stringify(this.addNewUserGroupForm.value.image))
       this.settingsServices.addNewUser(formData).subscribe(res => {
         this.router.navigate(['/dashboard-users'])
       })
